@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <link rel="icon" href="./assets/images/logo.png">
+    <link rel="stylesheet" href="./blog.css">
+    <!-- bootstrp -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
+     <!-- font-awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+       <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+</head>
+<body>
+  <section class="scroll-wrapper">
+      <section class="blog-wrapper">
+      <!-- navbar -->
+    <nav class="navbar navbar-dark">
+      <div class="container-fluid">
+        <!-- LOGO (ALWAYS) -->
+        <a class="navbar-brand" href="./home.html">
+          <img src="./assets/images/logo.png" alt="Logo" />
+        </a>
+
+        <!-- NAV LINKS -->
+        <ul class="navbar-nav flex-row ms-auto gap-3 align-items-center">
+          <!-- MEDIUM & UP -->
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link " href="./home.html">Home</a>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link " href="./about.html">About</a>
+          </li>
+
+          <!-- DROPDOWN (LARGE ONLY) -->
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Holiday Types
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Adventure</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Honeymoon</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Family</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Luxury</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Pilgrimage</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Destinations
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="./nepal.html">Nepal</a></li>
+              <li><a class="dropdown-item" href="./nepal.html">Bhutan</a></li>
+              <li><a class="dropdown-item" href="./nepal.html">Tibet</a></li>
+            </ul>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link" href="./contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- RIGHT ICONS (ALWAYS) -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- SEARCH ICON -->
+         <button title="search" class="icon-btn searchToggle" id="searchToggle">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+          
+                 <button id="inquiry-btn" class="explore_btn" 
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvas_inquiry" class="d-none d-sm-block">
+  <p>Plan Your Trip</p>
+
+</button>
+
+          
+          <button title="menu"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#menuCanvas"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+      
+   <!-- MENU OFFCANVAS -->
+    <div class="offcanvas offcanvas-end" id="menuCanvas">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button class="btn-close" title="menu" data-bs-dismiss="offcanvas"></button>
+      </div>
+     <div class="offcanvas-body sidebar">
+  <ul class="list-unstyled">
+
+    <li class="menu-item">Home</li>
+    <li class="menu-item">About</li>
+
+    <!-- Dropdown 1 -->
+    <li class="accordion menu-item" id="accordionHoliday">
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed custom-accordion-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#holidayTypes"
+          >
+            Holiday Types
+          </button>
+        </h2>
+
+        <div id="holidayTypes" class="accordion-collapse collapse">
+          <div class="accordion-body p-0">
+            <ul class="submenu list-unstyled">
+              <li>Adventure</li>
+              <li>Honeymoon</li>
+              <li>Family</li>
+              <li>Luxury</li>
+              <li>Pilgrimage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- Dropdown 2 -->
+    <li class="accordion menu-item" id="accordionDestinations">
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed custom-accordion-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#destinationTypes"
+          >
+            Destinations
+          </button>
+        </h2>
+
+        <div id="destinationTypes" class="accordion-collapse collapse">
+          <div class="accordion-body p-0">
+            <ul class="submenu list-unstyled">
+              <li>India</li>
+              <li>International</li>
+              <li>Weekend Trips</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="menu-item">Contact</li>
+
+  </ul>
+</div>
+
+      
+    </div>
+
+    <!-- SEARCH OFFCANVAS -->
+  <div class="bottom-search bottomSearch" id="bottomSearch">
+  
+
+    <!-- FORM -->
+    <form class="row g-3 align-items-center" id="navSearchForm">
+
+      <div class="col-md-3">
+        <label class="form-label">Destination</label>
+        <select id="destination" class="form-control">
+          <option value="" disabled selected>Where to?</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Bhutan">Bhutan</option>
+          <option value="Tibet">Tibet</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Activity</label>
+        <select id="activity" class="form-control">
+          <option value="" disabled selected>Select activity</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Relaxation">Relaxation</option>
+          <option value="Culture">Culture</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Duration</label>
+        <select id="duration" class="form-control">
+          <option value="" disabled selected>Select duration</option>
+          <option value="4-5 days">4-5 days</option>
+          <option value="10-15 days">10-15 days</option>
+          <option value="1-3 months">1-3 months</option>
+        </select>
+      </div>
+
+    <div class="col-md-3 d-grid">
+            <button class="explore_btn" id="inquiry-btn">
+              Search
+             
+            </button>
+          </div>
+
+    </form>
+ 
+</div>
+
+    <!-- inquiry_offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
+ 
+     <div class="offcanvas-header">
+    <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+ <div class="inquiry_text">
+   <div class="offcanvas-body">
+    <div class="inquiry_title orange-text">
+      <span>Plan</span> Your Trip
+             <form>
+  <!-- Packages & Date -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Packages <span>*</span></label>
+     <select id="country" name="country" required>
+                            <option value="">Select a country</option>
+                            <option value="NP" data-code="+977">Nepal</option>
+                            <option value="IN" data-code="+91">India</option>
+                            <option value="US" data-code="+1">United States</option>
+                            <option value="AU" data-code="+61">Australia</option>
+                            <option value="GB" data-code="+44">United Kingdom</option>
+                        </select>
+    </div>
+
+    <div class="form-group">
+      <label>Travel Date <span>*</span></label>
+      <input type="date" class="travel-date" required>
+    </div>
+  </div>
+
+  <!-- Pax & Price -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>No. of Pax <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label>Price <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+  </div>
+
+  <!-- Name & Email -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Full Name <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email Address <span class="required">*</span></label>
+      <input type="email" required>
+    </div>
+  </div>
+
+  <!-- Country, Code & Phone -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Country <span class="required">*</span></label>
+    <select id="planCountry" required>
+    <option value="">Select Country</option>
+    <option value="NP" data-code="+977">Nepal</option>
+    <option value="IN" data-code="+91">India</option>
+  </select>
+    </div>
+
+    <div class="form-group country-code">
+      <label>Code</label>
+       <input type="text" id="planCountryCode" class="country-code" readonly>
+    </div>
+
+    <div class="form-group phone-box">
+      <label>Contact No. <span class="required">*</span></label>
+      <input type="tel" required>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="form-group">
+    <label>Tour Details <span class="required">*</span></label>
+    <textarea required></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+    </div>
+  </div>
+ </div>
+  
+</div>
+         <section class="blog-section">
+  <div class="container">
+
+    <!-- Left Content -->
+    <div class="blog-content share-wrapper">
+      <h2 class="green-title">
+        Nature, Culture & Thrill: <span class="orange-text">Travel Stories That Inspire.</span>
+      </h2>
+
+      <p>
+        Summer is here, and it’s time to soak up the sun on some of the world’s most stunning beaches! Whether you're looking to relax on golden sands, dive into crystal-clear waters, or try exciting water sports, these 10 beaches offer something for every type of traveler. From remote island paradises to iconic coastal destinations.
+      </p>
+
+      <div class="blog-image">
+        <img src="./assets/images/langtangtrek.jpg" alt="Mountain">
+      </div>
+      <p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum optio asperiores minima ut alias libero? Ab, Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis ullam animi eligendi sint laboriosam officia nisi nam consequatur quo laborum? nostrum quos cum ipsam dolorem, enim neque sunt odio voluptatem, similique incidunt inventore eos?</p>
+    
+      <div class="share mt-4">
+        <span>Share:</span>
+        <a href="#"><i class="fa-brands fa-facebook" style="color: #000000;"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter "style="color: #000000;"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"style="color: #000000;"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"style="color: #000000;"></i></a>
+      </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <aside class="related-posts">
+      <h3>Related Post</h3>
+
+      <div class="related-item">
+        <img src="./assets/images/everestbasecamp.jpg" alt="">
+        <div>
+          <span>02 March, 2025</span>
+          <a href="#">The Best Mountain Getaways for Nature Lovers.</a>
+        </div>
+      </div>
+
+      <div class="related-item">
+        <img src="./assets/images/highlightsnepal.jpg" alt="">
+        <div>
+          <span>23 March, 2025</span>
+          <a href="#">Discover the Most Stunning Destinations by Culture.</a>
+        </div>
+      </div>
+
+      <div class="related-item">
+        <img src="./assets/images/everestbasecamp.jpg" alt="">
+        <div>
+          <span>02 April, 2025</span>
+          <a href="#">Dream. Explore. Discover. Where Will You Go Next?</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+    </section>
+   
+  <!-- footer -->
+ <footer class="footer ">
+    <div class="container-fluid position-relative">
+
+      <div class="footer-flex flex-wrap">
+        <!-- LEFT COLUMN -->
+        <div class=" footer_info footer-col">
+          <h4 class="footer-title">Himmalagari Travels</h4>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-location-dot "></i>
+            <span class="fw-semibold">NEPAL (REGISTERED OFFICE)</span>
+          </div>
+
+          <p class="footer-text">
+            Suite 04 – 3rd Floor, BHIM Plaza, 329 Bhupi Sadak,
+            Narayanchaur – Naxal, Kathmandu – Nepal
+          </p>
+          <br>
+          <div class="footer-line">
+            <i class="fa-solid fa-envelope "></i>
+            <a href="mailto:incoming@himmalagaritravel.com">
+              incoming@himmalagaritravel.com
+            </a>
+          </div>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-phone "></i>
+            <a href="tel:+9779802369474">+977 9802369474</a>
+          </div>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-phone "></i>
+            <a href="tel:+9779802369473">+977 9802369473</a>
+
+          </div>
+
+       
+
+        </div>
+        <!-- QUICK LINKS -->
+        <div class="footer-col footer_quicklinks">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./holiday_types_inner.html">Holiday Types</a></li>
+            <li><a href="./about.html">Legal Documents</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- DESTINATION -->
+        <div class=" footer-col">
+          <h4 class="footer-title">Destination</h4>
+          <ul class="footer-list">
+            <li><a href="./nepal.html">Nepal</a></li>
+            <li><a href="./nepal.html">Bhutan</a></li>
+            <li><a href="./nepal.html">Tibet</a></li>
+          </ul>
+        </div>
+
+      <!-- WHITE CURVE -->
+      <div class="footer-curve mt-3">
+        <h4>Our Affiliations & Awards</h4><br>
+        <p>
+          Join Hands with Our Trusted Partners to Discover Exclusive Travel Experiences,
+          Unmatched Comfort, and Seamless Journeys Worldwide
+        </p>
+
+        <div class="curve-logos d-flex flex-wrap gap-5">
+          <a href="#"><img src="./assets/images/affiliation1.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affiliation2.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affiliation3.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affilisation3.png" alt=""></a>
+
+        </div>
+      </div>
+
+     
+      </div>
+       </div>
+  <!-- COPYRIGHT -->
+      <ul class="footer-bottom mt-4 ">
+       
+          <!-- STAY CONNECTED -->
+          <li class="footer-social">
+            <h4 class="footer-subtitle stay-connected">Stay Connected</h4>
+            <a href="#"><i class="fa-brands fa-google" style="color: #ffffff;"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+          </li>
+
+          <!-- WE ACCEPT -->
+         <li class="footer_we_accept">
+           <h4 class="footer-subtitle we-accept">We Accept</h4>
+          <div class="footer-payments">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="">
+            <img src="./assets/images/maestro-logo-copy.png" alt="">
+          </div>
+         </li>
+           <li>Copyright &copy; 2023 Himmalagari Travels</li>
+          </ul>
+       
+  </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtns = document.querySelectorAll(".searchToggle");
+  const bottomSearch = document.querySelector(".bottomSearch");
+
+  // Toggle on button click
+  toggleBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevent document click from firing
+      bottomSearch.classList.toggle("active");
+    });
+  });
+
+  // Click outside to close
+  document.addEventListener("click", (e) => {
+    const clickedInsideSearch = bottomSearch.contains(e.target);
+    const clickedToggleBtn = [...toggleBtns].some((btn) =>
+      btn.contains(e.target)
+    );
+
+    if (!clickedInsideSearch && !clickedToggleBtn) {
+      bottomSearch.classList.remove("active");
+    }
+  });
+});
+     const planCountry = document.getElementById("planCountry");
+const planCountryCode = document.getElementById("planCountryCode");
+
+planCountry.addEventListener("change", function() {
+  const selected = this.selectedOptions[0];
+  const code = selected.getAttribute("data-code") || "";
+  planCountryCode.value = code;
+});
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+
+    // Apply to all date inputs (safe & future-proof)
+    document.querySelectorAll('input[type="date"]').forEach(input => {
+      input.setAttribute("min", today);
+    });
+  });
+</script>
+
+  </section>
+</body>
+</html>

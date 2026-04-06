@@ -1,0 +1,87 @@
+# =========================
+# SENSITIVE & CONFIGURATION
+# =========================
+# Database and credentials
+includes/config.php
+includes/database.php
+apanel/config.php
+.env
+.env.local
+.env.*.php
+
+# =========================
+# USER UPLOADS & MEDIA
+# =========================
+# User-uploaded files and images
+userfiles/
+ckfinder/userfiles/
+assets/userfiles/
+
+# =========================
+# GENERATED & TEMPORARY
+# =========================
+# Cache directories
+jpcache/
+phpthumb/
+thumbnails/
+images/
+
+# Temporary files
+tmp/
+*.tmp
+
+# Error and Log files
+error_log
+*.log
+
+# Backup files from tools
+.htaccess.phpupgrader.*
+
+# Downloaded/archived libraries (optional - adjust as needed)
+includes/google.zip
+
+# Database exports/backups
+*.sql
+
+# Temporary images/files
+temporary-suspension.png
+
+# =========================
+# IDE & EDITOR FILES
+# =========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.phpstorm.meta.php
+_ide_helper.php
+
+# =========================
+# OS & SYSTEM FILES
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.well-known/
+
+# =========================
+# COMPOSER & PACKAGE MANAGERS
+# =========================
+vendor/
+composer.lock
+node_modules/
+package-lock.json
+
+# =========================
+# SESSION & RUNTIME
+# =========================
+session/
+cache/
+cgi-bin/

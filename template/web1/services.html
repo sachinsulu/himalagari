@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title>
+    <link rel="stylesheet" href="./services.css">
+
+    <!-- bootstrp -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
+     <!-- font-awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+      <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    </head>
+<body>
+   <section class="herosection mb-5">
+  <div class="hero-content">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark">
+      <div class="container-fluid">
+        <!-- LOGO (ALWAYS) -->
+        <a class="navbar-brand" href="#">
+          <img src="./assets/images/logo.png" alt="Logo" />
+        </a>
+
+        <!-- NAV LINKS -->
+        <ul class="navbar-nav flex-row ms-auto gap-3 align-items-center">
+          <!-- MEDIUM & UP -->
+          <li class="nav-item d-none d-md-block">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <a class="nav-link" href="#">About</a>
+          </li>
+
+          <!-- DROPDOWN (LARGE ONLY) -->
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Holiday Types
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">Adventure</a></li>
+              <li><a class="dropdown-item" href="#">Honeymoon</a></li>
+              <li><a class="dropdown-item" href="#">Family</a></li>
+              <li><a class="dropdown-item" href="#">Luxury</a></li>
+              <li><a class="dropdown-item" href="#">Pilgrimage</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Destinations
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">Nepal</a></li>
+              <li><a class="dropdown-item" href="#">Bhutan</a></li>
+              <li><a class="dropdown-item" href="#">Tibet</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Nepali Rupee
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">USD Dollar</a></li>
+              <li><a class="dropdown-item" href="#">CAD Dollar</a></li>
+              <li><a class="dropdown-item" href="#">Euro</a></li>
+              <li><a class="dropdown-item" href="#">British Pound</a></li>
+              <li><a class="dropdown-item" href="#">Australian Dollar</a></li>
+              <li><a class="dropdown-item" href="#">Danish Krona</a></li>
+              <li><a class="dropdown-item" href="#">Swiss Franc</a></li>
+              <li><a class="dropdown-item" href="#">Brazilian Real</a></li>
+              <li><a class="dropdown-item" href="#">South African Rand</a></li>
+              <li><a class="dropdown-item" href="#">Chinese Yuan</a></li>
+              <li><a class="dropdown-item" href="#">Janpanese Yen</a></li>
+            </ul>
+          </li>
+
+          <!-- LARGE ONLY -->
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+
+        <!-- RIGHT ICONS (ALWAYS) -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- SEARCH ICON -->
+          <button
+            class="icon-btn"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#searchCanvas"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+
+          
+          <button id="inquiry-btn" class="d-none d-sm-block">
+            Inquiry
+          </button>
+
+          
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#menuCanvas"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+   <section class="sevice-container mt-3 ">
+    <h6 class="text-center mt-5 page-title">Travel Services Designed Around You.</h6>
+    <h3 class="text-center mt-2 mb-4 golden-text">From planning to return, we take care of every details.</h3>
+    <div class="container text-center">
+  <div class="row row-cols-4 gap-5 justify-content-center">
+    <div class="col service-box">
+      <div class="card-details">
+    <p class="text-title"> Core Services</p>
+    <p class="text-body"><i class="fa-solid fa-globe fa-2x" style="color: #ffffff;"></i></p>
+    <p class="card-body-text">Travel Stress-Free</p>
+  </div>
+  <button class="card-button">More info</button>
+    </div>
+    <div class="col service-box">
+       <div class="card-details">
+    <p class="text-title"> Travel Assistance Services</p>
+    <p class="text-body">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="#fff" d="M19.71 2.837c.733.147 1.306.72 1.453 1.453a3.56 3.56 0 0 1-.773 2.995l-2.751 3.252l1.944 7.131a1.25 1.25 0 0 1-.322 1.213l-1.302 1.302a1.01 1.01 0 0 1-1.597-.224l-2.942-5.296l-2.858 2.381l.21 1.053a1.25 1.25 0 0 1-.341 1.13L8.767 20.89a1.01 1.01 0 0 1-1.617-.263L5.89 18.11l-2.516-1.26a1.01 1.01 0 0 1-.263-1.617l1.664-1.664a1.25 1.25 0 0 1 1.129-.341l1.053.21l2.381-2.857l-5.296-2.943a1.01 1.01 0 0 1-.224-1.597L5.12 4.739a1.25 1.25 0 0 1 1.213-.322l7.13 1.944l3.253-2.751a3.56 3.56 0 0 1 2.995-.773Zm-.492 1.945a1.56 1.56 0 0 0-1.211.354l-3.65 3.089a1.01 1.01 0 0 1-.918.203L6.226 6.46l-.067.066l5.195 2.886a1.01 1.01 0 0 1 .285 1.53L8.115 15.17a1.01 1.01 0 0 1-.974.344l-1.237-.247l-.408.408l1.557.779a1.1 1.1 0 0 1 .492.492l.78 1.557l.407-.408l-.247-1.237a1.01 1.01 0 0 1 .344-.974l4.229-3.524a1.01 1.01 0 0 1 1.53.285l2.885 5.195l.066-.067l-1.967-7.213a1.01 1.01 0 0 1 .204-.918l3.088-3.65c.285-.337.412-.777.354-1.211Z"/></g></svg>
+    </p>
+    <p class="card-body-text">Travel Stress-Free</p>
+  </div>
+  <button class="card-button">More info</button>
+    </div>
+    <div class="col service-box">
+       <div class="card-details">
+    <p class="text-title"> Special Experience Services</p>
+    <p class="text-body">
+     <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 256 256"><path fill="#fff" d="M164 80a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0-40a12 12 0 1 1-12 12a12 12 0 0 1 12-12m90.88 155.92l-54.56-92.08A15.87 15.87 0 0 0 186.55 96a15.85 15.85 0 0 0-13.76 7.84L146.63 148l-44.84-76.1a16 16 0 0 0-27.58 0L1.11 195.94A8 8 0 0 0 8 208h240a8 8 0 0 0 6.88-12.08M88 80l23.57 40H64.43ZM22 192l33-56h66l18.74 31.8L154 192Zm150.57 0l-16.66-28.28L186.55 112L234 192Z"/></svg>
+    </p>
+    <p class="card-body-text">Travel Stress-Free</p>
+  </div>
+  <button class="card-button">More info</button>
+    </div>
+    <div class="col service-box">
+       <div class="card-details">
+    <p class="text-title"> Corporate & Group Services</p>
+    <p class="text-body">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="#fff" d="M12 10a4 4 0 1 0 0-8a4 4 0 0 0 0 8m-6.5 3a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5M21 10.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m-9 .5a5 5 0 0 1 5 5v6H7v-6a5 5 0 0 1 5-5m-7 5c0-.693.1-1.362.288-1.994l-.17.014A3.5 3.5 0 0 0 2 17.5V22h3zm17 6v-4.5a3.5 3.5 0 0 0-3.288-3.494c.187.632.288 1.301.288 1.994v6z"/></svg>
+    </p>
+    <p class="card-body-text">Travel Stress-Free</p>
+  </div>
+  <button class="card-button">More info</button>
+    </div>
+    <div class="col service-box">
+       <div class="card-details">
+    <p class="text-title"> Support Services</p>
+    <p class="text-body">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="#fff" d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zM11 20h1.975l.35-2.65q.775-.2 1.438-.587t1.212-.938l2.475 1.025l.975-1.7l-2.15-1.625q.125-.35.175-.737T17.5 12t-.05-.787t-.175-.738l2.15-1.625l-.975-1.7l-2.475 1.05q-.55-.575-1.212-.962t-1.438-.588L13 4h-1.975l-.35 2.65q-.775.2-1.437.588t-1.213.937L5.55 7.15l-.975 1.7l2.15 1.6q-.125.375-.175.75t-.05.8q0 .4.05.775t.175.75l-2.15 1.625l.975 1.7l2.475-1.05q.55.575 1.213.963t1.437.587zm1.05-4.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5M12 12"/></svg>
+    </p>
+    <p class="card-body-text">Travel Stress-Free</p>
+  </div>
+  <button class="card-button">More info</button>
+    </div>
+    <div class="col service-box">
+       <div class="card-details">
+    <p class="text-title">Card title</p>
+    <p class="text-body">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="#fff" d="M13 3.5a3.5 3.5 0 0 0-2.669 5.764a.75.75 0 0 1-.571 1.236H3.75a.25.25 0 0 0-.25.25v1c0 2.9 2.35 5.25 5.25 5.25h3.218q.226.166.504.255a9 9 0 0 0-.727 1.245H8.75A6.75 6.75 0 0 1 2 11.75v-1C2 9.784 2.784 9 3.75 9h4.666a5 5 0 1 1 9.168-4h1.666c.966 0 1.75.784 1.75 1.75a2.75 2.75 0 0 1-2.75 2.75h-.92q-.203.353-.461.667q.236.206.442.44q-.264.028-.54.065a7 7 0 0 0-1.323.306l-.1-.058a.75.75 0 0 1-.11-1.23A3.5 3.5 0 0 0 16.355 8h1.895c.69 0 1.25-.56 1.25-1.25a.25.25 0 0 0-.25-.25h-2.785A3.5 3.5 0 0 0 13 3.5m3.901 8.163c2.801-.37 4.539-.06 5.563.227a.75.75 0 0 1 .212 1.348c-.057.038-.15.13-.26.34a5 5 0 0 0-.32.825c-.088.284-.17.59-.261.925l-.057.212c-.112.41-.234.85-.382 1.286c-.292.862-.704 1.782-1.397 2.488c-.72.733-1.695 1.19-3 1.19c-1.328 0-2.256-.539-2.85-1.159c-.403.74-.613 1.437-.645 1.951a.75.75 0 0 1-1.497-.091c.07-1.14.665-2.574 1.662-3.844c1.009-1.284 2.48-2.467 4.381-3.04a.75.75 0 0 1 .433 1.436c-1.448.437-2.61 1.312-3.452 2.308c.31.442.922.939 1.969.939c.911 0 1.498-.302 1.928-.74c.457-.466.78-1.13 1.047-1.92c.132-.389.245-.791.355-1.197l.055-.201c.09-.335.181-.674.278-.987c.09-.291.192-.583.314-.853c-.893-.13-2.15-.184-3.879.044c-1.998.265-3.124 1.723-3.375 2.635a.75.75 0 0 1-1.446-.398c.396-1.442 1.978-3.373 4.624-3.724"/></svg>
+    </p>
+    <p class="card-body-text">Travel Stress-Free</p>
+  </div>
+  <button class="card-button">More info</button>
+    </div>
+  </div>
+</div>
+   </section>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container-fluid position-relative">
+
+    <div class="row gy-5 footer-flex">
+      <!-- LEFT COLUMN -->
+      <div class="col-lg-4 footer-col">
+        <h4 class="footer-title">Himmalagari Travels</h4>
+
+        <div class="footer-line">
+          <i class="fa-solid fa-location-dot "></i>
+          <span class="fw-semibold">NEPAL (REGISTERED OFFICE)</span>
+        </div>
+
+        <p class="footer-text">
+          Suite 04 – 3rd Floor, BHIM Plaza, 329 Bhupi Sadak,
+          Narayanchaur – Naxal, Kathmandu – Nepal
+        </p>
+        <br>
+        <div class="footer-line">
+          <i class="fa-solid fa-envelope "></i>
+          <a href="#">incoming@himmalagaritravel.com</a>
+        </div>
+
+        <div class="footer-line">
+          <i class="fa-solid fa-phone "></i>
+          <a href="#">+977 9802369474</a>
+        </div>
+
+        <div class="footer-line">
+          <i class="fa-solid fa-phone "></i>
+          <a href="#">+977 9802369473</a>
+        </div>
+
+        <!-- STAY CONNECTED -->
+        <h4 class="footer-subtitle mt-5 stay-connected">Stay Connected</h4>
+        <div class="footer-social">
+          <a href="#"><i class="fa-brands fa-google" style="color: #ffffff;"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+        </div>
+
+        <!-- WE ACCEPT -->
+        <h4 class="footer-subtitle mt-4 we-accept">We Accept</h4>
+        <div class="footer-payments">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg">
+          <img src="./assets/images/maestro-logo-copy.png" alt="">
+        </div>
+      </div>
+
+      <!-- DESTINATION -->
+      <div class="col-lg-2 footer-col">
+        <h4 class="footer-title">Destination</h4>
+        <ul class="footer-list">
+          <li>Nepal</li>
+          <li>Bhutan</li>
+          <li>Tibet</li>
+        </ul>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="col-lg-2 footer-col">
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-list">
+          <li>Home</li>
+          <li>FAQ</li>
+          <li>Services</li>
+        </ul>
+      </div>
+
+      <!-- EMPTY SPACE FOR CURVE -->
+      <div class="col-lg-4 d-none d-lg-block"></div>
+    </div>
+
+    <!-- WHITE CURVE -->
+    <div class="footer-curve">
+      <h4>Our Affiliations & Awards</h4><br>
+      <p>
+        Join Hands with Our Trusted Partners to Discover Exclusive Travel Experiences,
+        Unmatched Comfort, and Seamless Journeys Worldwide
+      </p>
+
+      <div class="curve-logos d-flex gap-5">
+        <img src="./assets/images/affiliation1.png" alt="">
+        <img src="./assets/images/affiliation2.png" alt="">
+        <img src="./assets/images/affiliation3.png" alt="">
+        <img src="./assets/images/affilisation3.png" alt="">
+        
+      </div>
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="footer-bottom">
+      © 2025 Himmalagari Travels. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js"></script>
+</body>
+</html>

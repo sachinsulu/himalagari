@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="icon" href="./assets/images/logo.png">
+    <link rel="stylesheet" href="./about.css">
+     <!-- bootstrp -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
+     
+     <!-- font-awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+       <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- owl carousel  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+</head>
+<body>
+ <section class="scroll-wrapper">
+   <!-- navbar -->
+    <nav class="navbar navbar-dark">
+      <div class="container-fluid">
+        <!-- LOGO (ALWAYS) -->
+        <a class="navbar-brand" href="./home.html">
+          <img src="./assets/images/logo.png" alt="Logo" />
+        </a>
+
+        <!-- NAV LINKS -->
+        <ul class="navbar-nav flex-row ms-auto gap-3 align-items-center">
+          <!-- MEDIUM & UP -->
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link " href="./home.html">Home</a>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link active" href="./about.html">About</a>
+          </li>
+
+          <!-- DROPDOWN (LARGE ONLY) -->
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Holiday Types
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Adventure</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Honeymoon</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Family</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Luxury</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Pilgrimage</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Destinations
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="./nepal.html">Nepal</a></li>
+              <li><a class="dropdown-item" href="./nepal.html">Bhutan</a></li>
+              <li><a class="dropdown-item" href="./nepal.html">Tibet</a></li>
+            </ul>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link" href="./contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- RIGHT ICONS (ALWAYS) -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- SEARCH ICON -->
+         <button title="search" class="icon-btn searchToggle" id="searchToggle">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+          
+                 <button id="inquiry-btn" class="explore_btn" 
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvas_inquiry" class="d-none d-sm-block">
+  <p>Plan Your Trip</p>
+
+</button>
+
+          
+          <button title="menu"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#menuCanvas"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+      
+   <!-- MENU OFFCANVAS -->
+    <div class="offcanvas offcanvas-end" id="menuCanvas">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button class="btn-close" title="menu" data-bs-dismiss="offcanvas"></button>
+      </div>
+     <div class="offcanvas-body sidebar">
+  <ul class="list-unstyled">
+
+    <li class="menu-item">Home</li>
+    <li class="menu-item">About</li>
+
+    <!-- Dropdown 1 -->
+    <li class="accordion menu-item" id="accordionHoliday">
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed custom-accordion-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#holidayTypes"
+          >
+            Holiday Types
+          </button>
+        </h2>
+
+        <div id="holidayTypes" class="accordion-collapse collapse">
+          <div class="accordion-body p-0">
+            <ul class="submenu list-unstyled">
+              <li>Adventure</li>
+              <li>Honeymoon</li>
+              <li>Family</li>
+              <li>Luxury</li>
+              <li>Pilgrimage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- Dropdown 2 -->
+    <li class="accordion menu-item" id="accordionDestinations">
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed custom-accordion-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#destinationTypes"
+          >
+            Destinations
+          </button>
+        </h2>
+
+        <div id="destinationTypes" class="accordion-collapse collapse">
+          <div class="accordion-body p-0">
+            <ul class="submenu list-unstyled">
+              <li>India</li>
+              <li>International</li>
+              <li>Weekend Trips</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="menu-item">Contact</li>
+
+  </ul>
+</div>
+
+      
+    </div>
+
+    <!-- SEARCH OFFCANVAS -->
+  <div class="bottom-search bottomSearch" id="bottomSearch">
+   <div class="container-fluid px-0">
+
+    <!-- FORM -->
+    <form class="row g-3 align-items-center" id="navSearchForm">
+
+      <div class="col-md-3">
+        <label class="form-label">Destination</label>
+        <select id="destination" class="form-control">
+          <option value="" disabled selected>Where to?</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Bhutan">Bhutan</option>
+          <option value="Tibet">Tibet</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Activity</label>
+        <select id="activity" class="form-control">
+          <option value="" disabled selected>Select activity</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Relaxation">Relaxation</option>
+          <option value="Culture">Culture</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Duration</label>
+        <select id="duration" class="form-control">
+          <option value="" disabled selected>Select duration</option>
+          <option value="4-5 days">4-5 days</option>
+          <option value="10-15 days">10-15 days</option>
+          <option value="1-3 months">1-3 months</option>
+        </select>
+      </div>
+
+    <div class="col-md-3 d-grid">
+            <button id="inquiry-btn" class="explore_btn">
+              Search
+              
+            </button>
+          </div>
+
+    </form>
+  </div>
+</div>
+
+    <!-- inquiry_offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
+ 
+     <div class="offcanvas-header">
+    <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+ <div class="inquiry_text">
+   <div class="offcanvas-body">
+    <div class="inquiry_title orange-text">
+      <span>Plan</span> Your Trip
+             <form>
+  <!-- Packages & Date -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Packages <span>*</span></label>
+     <select id="country" name="country" required>
+                            <option value="">Select a country</option>
+                            <option value="NP" data-code="+977">Nepal</option>
+                            <option value="IN" data-code="+91">India</option>
+                            <option value="US" data-code="+1">United States</option>
+                            <option value="AU" data-code="+61">Australia</option>
+                            <option value="GB" data-code="+44">United Kingdom</option>
+                        </select>
+    </div>
+
+    <div class="form-group">
+      <label>Travel Date <span>*</span></label>
+      <input type="date" class="travel-date" required>
+    </div>
+  </div>
+
+  <!-- Pax & Price -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>No. of Pax <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label>Price <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+  </div>
+
+  <!-- Name & Email -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Full Name <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email Address <span class="required">*</span></label>
+      <input type="email" required>
+    </div>
+  </div>
+
+  <!-- Country, Code & Phone -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Country <span class="required">*</span></label>
+    <select id="planCountry" required>
+    <option value="">Select Country</option>
+    <option value="NP" data-code="+977">Nepal</option>
+    <option value="IN" data-code="+91">India</option>
+  </select>
+    </div>
+
+    <div class="form-group country-code">
+      <label>Code</label>
+       <input type="text" id="planCountryCode" class="country-code" readonly>
+    </div>
+
+    <div class="form-group phone-box">
+      <label>Contact No. <span class="required">*</span></label>
+      <input type="tel" required>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="form-group">
+    <label>Tour Details <span class="required">*</span></label>
+    <textarea required></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+    </div>
+  </div>
+ </div>
+  
+</div>
+    <!-- ABOUT US SECTION -->
+<section class="about-section">
+  <h2 class="green-title mb-5">Get To Know <span class="orange-text">About Us</span></h2>
+  <div class="about-wrapper">
+    <!-- LEFT IMAGE -->
+    <div class="about-image">
+      <img src="./assets/images/team-pic.jpg" alt="About Us">
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="about-content">
+      <p class="about_quotes">"Every journey we plan is a story waiting to be written."</p>
+      <p>
+        We are a passionate travel company dedicated to creating meaningful
+        journeys and unforgettable experiences. From personalized itineraries
+        to seamless travel arrangements, we ensure every trip is carefully
+        planned and perfectly executed.
+      </p>
+      <p>
+        With years of experience and local expertise, we guide travelers across
+        breathtaking destinations while maintaining comfort, safety, and
+        authenticity. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, magnam voluptatem animi dicta, libero id rem assumenda incidunt a, delectus ex sapiente vero veritatis modi quisquam tempora. Necessitatibus, quos porro, molestiae quam numquam accusamus voluptatum optio fugiat ea odit omnis adipisci iure, corporis modi saepe quo enim voluptates! Incidunt, facilis!
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR TEAM SECTION -->
+ 
+<h2 class="green-title">Meet Our <span class="orange-text">Team</span></h2>
+<section class="team-section container mx-auto">
+
+  <!-- Tabs -->
+  <div class="team-tabs">
+    <button class="tab" data-tab="executive">Executive Team</button>
+    <button class="tab" data-tab="meet">Tour Guides</button>
+  </div>
+
+  <!-- Executive Team -->
+  <div class="team-content" id="executive">
+    <div class="team-member">
+      <img src="./assets/images/sample_person.jpg" alt="Hari Khadka">
+      <div class="member-info">
+        <span class="position">Managing Director</span>
+        <h3 class="name">Hari Khadka</h3>
+        <p class="description">
+          Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+          is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+          and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+          new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities...
+        </p>
+        <a href="#" id="openPopup" class="show-more">+ show more</a>
+        <div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <a href="#" class="close-btn" id="closePopup">&times;</a>
+    <h2>Managing Director</h2>
+    <p>Name</p>
+    <div class="detail-desc">
+      <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+        new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities.
+        Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.
+      </p>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="./assets/images/sample_person.jpg" alt="Nawaraj Thapaliya">
+      <div class="member-info">
+        <span class="position">Marketing Executive Officer</span>
+        <h3 class="name">Nawaraj Thapaliya</h3>
+        <p class="description">
+          Mr. Nawaraj Thapaliya, the Founder and Marketing Executive Officer of "Welcome Nepal Treks Pvt. Ltd."
+          has long years of national and international experience in the tourism sector, helping him lead his company as a Marketing Officer...
+        </p>
+        <a href="#" class="show-more">+ show more</a>
+           <div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <a href="#" class="close-btn" id="closePopup">&times;</a>
+    <h2>Managing Director</h2>
+    <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+        new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities.
+        Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Meet the Team -->
+  <div class="team-content" id="meet">
+    
+     <div class="team-member">
+      <img src="./assets/images/sample_person.jpg" alt="Hari Khadka">
+      <div class="member-info">
+        <span class="position">Managing Director</span>
+        <h3 class="name">Hari Khadka</h3>
+        <p class="description">
+          Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+          is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+          and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+          new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities...
+        </p>
+        <a href="#" class="show-more">+ show more</a>
+           <div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <a href="#" class="close-btn" id="closePopup">&times;</a>
+    <h2>Managing Director</h2>
+    <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+        new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities.
+        Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+  </div>
+</div>
+      </div>
+    </div>
+     <div class="team-member">
+      <img src="./assets/images/sample_person.jpg" alt="Hari Khadka">
+      <div class="member-info">
+        <span class="position">Managing Director</span>
+        <h3 class="name">Hari Khadka</h3>
+        <p class="description">
+          Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+          is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+          and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+          new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities...
+        </p>
+        <a href="#" class="show-more">+ show more</a>
+           <div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <a href="#" class="close-btn" id="closePopup">&times;</a>
+    <h2>Managing Director</h2>
+    <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. He spends his free time to develop 
+        new tourism concepts and making new business links with both foreign & Nepalese travel trade personalities.
+        Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd." 
+        is a well-established name in the tourism field of Nepal. He has widely traveled abroad 
+        and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+<!-- documents -->
+ <section class="documents">
+  <h2 class="text-center green-title achievement mb-5">Our Achievement & <span class="orange-text">Honors</span></h2>
+<ul class="awards-list">
+  <li>
+    <img src="./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+  </li>
+  <li>
+    <img src="./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+  </li>
+  <li>
+    <img src="./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+  </li>
+</ul>
+
+
+ </section>
+
+ <h2 class="green-title">Legal <span class="orange-text">Documents</span></h2>
+ <section class="team-section legal-section container mx-auto">
+
+  <!-- legal docs -->
+  <div class="legal">
+  <ul class="legal-grid">
+    <li>
+      <div class="docs_wrapper">
+        <img src="./assets/images/cv.png" class="popup-img" alt="">
+          <span class="search-icon">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </span>
+      </div>
+    </li>
+    <li>
+      <div class="docs_wrapper">
+        <img src="./assets/images/tour.png" class="popup-img" alt="">
+          <span class="search-icon">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </span>
+      </div>
+    </li>
+    <li>
+      <div class="docs_wrapper">
+        <img src="./assets/images/cv.png" class="popup-img" alt="">
+          <span class="search-icon">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </span>
+      </div>
+    </li>
+    <li>
+      <div class="docs_wrapper">
+        <img src="./assets/images/cv.png" class="popup-img" alt="">
+          <span class="search-icon">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </span>
+      </div>
+    </li>
+  </ul>
+</div>
+<div id="imgPopup" class="img-popup">
+  <span class="close">&times;</span>
+
+  <button class="nav-btn prev">&#10094;</button>
+  <img class="popup-content" id="popupImage" alt="">
+  <button class="nav-btn next">&#10095;</button>
+</div>
+
+
+
+ 
+  
+  </section>
+<!-- footer -->
+  <footer class="footer ">
+    <div class="container-fluid position-relative">
+
+      <div class="footer-flex flex-wrap">
+        <!-- LEFT COLUMN -->
+        <div class=" footer_info footer-col">
+          <h4 class="footer-title">Himmalagari Travels</h4>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-location-dot "></i>
+            <span class="fw-semibold">NEPAL (REGISTERED OFFICE)</span>
+          </div>
+
+          <p class="footer-text">
+            Suite 04 – 3rd Floor, BHIM Plaza, 329 Bhupi Sadak,
+            Narayanchaur – Naxal, Kathmandu – Nepal
+          </p>
+          <br>
+          <div class="footer-line">
+            <i class="fa-solid fa-envelope "></i>
+            <a href="mailto:incoming@himmalagaritravel.com">
+              incoming@himmalagaritravel.com
+            </a>
+          </div>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-phone "></i>
+            <a href="tel:+9779802369474">+977 9802369474</a>
+          </div>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-phone "></i>
+            <a href="tel:+9779802369473">+977 9802369473</a>
+
+          </div>
+
+       
+
+        </div>
+        <!-- QUICK LINKS -->
+        <div class="footer-col footer_quicklinks">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./holiday_types_inner.html">Holiday Types</a></li>
+            <li><a href="./about.html">Legal Documents</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- DESTINATION -->
+        <div class=" footer-col">
+          <h4 class="footer-title">Destination</h4>
+          <ul class="footer-list">
+            <li><a href="./nepal.html">Nepal</a></li>
+            <li><a href="./nepal.html">Bhutan</a></li>
+            <li><a href="./nepal.html">Tibet</a></li>
+          </ul>
+        </div>
+
+      <!-- WHITE CURVE -->
+      <div class="footer-curve mt-3">
+        <h4>Our Affiliations & Awards</h4><br>
+        <p>
+          Join Hands with Our Trusted Partners to Discover Exclusive Travel Experiences,
+          Unmatched Comfort, and Seamless Journeys Worldwide
+        </p>
+
+        <div class="curve-logos d-flex flex-wrap gap-5">
+          <a href="#"><img src="./assets/images/affiliation1.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affiliation2.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affiliation3.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affilisation3.png"alt=""></a>
+
+        </div>
+      </div>
+
+     
+      </div>
+       </div>
+  <!-- COPYRIGHT -->
+      <ul class="footer-bottom mt-4 ">
+       
+          <!-- STAY CONNECTED -->
+          <li class="footer-social">
+            <h4 class="footer-subtitle stay-connected">Stay Connected</h4>
+            <a href="#"><i class="fa-brands fa-google" style="color: #ffffff;"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+          </li>
+
+          <!-- WE ACCEPT -->
+         <li class="footer_we_accept">
+           <h4 class="footer-subtitle we-accept">We Accept</h4>
+          <div class="footer-payments">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="">
+            <img src="./assets/images/maestro-logo-copy.png" alt="">
+          </div>
+         </li>
+           <li>Copyright &copy; 2023 Himmalagari Travels</li>
+          </ul>
+       
+  </footer>
+<script>
+ const images = document.querySelectorAll('.popup-img');
+const popup = document.getElementById('imgPopup');
+const popupImg = document.getElementById('popupImage');
+const closeBtn = document.querySelector('.close');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+let currentIndex = 0;
+
+// Open popup
+images.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    popup.style.display = 'flex';
+    popupImg.src = img.src;
+    currentIndex = index;
+  });
+});
+
+// Close popup
+closeBtn.addEventListener('click', () => {
+  popup.style.display = 'none';
+});
+
+// Click outside image to close
+popup.addEventListener('click', (e) => {
+  if (e.target === popup) {
+    popup.style.display = 'none';
+  }
+});
+
+// Show previous image
+prevBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent popup close
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  popupImg.src = images[currentIndex].src;
+});
+
+// Show next image
+nextBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent popup close
+  currentIndex = (currentIndex + 1) % images.length;
+  popupImg.src = images[currentIndex].src;
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.team-section').forEach(section => {
+    const tabs = section.querySelectorAll('.team-tabs .tab');
+    const contents = section.querySelectorAll('.team-content');
+
+    function activateTab(tab) {
+      const targetId = tab.dataset.tab;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+
+      tab.classList.add('active');
+      section.querySelector('#' + targetId).classList.add('active');
+    }
+
+   
+    if (tabs.length > 0) {
+      activateTab(tabs[0]);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab));
+    });
+  });
+
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtns = document.querySelectorAll(".searchToggle");
+  const bottomSearch = document.querySelector(".bottomSearch");
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      bottomSearch.classList.toggle("active");
+    });
+  });
+
+  bottomSearch.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener("click", () => {
+    bottomSearch.classList.remove("active");
+  });
+});
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtns = document.querySelectorAll(".searchToggle");
+  const bottomSearch = document.querySelector(".bottomSearch");
+
+  // Toggle on button click
+  toggleBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevent document click from firing
+      bottomSearch.classList.toggle("active");
+    });
+  });
+
+  // Click outside to close
+  document.addEventListener("click", (e) => {
+    const clickedInsideSearch = bottomSearch.contains(e.target);
+    const clickedToggleBtn = [...toggleBtns].some((btn) =>
+      btn.contains(e.target)
+    );
+
+    if (!clickedInsideSearch && !clickedToggleBtn) {
+      bottomSearch.classList.remove("active");
+    }
+  });
+});
+
+
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Select all show-more buttons
+  const showMoreBtns = document.querySelectorAll('.team-member .show-more');
+
+  showMoreBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Find the popup inside this team member
+      const popup = this.closest('.team-member').querySelector('.popup-overlay');
+      if (popup) {
+        popup.style.display = 'flex';
+      }
+    });
+  });
+
+  // Close popup buttons
+  const closeBtns = document.querySelectorAll('.popup-overlay .close-btn');
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const popup = this.closest('.popup-overlay');
+      popup.style.display = 'none';
+    });
+  });
+
+  // Close popup if clicking outside the box
+  const popups = document.querySelectorAll('.popup-overlay');
+  popups.forEach(popup => {
+    popup.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  });
+
+});
+   const planCountry = document.getElementById("planCountry");
+const planCountryCode = document.getElementById("planCountryCode");
+
+planCountry.addEventListener("change", function() {
+  const selected = this.selectedOptions[0];
+  const code = selected.getAttribute("data-code") || "";
+  planCountryCode.value = code;
+});
+</script>
+<script>
+  document.getElementById("country").addEventListener("change", function () {
+    document.getElementById("countryCode").value = this.value;
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+
+ </section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+
+    // Apply to all date inputs (safe & future-proof)
+    document.querySelectorAll('input[type="date"]').forEach(input => {
+      input.setAttribute("min", today);
+    });
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

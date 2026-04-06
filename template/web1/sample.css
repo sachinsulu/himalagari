@@ -1,0 +1,260 @@
+:root {
+  --green: #1c6408;
+  --light-green: #e6f2da;
+  --text-dark: #222;
+  --text-muted: #666;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.packages-wrapper {
+  padding: clamp(16px, 4vw, 40px);
+  background: #f8f8f8;
+}
+
+.packages-grid {
+  padding: clamp(16px, 6vw, 40px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px)); /* responsive with max limit */
+  gap: clamp(24px, 5vw, 60px);
+  justify-content: center; /* center cards when row isn’t full */
+}
+
+/* CARD */
+.package-card {
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;       /* fill grid column */
+      max-width: 360px;  /* limit card growth */
+  margin: 0 auto;    /* center if extra space */
+}
+
+/* IMAGE */
+.image-wrapper {
+  position: relative;
+  height: clamp(233px, 55%, 268px);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--green);
+  color: #fff;
+  padding: 6px 16px;
+  font-size: 13px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 26px;
+  position: relative;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 26px;
+  color: var(--text-dark);
+}
+
+/* INFO GRID */
+.info-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  row-gap:50px;
+    column-gap: 8px;
+
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.value {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.green {
+  color: var(--green);
+}
+
+.divider {
+  background: #ddd;
+  width: 1px;
+}
+/* left column */
+.info-grid .info:nth-child(1),
+.info-grid .info:nth-child(4) {
+  text-align: left;
+}
+
+/* right column */
+.info-grid .info:nth-child(3),
+.info-grid .info:nth-child(6) {
+  text-align: right;
+}
+
+/* FOOTER */
+.card-footer {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-footer span{
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+.days {
+  background: var(--light-green);
+  color: var(--green);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.days-badge {
+  position: absolute;
+    left: 36.5%;
+
+    top: 60%;
+    transform: translate(-50%, -50%);
+    background: #e6f2da;
+    color: #1c6408;
+    padding: 8px 22px;
+    border-radius: 25px 0 0 25px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 2;
+}
+.explore-floating {
+  position: absolute;
+       right: 10%;
+    top: 45%;
+    transform: translateY(-50%);
+    background: #e6f2da;
+    color: #1c6408;
+    padding: 10px 26px;
+    border-radius: 0 30px 30px 0;
+  font-weight: 600;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  z-index: 2;
+}
+
+.divider {
+  background: #ddd;
+  width: 1px;
+}
+
+
+.explore-btn {
+  background: var(--light-green);
+  color: var(--green);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* =========================
+   EXPLORE PILL BUTTON
+========================= */
+
+.explore-pill {
+     position: absolute;
+    right: 12.5%;
+    top: 47%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background: #e6f2da;
+    border-radius: 0 32px 32px 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  font-family: inherit;
+  z-index: 3;
+
+  transition: box-shadow 0.25s ease;
+}
+
+/* TEXT PART */
+.explore-pill .text {
+    padding: 10px 13px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1c6408;
+  white-space: nowrap;
+}
+
+/* ICON PART */
+.explore-pill .icon {
+ 
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ARROW */
+.explore-pill svg {
+  width: 18px;
+  height: 18px;
+  color: #1c6408;
+
+  transition: transform 0.25s ease;
+}
+
+/* HOVER ANIMATION */
+.explore-pill:hover svg {
+  transform: translateX(4px);
+}
+
+
+.explore-pill:hover {
+  box-shadow: 0 6px 16px rgba(28, 100, 8, 0.18);
+}
+
+/* CLICK FEEDBACK */
+.explore-pill:active {
+  transform: translateY(-50%) scale(0.97);
+}
+

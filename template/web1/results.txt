@@ -1,0 +1,7 @@
+Match 0: ./assets/images/icons/trophy.png
+Match 1: ./assets/images/icons/rating.png
+Match 2: ./assets/images/icons/quality-service.png
+Match 3: ./assets/images/icons/passport.png
+Match 4: ./assets/images/icons/lowest-price.png
+Match 5: ./assets/images/icons/thumb-up.png
+Match 6: ./assets/images/everestbasecamp.jpg

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Listing</title>
+    <link rel="stylesheet" href="./fixed_listing.css">
+    <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="./assets/images/logo.png">
+
+     <!-- bootstrp -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css">
+     <!-- font-awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+       <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- owl carousel  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+</head>
+<body>
+  <section class="scroll-wrapper">
+    <nav class="navbar navbar-dark">
+      <div class="container-fluid">
+        <!-- LOGO (ALWAYS) -->
+        <a class="navbar-brand" href="./home.html">
+          <img src="./assets/images/logo.png" alt="Logo" />
+        </a>
+
+        <!-- NAV LINKS -->
+        <ul class="navbar-nav flex-row ms-auto gap-3 align-items-center">
+          <!-- MEDIUM & UP -->
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link " href="./home.html">Home</a>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link " href="./about.html">About</a>
+          </li>
+
+          <!-- DROPDOWN (LARGE ONLY) -->
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Holiday Types
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Adventure</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Honeymoon</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Family</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Luxury</a></li>
+              <li><a class="dropdown-item" href="./holiday_types_inner.html">Pilgrimage</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Destinations
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="./nepal.html">Nepal</a></li>
+              <li><a class="dropdown-item" href="./nepal.html">Bhutan</a></li>
+              <li><a class="dropdown-item" href="./nepal.html">Tibet</a></li>
+            </ul>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link" href="./contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- RIGHT ICONS (ALWAYS) -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- SEARCH ICON -->
+         <button title="search" class="icon-btn searchToggle" id="searchToggle">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+          
+                 <button id="inquiry-btn" class="explore_btn" 
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvas_inquiry" class="d-none d-sm-block">
+  <p>Plan Your Trip</p>
+ 
+</button>
+
+          
+          <button title="menu"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#menuCanvas"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+      
+   <!-- MENU OFFCANVAS -->
+    <div class="offcanvas offcanvas-end" id="menuCanvas">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button class="btn-close" title="menu" data-bs-dismiss="offcanvas"></button>
+      </div>
+     <div class="offcanvas-body sidebar">
+  <ul class="list-unstyled">
+
+    <li class="menu-item">Home</li>
+    <li class="menu-item">About</li>
+
+    <!-- Dropdown 1 -->
+    <li class="accordion menu-item" id="accordionHoliday">
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed custom-accordion-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#holidayTypes"
+          >
+            Holiday Types
+          </button>
+        </h2>
+
+        <div id="holidayTypes" class="accordion-collapse collapse">
+          <div class="accordion-body p-0">
+            <ul class="submenu list-unstyled">
+              <li>Adventure</li>
+              <li>Honeymoon</li>
+              <li>Family</li>
+              <li>Luxury</li>
+              <li>Pilgrimage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- Dropdown 2 -->
+    <li class="accordion menu-item" id="accordionDestinations">
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed custom-accordion-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#destinationTypes"
+          >
+            Destinations
+          </button>
+        </h2>
+
+        <div id="destinationTypes" class="accordion-collapse collapse">
+          <div class="accordion-body p-0">
+            <ul class="submenu list-unstyled">
+              <li>India</li>
+              <li>International</li>
+              <li>Weekend Trips</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="menu-item">Contact</li>
+
+  </ul>
+</div>
+
+      
+    </div>
+
+    <!-- SEARCH OFFCANVAS -->
+     <div class="bottom-search bottomSearch" id="bottomSearch">
+  <div class="container">
+    <div class="row g-3 align-items-center" id="navSearchForm">
+      
+      <div class="col-md-3">
+        <label class="form-label">Destination</label>
+        <select title="destination" class="form-control">
+          <option selected disabled>Where to?</option>
+          <option>Nepal</option>
+          <option>Bhutan</option>
+          <option>Tibet</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Activity</label>
+        <select title="activity" class="form-control">
+          <option selected disabled>Select activity</option>
+          <option>Adventure</option>
+          <option>Relaxation</option>
+          <option>Culture</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Duration</label>
+        <select title="duration" class="form-control">
+          <option selected disabled>Select duration</option>
+          <option>4-5 days</option>
+          <option>10-15 days</option>
+          <option>1-3 months</option>
+        </select>
+      </div>
+<div class="col-md-3 d-grid">
+            <button class="explore_btn" id="inquiry-btn">
+              Search
+            
+            </button>
+          </div>
+
+    </div>
+  </div>
+</div>
+    <!-- inquiry_offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
+ 
+     <div class="offcanvas-header">
+    <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+ <div class="inquiry_text">
+   <div class="offcanvas-body">
+    <div class="inquiry_title orange-text">
+      <span>Plan</span> Your Trip
+         <form>
+  <!-- Packages & Date -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Packages <span>*</span></label>
+      <select required>
+        <option value="">Choose Packages</option>
+        <option>Nepal</option>
+        <option>India</option>
+        <option>UAE</option>
+        <option>Bangladesh</option>
+        <option>Sri Lanka</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Travel Date <span>*</span></label>
+      <input type="date" class="travel-date" required>
+    </div>
+  </div>
+
+  <!-- Pax & Price -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>No. of Pax <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label>Price <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+  </div>
+
+  <!-- Name & Email -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Full Name <span class="required">*</span></label>
+      <input type="text" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email Address <span class="required">*</span></label>
+      <input type="email" required>
+    </div>
+  </div>
+
+  <!-- Country, Code & Phone -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>Country <span class="required">*</span></label>
+      <select id="planCountry" required>
+    <option value="">Select Country</option>
+    <option value="NP" data-code="+977">Nepal</option>
+    <option value="IN" data-code="+91">India</option>
+  </select>
+    </div>
+
+    <div class="form-group country-code">
+      <label>Code</label>
+       <input type="text" id="planCountryCode" class="country-code" readonly>
+    </div>
+
+    <div class="form-group phone-box">
+      <label>Contact No. <span class="required">*</span></label>
+      <input type="tel" required>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="form-group">
+    <label>Tour Details <span class="required">*</span></label>
+    <textarea required></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+    </div>
+  </div>
+ </div>
+  
+</div> 
+
+ 
+    <!-- PACKAGE LISTING -->
+        <section class="packages-wrapper ">
+      <header class="page-header">
+         <h4 class="text-center" id="package_title">Guarenteed Fixed Departure</h4>
+      <h2 class="mb-3 green-title">Join a group <span class="orange-text">Travel with</span> ease.</h3>
+
+      </header>
+       <br>
+
+<div class="package-grid-wrapper">
+  <div class="packages-grid mx-auto" id="packageGrid">
+
+    <!-- CARD -->
+    <div class="package-card">
+      <div class="image-wrapper">
+        <img src="./assets/images/everestbasecamp.jpg" alt="Nepal">
+        <span class="badge">POPULAR</span>
+      </div>
+
+      <div class="card-content">
+        <h3 class="title">Classic Nepal Tour</h3>
+
+       <div class="info-grid mx-auto">
+
+  <div class="info">
+    <span class="label">Trip Start Date</span>
+    <span class="value green">22 Aug 2025</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Seats Available</span>
+    <span class="value green">12</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Book Before</span>
+    <span class="value green">25th Aug 2026</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Trip End Date</span>
+    <span class="value green">12 Aug 2025</span>
+  </div>
+
+  <!-- FLOATING ELEMENTS -->
+  <span class="days-badge">4 days</span>
+
+          <button
+  class="explore_btn"
+  data-bs-toggle="modal"
+  data-bs-target="#fixedDepartureModal"
+  data-seats="12">
+
+                    <p>Book Now</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </button>
+
+
+</div>
+
+
+       
+      </div>
+    </div>
+ <div class="package-card">
+      <div class="image-wrapper">
+        <img src="./assets/images/everestbasecamp.jpg" alt="Nepal">
+        <span class="badge">POPULAR</span>
+      </div>
+
+      <div class="card-content">
+        <h3 class="title">Classic Nepal Tour</h3>
+
+     <div class="info-grid mx-auto">
+
+  <div class="info">
+    <span class="label">Trip Start Date</span>
+    <span class="value green">22 Aug 2025</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Seats Available</span>
+    <span class="value green">12</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Book Before</span>
+    <span class="value green">25th Aug 2026</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Trip End Date</span>
+    <span class="value green">12 Aug 2025</span>
+  </div>
+
+  <!-- FLOATING ELEMENTS -->
+  <span class="days-badge">4 days</span>
+
+          <button
+  class="explore_btn"
+  data-bs-toggle="modal"
+  data-bs-target="#fixedDepartureModal"
+  data-seats="12">
+
+                    <p>Book Now</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </button>
+
+
+</div>
+
+
+       
+      </div>
+    </div>
+
+     <div class="package-card">
+      <div class="image-wrapper">
+        <img src="./assets/images/everestbasecamp.jpg" alt="Nepal">
+        <span class="badge">POPULAR</span>
+      </div>
+
+      <div class="card-content">
+        <h3 class="title">Classic Nepal Tour</h3>
+
+      <div class="info-grid mx-auto">
+
+  <div class="info">
+    <span class="label">Trip Start Date</span>
+    <span class="value green">22 Aug 2025</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Seats Available</span>
+    <span class="value green">12</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Book Before</span>
+    <span class="value green">25th Aug 2026</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Trip End Date</span>
+    <span class="value green">12 Aug 2025</span>
+  </div>
+
+  <!-- FLOATING ELEMENTS -->
+  <span class="days-badge">4 days</span>
+
+          <button
+  class="explore_btn"
+  data-bs-toggle="modal"
+  data-bs-target="#fixedDepartureModal"
+  data-seats="12">
+
+                    <p>Book Now</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </button>
+
+
+</div>
+
+
+       
+      </div>
+    </div>
+    <div class="package-card">
+      <div class="image-wrapper">
+        <img src="./assets/images/everestbasecamp.jpg" alt="Nepal">
+        <span class="badge">POPULAR</span>
+      </div>
+
+      <div class="card-content">
+        <h3 class="title">Classic Nepal Tour</h3>
+
+       <div class="info-grid mx-auto">
+
+  <div class="info">
+    <span class="label">Trip Start Date</span>
+    <span class="value green">22 Aug 2025</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Seats Available</span>
+    <span class="value green">12</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Book Before</span>
+    <span class="value green">25th Aug 2026</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Trip End Date</span>
+    <span class="value green">12 Aug 2025</span>
+  </div>
+
+  <!-- FLOATING ELEMENTS -->
+  <span class="days-badge">4 days</span>
+
+          <button
+  class="explore_btn"
+  data-bs-toggle="modal"
+  data-bs-target="#fixedDepartureModal"
+  data-seats="12">
+
+                    <p>Book Now</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </button>
+
+
+</div>
+
+
+       
+      </div>
+    </div>
+    <div class="package-card">
+      <div class="image-wrapper">
+        <img src="./assets/images/everestbasecamp.jpg" alt="Nepal">
+        <span class="badge">POPULAR</span>
+      </div>
+
+      <div class="card-content">
+        <h3 class="title">Classic Nepal Tour</h3>
+
+      <div class="info-grid mx-auto">
+
+  <div class="info">
+    <span class="label">Trip Start Date</span>
+    <span class="value green">22 Aug 2025</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Seats Available</span>
+    <span class="value green">12</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Book Before</span>
+    <span class="value green">25th Aug 2026</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Trip End Date</span>
+    <span class="value green">12 Aug 2025</span>
+  </div>
+
+  <!-- FLOATING ELEMENTS -->
+  <span class="days-badge">4 days</span>
+
+          <button
+  class="explore_btn"
+  data-bs-toggle="modal"
+  data-bs-target="#fixedDepartureModal"
+  data-seats="12">
+
+                    <p>Book Now</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </button>
+
+
+</div>
+
+
+       
+      </div>
+    </div>
+       <div class="package-card">
+      <div class="image-wrapper">
+        <img src="./assets/images/everestbasecamp.jpg" alt="Nepal">
+        <span class="badge">POPULAR</span>
+      </div>
+
+      <div class="card-content">
+        <h3 class="title">Classic Nepal Tour</h3>
+
+      <div class="info-grid mx-auto">
+
+  <div class="info">
+    <span class="label">Trip Start Date</span>
+    <span class="value green">22 Aug 2025</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Seats Available</span>
+    <span class="value green">12</span>
+  </div>
+
+  <div class="info">
+    <span class="label">Book Before</span>
+    <span class="value green">25th Aug 2026</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <span class="label">Trip End Date</span>
+    <span class="value green">12 Aug 2025</span>
+  </div>
+
+  <!-- FLOATING ELEMENTS -->
+  <span class="days-badge">4 days</span>
+
+          <button
+  class="explore_btn"
+  data-bs-toggle="modal"
+  data-bs-target="#fixedDepartureModal"
+  data-seats="12">
+
+                    <p>Book Now</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor" stroke-width="4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </button>
+
+
+</div>
+
+
+       
+      </div>
+    </div>
+ <!-- uiverse btn -->
+      
+  </div>
+  </div>
+  <button class="explore_btn inquiry-btn mx-auto mt-4" id="toggleBtn">
+    Load More
+  </button>
+</section>
+    <!-- Fixed Departure Booking Modal -->
+<div class="modal fade" id="fixedDepartureModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title green-title">
+          Reserve Your <span class="orange-text">Fixed Departure</span> Trip 
+          <span class="book_before">Book before : 12Aug 2025</span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <ul class="fixed_dates">
+          <li class="trapezium-left">Start Date : 12Aug 2025</li>
+          <li class="square-middle">Seats left : 22</li>
+          <li class="trapezium-right">End Date : 22Aug 2025</li>
+        </ul>
+
+        <form>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="peopleCount" class="form-label">Number of Travellers <span>*</span></label>
+              <input type="number" id="peopleCount" class="form-control" min="1" value="1" required>
+            </div>
+
+            <div class="col-md-6 mb-3 d-flex align-items-end">
+              <div class="total-amount mx-auto">
+                <label class="form-label">Total Amount</label>
+                <div class="amount-box">$<span id="amountValue">400</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Full Name<span>*</span></label>
+              <input type="text" class="form-control">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Address<span>*</span></label>
+              <input type="text" class="form-control" readonly>
+            </div>
+          </div>
+
+        <div class="row">
+  <!-- Country -->
+  <div class="col-md-6 mb-3">
+    <label class="form-label" for="rowCountry">Country<span>*</span></label>
+    <select id="rowCountry" class="form-select" required>
+      <option value="">Select Country</option>
+      <option value="NP" data-code="+977">Nepal</option>
+      <option value="IN" data-code="+91">India</option>
+      <option value="AE" data-code="+971">UAE</option>
+      <option value="BD" data-code="+880">Bangladesh</option>
+      <option value="LK" data-code="+94">Sri Lanka</option>
+    </select>
+  </div>
+
+  <!-- Code -->
+  <div class="col-md-1 pe-0 mb-3">
+    <label class="form-label" for="rowCode">Code</label>
+    <input type="text" id="rowCode" class="form-control country-code" readonly>
+  </div>
+
+  <!-- Phone -->
+  <div class="col-md-5 ps-0 mb-3">
+    <label class="form-label" for="rowPhone">Phone<span>*</span></label>
+    <input type="tel" id="rowPhone" class="form-control" required>
+  </div>
+</div>
+
+
+          <div class="mb-3">
+            <label class="form-label">Email<span>*</span></label>
+            <input class="form-control" rows="3"></input>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success w-50">
+            Confirm Fixed Departure Booking
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- footer -->
+  <footer class="footer components ">
+    <div class="container-fluid position-relative">
+
+      <div class="footer-flex flex-wrap">
+        <!-- LEFT COLUMN -->
+        <div class=" footer_info footer-col">
+          <h4 class="footer-title">Himmalagari Travels</h4>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-location-dot "></i>
+            <span class="fw-semibold">NEPAL (REGISTERED OFFICE)</span>
+          </div>
+
+          <p class="footer-text">
+            Suite 04 – 3rd Floor, BHIM Plaza, 329 Bhupi Sadak,
+            Narayanchaur – Naxal, Kathmandu – Nepal
+          </p>
+          <br>
+          <div class="footer-line">
+            <i class="fa-solid fa-envelope "></i>
+            <a href="mailto:incoming@himmalagaritravel.com">
+              incoming@himmalagaritravel.com
+            </a>
+          </div>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-phone "></i>
+            <a href="tel:+9779802369474">+977 9802369474</a>
+          </div>
+
+          <div class="footer-line">
+            <i class="fa-solid fa-phone "></i>
+            <a href="tel:+9779802369473">+977 9802369473</a>
+
+          </div>
+
+       
+
+        </div>
+        <!-- QUICK LINKS -->
+        <div class="footer-col footer_quicklinks">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./holiday_types_inner.html">Holiday Types</a></li>
+            <li><a href="./about.html">Legal Documents</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- DESTINATION -->
+        <div class=" footer-col">
+          <h4 class="footer-title">Destination</h4>
+          <ul class="footer-list">
+            <li><a href="./nepal.html">Nepal</a></li>
+            <li><a href="./nepal.html">Bhutan</a></li>
+            <li><a href="./nepal.html">Tibet</a></li>
+          </ul>
+        </div>
+
+      <!-- WHITE CURVE -->
+      <div class="footer-curve mt-3">
+        <h4>Our Affiliations & Awards</h4><br>
+        <p>
+          Join Hands with Our Trusted Partners to Discover Exclusive Travel Experiences,
+          Unmatched Comfort, and Seamless Journeys Worldwide
+        </p>
+
+        <div class="curve-logos d-flex flex-wrap gap-5">
+          <a href="#"><img src="./assets/images/affiliation1.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affiliation2.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affiliation3.png" alt=""></a>
+          <a href="#"><img src="./assets/images/affilisation3.png" alt=""></a>
+
+        </div>
+      </div>
+
+     
+      </div>
+       </div>
+  <!-- COPYRIGHT -->
+      <ul class="footer-bottom mt-4 ">
+       
+          <!-- STAY CONNECTED -->
+          <li class="footer-social">
+            <h4 class="footer-subtitle stay-connected">Stay Connected</h4>
+            <a href="#"><i class="fa-brands fa-google" style="color: #ffffff;"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+          </li>
+
+          <!-- WE ACCEPT -->
+         <li class="footer_we_accept">
+           <h4 class="footer-subtitle we-accept">We Accept</h4>
+          <div class="footer-payments">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="">
+            <img src="./assets/images/maestro-logo-copy.png" alt="">
+          </div>
+         </li>
+           <li>Copyright &copy; 2023 Himmalagari Travels</li>
+          </ul>
+       
+  </footer>
+
+<script>
+  const searchtoggleBtn = document.getElementById("searchToggle");
+  const bottomSearch = document.getElementById("bottomSearch");
+
+  searchtoggleBtn.addEventListener("click", () => {
+    bottomSearch.classList.toggle("active");
+  });
+  
+  
+       const planCountry = document.getElementById("planCountry");
+const planCountryCode = document.getElementById("planCountryCode");
+
+planCountry.addEventListener("change", function() {
+  const selected = this.selectedOptions[0];
+  const code = selected.getAttribute("data-code") || "";
+  planCountryCode.value = code;
+});
+</script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+
+  </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+const grid = document.querySelector(".packages-grid");
+const wrapper = document.querySelector(".package-grid-wrapper");
+const toggleBtn = document.getElementById("toggleBtn");
+const title = document.getElementById("package_title");
+
+const cardsPerRow = 3;
+const cardTemplate = grid.children[0].outerHTML;
+let expanded = false;
+
+function updateHeight() {
+  wrapper.style.maxHeight = grid.scrollHeight + "px";
+}
+
+// initial height
+updateHeight();
+// Debounced resize to prevent too many calls
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    updateHeight();
+  }, 100); // 100ms delay
+});
+
+toggleBtn.addEventListener("click", () => {
+
+  if (!expanded) {
+    /* ---------- LOAD MORE ---------- */
+    for (let i = 0; i < cardsPerRow; i++) {
+      grid.insertAdjacentHTML("beforeend", cardTemplate);
+    }
+
+    requestAnimationFrame(updateHeight);
+    toggleBtn.childNodes[0].textContent = "Load Less";
+    expanded = true;
+
+  } else {
+    /* ---------- LOAD LESS ---------- */
+
+    const cardsToRemove = [...grid.children].slice(-cardsPerRow);
+
+    /* 🔹 START SCROLL FIRST */
+    title.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    /* 🔹 START FADE + COLLAPSE TOGETHER */
+    cardsToRemove.forEach(card => card.classList.add("removing"));
+
+    /* 🔹 REMOVE AFTER ANIMATION */
+    setTimeout(() => {
+      cardsToRemove.forEach(card => card.remove());
+      updateHeight(); // collapses height smoothly
+    }, 350);
+
+    toggleBtn.childNodes[0].textContent = "Load More";
+    expanded = false;
+  }
+});
+
+});
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+
+    // Apply to all date inputs (safe & future-proof)
+    document.querySelectorAll('input[type="date"]').forEach(input => {
+      input.setAttribute("min", today);
+    });
+  });
+</script>
+
+</body>
+</html>

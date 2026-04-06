@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Title Of Site -->
+    <jcms:site:seotitle/>
+    <meta name="google-site-verification" content="MDXT9VUrTQIc_Ov8SjX4QIwFCwc7tO_IGpUWdYtOmN0" />
+
+    <!-- Fav and Touch Icons -->
+    <jcms:site:fevicon/>
+
+    <!-- Font face -->
+    <link href='https://fonts.googleapis.com/css2?family=Raleway&display=swap' rel="stylesheet">
+
+    <!-- CSS Plugins -->
+    <link href="css/font-icons.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/animate.html" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/plugin.css" rel="stylesheet">
+
+    <!-- CSS Custom -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- CSS Custom -->
+    <link href="css/overlay.css" rel="stylesheet">
+    <link href="css/your-style.css" rel="stylesheet">
+    <link href="css/popup.css" rel="stylesheet">
+</head>
+
+<body class="with-waypoint-sticky">
+    <style>
+        .fb_dialog_content iframe{
+            bottom: 60px !important;
+            right: 0px !important;
+        }
+    </style>
+   
+    <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "424877144534517");
+        chatbox.setAttribute("attribution", "page_inbox");
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml            : true,
+                version          : 'v10.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
+    <!-- start Body Inner -->
+    <div class="body-inner">
+        <!-- start Header -->
+        <header id="header-waypoint-sticky" class="header-main header-mobile-menu with-absolute-navbar">
+            <div class="container">
+                <div class="header-outer clearfix">
+                    <div class="row shrink-auto-lg gap-0 align-items-center">
+                        <div class="col-9 col-shrink z-in-1111">
+                            <div class="col-inner">
+                                <div class="main-logo">
+                                    <jcms:site:logo/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-shrink order-last-lg">
+                            <div class="col-inner">
+                                <ul class="nav-mini-right">
+                                    <li>
+                                        <button class="btn btn-toggle collapsed" data-toggle="collapse"
+                                            data-target="#mobileMenu"></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-auto order-last-lg">
+                            <div class="navbar-wrapper">
+                                <div class="navbar navbar-expand-lg">
+                                    <div id="mobileMenu" class="collapse navbar-collapse">
+                                        <nav class="main-nav-menu main-menu-nav navbar-arrow">
+                                            <jcms:module:menu/>
+                                        </nav><!--/.nav-collapse -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- start Header -->
+
+        <!-- start Main Wrapper -->
+        <div class="main-wrapper scrollspy-container">
+            <div class="banner-vedio">
+                <jcms:module:home-slideshow/>
+            </div>
+
+            <div class="hero-banner overlay-light opacity-2">
+                <div class="overlay-holder bottom"></div>
+                <div class="hero-inner">
+                    <div class="container">
+                        <h1>Lifetime <span>experience <span class="block front-title">with ABC and EBC Nepal Trekking</span></span>
+                        </h1>
+                        <!--<p class="font-lg">Trekking, Tour, Adventure Sports and more...</p>-->
+    
+                        <div class="search-form-main">
+                            <jcms:module:quickform/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<img src="img/hill.png" class="new-img" alt="Mountains">-->
+
+            <img src="img/temple1.png" class="new-img1" alt="Temple">
+
+            <div class="pt-0 tour-packages1">
+                <div class="container">
+                    <div class="clear mb-10"></div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="section-title">
+                                <h2><span><span class="color-3a3838">Featured Trips</span></span></h2>
+                                <p class="sherpa1">One of the leading trekking agencies of Nepal, would like to invite you to discover the diversity and wonders and beauties of the Himalayas.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row d-flex equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mb-30">
+                                <jcms:module:package-home/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img src="img/temple.png" class="new-img2" alt="Temple">
+                </div>
+            </div>
+
+            <section class="deals1">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><span><span class="color-3a3838">Life is an adventure  …  or just nothing!</span></span></h2>
+                    </div>
+                    <div class="row cols-1 cols-lg-3">
+                        <div class="col-md-6">
+                            <img src="img/life.jpg">
+                            </div>
+                        <div class="col-md-3">
+                            <div class="featured-icon-horizontal-01 clearfix">
+                                <p style="text-align:left;">We at ABC and EBC Nepal Trekking Adventures Pvt. Ltd are set with the mission to provide you amazing opportunities to make your holiday dreams come true – whether it’s a trail passing through ivory snows, jaded forests and blossoms of Rhododendrons, or enjoying breathtaking views of the Himalayas; we offer you remarkable vacations to remember throughout life. This is what God’s gift of nature is all about…. And so was born a Vision with a Mission.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <!--<div id="TA_selfserveprop199" class="TA_selfserveprop"><ul id="ywwuSz" class="TA_links Pf3xRvjU"><li id="YLq6iiog" class="LafEbCR"><a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d13424854-Reviews-ABC_and_EBC_Nepal_Trekking_Adventure-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Cen.html"><img src="img/trip.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=199&amp;locationId=13424854&amp;lang=en_US&amp;rating=true&amp;nreviews=5&amp;writereviewlink=true&amp;popIdx=true&amp;iswide=false&amp;border=true&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>-->
+                            <!--<p><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d13424854-Reviews-ABC_and_EBC_Nepal_Trekking_Adventure-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Cen.html" target="_blank" style="color:#000;">View Review</a></p>-->
+                            <!--<div id="TA_cdsratingsonlynarrow721" class="TA_cdsratingsonlynarrow">
+                                <ul id="dhI83f2iG" class="TA_links d4A9tXoRHrF4">
+                                    <li id="NSdEBh" class="4tfAoH">
+                                        <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d13424854-Reviews-ABC_and_EBC_Nepal_Trekking_Adventure-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Cen.html">
+                                            <img src='https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-18034-2.svg' alt="TripAdvisor"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <script async src='https://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&amp;uniq=721&amp;locationId=13424854&amp;lang=en_US&amp;border=true&amp;display_version=2' data-loadtrk onload="this.loadtrk=true"></script>-->
+                            <div id="TA_selfserveprop219" class="TA_selfserveprop">
+                                <ul id="PgipSv" class="TA_links d6etkUCyRX7">
+                                    <li id="ejdcXf" class="ge49Qc2L7opN">
+                                        <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d13424854-Reviews-ABC_and_EBC_Nepal_Trekking_Adventure-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Cen.html">
+                                            <img src='https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-11900-2.svg' alt="TripAdvisor"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <script async src='https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=219&amp;locationId=13424854&amp;lang=en_US&amp;rating=true&amp;nreviews=5&amp;writereviewlink=true&amp;popIdx=true&amp;iswide=false&amp;border=true&amp;display_version=2' data-loadtrk onload="this.loadtrk=true"></script>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pb-0">
+            <div class="container">
+                <div class="section-title">
+                    <h2><span><span class="color-3a3838">Things to do in Nepal </span></span></h2>
+                    <p class="recomend-trip1">Tell us your dream and let us do work. Whether its trekking, mountaineering expedition, or luxury tours, let us craft your perfect trip.</p>
+                </div>
+            </div>
+
+            <div class="slick-list-visible">
+                <div class="container">
+                    <div class="slick-carousel-wrapper gap-5">
+                        <div class="slick-carousel-inner">
+                            <div class="slick-top-destination">
+                                <jcms:module:home-destination/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            <section class="deals1">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><span><span class="color-3a3838">Why travel with us?</span></span></h2>
+                    </div>
+                    <div class="row cols-1 cols-lg-3 gap-20 gap-lg-40">
+                        <div class="col">
+                            <div class="featured-icon-horizontal-01 clearfix">
+                                <div class="icon-font">
+                                    <i class="elegent-icon-gift_alt text-primary"></i>
+                                </div>
+                                <div class="content">
+                                    <h6>Flexible & Quality service</h6>
+                                    <!--<p class="text-muted">Considered an invitation do introduced sufficient understood instrument it. </p>-->
+                                    <p class="text-muted">We design each day itinerary to fulfill and match our travelers requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col">
+                            <div class="featured-icon-horizontal-01 clearfix">
+                                <div class="icon-font">
+                                    <i class="elegent-icon-wallet text-primary"></i>
+                                </div>
+                                <div class="content">
+                                    <h6>Best price guaranteed</h6>
+                                    <!--<p class="text-muted">Discovery sweetness principle discourse shameless bed one excellent.</p>-->
+                                    <p class="text-muted">We assure that you are getting best possible price at the time of booking.</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col">
+                            <div class="featured-icon-horizontal-01 clearfix">
+                                <div class="icon-font">
+                                    <i class="elegent-icon-heart_alt text-primary"></i>
+                                </div>
+                                <div class="content">
+                                    <h6>Safety & Responsible</h6>
+                                    <!--<p class="text-muted">Sentiments of surrounded friendship dispatched connection john shed hope.</p>-->
+                                    <p class="text-muted">The trip was most memorable and remarkable to every travelers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pt-0 pb-0">
+            <div class="container">
+                <div class="section-title">
+                    <h2><span><span class="color-3a3838">Our Best Selling Trips</span></span></h2>
+                    <p class="recomend-trip1">Discover your next great soft and adventurous holidays, Get start now!</p>
+                </div>
+                <div class="clear mb-10"></div>
+                <div class="row">
+                    <div class="col-md-12 popular1">
+                        <div class="row d-flex equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mb-30">
+                            <jcms:module:package-feature/>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center add_bottom_30">
+                    <a href="searchlist" class="btn_cus trip1_btn">View All Trips</a>
+                </p>
+            </div>
+        </div>
+        
+            <div class="easy-step">
+                <div class="container">
+                    <img src="img/easy.png">
+                </div>
+            </div>
+
+            <div class="bg-white-gradient-top-bottom reviews">
+                <div class="bg-image overlay-relative travel-review">
+                    <div class="overlay-holder overlay-white opacity-8"></div>
+                    <div class="container">
+                        <div class="testimonialabc">
+                            <p>Our Happy Clients</p>
+                        </div>
+
+                        <div class="testimonial-grid-slick-carousel testimonial-grid-wrapper">
+                        <jcms:module:testimonial-list/>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="overlay-relative overlay-gradient gradient-white set-height-01">
+                    <div class="overlay-holder bottom"></div>
+                </div>
+            </div>
+
+            <div class="customis">
+                <div class="container">
+                    <div class="customis-cover">
+                        <div class="banner_2">
+                            <div class="wrapper d-flex align-items-center opacity-mask"
+                                 data-opacity-mask="rgba(0, 0, 0, 0.3)">
+                                <div>
+                                    <h3>Your Perfect<br>Tour Experience</h3>
+                                    <p>Activities and Packages</p>
+                                    <a href="customize" class="btn_cus">Customize Your Trip Itinerary</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="travel-vlog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-9 col-xs-9 blogtravel12">
+                        <jcms:module:home-blog/>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="section-title">
+                            <h2><span><span class="trav123 color-3a3838">Travel Blogs</span></span></h2>
+                            <p>Highlighting some of latest travel news. Whether its trekking, mountaineering, expedition, or luxury tours, that can help you travel better.</p>
+                            <br/>
+                            <p class="btn_home_align"><a href="blog" class="btn_1">Read More</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- end Main Wrapper -->
+
+        <!-- start Footer Wrapper -->
+        <jcms:module:footer/>
+        <!-- start Footer Wrapper -->
+    </div>
+    <!-- end Body Inner -->
+
+    <!-- start Back To Top -->
+    <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip"
+        data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
+    <!-- end Back To Top -->
+
+    <div id="option_btn" class="">
+        <!-- <a href="#" class="demotip tooltipstered"><img src="img/messenger.png"></a>
+        <a href="#" class="demotip tooltipstered"><img src="img/viber.png"></a>
+        <a href="#" class="demotip tooltipstered"><img src="img/whatsapp.png"></a> -->
+        <!--<img src="img/offer.jpg">-->
+    </div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/custom-core.js"></script>
+    
+    <!-- dynamic popup -->
+    <jcms:module:popup/>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#modal-popup-video").modal('show');
+            $('#modal-popup-video').on('hidden.bs.modal', function () {
+                $("#modal-popup-image").modal('show');
+                $("#modal-popup-video iframe").attr("src", "");
+            });
+            $('#modal-popup-image').on('hidden.bs.modal', function () {
+                // $('.deals ,.D-prev ,.D-next').removeClass('d-none');
+            });
+            if ($('#modal-popup-video')[0]) {
+                $("#modal-popup-image").modal('hide');
+            } else {
+                $("#modal-popup-image").modal('show');
+            }
+            jQuery('.deals .close').on('click', function () {
+                jQuery('.deals ').addClass('d-none');
+            });
+            $('#offon').on('click', function () {
+                $('.deals ').toggleClass('d-none');
+            });
+    
+            // $('').on('click', function () {
+            //     $('.deals ').toggleClass('d-none');
+            // });
+    
+            // $('a#book_now').click(function () {
+            //     window.open("https://www.aagantukresort.com/result.php?hotel_code=3TFYh3", "_blank");
+            //     return false;
+            // });
+        });
+    </script>
+
+    <script>
+        var base_url = $('base').attr('url');
+        $('.qdestination').on('change', function () {
+            var destId = $(this).val();
+            $('.qactivities').html('<option>Loading...</option>');
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: base_url + "quicksearch.php",
+                data: "action=filteractivity&destid=" + destId,
+                success: function (data) {
+                    var msg = eval(data);
+                    if (msg.action == 'success') {
+                        $('.qactivities').html(msg.result);
+                    }
+                }
+            });
+            return !1
+        });
+    </script>
+
+</body>
+</html>
