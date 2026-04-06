@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "summit-hotel",
+  "private_key_id": "ca25b7a1e943de31d6e34fa7593c96eae99d17fe",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCl71NTs4XPtlOW\nEKU8Zu4PAkRrOLlDHcFKRK4SUNkt7lwBTxUWYSx9bYr8S0PYPGLziFQ8XJHd7O4X\nIs3geBvddiF3loKeTeDqyHrUbkj6AfkGC4U2089bJJQ8ea3/rfMUVM/MDDr4zqYj\nFa9u2oXTxUv78Pn2Bh6Gz/h4WPoMhiWvT9KZxr0HISx2jv9/2GMXnmpMNzCGE71d\noUznqcDVRrMa2pa1bExxSh1j92dm/HPEFA+FY2+EN325Td1lnPNMwG0sOcdEdDJQ\nK7wIDfnlV0J/++xCqORowdWcKPiNGk7OVZjgxTah4TvOdD/gjtV94+21CpteaWzC\nyBpK9UQfAgMBAAECggEAPbP69lsBXTXdayYRa56S033yVzSmn3CHGcjkOedaexvx\nloMDwmisFJARaLPMLLJ30TtWp4N8sluSRYQprli7c+SjmUacl6U6B9Q46JmCBYWK\nRlcuWC73Ils9zCcrLrJOe7b19lht7WtamB1OORiFPzRUhwEa0gOAgnz/VjEv+kum\nlQgN3+JU5Uy65B1edXHszjLRDOj5NuNVwcBJP5J9fZxnvRYW26uypEDkXt4vVPKA\ni4TOTjutJ0GWu0MvqfYVI3Lxz102iXCxPItwLvH9P5s5YcuSvLCekJhQUI4ArokW\nPY1w87TS4Wq+d1j1oXDfLhCms6dDR9qTEmNBo5oxIQKBgQDR0RbgmxtnTODdLT3U\n+Hu7caUMn0w+uVNDWznpbcdx0toVOFOC2/LTj5XU9KFkKb5ILZAb6maUG6edVYdP\nfffTtSQXGqTDSG1AKj8Oksw9uofupFNDcmTF1DIhwyF73cDBml5jOVAzQnbHnSIF\nSVx6XVNTO8enurY9rrhEG2ws9wKBgQDKdYv3DwiRCoLdmG+U7tmzTqmvXO9ACliD\n31ayU3Xjhizxp6PXDPvaffTRQDocKmDMlUL+A+NWSGjndgM9qGNk8wWZ7Qky5EYH\ntjs0BPsD5c9WlByVe2ptb96gHFx1DYmc7q4MpxTOBvhU817TAodVJpNI2UvJcNZt\nkkMZcuogGQKBgDmZ9XXkHznU2UbfTMJTFWT4Zh94/C2cI0eym8uB3+dXw5dfx019\npMR//tpf7o7ZBuw51f5T86VlkjaXbHZeVtNAP5A4OFOEZrne30DY/ElWFEtnwZQa\nq5/ECZ9LOr4OuwRrpM4IxgPMk19pvBVHdqQBSwbmuoFJuQ5mESBhhukxAoGBAKGE\nfZEwUSlFNXoL7pjmpI9EJmNcxRJWLp+mQcgqhVZq6NgxYahjF1oMOo/lqXZm6KrO\nOY/lEiz3v5lIsPUzrXgP2VwfmsMbEjN80maBwrAtWug7aUJoH1QHd5hMiAZqMmsc\nj4ZQlWx4aw16yx+UWNs51y67DJc8ihUIJrfa0aWhAoGBAKRWKvFpvZX3Hf2lgh0u\nrQTf+6A9zGVCdt0z6MGPdb2iCoxKYtwP31KvuhsYYTHwIXMW8oo/7g6MSnCoSJWy\n2AIdJOIAERJwQ+CfxftyiNbHCyZG3jl6+vYj2Bq3eml9d07m0xswqS2z552jrjeo\n+2Pmq8DIOokDtVT9+HhMKcmE\n-----END PRIVATE KEY-----\n",
+  "client_email": "analytics@summit-hotel.iam.gserviceaccount.com",
+  "client_id": "112727875979894763653",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/analytics%40summit-hotel.iam.gserviceaccount.com"
+}

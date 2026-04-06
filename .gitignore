@@ -9,18 +9,6 @@ apanel/config.php
 .env.local
 .env.*.php
 
-# API Keys and Service Credentials
-includes/google/json/
-includes/google/*.json
-includes/**/*.php.bak
-includes/**/*.key
-includes/**/*.pem
-
-# Sensitive configuration files
-*.apikey
-*.secret
-*credentials*
-
 # =========================
 # USER UPLOADS & MEDIA
 # =========================
