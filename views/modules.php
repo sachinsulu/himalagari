@@ -32,6 +32,8 @@ require_once('module.packagelists.php');
 require_once('module.onlinechat.php');
 require_once('module.enquiry.php');
 require_once('module.customize.php');
+require_once('module.team.php');
+require_once('module.legaldocuments.php');
 
 // SITE MODULES
 $modulesList = Module::getAllmode();
