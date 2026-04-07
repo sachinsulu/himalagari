@@ -1,116 +1,118 @@
 <?php
-$footer = $number = $mail = '';
+$footer = $number = $mail = $footer1 = '';
 $emlAddress = str_replace('@', '&#64;', $siteRegulars->email_address);
 $emlAddress = str_replace('.', '&#46;', $emlAddress);
 
 $emails = explode("<br>", $emlAddress);
-foreach($emails as $email){
-    if ($email != end($emails)) {
-        $mail .= '<a href="mailto:' . $email . '" id="email_footer">' . $email . '</a><br>';
-    } else {
-        $mail .= '<a href="mailto:' . $email . '" id="email_footer">' . $email . '</a>';
-    }
+if (!empty($emails)) {
+  $mail = '<a href="mailto:' . $emails[0] . '">' . $emails[0] . '</a>';
 }
-
+$copyrightText = str_replace('{year}', date('Y'), $siteRegulars->copyright);
 $contacts = explode("<br>", $siteRegulars->contact_info);
+$number_divs = '';
 foreach ($contacts as $contact) {
-    $numbers = explode("(", $contact);
-    if ($contact != end($contacts)) {
-        $number .= '<a href="tel:' . $numbers[0] . '" id="phone">' . $contact . '</a><br> ';
-    } else {
-        $number .= '<a href="tel:' . $numbers[0] . '" id="phone">' . $contact . '</a>';
-    }
+  if (empty(trim($contact)))
+    continue;
+  $numbers = explode("(", $contact);
+  $tel = trim($numbers[0]);
+  if ($contact != end($contacts)) {
+    $number .= '<a href="tel:' . $tel . '" id="phone">' . $contact . '</a><br> ';
+  } else {
+    $number .= '<a href="tel:' . $tel . '" id="phone">' . $contact . '</a>';
+  }
+  $number_divs .= '
+            <div class="footer-line">
+              <i class="fa-solid fa-phone "></i>
+              <a href="tel:' . $tel . '">' . $contact . '</a>
+            </div>';
 }
-$footer .= '
-    <footer class="revealed footer-revealed">
-        <div class="container">
-            <div class="row">
-                <!--<div class="col-md-4 col-sm-12 col-xs-12">
-                    <h3>Contact With Us</h3>
-                    <p> ' . $siteRegulars->fiscal_address . '</p>
-                    <p><i class="fas fa-phone-alt"></i>' . $number . '
-                        <a href="mailto:' . $emlAddress . '" id="email_footer">' . $emlAddress . '</a>
 
-                    <h3>Follow us</h3>
-                    <div class="footer-socials mt-20">
-                        ' . $jVars['module:socilaLinkbtm'] . '
-                    </div>
-                </div>-->
 
-                <div class="col-md-2 col-sm-12 col-xs-1">
-                    <h3>Destinations</h3>
-                    ' . $jVars['module:footer-menu-1'] . '
-                </div>
-                <div class="col-md-2 col-sm-12 col-xs-1">
-                    <h3>Activities</h3>
-                    ' . $jVars['module:footer-menu-2'] . '
-                </div>
-                <div class="col-md-4 col-sm-12 col-xs-1">
-                    <h3>Others</h3>
-                    ' . $jVars['module:footer-menu-3'] . '
-                </div>
 
-                <div class="col-md-4 col-sm-12 col-xs-1">
-                    <h3>Affiliations</h3>
-                    <ul class="affilation-footer">
-                        <li><a href="https://www.taan.org.np/" target="_blank"><img src="'.IMAGE_PATH.'/taan.png" class="width-50" alt="TAAN"></a></li>
-                        <li><a href="https://www.facebook.com/nattapage/" target="_blank"><img src="'.IMAGE_PATH.'/natta.png" class="width-50" alt="NATTA"></a></li>
-                        <li><a href="https://www.nepal.gov.np/" target="_blank"><img src="'.IMAGE_PATH.'/tourism.jpg" class="width-50" alt="Nepal Government"></a></li>
-                        <li><a href="https://www.welcomenepal.com/" target="_blank"><img src="'.IMAGE_PATH.'/ntb.png" class="width-50" alt="NTB"></a></li>
-                        <li><a href="https://www.nepalmountaineering.org/" target="_blank"><img src="'.IMAGE_PATH.'/nma.png" class="width-50" alt="NMA"></a></li>
-                        <li><a href="https://keepnepal.org/" target="_blank"><img src="'.IMAGE_PATH.'/keep.jpg" class="width-43" alt="Keep Nepal"></a></li>
-                    </ul>
-                     <p>' . $siteRegulars->fiscal_address . '</p>
-                    <p class="footer-aff"><i class="fas fa-phone"></i> ' . $number . '</p>
-                    <p class="footer-aff">
-                        <i class="fas fa-envelope"></i> '.$mail.'</p>
-                    <div class="footer-socials mt-20">
-                        ' . $jVars['module:socilaLinkbtm'] . '
-                    </div>
-                    
-                    <!--<form class="footer-newsletter mt-20">
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Email address">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button"><i class="far fa-envelope"></i></button>
-                            </div>
-                        </div>
-                    </form>-->
-                    <h3>We Accept</h3>
-                    <div class="footer-socials mt-20">
-                        <style>.footer-socials img{width: 160px;}</style>
-                        <img src="' . BASE_URL . 'template/web/img/payment.jpg" alt="Payment">
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-12 partnr1">
-                    <h3>Partner Companies</h3>
-                    <ul>
-                        <li><a href="https://www.facebook.com/firstflight20" target="_blank" title="First Flight Travel Pvt.Ltd"><img src="' . BASE_URL . 'template/web/img/partner1.png" alt="Payment"></a></li>
-                        <li><a href="https://www.facebook.com/easyexportandimportservice" target="_blank" title="Easy Export & Import Service"><img src="' . BASE_URL . 'template/web/img/partner2.png" alt="Payment"></a></li>
-                        <li><a href="https://www.facebook.com/flyingskyinternational" target="_blank" title="Flying Sky International Logistics"><img src="' . BASE_URL . 'template/web/img/partner3.png" alt="Payment"></a></li>
-                    </ul>
-                </div>
-            </div><!-- End row -->
+$footer1 .= '
 
-            <div class="row">
-            <div class="footer1">
-                <div class="col-md-10">
-                    <div id="social_footer">
-                        <p class="footer-copy-right">' . $jVars['site:copyright'] . '</p>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="social_footer">
-                        ' . $jVars['module:socilaLinkbtmFooter'] . '
-                    </div>
-                </div>
-                </div>
-            </div><!-- End row -->
-        </div><!-- End container -->
+     <footer class="footer ">
+      <div class="container-fluid position-relative">
+
+        <div class="footer-flex flex-wrap">
+          
+          <div class=" footer_info footer-col">
+            <h4 class="footer-title">' . $siteRegulars->sitename . '</h4>
+
+            <div class="footer-line">
+              <i class="fa-solid fa-location-dot "></i>
+              <span class="fw-semibold">NEPAL (REGISTERED OFFICE)</span>
+            </div>
+
+            <p class="footer-text">
+             ' . $siteRegulars->fiscal_address . '
+            </p>
+            <br>
+            <div class="footer-line">
+              <i class="fa-solid fa-envelope "></i>
+              ' . $mail . '
+            </div>
+            ' . $number_divs . '
+          </div>
+          
+          <div class="footer-col footer_quicklinks">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-list">
+              ' . $jVars['module:footer-menu-1'] . '
+            </ul>
+          </div>
+          
+          <div class=" footer-col">
+            <h4 class="footer-title">Destination</h4>
+            <ul class="footer-list">
+              ' . $jVars['module:footer-destination'] . '
+            </ul>
+          </div>
+
+          
+          <div class="footer-curve mt-3">
+            ' . $siteRegulars->breif . '
+
+            <div class="curve-logos d-flex flex-wrap gap-5">
+              <a href="' . BASE_URL . '"><img src="' . BASE_URL . 'template/web/assets/images/affiliation1.png" alt=""></a>
+              <a href="#"><img src="' . BASE_URL . 'template/web/assets/images/affiliation2.png" alt=""></a>
+              <a href="#"><img src="' . BASE_URL . 'template/web/assets/images/affiliation3.png" alt=""></a>
+              <a href="#"><img src="' . BASE_URL . 'template/web/assets/images/affilisation3.png" alt=""></a>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      
+      <ul class="footer-bottom mt-4 ">
+
+        
+        <li class="footer-social">
+          <h4 class="footer-subtitle stay-connected">Stay Connected</h4>
+           ' . $jVars['module:socilaLinkbtm'] . '
+        </li>
+
+        
+        <li class="footer_we_accept">
+          <h4 class="footer-subtitle we-accept">We Accept</h4>
+          <div class="footer-payments">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Visa_Inc._logo_%282021%E2%80%93present%29.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="">
+            <img src="' . BASE_URL . 'template/web/assets/images/maestro-logo-copy.png" alt="">
+          </div>
+        </li>
+        <li>' . $copyrightText . '</li>
+      </ul>
+
     </footer>
+
+
 ';
 
-$jVars['module:footer'] = $footer;
+$jVars['module:footer'] = $footer1;
 
 
 ?>

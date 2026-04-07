@@ -1,9 +1,46 @@
 <?php
 /*
-* Location Information
-*/
+ * Location Information
+ */
+$emlAddress = str_replace('@', '&#64;', $siteRegulars->email_address);
+$emlAddress = str_replace('.', '&#46;', $emlAddress);
+$emails = explode("<br>", $emlAddress);
+if (!empty($emails)) {
+    $mail = '<a href="mailto:' . $emails[0] . '">' . $emails[0] . '</a>';
+}
+
+$contacts = explode("<br>", $siteRegulars->contact_info);
+
+$number_divs = '';
+$count = 0;
+
+foreach ($contacts as $contact) {
+    $contact = trim($contact);
+
+    if (empty($contact))
+        continue;
+    if ($count >= 2)
+        break; // ✅ limit to 2 numbers
+
+    // ✅ Remove text inside parentheses
+    $cleanContact = preg_replace('/\s*\(.*?\)/', '', $contact);
+
+    // ✅ Extract tel number (remove spaces for tel link)
+    $tel = preg_replace('/\s+/', '', $cleanContact);
+
+    $number_divs .= '
+        <div class="footer-line">
+          <i class="fa-solid fa-phone "></i>
+          <a href="tel:' . $tel . '">' . trim($cleanContact) . '</a>
+        </div>
+    ';
+
+    $count++;
+}
+
 
 $reslocinfo = '';
+$reslocinfo1 = '';
 
 $reslocinfo .= '
 <div class="contact-info">
@@ -35,7 +72,42 @@ $reslocinfo .= '</div> <div class="media-contact-info">
 
 </div>';
 
-$jVars['module:locationinfo'] = $reslocinfo;
+$reslocinfo1 = '
+
+<div class="contact-info">
+            <h4>Nepal (Registered Office)</h4>
+            <div class="info-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>
+                ' . $siteRegulars->fiscal_address . '
+              </p>
+            </div>
+
+            <div class="info-item">
+              <i class="fa-solid fa-envelope"></i>
+              <p>
+                ' . $mail . '
+              </p>
+            </div>
+
+            ' . $number_divs . '
+
+            <!-- MAP -->
+            <div class="map-wrapper">
+              <iframe
+                src="' . $siteRegulars->location_map . '"
+                width="400"
+                height="300"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+';
+
+$jVars['module:locationinfo'] = $reslocinfo1;
 
 /*
 /top helpline
@@ -59,14 +131,14 @@ $jVars['module:helplinetop'] = $helpline;
 
 
 /*
-* Contact Form Location Info
-*/
+ * Contact Form Location Info
+ */
 $rescnt = $number = $fax_number = $mail = '';
 $emlAddress = str_replace('@', '&#64;', $siteRegulars->email_address);
 $emlAddress = str_replace('.', '&#46;', $emlAddress);
 
 $emails = explode("<br>", $emlAddress);
-foreach($emails as $email){
+foreach ($emails as $email) {
     if ($email != end($emails)) {
         $mail .= '<a href="mailto:' . $email . '">' . $email . '</a><br>';
     } else {
@@ -102,7 +174,7 @@ $rescnt .= '
             <li>
                 <span class="icon-font"><i class="ion-android-mail"></i></span>
                 <h6>Email</h6>
-                    '.$mail.'
+                    ' . $mail . '
             </li>
 
             <li>
@@ -122,8 +194,8 @@ $rescnt .= '
 $jVars['module:contactinfo'] = $rescnt;
 
 /*
-* Office location map/image
-*/
+ * Office location map/image
+ */
 
 $reslocmi = '';
 
@@ -145,13 +217,13 @@ $jVars['module:contact-mapimage'] = $reslocmi;
 
 
 /*
-* Google map
-*/
+ * Google map
+ */
 $resgmap = '';
 if ($siteRegulars->location_type == 1) {
-    $maps = explode('<br/>',$siteRegulars->location_map);
-    foreach($maps as $map){
-        $resgmap.='
+    $maps = explode('<br/>', $siteRegulars->location_map);
+    foreach ($maps as $map) {
+        $resgmap .= '
             <div class="col-md-12">
                 <iframe src=' . $map . ' width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
             </div>

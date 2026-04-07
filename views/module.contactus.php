@@ -1,17 +1,17 @@
 <?php
 /* 
-* Module Contact us
-*/
-$rescntbdc=$rescontct= '';
+ * Module Contact us
+ */
+$rescntbdc = $rescontct = $rescontct1 = '';
 
-if(defined('CONTACTUS_PAGE')){
+if (defined('CONTACTUS_PAGE')) {
 
-$rescntbdc.='<div class="opacy_bg_02">
+  $rescntbdc .= '<div class="opacy_bg_02">
      <div class="container">
         <h3>Contact Us</h3>
         <div class="crumbs">
             <ul>
-                <li><a href="'.BASE_URL.'home">Home</a></li>
+                <li><a href="' . BASE_URL . 'home">Home</a></li>
                 <li>/</li>
                 <li>Contact Us</li>                                         
             </ul>    
@@ -19,9 +19,9 @@ $rescntbdc.='<div class="opacy_bg_02">
     </div>  
 </div>  
 <!-- End Content Parallax-->';
-/* End Breadcrumb block */
+  /* End Breadcrumb block */
 
-$rescontct.='
+  $rescontct .= '
         <section>
         <div class="form form-spac rows">
             <div class="container">
@@ -57,7 +57,7 @@ $rescontct.='
                             </li>
                             <div class="form-group col-md-3">
                         <label for="inputCode4">Human Verification</label>
-                        <img src='.BASE_URL.'/captcha/imagebuilder.php?rand=310333 border="1" class="text-field" onclick="updateCaptcha(this);">
+                        <img src=' . BASE_URL . '/captcha/imagebuilder.php?rand=310333 border="1" class="text-field" onclick="updateCaptcha(this);">
                     </div>
                     <div class="form-group col-md-9 pt-4 mt-2">
                         <input type="text" class="form-control" id="inputCode4"
@@ -71,15 +71,125 @@ $rescontct.='
                 </div>
                 <!--====== COMMON NOTICE ==========-->
                 <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-duration="1s">
-                    <div class="rows book_poly">'.$jVars['module:locationinfo'].'</div>
+                    <div class="rows book_poly">' . $jVars['module:locationinfo'] . '</div>
                 </div>
             </div>
         </div>
     </section>
                ';
+
+
+  $rescontct1 = '
+    
+    <section class="contact-section">
+        <h2 class="contact-title green-title text-center">
+          Let’s Start Planning Your
+          <span class="orange-text">Journey</span> Together
+        </h2>
+        <section class="contact-wrapper">
+          <!-- LEFT -->
+          ' . $jVars['module:locationinfo'] . '
+
+          <!-- FORM -->
+          <div class="contact-form">
+            <h2 class="orange-text text-start">Get In Touch</h2>
+            <h3 class="mb-4">We’re here to help with your travel plans.</h3>
+            <form>
+              <label class="form-label">
+                Full Name <span class="required">*</span>
+              </label>
+              <input type="text" placeholder="Full Name " required />
+              <label class="form-label"> Address </label>
+              <input type="text" placeholder="Address " required />
+              <label class="form-label">
+                Email Address <span class="required">*</span>
+              </label>
+              <input type="email" placeholder="Email Address " required />
+
+              <div class="form-row">
+                <select title="country" id="countrySelect" required>
+                  <option value="">Choose Your Country</option>
+                  <option>Nepal</option>
+                  <option>India</option>
+                  <option>UAE</option>
+                  <option>Bangladesh</option>
+                  <option>Sri Lanka</option>
+                </select>
+                <p class="phone-field">
+                  <select
+                    title="country-code"
+                    id="countryCode"
+                    class="country-code"
+                    required
+                  >
+                    <option value="">Code</option>
+                    <option value="+977">+977</option>
+                    <option value="+91">+91</option>
+                    <option value="+971">+971</option>
+                    <option value="+880">+880</option>
+                    <option value="+94">+94</option>
+                  </select>
+
+                  <input type="text" placeholder="Phone Number " required />
+                </p>
+              </div>
+              <label class="form-label">
+                Questions & Comments <span class="required">*</span>
+              </label>
+              <textarea
+                placeholder="Any Suggestions , Inquiry , Feedbacks ? "
+                required
+              ></textarea>
+              <button class="uiverseButton w-50">
+                Submit
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- LOCATIONS -->
+        <section class="branches">
+          <h2 class="text-center green-title mt-5">
+            Our <span class="orange-text">Branches</span>
+          </h2>
+          <ul class="locations-grid">
+            <li class="location-card">
+              <img src="' . BASE_URL . 'template/web/assets/images/Flag_of_India.png" alt="india" />
+              <h4>INDIA OFFICE</h4>
+              <p>Unit No 217 ILD Trade Centre, Sohna Road, Gurugram – India</p>
+            </li>
+
+            <li class="location-card">
+              <img
+                src="' . BASE_URL . 'template/web/assets/images/Flag_of_the_United_Arab_Emirates.png"
+                alt="dubai"
+              />
+              <h4>DUBAI OFFICE</h4>
+              <p>Level 3, Latifa Tower, Shaikh Zayed Road, Dubai – UAE</p>
+            </li>
+
+            <li class="location-card">
+              <img
+                src="' . BASE_URL . 'template/web/assets/images/Flag_of_Bangladesh.png"
+                alt="bangladesh"
+              />
+              <h4>BANGLADESH OFFICE</h4>
+              <p>Gulshan – 02, Dhaka - 1212, Bangladesh</p>
+            </li>
+
+            <li class="location-card">
+              <img src="' . BASE_URL . 'template/web/assets/images/Flag_of_Sri_Lanka.png" alt="srilanka" />
+              <h4>SRI LANKA OFFICE</h4>
+              <p>World Trade Center, Colombo 01 – Sri Lanka</p>
+            </li>
+          </ul>
+        </section>
+      </section>
+    
+    ';
 }
 
 $jVars['module:contactus-breadcrumb'] = $rescntbdc;
-$jVars['module:contact-form'] = $rescontct;
+$jVars['module:contact-form'] = $rescontct1;
 
 ?>

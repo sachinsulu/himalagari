@@ -25,6 +25,7 @@ jpcache/
 phpthumb/
 thumbnails/
 images/
+web2/
 
 # Temporary files
 tmp/

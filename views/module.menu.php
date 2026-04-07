@@ -7,7 +7,7 @@ $current_url = $_SERVER["REQUEST_URI"];
 $data = explode('/', $current_url);
 
 if ($menuRec):
-    $result .= '<ul class="main-nav">';
+    $result .= '<ul class="navbar-nav flex-row ms-auto gap-3 align-items-center">';
     foreach ($menuRec as $menuRow):
         $linkActive = $PlinkActive = '';
         $tot = strlen(SITE_FOLDER) + 2;
@@ -22,85 +22,124 @@ if ($menuRec):
         endif;
 
         $menusubRec = Menu::getMenuByParent($menuRow->id, 1);
-//        $subclass = ($menusubRec) ? ' dropdown-toggle disabled' : '';
-//        $tags = ($menusubRec) ? ' data-toggle="dropdown"' : '';
-        $subclass = ($menusubRec) ? '' : '';
-        $tags = ($menusubRec) ? '' : '';
-        $result .= '<li>';
-        $result .= getMenuList($menuRow->name, $menuRow->linksrc, $menuRow->linktype, $linkActive . $PlinkActive . $subclass, $tags);
-        /* Second Level Menu */
-        if ($menusubRec):
-            $result .= '<ul>';
-            foreach ($menusubRec as $menusubRow):
-                $menusub2Rec = Menu::getMenuByParent($menusubRow->id, 1);
-                $subclass2 = ($menusub2Rec) ? ' class="dropdown-submenu"' : '';
-                $subclass = (!empty($menusub2Rec)) ? ' dropdown-toggle disabled' : '';
-                $tags = ($menusub2Rec) ? ' data-toggle="dropdown"' : '';
 
-                $result .= '<li id="menu-item-' . $menusubRow->id . '" ' . $subclass2 . '>';
-                $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, $subclass, $tags);
-                /* Third Level Menu */
-                if ($menusub2Rec):
-                    $result .= '<ul class="dropdown-menu">';
-                    foreach ($menusub2Rec as $menusub2Row):
-                        $menusub3Rec = Menu::getMenuByParent($menusub2Row->id, 1);
-                        $subclass3 = ($menusub3Rec) ? ' class="dropdown-submenu"' : '';
-                        $subclass = (!empty($menusub3Rec)) ? ' dropdown-toggle disabled' : '';
-                        $tags = ($menusub3Rec) ? ' data-toggle="dropdown"' : '';
-                        $result .= '<li id="menu-item-' . $menusub2Row->id . '" ' . $subclass3 . '>';
-                        $result .= getMenuList($menusub2Row->name, $menusub2Row->linksrc, $menusub2Row->linktype, $subclass, $tags);
-                        /* Fourth Level Menu */
-                        if ($menusub3Rec):
-                            $result .= '<ul class="dropdown-menu">';
-                            foreach ($menusub3Rec as $menusub3Row):
-                                $menusub4Rec = Menu::getMenuByParent($menusub3Row->id, 1);
-                                $chkparent4 = (!empty($menusub4Rec)) ? ' class="dropdown-submenu"' : '';
-                                $subclass = (!empty($menusub4Rec)) ? ' dropdown-toggle disabled' : '';
-                                $tags = ($menusub4Rec) ? ' data-toggle="dropdown"' : '';
-                                $result .= '<li id="menu-item-' . $menusub3Row->id . '" ' . $chkparent4 . '>';
-                                $result .= getMenuList($menusub3Row->name, $menusub3Row->linksrc, $menusub3Row->linktype, $subclass, $tags);
-                                /* Fifth Level Menu */
-                                if ($menusub4Rec):
-                                    $result .= '<ul class="dropdown-menu">';
-                                    foreach ($menusub4Rec as $menusub4Row):
-                                        $menusub5Rec = Menu::getMenuByParent($menusub4Row->id, 1);
-                                        $chkparent5 = (!empty($menusub4Rec)) ? 1 : 0;
-                                        $result .= '<li>' . getMenuList($menusub4Row->name, $menusub4Row->linksrc, $menusub4Row->linktype, $chkparent5) . '</li>';
-                                    endforeach;
-                                    $result .= '</ul>';
-                                endif;
-                                $result .= '</li>';
-                            endforeach;
-                            $result .= '</ul>';
-                        endif;
-                        $result .= '</li>';
-                    endforeach;
-                    $result .= '</ul>';
-                endif;
-                $result .= '</li>';
+        if ($menusubRec):
+            $result .= '<li class="nav-item dropdown d-none d-lg-block">';
+            $result .= '<a class="nav-link dropdown-toggle ' . $linkActive . $PlinkActive . '" href="#" role="button" data-bs-toggle="dropdown">' . $menuRow->name . '</a>';
+            $result .= '<ul class="dropdown-menu dropdown-menu-dark">';
+            foreach ($menusubRec as $menusubRow):
+                $subactive = (substr($_SERVER['REQUEST_URI'], $tot) == $menusubRow->linksrc) ? " active" : "";
+                $result .= '<li><a class="dropdown-item ' . $subactive . '" href="' . BASE_URL . $menusubRow->linksrc . '">' . $menusubRow->name . '</a></li>';
             endforeach;
             $result .= '</ul>';
+        else:
+            $result .= '<li class="nav-item d-none d-lg-block">';
+            $result .= '<a class="nav-link ' . $linkActive . $PlinkActive . '" href="' . BASE_URL . $menuRow->linksrc . '">' . $menuRow->name . '</a>';
         endif;
         $result .= '</li>';
     endforeach;
     $result .= '</ul>';
 endif;
 
+
 $jVars['module:menu'] = $result;
+
+// Home Menu
+$menu_home = '';
+$menuRec = Menu::getMenuByParent(0, 1);
+if ($menuRec):
+    $menu_home .= '<ul class="navbar-nav flex-row ms-auto hero-navbar gap-3 align-items-center">';
+    foreach ($menuRec as $menuRow):
+        $linkActive = $PlinkActive = '';
+        $tot = strlen(SITE_FOLDER) + 2;
+        $data = substr($_SERVER['REQUEST_URI'], $tot);
+
+        if (!empty($data)):
+            $linkActive = ($menuRow->linksrc == $data) ? " active" : "";
+            $parentInfo = Menu::find_by_linksrc($data);
+            if ($parentInfo):
+                $PlinkActive = ($menuRow->id == $parentInfo->parentOf) ? " active" : "";
+            endif;
+        endif;
+
+        $menusubRec = Menu::getMenuByParent($menuRow->id, 1);
+
+        if ($menusubRec):
+            $menu_home .= '<li class="nav-item dropdown d-none d-lg-block">';
+            $menu_home .= '<a class="nav-link dropdown-toggle ' . $linkActive . $PlinkActive . '" href="#" role="button" data-bs-toggle="dropdown">' . $menuRow->name . '</a>';
+            $menu_home .= '<ul class="dropdown-menu dropdown-menu-dark">';
+            foreach ($menusubRec as $menusubRow):
+                $subactive = (substr($_SERVER['REQUEST_URI'], $tot) == $menusubRow->linksrc) ? " active" : "";
+                $menu_home .= '<li><a class="dropdown-item ' . $subactive . '" href="' . BASE_URL . $menusubRow->linksrc . '">' . $menusubRow->name . '</a></li>';
+            endforeach;
+            $menu_home .= '</ul>';
+        else:
+            $menu_home .= '<li class="nav-item d-none d-lg-block">';
+            $menu_home .= '<a class="nav-link ' . $linkActive . $PlinkActive . '" href="' . BASE_URL . $menuRow->linksrc . '">' . $menuRow->name . '</a>';
+        endif;
+        $menu_home .= '</li>';
+    endforeach;
+    $menu_home .= '</ul>';
+endif;
+
+$jVars['module:menu_home'] = $menu_home;
+
+// Offcanvas Menu
+$res_offcanvas = '';
+$menuRec = Menu::getMenuByParent(0, 1);
+if ($menuRec):
+    $res_offcanvas .= '<ul class="list-unstyled">';
+    foreach ($menuRec as $menuRow):
+        $menusubRec = Menu::getMenuByParent($menuRow->id, 1);
+        if ($menusubRec):
+            $accordionId = 'accordion_' . $menuRow->id;
+            $collapseId = 'collapse_' . $menuRow->id;
+            $res_offcanvas .= '
+            <li class="accordion menu-item" id="' . $accordionId . '">
+              <div class="accordion-item border-0">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed custom-accordion-btn"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#' . $collapseId . '"
+                  >
+                    ' . $menuRow->name . '
+                  </button>
+                </h2>
+                <div id="' . $collapseId . '" class="accordion-collapse collapse">
+                  <div class="accordion-body p-0">
+                    <ul class="submenu list-unstyled">';
+            foreach ($menusubRec as $menusubRow):
+                $res_offcanvas .= '<li>' . $menusubRow->name . '</li>';
+            endforeach;
+            $res_offcanvas .= '
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>';
+        else:
+            $res_offcanvas .= '<li class="menu-item">' . $menuRow->name . '</li>';
+        endif;
+    endforeach;
+    $res_offcanvas .= '</ul>';
+endif;
+
+$jVars['module:offcanvas-menu'] = $res_offcanvas;
 
 
 //Footer Menu
 $result1 = '';
 $FmenuRec = Menu::getMenuByParent(0, 2);
 if ($FmenuRec):
-    $result1 .= '<ul>';
+
     foreach ($FmenuRec as $FmenuRow):
         $result1 .= '<li>';
         $result1 .= getMenuList($FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, 'parent');
-//		   $subRec = Menu::getMenuByParent($FmenuRow->id,2);
+        //		   $subRec = Menu::getMenuByParent($FmenuRow->id,2);
         $result1 .= '</li>';
     endforeach;
-    $result1 .= '</ul>';
 endif;
 $jVars['module:footer-menu-1'] = $result1;
 
@@ -111,7 +150,7 @@ if ($FmenuRec):
     foreach ($FmenuRec as $FmenuRow):
         $result2 .= '<li>';
         $result2 .= getMenuList($FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, 'parent');
-//		   $subRec = Menu::getMenuByParent($FmenuRow->id,2);
+        //		   $subRec = Menu::getMenuByParent($FmenuRow->id,2);
         $result2 .= '</li>';
     endforeach;
     $result2 .= '</ul>';
@@ -125,7 +164,7 @@ if ($FmenuRec):
     foreach ($FmenuRec as $FmenuRow):
         $result3 .= '<li>';
         $result3 .= getMenuList($FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, 'parent');
-//		   $subRec = Menu::getMenuByParent($FmenuRow->id,2);
+        //		   $subRec = Menu::getMenuByParent($FmenuRow->id,2);
         $result3 .= '</li>';
     endforeach;
     $result3 .= '</ul>';

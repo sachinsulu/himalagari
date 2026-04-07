@@ -1,7 +1,7 @@
 <?php
 /*
-* Top Social Links
-*/
+ * Top Social Links
+ */
 $resocl = '';
 
 $socialRec = SocialNetworking::getSocialNetwork();
@@ -24,31 +24,27 @@ $jVars['module:socilaLinktop'] = $resocl;
 
 
 /*
-*  Social link
-*/
+ *  Social link
+ */
 $ressl = '';
 
 
 if (!empty($socialRec)) {
-     $ressl .= '<div class="col-sm-12">
-                <div class="header-contacts">';
     foreach ($socialRec as $socialRow) {
-        $ressl .= '<a href="' . $socialRow->linksrc . '" target="_blank" class="social-icon img-bg-icon rounded-icon soc-' . $socialRow->title . '"></a> ';
+        $ressl .= '<a href="' . $socialRow->linksrc . '" target="_blank" ><i class="' . $socialRow->image . '"></i></a> ';
     }
-    $ressl .= '</div>
-            </div>';
 }
 
 $jVars['module:socilaLinkbtm'] = $ressl;
 
 
 /*
-*   Footer
-*/
+ *   Footer
+ */
 $ressl = '';
 
 if (!empty($socialRec)) {
-     $ressl .= '<style>.affilation-footer{float:right;}</style><ul class="affilation-footer">';
+    $ressl .= '<style>.affilation-footer{float:right;}</style><ul class="affilation-footer">';
     foreach ($socialRec as $socialRow) {
         $ressl .= '<li><a href="' . $socialRow->linksrc . '" target="_blank"><i class="fab ' . $socialRow->image . '"></i></a></li>';
     }

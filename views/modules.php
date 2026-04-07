@@ -10,9 +10,10 @@ $jVars['site:fevicon']		=  '<link rel="shortcut icon" href="'.IMAGE_PATH.'prefer
 							    <link rel="apple-touch-icon" sizes="72x72" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'"> 
 							    <link rel="apple-touch-icon" sizes="114x114" href="'.IMAGE_PATH.'preference/'.$siteRegulars->icon_upload.'">';
 $lgclass = (!defined('ERROR_PAGE') and !defined('NEWS_PAGE')) ?'navbar-brand':'';
-$jVars['site:logo']			=  '<a href="'.BASE_URL.'home" title="'.$siteRegulars->sitetitle.'">
-			                            <img src="'.IMAGE_PATH.'preference/'.$siteRegulars->logo_upload.'" alt="'.$siteRegulars->sitetitle.'" />
-			                        </a>';	
+$jVars['site:logo']			=  '<a class="navbar-brand" href="'.BASE_URL.'home" title="'.$siteRegulars->sitetitle.'">
+									<img src="'.IMAGE_PATH.'preference/'.$siteRegulars->logo_upload.'" alt="'.$siteRegulars->sitetitle.'" />
+								</a>
+									';	
 
 $jVars['site:seotitle'] 	= MetaTagsFor_SEO();
 $jVars['baseurl']			= '<base url="'.BASE_URL.'"/>';

@@ -1,131 +1,477 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <!-- Title Of Site -->
-    <jcms:site:seotitle/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="icon" href="template/web/assets/images/logo.png">
+  <link href="./about.css" rel="stylesheet">
+  <!-- bootstrp -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet">
 
-    <!-- Fav and Touch Icons -->
-    <jcms:site:fevicon/>
-
-    <!-- Font face -->
-    <link href='https://fonts.googleapis.com/css2?family=Raleway&display=swap' rel="stylesheet">
-
-    <!-- CSS Plugins -->
-    <link href="css/font-icons.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/animate.html" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/plugin.css" rel="stylesheet">
-
-    <!-- CSS Custom -->
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- CSS Custom -->
-    <link href="css/overlay.css" rel="stylesheet">
-    <link href="css/your-style.css" rel="stylesheet">
+  <!-- font-awesome -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com' rel="preconnect" />
+  <link href='https://fonts.gstatic.com' rel="preconnect" crossorigin />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <!-- owl carousel  -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' rel="stylesheet" />
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'
+    rel="stylesheet" />
 </head>
 
-<body class="with-waypoint-sticky">
-    <style>
-        .fb_dialog_content iframe{
-            bottom: 60px !important;
-            right: 0px !important;
-        }
-    </style>
-   
-    <!-- Messenger Chat plugin Code -->
-    <div id="fb-root"></div>
+<body>
+  <section class="scroll-wrapper">
+    <!-- navbar -->
+    <jcms:module:header/>
 
-    <!-- Your Chat plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat"></div>
 
-    <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "424877144534517");
-        chatbox.setAttribute("attribution", "page_inbox");
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml            : true,
-                version          : 'v10.0'
-            });
-        };
+    <!-- ABOUT US SECTION -->
+    <jcms:module:articlepage/>
 
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    
-    <!-- start Body Inner -->
-    <div class="body-inner">
-        <!-- start Header -->
-        <header id="header-waypoint-sticky" class="header-main header-mobile-menu with-absolute-navbar">
-            <div class="container">
-                <div class="header-outer clearfix">
-                    <div class="row shrink-auto-lg gap-0 align-items-center">
-                        <div class="col-9 col-shrink z-in-1111">
-                            <div class="col-inner">
-                                <div class="main-logo">
-                                    <jcms:site:logo/>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-12 col-shrink order-last-lg">
-    							<div class="col-inner">
-    								<ul class="nav-mini-right">
-    									<li>
-    										<button class="btn btn-toggle collapsed" data-toggle="collapse" data-target="#mobileMenu"></button>
-    									</li>
-    								</ul>
-    							</div>
-    						</div>
-    
-                        <div class="col-12 col-auto order-last-lg">
-                            <div class="navbar-wrapper">
-                                <div class="navbar navbar-expand-lg">
-                                    <div id="mobileMenu" class="collapse navbar-collapse">
-                                        <nav class="main-nav-menu main-menu-nav navbar-arrow">
-                                            <jcms:module:menu/>
-                                        </nav><!--/.nav-collapse -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- OUR TEAM SECTION -->
+
+    <h2 class="green-title">Meet Our <span class="orange-text">Team</span></h2>
+    <section class="team-section container mx-auto">
+
+      <!-- Tabs -->
+      <div class="team-tabs">
+        <button class="tab" data-tab="executive">Executive Team</button>
+        <button class="tab" data-tab="meet">Tour Guides</button>
+      </div>
+
+      <!-- Executive Team -->
+      <div class="team-content" id="executive">
+        <div class="team-member">
+          <img src="./assets/images/sample_person.jpg" alt="Hari Khadka">
+          <div class="member-info">
+            <span class="position">Managing Director</span>
+            <h3 class="name">Hari Khadka</h3>
+            <p class="description">
+              Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+              is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+              and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+              new tourism concepts and making new business links with both foreign & Nepalese travel trade
+              personalities...
+            </p>
+            <a href="#" id="openPopup" class="show-more">+ show more</a>
+            <div class="popup-overlay" id="popup">
+              <div class="popup-box">
+                <a href="#" class="close-btn" id="closePopup">&times;</a>
+                <h2>Managing Director</h2>
+                <p>Name</p>
+                <div class="detail-desc">
+                  <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                    is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                    and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+                    new tourism concepts and making new business links with both foreign & Nepalese travel trade
+                    personalities.
+                    Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                    is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                    and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing
+                    Director of "Welcome Nepal Treks Pvt. Ltd."
+                    is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                    and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime
+                    repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.
+                  </p>
                 </div>
+              </div>
             </div>
-        </header>
-        <!-- start Header -->
-
-        <!-- start Main Wrapper -->
-        <div class="main-wrapper scrollspy-container">
-            <section class="page-wrapper">
-                <jcms:module:articlebcumb/>
-
-                <jcms:module:articlepage/>
-            </section>
+          </div>
         </div>
-        <!-- end Main Wrapper -->
 
-        <!-- start Footer Wrapper -->
-        <jcms:module:footer/>
-        <!-- start Footer Wrapper -->
-    </div>
-    <!-- end Body Inner -->
+        <div class="team-member">
+          <img src="./assets/images/sample_person.jpg" alt="Nawaraj Thapaliya">
+          <div class="member-info">
+            <span class="position">Marketing Executive Officer</span>
+            <h3 class="name">Nawaraj Thapaliya</h3>
+            <p class="description">
+              Mr. Nawaraj Thapaliya, the Founder and Marketing Executive Officer of "Welcome Nepal Treks Pvt. Ltd."
+              has long years of national and international experience in the tourism sector, helping him lead his
+              company as a Marketing Officer...
+            </p>
+            <a href="#" class="show-more">+ show more</a>
+            <div class="popup-overlay" id="popup">
+              <div class="popup-box">
+                <a href="#" class="close-btn" id="closePopup">&times;</a>
+                <h2>Managing Director</h2>
+                <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+                  new tourism concepts and making new business links with both foreign & Nepalese travel trade
+                  personalities.
+                  Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing
+                  Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime
+                  repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- start Back To Top -->
-    <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip"
-        data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
-    <!-- end Back To Top -->
+      <!-- Meet the Team -->
+      <div class="team-content" id="meet">
 
-    <!-- JS -->
-    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script type="text/javascript" src="js/custom-core.js"></script>
+        <div class="team-member">
+          <img src="./assets/images/sample_person.jpg" alt="Hari Khadka">
+          <div class="member-info">
+            <span class="position">Managing Director</span>
+            <h3 class="name">Hari Khadka</h3>
+            <p class="description">
+              Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+              is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+              and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+              new tourism concepts and making new business links with both foreign & Nepalese travel trade
+              personalities...
+            </p>
+            <a href="#" class="show-more">+ show more</a>
+            <div class="popup-overlay" id="popup">
+              <div class="popup-box">
+                <a href="#" class="close-btn" id="closePopup">&times;</a>
+                <h2>Managing Director</h2>
+                <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+                  new tourism concepts and making new business links with both foreign & Nepalese travel trade
+                  personalities.
+                  Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing
+                  Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime
+                  repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-member">
+          <img src="./assets/images/sample_person.jpg" alt="Hari Khadka">
+          <div class="member-info">
+            <span class="position">Managing Director</span>
+            <h3 class="name">Hari Khadka</h3>
+            <p class="description">
+              Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+              is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+              and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+              new tourism concepts and making new business links with both foreign & Nepalese travel trade
+              personalities...
+            </p>
+            <a href="#" class="show-more">+ show more</a>
+            <div class="popup-overlay" id="popup">
+              <div class="popup-box">
+                <a href="#" class="close-btn" id="closePopup">&times;</a>
+                <h2>Managing Director</h2>
+                <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+                  new tourism concepts and making new business links with both foreign & Nepalese travel trade
+                  personalities.
+                  Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing
+                  Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime
+                  repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+    <!-- documents -->
+    <section class="documents">
+      <h2 class="text-center green-title achievement mb-5">Our Achievement & <span class="orange-text">Honors</span>
+      </h2>
+      <ul class="awards-list">
+        <li>
+          <img src="./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+        </li>
+        <li>
+          <img src="./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+        </li>
+        <li>
+          <img src="./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+        </li>
+      </ul>
+    </section>
+
+    <h2 class="green-title">Legal <span class="orange-text">Documents</span></h2>
+    <section class="team-section legal-section container mx-auto">
+
+      <!-- legal docs -->
+      <div class="legal">
+        <ul class="legal-grid">
+          <li>
+            <div class="docs_wrapper">
+              <img src="./assets/images/cv.png" class="popup-img" alt="">
+              <span class="search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="docs_wrapper">
+              <img src="./assets/images/tour.png" class="popup-img" alt="">
+              <span class="search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="docs_wrapper">
+              <img src="./assets/images/cv.png" class="popup-img" alt="">
+              <span class="search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="docs_wrapper">
+              <img src="./assets/images/cv.png" class="popup-img" alt="">
+              <span class="search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="imgPopup" class="img-popup">
+        <span class="close">&times;</span>
+
+        <button class="nav-btn prev">&#10094;</button>
+        <img class="popup-content" id="popupImage" alt="">
+        <button class="nav-btn next">&#10095;</button>
+      </div>
+
+
+
+
+
+    </section>
+    <!-- footer -->
+
+    <jcms:module:footer/>
+
+
+  </section>
+
+  <script>
+    const images = document.querySelectorAll('.popup-img');
+    const popup = document.getElementById('imgPopup');
+    const popupImg = document.getElementById('popupImage');
+    const closeBtn = document.querySelector('.close');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let currentIndex = 0;
+
+    // Open popup
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        popup.style.display = 'flex';
+        popupImg.src = img.src;
+        currentIndex = index;
+      });
+    });
+
+    // Close popup
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Click outside image to close
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Show previous image
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent popup close
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      popupImg.src = images[currentIndex].src;
+    });
+
+    // Show next image
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent popup close
+      currentIndex = (currentIndex + 1) % images.length;
+      popupImg.src = images[currentIndex].src;
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      document.querySelectorAll('.team-section').forEach(section => {
+        const tabs = section.querySelectorAll('.team-tabs .tab');
+        const contents = section.querySelectorAll('.team-content');
+
+        function activateTab(tab) {
+          const targetId = tab.dataset.tab;
+
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          tab.classList.add('active');
+          section.querySelector('#' + targetId).classList.add('active');
+        }
+
+
+        if (tabs.length > 0) {
+          activateTab(tabs[0]);
+        }
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => activateTab(tab));
+        });
+      });
+
+    });
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtns = document.querySelectorAll(".searchToggle");
+      const bottomSearch = document.querySelector(".bottomSearch");
+
+      toggleBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          bottomSearch.classList.toggle("active");
+        });
+      });
+
+      bottomSearch.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+
+      document.addEventListener("click", () => {
+        bottomSearch.classList.remove("active");
+      });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtns = document.querySelectorAll(".searchToggle");
+      const bottomSearch = document.querySelector(".bottomSearch");
+
+      // Toggle on button click
+      toggleBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation(); // prevent document click from firing
+          bottomSearch.classList.toggle("active");
+        });
+      });
+
+      // Click outside to close
+      document.addEventListener("click", (e) => {
+        const clickedInsideSearch = bottomSearch.contains(e.target);
+        const clickedToggleBtn = [...toggleBtns].some((btn) =>
+          btn.contains(e.target)
+        );
+
+        if (!clickedInsideSearch && !clickedToggleBtn) {
+          bottomSearch.classList.remove("active");
+        }
+      });
+    });
+
+
+
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // Select all show-more buttons
+      const showMoreBtns = document.querySelectorAll('.team-member .show-more');
+
+      showMoreBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          // Find the popup inside this team member
+          const popup = this.closest('.team-member').querySelector('.popup-overlay');
+          if (popup) {
+            popup.style.display = 'flex';
+          }
+        });
+      });
+
+      // Close popup buttons
+      const closeBtns = document.querySelectorAll('.popup-overlay .close-btn');
+      closeBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const popup = this.closest('.popup-overlay');
+          popup.style.display = 'none';
+        });
+      });
+
+      // Close popup if clicking outside the box
+      const popups = document.querySelectorAll('.popup-overlay');
+      popups.forEach(popup => {
+        popup.addEventListener('click', function (e) {
+          if (e.target === this) {
+            this.style.display = 'none';
+          }
+        });
+      });
+
+    });
+    const planCountry = document.getElementById("planCountry");
+    const planCountryCode = document.getElementById("planCountryCode");
+
+    planCountry.addEventListener("change", function () {
+      const selected = this.selectedOptions[0];
+      const code = selected.getAttribute("data-code") || "";
+      planCountryCode.value = code;
+    });
+  </script>
+
+  <script>
+    document.getElementById("country").addEventListener("change", function () {
+      document.getElementById("countryCode").value = this.value;
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const today = new Date().toISOString().split("T")[0];
+
+      // Apply to all date inputs (safe & future-proof)
+      document.querySelectorAll('input[type="date"]').forEach(input => {
+        input.setAttribute("min", today);
+      });
+    });
+  </script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
+
+
+
+  <script src="script.js"></script>
 </body>
+
 </html>

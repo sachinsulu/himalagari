@@ -75,7 +75,7 @@
 			
 			$record = new Subscribers();
 			$record->title		   = $fullname;
-			$record->email_address = $mail;
+			$record->mailaddress = $mail;
 
 			$checkDupliEmail = Subscribers::checkDupliEmail($mail);			
 			if($checkDupliEmail):
@@ -86,7 +86,7 @@
 			// For Mail Chimp
 			$api = new MCAPI('819718a1f4406cea17991df58b4d2c8f-us3');
 			$list_id = "936ee54603";
-			$getresult = $api->listSubscribe($list_id, $mail, '');
+			$getresult = $api->listSubscribe($list_id, $mail);
 			
 			if($getresult === true):
 				$record->save();

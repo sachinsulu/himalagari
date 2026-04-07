@@ -1,7 +1,7 @@
 <?php
 /*
-* Destination list for home section
-*/
+ * Destination list for home section
+ */
 $resdest = '';
 $destRec = Destination::getDestinationlist(4);
 if ($destRec) {
@@ -18,24 +18,21 @@ if ($destRec) {
 $jVars['module:destination-list'] = $resdest;
 
 /*
-* Destination list for footer section
-*/
+ * Destination list for footer section
+ */
 $resdestfooter = '';
 $destRec = Destination::getfooterDestination(4);
 if ($destRec) {
-    $resdestfooter .= '<ul>';
     foreach ($destRec as $destRow) {
         $resdestfooter .= '<li>
-		    	<i class="fa fa-check"></i> 
 		    	<a href="' . BASE_URL . 'destination/' . $destRow->slug . '">' . $destRow->title . '</a>
 		    </li>';
     }
-    $resdestfooter .= '</ul>';
 }
 
 $jVars['module:footer-destination'] = $resdestfooter;
 
-
+//pr($resdestfooter);
 $resdestbdc = $resdestbanner = $resdest = $resdestactv = '';
 if (defined('DESTINATION_PAGE') and !empty($_REQUEST['slug'])) {
     $slug = addslashes($_REQUEST['slug']);
@@ -218,18 +215,18 @@ if (defined('DESTINATION_PAGE')) {
             */
             $file_path = SITE_ROOT . "images/destination/" . @$destination->image;
             $img = (!empty($destination->image) and file_exists($file_path)) ? IMAGE_PATH . "destination/" . $destination->image : IMAGE_PATH . "static/home-destination.jpg";
-            $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />',$destination->content);
+            $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', $destination->content);
             $dest_list .= '
                 <div class="col">
                     <figure class="tour-grid-item-01">
-                        <a href="'.BASE_URL.'destination/'.$destination->slug.'">
+                        <a href="' . BASE_URL . 'destination/' . $destination->slug . '">
                             <div class="image">
-                                <img src="'.$img.'" alt="'.$destination->title.'" style="height:450px"/>
+                                <img src="' . $img . '" alt="' . $destination->title . '" style="height:450px"/>
                             </div>
                             <figcaption class="content ">
-                                <h5>'.$destination->title.'</h5>
+                                <h5>' . $destination->title . '</h5>
                                 </br>
-                                '.$content[0].'
+                                ' . $content[0] . '
                             </figcaption>
                         </a>
                     </figure>
