@@ -1321,51 +1321,91 @@ box-sizing: border-box;
   color: var(--primary-color);
 }
 
-/* INFO GRID */
-.info-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  row-gap:50px;
-    column-gap: 8px;
-    
-
-}
-
-.info {
+/* CARD INFO WRAPPER */
+.card-info-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 12px;
+  margin-top: 8px;
 }
 
+/* INFO ROW: left label | divider | right label */
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.info-row .info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.info-row .info.text-right {
+  text-align: right;
+}
+
+.row-divider {
+  flex-shrink: 0;
+  width: 1px;
+  background: #ddd;
+  align-self: stretch;
+  min-height: 36px;
+  margin-inline: 8px;
+}
+
+/* ACTION ROW: days-badge and explore btn centered + overlapping */
+.action-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 4px 0;
+}
+
+.action-row .days-badge {
+  position: relative;
+  z-index: 1;
+}
+
+.action-row .explore_btn {
+  position: relative;
+  z-index: 2;
+  margin-left: -18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* LABELS & VALUES */
 .label {
-    font-size: 13px;
-  color: var(--text-muted);
+  font-size: 13px;
+  color: #666;
 }
 
 .value {
-    font-size: 12px;
+  font-size: 12px;
   font-weight: 600;
+  word-break: break-word;
 }
 
 .green {
-  color: var(--green);
+  color: #1c6408;
 }
 
-.divider {
-  background: #ddd;
-  width: 1px;
-}
-/* left column */
-.info-grid .info:nth-child(1),
-.info-grid .info:nth-child(4) {
-  text-align: left;
-}
-
-/* right column */
-.info-grid .info:nth-child(3),
-.info-grid .info:nth-child(6) {
-  text-align: right;
+/* DAYS BADGE */
+.days-badge {
+  display: inline-block;
+  background: rgba(149, 191, 87, 0.28);
+  color: #1c6408;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
 }
 
 /* FOOTER */
@@ -1766,3 +1806,87 @@ width: 25%;
 
   
 }
+
+/* Destination cards: keep layout stable when values wrap to 2-3 lines */
+.packages-wrapper .info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 10px;
+  row-gap: 12px;
+  align-items: start;
+}
+
+.packages-wrapper .info-grid > .info:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: left;
+}
+
+.packages-wrapper .info-grid > .info:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+  text-align: right;
+}
+
+.packages-wrapper .info-grid > .info:nth-child(4) {
+  grid-column: 1;
+  grid-row: 3;
+  text-align: left;
+}
+
+.packages-wrapper .info-grid > .info:nth-child(6) {
+  grid-column: 3;
+  grid-row: 3;
+  text-align: right;
+}
+
+.packages-wrapper .info-grid > .divider:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  width: 1px;
+  background: #ddd;
+  align-self: stretch;
+}
+
+.packages-wrapper .info-grid > .divider:nth-child(5) {
+  display: none;
+}
+
+.packages-wrapper .days-badge {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  align-self: center;
+  border-radius: 24px;
+  padding: 6px 16px;
+  white-space: nowrap;
+}
+
+.packages-wrapper .card-content .explore_btn {
+  position: relative;
+  top: auto;
+  left: auto;
+  margin: 0;
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: end;
+  align-self: center;
+  border-radius: 0 24px 24px 0;
+  padding: 10px 14px;
+}
+
+.packages-wrapper .info-grid > .info {
+  min-width: 0;
+}
+
+.packages-wrapper .info .value {
+  display: block;
+  word-break: break-word;
+  line-height: 1.3;
+}
+

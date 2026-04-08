@@ -930,9 +930,6 @@ position: absolute;
 
 }
 .card-content-right .explore_btn{
-  position: absolute;
-        top: 105px;
-    left: 179px;
     background-color: rgba(149, 191, 87, 0.28);
     padding: 14px;
     border: none;
