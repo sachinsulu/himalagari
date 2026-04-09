@@ -264,9 +264,35 @@ if (defined('DESTINATION_PAGE') and !empty($_REQUEST['slug'])) {
 }
 
 if ($packageRows) {
+        if ($heroTitle) {
+        $banner_img = '';
+        if (isset($selectedDestination) && $selectedDestination) {
+            $gallery_img = '';
+            if (!empty($selectedDestination->gallery) && $selectedDestination->gallery != 'a:0:{}') {
+                $gallery_array = unserialize($selectedDestination->gallery);
+                if (is_array($gallery_array) && !empty($gallery_array)) {
+                    $gallery_img = $gallery_array[0]; // get the first image
+                }
+            }
+
+            if (!empty($gallery_img)) {
+                $file_path = SITE_ROOT . 'images/destination/gallery/' . $gallery_img;
+                if (file_exists($file_path)) {
+                    $banner_img = IMAGE_PATH . 'destination/gallery/' . $gallery_img;
+                }
+            }
+            
+            if (empty($banner_img)) {
+                $file_path2 = SITE_ROOT . 'images/destination/' . $selectedDestination->image;
+                if (!empty($selectedDestination->image) && file_exists($file_path2)) {
+                    $banner_img = IMAGE_PATH . 'destination/' . $selectedDestination->image;
+                }
+            }
+        }
+        $hero_bg = !empty($banner_img) ? 'style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(' . $banner_img . ');"' : '';
 
     $bread .= '<section class="nepal-hero-content nepal mt-4">
-            <section class="hero">
+            <section class="hero" ' .$hero_bg. ' >
                 <div class="overlay"></div>
 
                 <div class="hero-content">
@@ -281,6 +307,8 @@ if ($packageRows) {
                 </div>
             </section>
         </section>';
+
+        }
 
     foreach ($packageRows as $packageRow) {
         $file_path = SITE_ROOT . 'images/package/' . $packageRow->image;
@@ -362,6 +390,7 @@ if ($packageRows) {
 if (empty($destinationPackageCards)) {
     $destinationPackageCards = '<div class="col-12 text-center"><p>No packages found for this destination right now.</p></div>';
 }
+
 
 $jVars['module:destination-package-cards'] = $destinationPackageCards;
 $jVars['module:destination-bread'] = $bread;

@@ -23,12 +23,10 @@ RewriteRule ^package/download/([a-zA-Z0-9-]+)$ fdownload.php?filename=$1 [L]
 #For search list page
 RewriteRule ^searchlist/?$ search.php [L]
 RewriteRule ^searchlist/page/([0-9]+)$ search.php?pageno=$1 [L]
-RewriteRule ^activity/([a-zA-Z0-9-]+)$ search.php?gactivity_slug=$1 [L]
 
 #For all the dynamically destination pages.
 RewriteRule ^destination/([a-zA-Z0-9-]+)$ destination.php?slug=$1 [L]
-RewriteRule ^destination-list$ destination.php [L]
-RewriteRule ^activity-list/([a-zA-Z0-9-]+)$ activities.php?slug=$1 [L]
+RewriteRule ^activity/([a-zA-Z0-9-]+)$ activities.php?slug=$1 [L]
 
 #For all the dynamically activities pages.
 RewriteRule ^activities/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)$ activities.php?dslug=$1&slug=$2 [L]

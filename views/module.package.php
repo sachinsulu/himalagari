@@ -972,7 +972,7 @@ if (defined('PACKAGE_PAGE')) {
                         <ul class="review-list">
                         ';
             foreach ($reviews as $review) {
-                $linkstart = (!empty($review->linksrc)) ? '<a href="' . $review->linksrc . '" target="_blank">' : '';
+                $linkstart = (!empty($review->linksrc)) ? '<a href="#" target="_blank">' : '';
                 $linkend = (!empty($review->linksrc)) ? '</a>' : '';
                 $respkg_detail .= '
                             <li>

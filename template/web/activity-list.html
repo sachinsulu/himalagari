@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holiday Types</title>
+  <link rel="icon" href="./assets/images/logo.png">
+  <link href="./holiday_types_inner.css" rel="stylesheet">
+  <link href="./package_listing.css" rel="stylesheet">
+
+
+  <!-- bootstrp -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet">
+  <!-- font-awesome -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com' rel="preconnect" />
+  <link href='https://fonts.gstatic.com' rel="preconnect" crossorigin />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' rel="stylesheet">
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <section class="scroll-wrapper">
+    <!-- navbar -->
+    <jcms:module:header/>
+
+
+    <!-- nepal-hero-content -->
+    <jcms:module:activity-bread/>
+
+
+
+    <!-- best_packages -->
+    <section class="popular-packages packages-wrapper deals-grid text-center components">
+      <h2 class="green-title text-center" id="packagesTitle">
+        Best <span class="orange-text">Packages</span>
+      </h2>
+
+      <br>
+
+      <div class="package-grid-wrapper">
+        <div class="packages-grid  mx-auto" id="packageGrid">
+
+          <jcms:module:activity-package-cards/>
+
+        </div>
+      </div>
+      <button class="explore_btn inquiry-btn mx-auto mt-4" id="toggleBtn">
+        Load More
+      </button>
+    </section>
+
+
+
+    <!-- guides-trek -->
+    <section class="travel_guides components mx-auto">
+      <h2 class="green-title text-center">Essential <span class="orange-text">Travel Guides</span> for Tour in Nepal
+      </h2><br>
+      <!-- <p class="cursive mb-4">Everything you need to know to explore Nepal better.</p> -->
+      <!-- NAV TABS -->
+      <ul class="nav nav-underline">
+        <li class="nav-item">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#todo">
+            Packing Essentials
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#visit">
+            Money & Expenses
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#stay">
+            Best Time to Visit
+          </button>
+        </li>
+
+      </ul>
+
+      <!-- TAB CONTENT -->
+      <div class="tab-content">
+
+        <!-- TAB 1 -->
+        <div class="tab-pane fade show active" id="todo">
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Visa Information</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Emergency Contacts</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Required Documents</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">What you need to pack ?</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+
+        </div>
+
+        <!-- TAB 2 -->
+        <div class="tab-pane fade" id="visit">
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Local Currency</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">ATM and exchange availability</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Card Acceptance</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Daily budget estimates</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+
+
+        </div>
+
+
+        <!-- TAB 3 -->
+        <div class="tab-pane fade" id="stay">
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Weather Conditions</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Best Seasons</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Fest and local events</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="row g-4">
+
+              <!-- Image gallery -->
+              <div class="col-lg-3">
+                <div class="single-image">
+                  <img src="https://picsum.photos/500/500" alt="Travel Guide">
+                </div>
+
+
+              </div>
+
+              <!-- Text content -->
+              <div class="col-lg-9">
+                <header>
+                  <h2 class="guide-title">Trekking or activities suitability</h2>
+                </header>
+
+                <p class="guide-text">
+                  Sitting in the lap of the majestic Himalayas, Nepal is an enchanting destination
+                  for hikers and trekkers of all types, many venturing to the famous Everest Base Camp.
+                  Over the years, Nepal has also managed to become a popular destination for nature,
+                  wildlife, culture, and adventure thanks to its rich natural beauty and diverse terrain.
+                  Nepal offers a perfect blend of adventure, culture, and nature.
+                </p>
+              </div>
+
+            </div>
+          </article>
+
+
+        </div>
+      </div>
+
+    </section>
+
+    
+    <!-- footer -->
+    <jcms:module:footer/>
+
+  </section>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
+
+
+  <script>
+    // button on click
+    function goToPage(page) {
+      window.location.href = page;
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtns = document.querySelectorAll(".searchToggle");
+      const bottomSearch = document.querySelector(".bottomSearch");
+
+      // Toggle on button click
+      toggleBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation(); // prevent document click from firing
+          bottomSearch.classList.toggle("active");
+        });
+      });
+
+      // Click outside to close
+      document.addEventListener("click", (e) => {
+        const clickedInsideSearch = bottomSearch.contains(e.target);
+        const clickedToggleBtn = [...toggleBtns].some((btn) =>
+          btn.contains(e.target)
+        );
+
+        if (!clickedInsideSearch && !clickedToggleBtn) {
+          bottomSearch.classList.remove("active");
+        }
+      });
+    });
+
+    $(document).ready(function () {
+      $('.owl-carousel').owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        stagePadding: 10,
+        navText: ["<span class='owl-prev'>&lt</span>", "<span class='owl-next'>&gt</span>"],
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 2
+          },
+          1000: {
+            items: 3
+          }
+        }
+      })
+    });
+
+  </script>
+
+  <script>
+    const grid = document.getElementById("packageGrid");
+    const wrapper = document.querySelector(".package-grid-wrapper");
+    const toggleBtn = document.getElementById("toggleBtn");
+    const title = document.getElementById("packagesTitle");
+
+    const cardTemplate = grid.children[0].outerHTML;
+    const cardsPerRow = 3;
+    let expanded = false;
+
+    function updateHeight() {
+      wrapper.style.maxHeight = grid.scrollHeight + "px";
+    }
+
+    updateHeight();
+    // Debounced resize to prevent too many calls
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateHeight();
+      }, 100); // 100ms delay
+    });
+
+    toggleBtn.addEventListener("click", () => {
+
+      if (!expanded) {
+        /* LOAD MORE */
+        for (let i = 0; i < cardsPerRow; i++) {
+          grid.insertAdjacentHTML("beforeend", cardTemplate);
+        }
+
+        requestAnimationFrame(updateHeight);
+        toggleBtn.childNodes[0].textContent = "Load Less";
+        expanded = true;
+
+      } else {
+        /* LOAD LESS */
+        const cards = [...grid.children].slice(-cardsPerRow);
+
+        cards.forEach(card => card.classList.add("removing"));
+
+        // 🔹 Smooth scroll to title
+        title.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        setTimeout(() => {
+          cards.forEach(card => card.remove());
+          updateHeight();
+        }, 350);
+
+        toggleBtn.childNodes[0].textContent = "Load More";
+        expanded = false;
+      }
+    });
+    const planCountry = document.getElementById("planCountry");
+    const planCountryCode = document.getElementById("planCountryCode");
+
+    planCountry.addEventListener("change", function () {
+      const selected = this.selectedOptions[0];
+      const code = selected.getAttribute("data-code") || "";
+      planCountryCode.value = code;
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const today = new Date().toISOString().split("T")[0];
+
+      // Apply to all date inputs (safe & future-proof)
+      document.querySelectorAll('input[type="date"]').forEach(input => {
+        input.setAttribute("min", today);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

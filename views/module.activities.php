@@ -6,10 +6,16 @@
 
 // Activities listing according to Destination
 $act_bread = $act_list = '';
+$activity_hero = '';
+$activity_package_cards = '';
 if (defined('ACTIVITIES_PAGE') and !empty($_REQUEST['slug'])) {
     $slug = addslashes($_REQUEST['slug']);
     $destt = Destination::find_by_slug($slug);
-    $activities = Activities::get_actitvityby($destt->id);
+    if ($destt) {
+        $activities = Activities::get_actitvityby($destt->id);
+    } else {
+        $activities = false;
+    }
 
     if ($activities) {
         $act_bread .= '
@@ -64,4 +70,159 @@ if (defined('ACTIVITIES_PAGE') and !empty($_REQUEST['slug'])) {
 
 $jVars['module:activity-list-breadcrumb'] = $act_bread;
 $jVars['module:activity-list'] = $act_list;
+
+// Dynamic modules for template/web/activity-list.html
+$heroTitle = '';
+$heroDescription = '';
+$packageRows = array();
+$content = array();
+
+if (defined('ACTIVITIES_PAGE') and !empty($_REQUEST['slug'])) {
+    $slug = addslashes($_REQUEST['slug']);
+    
+    // First try to find as Activity
+    $selectedActivity = Activities::find_by_slug($slug);
+    if ($selectedActivity) {
+        $heroTitle = $selectedActivity->title;
+        $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', $selectedActivity->content);
+        if (!empty($selectedActivity->content)) {
+            $heroDescription = strip_tags($selectedActivity->content);
+        }
+        $packageRows = Package::get_filterpkg_by('', $selectedActivity->id);
+    } else {
+        // If not activity, maybe it's a destination and we want packages for it?
+        // Or we just default to some packages.
+        $destt = Destination::find_by_slug($slug);
+        if ($destt) {
+            $heroTitle = $destt->title;
+            $packageRows = Package::get_filterpkg_by($destt->id);
+        }
+    }
+}
+
+if (empty($packageRows)) {
+    $packageRows = Package::getPackage(9);
+}
+
+if ($packageRows) {
+    if ($heroTitle) {
+        $banner_img = '';
+        if (isset($selectedActivity) && $selectedActivity) {
+            $file_path = SITE_ROOT . 'images/activities/banner/' . $selectedActivity->banner_image;
+            if (!empty($selectedActivity->banner_image) && file_exists($file_path)) {
+                $banner_img = IMAGE_PATH . 'activities/banner/' . $selectedActivity->banner_image;
+            } else {
+                $file_path2 = SITE_ROOT . 'images/activities/' . $selectedActivity->image;
+                if (!empty($selectedActivity->image) && file_exists($file_path2)) {
+                    $banner_img = IMAGE_PATH . 'activities/' . $selectedActivity->image;
+                }
+            }
+        }
+        $hero_bg = !empty($banner_img) ? 'style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(' . $banner_img . ');"' : '';
+
+        $activity_hero .= '
+            <section class="nepal-hero-content mt-4">
+                <section class="hero" ' . $hero_bg . '>
+                    <div class="overlay"></div>
+
+                    <div class="hero-content">
+                        <h1 class="hero-title-trapezium">' . $heroTitle . '</h1>
+
+                           ' . (isset($content[0]) ? $content[0] : '') . '
+
+
+                        <div class="hero-buttons">
+                            <a href="tel:+9779800000000" class="btn btn-secondary">Talk to a Travel Advisor</a>
+                        </div>
+
+                    ' . (isset($content[1]) ? $content[1] : '') . '
+                    </div>
+                </section>
+            </section>
+        ';
+    }
+
+    foreach ($packageRows as $packageRow) {
+        $file_path = SITE_ROOT . 'images/package/' . $packageRow->image;
+        $img = (!empty($packageRow->image) and file_exists($file_path)) ? IMAGE_PATH . 'package/' . $packageRow->image : IMAGE_PATH . 'static/home-destination.jpg';
+
+        $destinationTitle = !empty($packageRow->destinationId) ? Destination::field_by_id((int)$packageRow->destinationId, 'title') : '';
+        $activityTitle = !empty($packageRow->activityId) ? Activities::field_by_id((int)$packageRow->activityId, 'title') : '';
+        $accomodation = !empty($packageRow->accomodation) ? $packageRow->accomodation : 'N/A';
+        $difficulty = !empty($packageRow->difficulty) ? $packageRow->difficulty : 'Moderate';
+        $days = !empty($packageRow->days) ? (int)$packageRow->days : 0;
+
+        $destinationTitleClean = trim(strip_tags((string)$destinationTitle));
+        $activityTitleClean = trim(strip_tags((string)$activityTitle));
+        $accomodationClean = trim(strip_tags((string)$accomodation));
+        $difficultyClean = trim(strip_tags((string)$difficulty));
+
+        $destinationTitleDisplay = (strlen($destinationTitleClean) > 32) ? substr($destinationTitleClean, 0, 29) . '...' : $destinationTitleClean;
+        $activityTitleDisplay = (strlen($activityTitleClean) > 32) ? substr($activityTitleClean, 0, 29) . '...' : $activityTitleClean;
+        $accomodationDisplay = $accomodationClean;
+        $difficultyDisplay = $difficultyClean;
+
+        $popularBadge = ($packageRow->popular == 1) ? '<span class="badge">POPULAR</span>' : '';
+
+        $activity_package_cards .= '
+            <div class="package-card">
+                <div class="image-wrapper">
+                    <img src="' . $img . '" alt="' . htmlspecialchars($packageRow->title, ENT_QUOTES, 'UTF-8') . '">
+                    ' . $popularBadge . '
+                </div>
+
+                <div class="card-content">
+                    <h3 class="title">' . htmlspecialchars($packageRow->title, ENT_QUOTES, 'UTF-8') . '</h3>
+
+                            <div class="card-info-wrapper">
+
+                                <div class="info-row">
+                                    <div class="info">
+                                        <span class="label">Destination</span>
+                                        <span class="value green" title="' . htmlspecialchars($destinationTitleClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($destinationTitleDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                    <div class="row-divider"></div>
+                                    <div class="info text-right">
+                                        <span class="label">Accomodations</span>
+                                        <span class="value green" title="' . htmlspecialchars($accomodationClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($accomodationDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                </div>
+
+                                <div class="action-row">
+                                    <span class="days-badge">' . $days . ' days</span>
+                                    <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $packageRow->slug . '\')">
+                                        <p>Explore</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="info-row">';
+        if ($activityTitleDisplay) {
+            $activity_package_cards .= '
+                                    <div class="info">
+                                        <span class="label">Activities</span>
+                                        <span class="value green" title="' . htmlspecialchars($activityTitleClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($activityTitleDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                    <div class="row-divider"></div>';
+        }
+        $activity_package_cards .= '
+                                    <div class="info text-right">
+                                        <span class="label">Difficulty-level</span>
+                                        <span class="value green" title="' . htmlspecialchars($difficultyClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($difficultyDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+    }
+}
+
+if (empty($activity_package_cards)) {
+    $activity_package_cards = '<div class="col-12 text-center"><p>No packages found for this activity right now.</p></div>';
+}
+
+
+$jVars['module:activity-bread'] = $activity_hero;
+$jVars['module:activity-package-cards'] = $activity_package_cards;
 ?>
