@@ -36,6 +36,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     <th class="text-center">Images</th>
                     <th class="text-center">Popular</th>
                     <th class="text-center">Featured</th>
+                    <th class="text-center">Homepage</th>
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
                 </thead>
@@ -93,6 +94,17 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             </a>
                         </td>
                         <td class="text-center">
+                            <?php $popularImage = ($record->popular == 1) ? "bg-green" : "bg-red";
+                            $popularText = ($record->popular == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub']; ?>
+                            <a href="javascript:void(0);"
+                               class="btn small <?php echo $popularImage; ?> tooltip-button popularToggler"
+                               data-placement="top" title="<?php echo $popularText; ?>"
+                               status="<?php echo $record->popular; ?>" id="popimgHolder_<?php echo $record->id; ?>"
+                               moduleId="<?php echo $record->id; ?>">
+                                <i class="glyph-icon icon-flag"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
                             <?php $featureImage = ($record->featured == 1) ? "bg-green" : "bg-red";
                             $featlureText = ($record->featured == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub']; ?>
                             <a href="javascript:void(0);"
@@ -103,13 +115,6 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                 <i class="glyph-icon icon-flag"></i>
                             </a>
                         </td>
-                        <!-- <td class="text-center">
-                    <?php /*$lstminImage = ($record->lastminutes == 1) ? "bg-green" : "bg-red" ; 
-                    $lstminText = ($record->lastminutes == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub'] ;*/ ?>                                             
-                    <a href="javascript:void(0);" class="btn small <?php //echo $lstminImage;?> tooltip-button lstminToggler" data-placement="top" title="<?php //echo $lstminText;?>" status="<?php //echo $record->lastminutes;?>" id="lstimgHolder_<?php //echo $record->id;?>" moduleId="<?php //echo $record->id;?>">
-                        <i class="glyph-icon icon-flag"></i>
-                    </a>
-                </td> -->
                         <td class="text-center">
                             <?php $homeImage = ($record->homepage == 1) ? "bg-green" : "bg-red";
                             $homeText = ($record->homepage == 1) ? $GLOBALS['basic']['clickUnpub'] : $GLOBALS['basic']['clickPub']; ?>
@@ -171,8 +176,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
         $unstatus = ($packageInfo->status == 0) ? "checked" : " ";
         $feature = ($packageInfo->featured == 1) ? "checked" : " ";
         $unfeature = ($packageInfo->featured == 0) ? "checked" : " ";
-        /*$lstmin      = ($packageInfo->lastminutes==1)?"checked":" ";
-        $unlstmin    = ($packageInfo->lastminutes==0)?"checked":" ";*/
+        $popular      = ($packageInfo->popular==1)?"checked":" ";
+        $unpopular    = ($packageInfo->popular==0)?"checked":" ";
         $homepg = ($packageInfo->homepage == 1) ? "checked" : " ";
         $unhomepg = ($packageInfo->homepage == 0) ? "checked" : " ";
         $imgmptype = ($packageInfo->maptype == 1) ? "checked" : " ";
@@ -855,19 +860,21 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <label for="">No</label>
                     </div>
                 </div>
-                <!--  <div class="form-row">
-                <div class="form-label col-md-2">
-                    <label for="">
-                        Last Minute :
-                    </label>
-                </div>             
-                <div class="form-checkbox-radio col-md-9">
-                    <input type="radio" class="custom-radio" name="lastminutes" id="check1" value="1" <?php echo !empty($lstmin) ? $lstmin : ""; ?>>
-                    <label for="">Yes</label>
-                    <input type="radio" class="custom-radio" name="lastminutes" id="check0" value="0" <?php echo !empty($unlstmin) ? $unlstmin : "checked"; ?>>
-                    <label for="">No</label>
-                </div>                
-            </div> -->
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Popular :
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <input type="radio" class="custom-radio" name="popular" id="popcheck1"
+                               value="1" <?php echo !empty($popular) ? $popular : ""; ?>>
+                        <label for="">Yes</label>
+                        <input type="radio" class="custom-radio" name="popular" id="popcheck0"
+                               value="0" <?php echo !empty($unpopular) ? $unpopular : "checked"; ?>>
+                        <label for="">No</label>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">

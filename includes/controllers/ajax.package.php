@@ -106,7 +106,7 @@
 			}	*/		
 			$record->tags 			= $_REQUEST['tags'];
 			$record->featured 		= $_REQUEST['featured'];
-			/*$record->lastminutes 	= $_REQUEST['lastminutes'];*/
+			$record->popular 		= $_REQUEST['popular'];
 			$record->color 		= $_REQUEST['color'];
 			$record->homepage 		= $_REQUEST['homepage'];
 			$record->status 		= $_REQUEST['status'];
@@ -208,7 +208,7 @@
 			}*/
 			$record->tags 			= $_REQUEST['tags'];
 			$record->featured 		= $_REQUEST['featured'];
-			/*$record->lastminutes 	= $_REQUEST['lastminutes'];*/
+			$record->popular 		= @$_REQUEST['popular'];
 			$record->color 		= $_REQUEST['color'];
 			$record->homepage 		= $_REQUEST['homepage'];
 			$record->status 		= $_REQUEST['status'];
@@ -250,10 +250,10 @@
 			echo "";
 		break;
 
-		case "togglelstmin":
+		case "togglePopular":
 			$id = $_REQUEST['id'];
 			$record = Package::find_by_id($id);
-			$record->lastminutes = ($record->lastminutes == 1) ? 0 : 1 ;
+			$record->popular = ($record->popular == 1) ? 0 : 1 ;
 			$record->save();
 			echo "";
 		break;

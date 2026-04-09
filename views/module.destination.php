@@ -271,13 +271,13 @@ if ($packageRows) {
 
                 <div class="hero-content">
                     <h1 class="hero-title-trapezium">' . $heroTitle . '</h1>
-                    ' . $content[0] . '
+                    ' . (isset($content[0]) ? $content[0] : '') . '
 
                     <div class="hero-buttons">
                         <a href="tel:+9779800000000" class="btn btn-secondary">Talk to a Travel Advisor</a>
                     </div>
 
-                    ' . $content[1] . '
+                    ' . (isset($content[1]) ? $content[1] : '') . '
                 </div>
             </section>
         </section>';
@@ -302,10 +302,12 @@ if ($packageRows) {
         $accomodationDisplay = $accomodationClean;
         $difficultyDisplay = $difficultyClean;
 
+        $popularBadge = ($packageRow->popular == 1) ? '<span class="badge">POPULAR</span>' : '';
+
         $destinationPackageCards .= '<div class="package-card">
                         <div class="image-wrapper">
                             <img src="' . $img . '" alt="' . htmlspecialchars($packageRow->title, ENT_QUOTES, 'UTF-8') . '">
-                            <span class="badge">POPULAR</span>
+                            ' . $popularBadge . '
                         </div>
 
                         <div class="card-content">
@@ -334,19 +336,23 @@ if ($packageRows) {
                                         </svg>
                                     </button>
                                 </div>
-
-                                <div class="info-row">
+                                <div class="info-row">';
+        if ($activityTitleDisplay) {
+            $destinationPackageCards .= '
                                     <div class="info">
                                         <span class="label">Activities</span>
                                         <span class="value green" title="' . htmlspecialchars($activityTitleClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($activityTitleDisplay, ENT_QUOTES, 'UTF-8') . '</span>
                                     </div>
-                                    <div class="row-divider"></div>
+                                    <div class="row-divider"></div>';
+        }
+        $destinationPackageCards .= '
                                     <div class="info text-right">
                                         <span class="label">Difficulty-level</span>
                                         <span class="value green" title="' . htmlspecialchars($difficultyClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($difficultyDisplay, ENT_QUOTES, 'UTF-8') . '</span>
                                     </div>
-                                </div>
+                                </div>';
 
+        $destinationPackageCards .= '
                             </div>
                         </div>
                     </div>';

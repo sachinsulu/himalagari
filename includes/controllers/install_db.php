@@ -259,7 +259,7 @@ $table['tbl_package'] = "CREATE TABLE IF NOT EXISTS `tbl_package` (
   `gallery` blob NOT NULL,
   `tags` varchar(50) NOT NULL,
   `featured` tinyint(1) NOT NULL DEFAULT '0',
-  `lastminutes` tinyint(1) NOT NULL DEFAULT '0',
+  `popular` tinyint(1) NOT NULL DEFAULT '0',
   `homepage` tinyint(1) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `sortorder` int(11) NOT NULL,

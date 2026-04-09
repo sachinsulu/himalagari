@@ -33,26 +33,26 @@
             }
         });
 
-        /*************************************** USer Package Lastmin Toggler ******************************************/
-        $('.lstminToggler').on('click', function () {
+        /*************************************** USer Package Popular Toggler ******************************************/
+        $('.popularToggler').on('click', function () {
             var Re = $(this).attr('moduleId');
             var status = $(this).attr('status');
             newStatus = (status == 1) ? 0 : 1;
             $.ajax({
                 type: "POST",
                 url: getLocation(),
-                data: "action=togglelstmin&id=" + Re,
+                data: "action=togglePopular&id=" + Re,
                 success: function (msg) {
                 }
             });
             $(this).attr({'status': newStatus});
             if (status == 1) {
-                $('#lstimgHolder_' + Re).removeClass("bg-green");
-                $('#lstimgHolder_' + Re).addClass("bg-red");
+                $('#popimgHolder_' + Re).removeClass("bg-green");
+                $('#popimgHolder_' + Re).addClass("bg-red");
                 $(this).attr("data-original-title", "Click to Publish");
             } else {
-                $('#lstimgHolder_' + Re).removeClass("bg-red");
-                $('#lstimgHolder_' + Re).addClass("bg-green");
+                $('#popimgHolder_' + Re).removeClass("bg-red");
+                $('#popimgHolder_' + Re).addClass("bg-green");
                 $(this).attr("data-original-title", "Click to Un-publish");
             }
         });
