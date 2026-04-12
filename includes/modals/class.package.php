@@ -4,7 +4,7 @@ class Package extends DatabaseObject
 {
 
     protected static $table_name = "tbl_package";
-    protected static $db_fields = array('id', 'slug', 'title', 'image', 'destinationId', 'activityId', 'regionId', 'price', 'offers', 'offer_price', 'accomodation', 'group_size', 'transportation', 'currency', 'days', 'maptype', 'mapimage', 'mapgoogle', 'videolink', 'breif', 'overview', 'itinerary', 'incexc', 'availability', 'others', 'booking_info', 'other_info', 'guide', 'altitude', 'difficulty', 'gread', 'season', 'pdate', 'startpoint', 'endpoint', 'gallery', 'expackage', 'tags', 'featured', 'popular', 'homepage', 'status', 'fixed', 'date', 'sortorder', 'added_date', 'meta_keywords', 'meta_description', 'banner_image', 'itenaryfile', 'expert_id', 'group_size_price1', 'discount1', 'group_size_price2', 'discount2', 'group_size_price3', 'discount3', 'group_size_price4', 'discount4', 'group_size_price5', 'discount5', 'color');
+    protected static $db_fields = array('id', 'slug', 'title', 'image', 'destinationId', 'activityId', 'regionId', 'price', 'offers', 'offer_price', 'accomodation', 'group_size', 'transportation', 'currency', 'days', 'maptype', 'mapimage', 'mapgoogle', 'videolink', 'breif', 'overview', 'itinerary', 'incexc', 'availability', 'others', 'booking_info', 'other_info', 'guide', 'altitude', 'difficulty', 'gread', 'season', 'pdate', 'startpoint', 'endpoint', 'gallery', 'expackage', 'tags', 'featured', 'popular', 'homepage', 'status', 'fixed', 'date', 'sortorder', 'added_date', 'meta_keywords', 'meta_description', 'banner_image', 'itenaryfile', 'expert_id', 'group_size_price1', 'discount1', 'group_size_price2', 'discount2', 'group_size_price3', 'discount3', 'group_size_price4', 'discount4', 'group_size_price5', 'discount5', 'color', 'avg_rating', 'review_count');
 
     public $id;
     public $slug;
@@ -69,6 +69,10 @@ class Package extends DatabaseObject
     public $discount5;
     public $color;
 
+    // Virtual properties — populated by aggregate queries (not stored in DB)
+    public $avg_rating;
+    public $review_count;
+
 
     public static function get_total_activities_packages($id = '')
     {
@@ -98,18 +102,17 @@ class Package extends DatabaseObject
     public static function get_avg_rating($id = '')
     {
         global $db;
-        $sql = "SELECT AVG(rating) 'rating' FROM tbl_review WHERE package_id = $id";
+        $sql = "SELECT AVG(rating) 'rating' FROM tbl_review WHERE package_id = $id AND status = 1";
         $ratingObj = $db->fetch_object($db->query($sql));
         $rating_float = (float)$ratingObj->rating;
-        $rating_floor = floor($rating_float);
-        $rating = ($rating_float <= ($rating_floor + 0.5)) ? ($rating_floor + 0.5) : (ceil($rating_float));
+        $rating = round($rating_float, 1);
         return $rating;
     }
 
     public static function get_review_num($id = '')
     {
         global $db;
-        $sql = "SELECT * FROM tbl_review WHERE package_id = $id";
+        $sql = "SELECT id FROM tbl_review WHERE package_id = $id AND status = 1";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -159,6 +162,22 @@ class Package extends DatabaseObject
         if ($result > 0) {
             return true;
         }
+    }
+
+    public static function get_top_rated_packages($min_rating = 4, $limit = 6)
+    {
+        global $db;
+        $limit = (int)$limit;
+        $min_rating = (float)$min_rating;
+        $sql = "SELECT p.*, AVG(r.rating) AS avg_rating, COUNT(r.id) AS review_count
+                FROM " . self::$table_name . " p
+                INNER JOIN tbl_review r ON r.package_id = p.id AND r.status = 1
+                WHERE p.status = 1
+                GROUP BY p.id
+                HAVING avg_rating >= $min_rating
+                ORDER BY avg_rating DESC
+                LIMIT $limit";
+        return self::find_by_sql($sql);
     }
 
     public static function get_packages()

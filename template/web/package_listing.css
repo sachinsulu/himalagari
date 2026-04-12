@@ -1381,6 +1381,14 @@ box-sizing: border-box;
   padding: 0;
 }
 
+/* Clip the hover underline inside the button, suppress double-text ghost */
+.action-row .explore_btn {
+  overflow: hidden;
+}
+.action-row .explore_btn p::before {
+  display: none !important;
+}
+
 /* LABELS & VALUES */
 .label {
   font-size: 13px;

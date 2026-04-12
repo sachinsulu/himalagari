@@ -182,6 +182,13 @@ section h3 {
     display: none;
   }
 }
+/* Clip the hover underline inside the pill, suppress double-text ghost */
+.inquiry-btn {
+  overflow: hidden;
+}
+.inquiry-btn p::before {
+  display: none !important;
+}
 
 
 #offcanvas_inquiry{

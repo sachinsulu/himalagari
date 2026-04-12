@@ -134,10 +134,197 @@ if (!empty($homeRec)) {
 
 $jVars['module:package-home'] = $reshome;
 
+/* Top-Rated Family Packages — shown on homepage */
+$res_toprated = '';
+$topRatedRec = Package::get_top_rated_packages(4, 6);
+
+if (!empty($topRatedRec)) {
+    $res_toprated .= '
+    <section class="packages-wrapper components">
+      <header class="page-header">
+        <h4 class="text-center">Highly Recommended</h4>
+        <h2 class="green-title">
+          Discover our <span class="orange-text">Top Rated</span> Adventures
+        </h2>
+      </header>
+      <br />
+      <div class="packages-grid mx-auto">';
+
+    foreach ($topRatedRec as $pkg) {
+        $file_path = SITE_ROOT . 'images/package/' . @$pkg->image;
+        $img = (!empty($pkg->image) && file_exists($file_path))
+            ? IMAGE_PATH . 'package/' . $pkg->image
+            : IMAGE_PATH . 'static/home-featured.jpg';
+
+        $destination_name = !empty($pkg->destinationId)
+            ? Destination::field_by_id($pkg->destinationId, 'title') : 'Nepal';
+        $activityTitle = !empty($pkg->activityId)
+            ? Activities::field_by_id($pkg->activityId, 'title') : '';
+        $accomodation  = !empty($pkg->accomodation) ? $pkg->accomodation : 'N/A';
+        $difficulty    = !empty($pkg->difficulty)   ? $pkg->difficulty   : 'Moderate';
+
+        // Average rating — already available as avg_rating on the object via SQL alias
+        $avg = isset($pkg->avg_rating) ? round((float)$pkg->avg_rating, 1) : 0;
+        $stars = '';
+        for ($s = 1; $s <= 5; $s++) {
+            $stars .= ($s <= floor($avg))
+                ? '<i class="fa fa-star" style="color:#f5a623;font-size:12px;"></i>'
+                : '<i class="fa fa-star-o" style="color:#ccc;font-size:12px;"></i>';
+        }
+
+        $popularBadge = '<span class="badge" style="background:var(--green);">TOP RATED</span>';
+
+        $res_toprated .= '
+        <div class="package-card">
+          <div class="image-wrapper">
+            <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
+            ' . $popularBadge . '
+          </div>
+          <div class="card-content">
+            <h3 class="title">' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            <div class="card-info-wrapper">
+
+              <div class="info-row">
+                <div class="info">
+                  <span class="label">Destination</span>
+                  <span class="value green" title="' . htmlspecialchars($destination_name, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($destination_name, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+                <div class="row-divider"></div>
+                <div class="info text-right">
+                  <span class="label">Accomodations</span>
+                  <span class="value green" title="' . htmlspecialchars($accomodation, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($accomodation, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+              </div>
+
+              <div class="action-row">
+                <span class="days-badge">' . $pkg->days . ' days</span>
+                <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $pkg->slug . '\')">
+                  <p>Explore</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="info-row">
+                <div class="info">
+                  <span class="label">Activities</span>
+                  <span class="value green" title="' . htmlspecialchars($activityTitle, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($activityTitle, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+                <div class="row-divider"></div>
+                <div class="info text-right">
+                  <span class="label">Difficulty-level</span>
+                  <span class="value green" title="' . htmlspecialchars($difficulty, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($difficulty, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+              </div>
+              
+              <div class="info-row" style="margin-top: 10px; justify-content: center;">
+                <div class="info text-center">
+                  <span class="label">Rating</span>
+                  <span class="value">' . $stars . ' <small style="color:#666;font-size:11px;">(' . $avg . '/5)</small></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>';
+    }
+
+    $res_toprated .= '
+      </div>
+      <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'package_listing.html\')">
+        <p>View More</p>
+      </button>
+    </section>';
+} else {
+    // Fallback: show section with popular packages if no rated ones exist
+    $fallbackRec = Package::get_databy_display('popular', 1, 6);
+    if (!empty($fallbackRec)) {
+        $res_toprated .= '
+    <section class="packages-wrapper components">
+      <header class="page-header">
+        <h4 class="text-center">Highly Recommended</h4>
+        <h2 class="green-title">
+          Discover our <span class="orange-text">Top Rated</span> Adventures
+        </h2>
+      </header>
+      <br />
+      <div class="packages-grid mx-auto">';
+        foreach ($fallbackRec as $pkg) {
+            $file_path = SITE_ROOT . 'images/package/' . @$pkg->image;
+            $img = (!empty($pkg->image) && file_exists($file_path))
+                ? IMAGE_PATH . 'package/' . $pkg->image
+                : IMAGE_PATH . 'static/home-featured.jpg';
+            $destination_name = !empty($pkg->destinationId)
+                ? Destination::field_by_id($pkg->destinationId, 'title') : 'Nepal';
+            $activityTitle = !empty($pkg->activityId)
+                ? Activities::field_by_id($pkg->activityId, 'title') : '';
+            $accomodation = !empty($pkg->accomodation) ? $pkg->accomodation : 'N/A';
+            $difficulty   = !empty($pkg->difficulty)   ? $pkg->difficulty   : 'Moderate';
+            $res_toprated .= '
+        <div class="package-card">
+          <div class="image-wrapper">
+            <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
+            <span class="badge">POPULAR</span>
+          </div>
+          <div class="card-content">
+            <h3 class="title">' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            <div class="card-info-wrapper">
+
+              <div class="info-row">
+                <div class="info">
+                  <span class="label">Destination</span>
+                  <span class="value green" title="' . htmlspecialchars($destination_name, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($destination_name, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+                <div class="row-divider"></div>
+                <div class="info text-right">
+                  <span class="label">Accomodations</span>
+                  <span class="value green" title="' . htmlspecialchars($accomodation, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($accomodation, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+              </div>
+
+              <div class="action-row">
+                <span class="days-badge">' . $pkg->days . ' days</span>
+                <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $pkg->slug . '\')">
+                  <p>Explore</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="info-row">
+                <div class="info">
+                  <span class="label">Activities</span>
+                  <span class="value green" title="' . htmlspecialchars($activityTitle, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($activityTitle, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+                <div class="row-divider"></div>
+                <div class="info text-right">
+                  <span class="label">Difficulty-level</span>
+                  <span class="value green" title="' . htmlspecialchars($difficulty, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($difficulty, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>';
+        }
+        $res_toprated .= '
+      </div>
+      <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'package_listing.html\')">
+        <p>View More</p>
+      </button>
+    </section>';
+    }
+}
+
+$jVars['module:top-rated-packages'] = $res_toprated;
+
 /* Package Display Using Feature Flag */
 $resfeature = '';
 
 $featureRec = Package::get_databy_display('featured', 1, 6);
+
 if (!empty($featureRec)) {
     foreach ($featureRec as $fetRow) {
         $img = $tag = '';
