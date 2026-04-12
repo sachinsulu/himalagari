@@ -148,4 +148,16 @@ if (defined('HOME_PAGE')) {
 
 $jVars['module:articles-home-list'] = $resbloghome;
 
+/* 
+/ Explore Locally section from Article "home"
+*/
+$res_explore_home = '';
+if (defined('HOME_PAGE')) {
+    $rec_explore = Articles::getArticles('home');
+    if ($rec_explore) {
+        $res_explore_home = $rec_explore->content;
+    }
+}
+$jVars['module:explore-home'] = $res_explore_home;
+
 ?>

@@ -44,7 +44,7 @@
     }
 
     /* Force all section headings to be centered */
-    .green-title, 
+    .green-title,
     .page-header h4,
     .page-header h2,
     .packages-wrapper header h4,
@@ -62,61 +62,62 @@
     }
 
     .footer-line {
-        justify-content: center;
+      justify-content: center;
     }
 
     .about-text {
-        text-align: center;
-        width: 100%;
+      text-align: center;
+      width: 100%;
     }
 
     .review {
-        background: #f8fdf8;
-        border: 1px solid #e0eee0;
-        border-radius: 24px;
-        padding: clamp(30px, 5%, 50px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 30px;
-        margin-top: 50px;
+      background: #f8fdf8;
+      border: 1px solid #e0eee0;
+      border-radius: 24px;
+      padding: clamp(30px, 5%, 50px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: 50px;
     }
 
     .left-review {
-        flex: 1;
-        text-align: left;
+      flex: 1;
+      text-align: left;
     }
 
     .left-review p:first-child {
-        font-size: clamp(24px, 3vw, 32px);
-        font-weight: 700;
-        color: var(--green);
-        margin-bottom: 12px;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 12px;
     }
 
     .left-review p:last-child {
-        color: #666;
-        line-height: 1.6;
-        font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      font-size: 16px;
     }
 
     .review img {
-        width: 140px;
-        height: 140px;
-        background: #fff;
-        padding: 10px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      width: 140px;
+      height: 140px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
 
     @media (max-width: 768px) {
-        .review {
-            flex-direction: column;
-            text-align: center;
-        }
-        .left-review {
-            text-align: center;
-        }
+      .review {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .left-review {
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -185,66 +186,7 @@
 
 
   <!-- explore-start -->
-
-  <section class="explore-content mb-5 pb-5 components text-center">
-    <h4>Explore Locally</h4>
-    <h2 class="mb-4 green-title text-center">
-      Why Choose <span class="orange-text">Himmalagari Travels ?</span>
-    </h2>
-    <ul class="explore-box-grid mx-auto">
-      <li class="explore-box">
-        <img class="mx-auto" src="./assets/images/icons/trophy.png" alt="" />
-        <h5>29+ Years Experience</h5>
-        <p>
-          Experienced in planning trips, assisting customers, and organizing
-          travel details.
-        </p>
-      </li>
-
-      <li class="explore-box">
-        <img class="mx-auto" src="./assets/images/icons/rating.png" alt="" />
-        <h5>Local Expertise</h5>
-        <p>
-          Deep knowledge of destinations ensuring authentic travel
-          experiences.
-        </p>
-      </li>
-
-      <li class="explore-box">
-        <img class="mx-auto" src="./assets/images/icons/quality-service.png" alt="" />
-        <h5>Local Expertise</h5>
-        <p>
-          Deep knowledge of destinations ensuring authentic travel
-          experiences.
-        </p>
-      </li>
-      <li class="explore-box">
-        <img class="mx-auto" src="./assets/images/icons/passport.png" alt="" />
-        <h5>Local Expertise</h5>
-        <p>
-          Deep knowledge of destinations ensuring authentic travel
-          experiences.
-        </p>
-      </li>
-      <li class="explore-box">
-        <img class="mx-auto" src="./assets/images/icons/lowest-price.png" alt="" />
-        <h5>Trusted Service</h5>
-        <p>
-          Reliable customer support with transparent and honest travel
-          planning.
-        </p>
-      </li>
-
-      <li class="explore-box">
-        <img class="mx-auto" src="./assets/images/icons/thumb-up.png" alt="" />
-        <h5>Custom Trips</h5>
-        <p>
-          Personalized itineraries tailored to your preferences and budget.
-        </p>
-      </li>
-    </ul>
-  </section>
-
+  <jcms:module:explore-home/>
   <!-- explore-end -->
 
   <!-- blog -->
@@ -421,9 +363,9 @@
               </div>
 
               <div class="col-md-6 mb-3 d-flex align-items-end">
-                <div class="total-amount mx-auto">
+                <div class="total-amount mx-auto w-100">
                   <label class="form-label">Total Amount</label>
-                  <div class="amount-box">
+                  <div class="amount-box form-control text-center fs-5 fw-bold" style="background:#f8f9fa;">
                     $<span class="amountValue">400</span>
                   </div>
                 </div>
@@ -621,7 +563,7 @@
       btn.addEventListener("click", function () {
         maxSeats = parseInt(this.dataset.seats) || 1;
         pricePerPerson = parseFloat(this.dataset.price) || 0;
-        
+
         const peopleInput = document.getElementById("peopleCount");
         peopleInput.value = 1;
         peopleInput.max = maxSeats;
@@ -629,20 +571,20 @@
         // Update modal content
         const modal = document.querySelector("#fixedDepartureModal");
         if (modal) {
-            const titleEl = modal.querySelector(".modal-header .green-title");
-            if (titleEl) titleEl.innerHTML = `Reserve Your <span class="orange-text">Fixed Departure</span> Trip : ${this.dataset.title}`;
-            
-            const beforeEl = modal.querySelector(".book_before");
-            if (beforeEl) beforeEl.textContent = `Book before : ${this.dataset.before}`;
-            
-            const startEl = modal.querySelector(".trapezium-left");
-            if (startEl) startEl.textContent = `Start Date : ${this.dataset.start}`;
-            
-            const endEl = modal.querySelector(".trapezium-right");
-            if (endEl) endEl.textContent = `End Date : ${this.dataset.end}`;
+          const titleEl = modal.querySelector(".modal-header .green-title");
+          if (titleEl) titleEl.innerHTML = `Reserve Your <span class="orange-text">Fixed Departure</span> Trip : ${this.dataset.title}`;
 
-            const amountValueEl = modal.querySelector(".amountValue");
-            if (amountValueEl) amountValueEl.textContent = pricePerPerson;
+          const beforeEl = modal.querySelector(".book_before");
+          if (beforeEl) beforeEl.textContent = `Book before : ${this.dataset.before}`;
+
+          const startEl = modal.querySelector(".trapezium-left");
+          if (startEl) startEl.textContent = `Start Date : ${this.dataset.start}`;
+
+          const endEl = modal.querySelector(".trapezium-right");
+          if (endEl) endEl.textContent = `End Date : ${this.dataset.end}`;
+
+          const amountValueEl = modal.querySelector(".amountValue");
+          if (amountValueEl) amountValueEl.textContent = pricePerPerson;
         }
       });
     });
@@ -650,36 +592,36 @@
     // Handle people input change
     const peopleInput = document.getElementById("peopleCount");
     if (peopleInput) {
-        peopleInput.addEventListener("input", function () {
-            let value = parseInt(this.value) || 1;
-            const amountSpan = document.querySelector(".amountValue");
+      peopleInput.addEventListener("input", function () {
+        let value = parseInt(this.value) || 1;
+        const amountSpan = document.querySelector(".amountValue");
 
-            if (value > maxSeats) {
-                value = maxSeats;
-                this.value = maxSeats;
-                alert(`Only ${maxSeats} seats are available for this departure.`);
-            }
+        if (value > maxSeats) {
+          value = maxSeats;
+          this.value = maxSeats;
+          alert(`Only ${maxSeats} seats are available for this departure.`);
+        }
 
-            if (value < 1) {
-                value = 1;
-                this.value = 1;
-            }
+        if (value < 1) {
+          value = 1;
+          this.value = 1;
+        }
 
-            if (amountSpan) {
-                amountSpan.textContent = value * pricePerPerson;
-            }
-        });
+        if (amountSpan) {
+          amountSpan.textContent = value * pricePerPerson;
+        }
+      });
     }
 
     // Country code handling for Review (if present)
     const tripCountry = document.getElementById("tripCountry");
     const tripCode = document.getElementById("tripCode");
     if (tripCountry && tripCode) {
-        tripCountry.addEventListener("change", function () {
-            const selected = this.selectedOptions[0];
-            const code = selected.getAttribute("data-code") || "";
-            tripCode.textContent = code;
-        });
+      tripCountry.addEventListener("change", function () {
+        const selected = this.selectedOptions[0];
+        const code = selected.getAttribute("data-code") || "";
+        tripCode.textContent = code;
+      });
     }
   </script>
 

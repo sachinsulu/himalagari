@@ -34,6 +34,7 @@ require_once('module.enquiry.php');
 require_once('module.customize.php');
 require_once('module.team.php');
 require_once('module.legaldocuments.php');
+require_once('module.packagedate.php'); // loads fixed-departure-home
 
 // SITE MODULES
 $modulesList = Module::getAllmode();

@@ -126,9 +126,6 @@ if (!empty($homeRec)) {
     $reshome .= '
       </div>
       </div>
-      <button class="explore_btn inquiry-btn mx-auto mt-4" id="toggleBtn" onclick="goToPage(\'' . BASE_URL . 'package_listing.html\')">
-        View More
-      </button>
     </section>';
 }
 
@@ -232,9 +229,6 @@ if (!empty($topRatedRec)) {
 
     $res_toprated .= '
       </div>
-      <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'package_listing.html\')">
-        <p>View More</p>
-      </button>
     </section>';
 } else {
     // Fallback: show section with popular packages if no rated ones exist
@@ -311,9 +305,6 @@ if (!empty($topRatedRec)) {
         }
         $res_toprated .= '
       </div>
-      <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'package_listing.html\')">
-        <p>View More</p>
-      </button>
     </section>';
     }
 }
@@ -1417,109 +1408,5 @@ $jVars['module:package-review-modal'] = $send_review;
 $jVars['module:package-email-friend'] = $email_friend;
 $jVars['module:package-ask-question-modal'] = $ask_question;
 
-
-// Fixed package for home
-$resfixed = '';
-if (defined('HOME_PAGE')) {
-    $sql = "SELECT pd.*, p.title as pkg_title, p.slug as pkg_slug, p.image as pkg_image, p.days as pkg_days, p.popular as pkg_popular
-            FROM tbl_package_date pd
-            JOIN tbl_package p ON pd.package_id = p.id
-            WHERE pd.status = '1' AND pd.package_date >= CURDATE()
-            ORDER BY pd.package_date ASC
-            LIMIT 4";
-    $fixedRec = Packagedate::find_by_sql($sql);
-
-    if ($fixedRec) {
-        $resfixed .= '
-        <section class="packages-wrapper components text-center">
-            <header class="page-header text-center">
-                <h4 class="text-center">Fixed Departure</h4>
-                <h2 class="mb-3 green-title text-center">
-                    Hassle-Free
-                    <span class="orange-text">Fixed Departure</span> Adventures.
-                </h2>
-            </header>
-            <br />
-
-            <div class="packages-grid mx-auto">';
-
-        foreach ($fixedRec as $row) {
-            $file_path = SITE_ROOT . "images/package/" . $row->pkg_image;
-            $img = (!empty($row->pkg_image) and file_exists($file_path)) ? IMAGE_PATH . "package/" . $row->pkg_image : IMAGE_PATH . "static/home-featured.jpg";
-            
-            $popularBadge = ($row->pkg_popular == 1) ? '<span class="badge">POPULAR</span>' : '';
-            
-            $startDate = date('d M Y', strtotime($row->package_date));
-            $endDate = date('d M Y', strtotime($row->package_date . ' + ' . $row->pkg_days . ' days'));
-            $bookBefore = date('d M Y', strtotime($row->package_closure));
-
-            $resfixed .= '
-            <div class="package-card">
-                <div class="image-wrapper">
-                    <img src="' . $img . '" alt="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '" />
-                    ' . $popularBadge . '
-                </div>
-
-                <div class="card-content">
-                    <h3 class="title">' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '</h3>
-
-                    <div class="info-grid mx-auto">
-                        <div class="info">
-                            <span class="label">Trip Start Date</span>
-                            <span class="value green">' . $startDate . '</span>
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <div class="info">
-                            <span class="label">Seats Available</span>
-                            <span class="value green">' . $row->package_seats . '</span>
-                        </div>
-
-                        <div class="info">
-                            <span class="label">Book Before</span>
-                            <span class="value green">' . $bookBefore . '</span>
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <div class="info">
-                            <span class="label">Trip End Date</span>
-                            <span class="value green">' . $endDate . '</span>
-                        </div>
-
-                        <!-- FLOATING ELEMENTS -->
-                        <span class="days-badge">' . $row->pkg_days . ' days</span>
-
-                        <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" 
-                                data-seats="' . $row->package_seats . '" 
-                                data-pkgid="' . $row->package_id . '" 
-                                data-dateid="' . $row->id . '"
-                                data-price="' . $row->package_rate . '"
-                                data-title="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '"
-                                data-start="' . $startDate . '"
-                                data-end="' . $endDate . '"
-                                data-before="' . $bookBefore . '">
-                            <p>Book Now</p>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>';
-        }
-
-        $resfixed .= '
-            </div>
-            <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'fixed_listing.html\')">
-                <p>View More</p>
-            </button>
-        </section>';
-    }
-}
-
-$jVars['module:fixed-departure-home'] = $resfixed;
 
 ?>

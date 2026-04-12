@@ -17,6 +17,13 @@ class Packagedate extends DatabaseObject
     public $sortorder;
     public $added_date;
 
+    // JOIN properties
+    public $pkg_title;
+    public $pkg_slug;
+    public $pkg_image;
+    public $pkg_days;
+    public $pkg_popular;
+
     public static function get_package_date($pkgid = '')
     {
         global $db;
@@ -124,9 +131,7 @@ class Packagedate extends DatabaseObject
     {
         $object = new self;
         foreach ($record as $attribute => $value) {
-            if ($object->has_attribute($attribute)) {
-                $object->$attribute = $value;
-            }
+            $object->$attribute = $value;
         }
         return $object;
     }
