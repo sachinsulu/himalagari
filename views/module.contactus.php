@@ -107,28 +107,24 @@ if (defined('CONTACTUS_PAGE')) {
               <input type="email" placeholder="Email Address " required />
 
               <div class="form-row">
-                <select title="country" id="countrySelect" required>
-                  <option value="">Choose Your Country</option>
-                  <option>Nepal</option>
-                  <option>India</option>
-                  <option>UAE</option>
-                  <option>Bangladesh</option>
-                  <option>Sri Lanka</option>
+                <select title="country" id="countrySelect" required onchange="document.getElementById(\'countryCode\').value = this.options[this.selectedIndex].getAttribute(\'data-code\') || \'\';">
+                  <option value="" data-code="">Choose Your Country</option>
+                  <option value="Nepal" data-code="+977">Nepal</option>
+                  <option value="India" data-code="+91">India</option>
+                  <option value="UAE" data-code="+971">UAE</option>
+                  <option value="Bangladesh" data-code="+880">Bangladesh</option>
+                  <option value="Sri Lanka" data-code="+94">Sri Lanka</option>
                 </select>
                 <p class="phone-field">
-                  <select
+                  <input
+                    type="text"
                     title="country-code"
                     id="countryCode"
                     class="country-code"
+                    placeholder="Code"
                     required
-                  >
-                    <option value="">Code</option>
-                    <option value="+977">+977</option>
-                    <option value="+91">+91</option>
-                    <option value="+971">+971</option>
-                    <option value="+880">+880</option>
-                    <option value="+94">+94</option>
-                  </select>
+                    readonly
+                  />
 
                   <input type="text" placeholder="Phone Number " required />
                 </p>

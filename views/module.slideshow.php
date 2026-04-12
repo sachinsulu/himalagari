@@ -49,10 +49,19 @@ $slides = Slideshow::getSlideshow_by(0);
 
 if (!empty($slides)) {
     foreach ($slides as $slide) {
-        $home_slide .= '
-            <video autoplay muted loop>
+        $video_html = '';
+        if (strpos($slide->source, 'youtube') !== false || strpos($slide->source, 'youtu.be') !== false) {
+            $video_html = '<iframe src="' . $slide->source . '" allowfullscreen></iframe>';
+        } else {
+            $video_html = '<video autoplay muted loop playsinline>
                 <source src="' . IMAGE_PATH . 'slideshow/video/' . $slide->source . '" type="video/mp4">
-            </video>
+            </video>';
+        }
+
+        $home_slide .= '
+            <div class="ratio ratio-16x9 video">
+                ' . $video_html . '
+            </div>
         ';
     }
 }

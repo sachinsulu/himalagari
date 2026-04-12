@@ -29,6 +29,86 @@ foreach ($durationRec as $k => $v) {
     $durationHTML .= '<option value="' . $k . '">' . $v . '</option>';
 }
 
+// Dynamic packages for inquiry form
+$packagesHTML = '<option value="" disabled selected>Select a Package</option>';
+$packageRec = Package::get_packages();
+if ($packageRec) {
+    foreach ($packageRec as $pkgRow) {
+        $prc = !empty($pkgRow->offer_price) ? $pkgRow->offer_price : (!empty($pkgRow->price) ? $pkgRow->price : '');
+        $packagesHTML .= '<option value="' . $pkgRow->id . '" data-price="' . htmlspecialchars($prc) . '">' . htmlspecialchars($pkgRow->title) . '</option>';
+    }
+}
+
+// Country list with dial codes
+$countriesList = [
+    'AF' => ['name' => 'Afghanistan',          'code' => '+93'],
+    'AL' => ['name' => 'Albania',               'code' => '+355'],
+    'DZ' => ['name' => 'Algeria',               'code' => '+213'],
+    'AR' => ['name' => 'Argentina',             'code' => '+54'],
+    'AU' => ['name' => 'Australia',             'code' => '+61'],
+    'AT' => ['name' => 'Austria',               'code' => '+43'],
+    'BD' => ['name' => 'Bangladesh',            'code' => '+880'],
+    'BE' => ['name' => 'Belgium',               'code' => '+32'],
+    'BR' => ['name' => 'Brazil',                'code' => '+55'],
+    'CA' => ['name' => 'Canada',                'code' => '+1'],
+    'CN' => ['name' => 'China',                 'code' => '+86'],
+    'CO' => ['name' => 'Colombia',              'code' => '+57'],
+    'HR' => ['name' => 'Croatia',               'code' => '+385'],
+    'CZ' => ['name' => 'Czech Republic',        'code' => '+420'],
+    'DK' => ['name' => 'Denmark',               'code' => '+45'],
+    'EG' => ['name' => 'Egypt',                 'code' => '+20'],
+    'FI' => ['name' => 'Finland',               'code' => '+358'],
+    'FR' => ['name' => 'France',                'code' => '+33'],
+    'DE' => ['name' => 'Germany',               'code' => '+49'],
+    'GR' => ['name' => 'Greece',                'code' => '+30'],
+    'HK' => ['name' => 'Hong Kong',             'code' => '+852'],
+    'HU' => ['name' => 'Hungary',               'code' => '+36'],
+    'IN' => ['name' => 'India',                 'code' => '+91'],
+    'ID' => ['name' => 'Indonesia',             'code' => '+62'],
+    'IE' => ['name' => 'Ireland',               'code' => '+353'],
+    'IL' => ['name' => 'Israel',                'code' => '+972'],
+    'IT' => ['name' => 'Italy',                 'code' => '+39'],
+    'JP' => ['name' => 'Japan',                 'code' => '+81'],
+    'JO' => ['name' => 'Jordan',                'code' => '+962'],
+    'KZ' => ['name' => 'Kazakhstan',            'code' => '+7'],
+    'KE' => ['name' => 'Kenya',                 'code' => '+254'],
+    'KR' => ['name' => 'South Korea',           'code' => '+82'],
+    'KW' => ['name' => 'Kuwait',                'code' => '+965'],
+    'MY' => ['name' => 'Malaysia',              'code' => '+60'],
+    'MX' => ['name' => 'Mexico',                'code' => '+52'],
+    'NL' => ['name' => 'Netherlands',           'code' => '+31'],
+    'NZ' => ['name' => 'New Zealand',           'code' => '+64'],
+    'NG' => ['name' => 'Nigeria',               'code' => '+234'],
+    'NO' => ['name' => 'Norway',                'code' => '+47'],
+    'NP' => ['name' => 'Nepal',                 'code' => '+977'],
+    'OM' => ['name' => 'Oman',                  'code' => '+968'],
+    'PK' => ['name' => 'Pakistan',              'code' => '+92'],
+    'PH' => ['name' => 'Philippines',           'code' => '+63'],
+    'PL' => ['name' => 'Poland',                'code' => '+48'],
+    'PT' => ['name' => 'Portugal',              'code' => '+351'],
+    'QA' => ['name' => 'Qatar',                 'code' => '+974'],
+    'RO' => ['name' => 'Romania',               'code' => '+40'],
+    'RU' => ['name' => 'Russia',                'code' => '+7'],
+    'SA' => ['name' => 'Saudi Arabia',          'code' => '+966'],
+    'SG' => ['name' => 'Singapore',             'code' => '+65'],
+    'ZA' => ['name' => 'South Africa',          'code' => '+27'],
+    'ES' => ['name' => 'Spain',                 'code' => '+34'],
+    'LK' => ['name' => 'Sri Lanka',             'code' => '+94'],
+    'SE' => ['name' => 'Sweden',                'code' => '+46'],
+    'CH' => ['name' => 'Switzerland',           'code' => '+41'],
+    'TH' => ['name' => 'Thailand',              'code' => '+66'],
+    'TR' => ['name' => 'Turkey',                'code' => '+90'],
+    'AE' => ['name' => 'UAE',                   'code' => '+971'],
+    'GB' => ['name' => 'United Kingdom',        'code' => '+44'],
+    'US' => ['name' => 'United States',         'code' => '+1'],
+    'VN' => ['name' => 'Vietnam',               'code' => '+84'],
+];
+
+$countriesHTML = '<option value="" disabled selected>Select Country</option>';
+foreach ($countriesList as $iso => $info) {
+    $countriesHTML .= '<option value="' . $iso . '" data-code="' . $info['code'] . '">' . $info['name'] . '</option>';
+}
+
 $header_components = '
       <div class="offcanvas offcanvas-end" id="menuCanvas">
         <div class="offcanvas-header">
@@ -48,7 +128,7 @@ $header_components = '
       <div class="bottom-search bottomSearch" id="bottomSearch">
         <div class="container">
           <!-- FORM -->
-          <form class="row g-3 align-items-center" id="navSearchForm" action="' . BASE_URL . 'searchlist" method="post">
+          <form class="row g-3 align-items-end" id="navSearchForm" action="' . BASE_URL . 'searchlist" method="post">
             <div class="col-md-3">
               <label class="form-label">Destination</label>
               <select id="destination" name="qdestination[]" class="form-control">
@@ -76,6 +156,7 @@ $header_components = '
           </form>
         </div>
       </div>
+
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
         <div class="offcanvas-header">
           <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
@@ -89,14 +170,9 @@ $header_components = '
                 <!-- Packages & Date -->
                 <div class="form-row">
                   <div class="form-group">
-                    <label>Packages <span>*</span></label>
-                    <select id="country" name="country" required>
-                      <option value="">Select a country</option>
-                      <option value="NP" data-code="+977">Nepal</option>
-                      <option value="IN" data-code="+91">India</option>
-                      <option value="US" data-code="+1">United States</option>
-                      <option value="AU" data-code="+61">Australia</option>
-                      <option value="GB" data-code="+44">United Kingdom</option>
+                    <label>Package <span>*</span></label>
+                    <select id="inq_package" name="package" required>
+                      ' . $packagesHTML . '
                     </select>
                   </div>
 
@@ -110,12 +186,12 @@ $header_components = '
                 <div class="form-row">
                   <div class="form-group">
                     <label>No. of Pax <span class="required">*</span></label>
-                    <input type="text" required />
+                    <input type="number" id="inq_pax" name="pax" min="1" required />
                   </div>
 
                   <div class="form-group">
                     <label>Price <span class="required">*</span></label>
-                    <input type="text" required />
+                    <input type="text" id="inq_price" name="price" required />
                   </div>
                 </div>
 
@@ -136,10 +212,8 @@ $header_components = '
                 <div class="form-row">
                   <div class="form-group">
                     <label>Country <span class="required">*</span></label>
-                    <select id="planCountry" required>
-                      <option value="">Select Country</option>
-                      <option value="NP" data-code="+977">Nepal</option>
-                      <option value="IN" data-code="+91">India</option>
+                    <select id="planCountry" name="country" required>
+                      ' . $countriesHTML . '
                     </select>
                   </div>
 
@@ -166,6 +240,48 @@ $header_components = '
 
                 <button type="submit">Submit</button>
               </form>
+              <script>
+                (function() {
+                  var sel = document.getElementById("planCountry");
+                  var codeInput = document.getElementById("planCountryCode");
+                  if (sel && codeInput) {
+                    sel.addEventListener("change", function() {
+                      var opt = this.options[this.selectedIndex];
+                      codeInput.value = opt.getAttribute("data-code") || "";
+                    });
+                  }
+
+                  var pkgSel = document.getElementById("inq_package");
+                  var priceInput = document.getElementById("inq_price");
+                  var paxInput = document.getElementById("inq_pax");
+
+                  function updatePrice() {
+                    var opt = pkgSel.options[pkgSel.selectedIndex];
+                    if (!opt) return;
+                    var priceAttr = opt.getAttribute("data-price");
+                    
+                    if (priceAttr) {
+                      var priceVal = parseFloat(priceAttr);
+                      if (!isNaN(priceVal)) {
+                        var pax = parseInt(paxInput.value) || 1;
+                        priceInput.value = priceVal * pax;
+                      } else {
+                        priceInput.value = priceAttr;
+                      }
+                    } else {
+                      priceInput.value = "";
+                    }
+                  }
+
+                  if (pkgSel && priceInput && paxInput) {
+                    pkgSel.addEventListener("change", function() {
+                      if (!paxInput.value) paxInput.value = 1;
+                      updatePrice();
+                    });
+                    paxInput.addEventListener("input", updatePrice);
+                  }
+                })();
+              </script>
             </div>
           </div>
         </div>

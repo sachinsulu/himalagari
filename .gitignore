@@ -8,6 +8,8 @@ apanel/config.php
 .env
 .env.local
 .env.*.php
+.agents/
+skills-lock.json
 
 # =========================
 # USER UPLOADS & MEDIA
