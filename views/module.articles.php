@@ -41,10 +41,111 @@ if (defined('HOME_PAGE')) {
     if ($rechome) {
         foreach ($rechome as $row) {
             $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($row->content));
-            $reshome .= $content[0];
+            
+            $file_path = SITE_ROOT . 'images/articles/' . $row->image;
+            $imgsrc = (file_exists($file_path) && !empty($row->image)) ? IMAGE_PATH . 'articles/' . $row->image : BASE_URL . 'template/web/assets/images/aboutimg2.jpg';
+
+            $reshome .= '
+            <section class="about-hero components">
+                <div class="about-hero-inner">
+                <!-- LEFT CONTENT -->
+                <div class="about-text">
+                    <span class="about-label">'.$row->type.'</span>
+
+                    <h2>' . $row->title . '</h2>
+
+                    <p>
+                    ' . strip_tags($content[0]) . '
+                    </p>
+                    <!-- uiverse btn -->
+                    <button class="explore_btn inquiry-btn" onclick="goToPage(\'' . BASE_URL . 'pages/' .  'about-us' . '\')">
+                    <p>View More</p>
+                    </button>
+                </div>
+
+                <!-- RIGHT IMAGE -->
+                <div class="about-media">
+                    <img src="' . $imgsrc . '" alt="' . $row->title . '" />
+                </div>
+                </div>
+            </section>';
         }
     }
 }
 
 $jVars['module:showhome'] = $reshome;
+
+
+/*
+/ Blog list for Homepage
+*/
+$resbloghome = '';
+if (defined('HOME_PAGE')) {
+    $rechomeblog = Articles::homepageArticles(6);
+    if ($rechomeblog) {
+        $resbloghome .= '
+        <section class="popular-packages mx-auto blog_wrapper deals-grid text-center components">
+            <h4 class="text-center">Top Travel Inspirations</h4>
+            <h2 class="mb-5 green-title text-center">
+                Destinations and stories
+                <span class="orange-text">Worth Exploring</span>
+            </h2>
+
+            <ul class="packages-grid mx-auto">';
+        
+        foreach ($rechomeblog as $row) {
+            $file_path = SITE_ROOT . 'images/articles/' . $row->image;
+            $imgsrc = (file_exists($file_path) && !empty($row->image)) ? IMAGE_PATH . 'articles/' . $row->image : BASE_URL . 'template/web/assets/images/everestbasecamp.jpg';
+            
+            $content = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($row->content));
+            $short_desc = !empty($content[0]) ? strip_tags($content[0]) : '';
+            $short_desc = (strlen($short_desc) > 120) ? substr($short_desc, 0, 117) . '...' : $short_desc;
+            
+            $date = date('j', strtotime($row->added_date));
+            $month = date('M', strtotime($row->added_date));
+            $year = date('Y', strtotime($row->added_date));
+            $suffix = date('S', strtotime($row->added_date));
+
+            $resbloghome .= '
+            <li class="package-card deal-card">
+                <div class="deal-image">
+                    <a href="' . BASE_URL . 'pages/' . $row->slug . '"><img src="' . $imgsrc . '" alt="' . $row->title . '" /></a>
+                </div>
+                <div class="card-content">
+                    <div class="author">
+                        <p>By Admin</p>
+                        <p>
+                            <span>' . $date . '</span> <sup>' . $suffix . '</sup> ' . $month . ' <br />
+                            ' . $year . '
+                        </p>
+                    </div>
+
+                    <div class="blog-content">
+                        <a href="' . BASE_URL . 'pages/' . $row->slug . '">
+                            <h6>' . $row->title . '</h6>
+                        </a>
+                        <p>' . $short_desc . '</p>
+                    </div>
+                    <hr />
+                    <a href="' . BASE_URL . 'pages/' . $row->slug . '">
+                        <div class="author">
+                            <p>Continue Reading</p>
+                            <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
+                        </div>
+                    </a>
+                </div>
+            </li>';
+        }
+
+        $resbloghome .= '
+            </ul>
+            <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'blog_listing.html\')">
+                <p>View More</p>
+            </button>
+        </section>';
+    }
+}
+
+$jVars['module:articles-home-list'] = $resbloghome;
+
 ?>

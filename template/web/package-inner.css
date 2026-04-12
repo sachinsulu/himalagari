@@ -1574,8 +1574,8 @@ color: #f97316;
 }
 
 .features-column li {
-  display: flex;
-  gap: 14px;
+  position: relative;
+  padding-left: 35px;
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 18px;
@@ -1605,6 +1605,7 @@ color: #f97316;
   padding: 0;
 }
 
+.features-column.include li,
 .include_popup_check-list li {
   position: relative;
   padding-left: 35px;
@@ -1612,6 +1613,7 @@ color: #f97316;
 }
 
 /* This replaces the span.icon.check */
+.features-column.include li::before,
 .include_popup_check-list li::before {
   content: "✓";
   position: absolute;
@@ -1640,12 +1642,14 @@ color: #f97316;
   padding: 0;
 }
 
+.features-column.exclude li,
 .exclude_popup_check-list li {
   position: relative;
   padding-left: 35px;
   margin-bottom: 10px;
 }
 
+.features-column.exclude li::before,
 .exclude_popup_check-list li::before {
   content: "✕";
   position: absolute;

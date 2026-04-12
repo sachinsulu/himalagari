@@ -10,71 +10,40 @@ $tstmresult = '';
 
 if ($tmonialRec) {
     foreach ($tmonialRec as $row) {
-        $linkstart = (!empty($row->linksrc)) ? '<a href="' . $row->linksrc . '" target="_blank">' : '';
-        $linkend = (!empty($row->linksrc)) ? '</a>' : '';
-        $tstmresult .= '
-                <div class="slick-item border-btm-dadada">
-                    <div class="testimonial-grid-01">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="texting">
-                                <h5>' . $row->name . '</h5>
-                                <ul class="item-meta">
-                                    <li>
-                                        <i class="elegent-icon-pin_alt text-warning"></i> ' . $row->country . '
-                                    </li>
-                                    <!--<li>|</li>
-                                    <li>
-                                        <p class="text-muted testimonial-cite"> ' . date("F d, Y", strtotime($row->added_date)) . ' </p>
-                                    </li>-->
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="content">
-                                <p class="saying">' . strip_tags($row->comments) . '</p>
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            ' . $linkstart . '<div class="image">
-                                <img src="' . IMAGE_PATH . 'package/review/' . $row->image . '" alt="' . $row->name . '" class="img-circle"/>
-                            </div>' . $linkend . '
-                        </div>
-                    </div>
-                        
+        $rating_stars = '';
+        $rating = !empty($row->rating) ? $row->rating : 5;
+        for ($i = 0; $i < $rating; $i++) {
+            $rating_stars .= '★ ';
+        }
 
-                        <div class="man clearfix">';
-        $file_path = SITE_ROOT . 'images/package/review/' . $row->image;
-        if (file_exists($file_path)):
-            $tstmresult .= '
-                        <!--<div class="image">
-                            <img src="' . IMAGE_PATH . 'package/review/' . $row->image . '" alt="' . $row->name . '" class="img-circle"/>
-                        </div>-->
-                        ';
-        else:
-            $tstmresult .= '
-                    <!--<div class="image">
-                        <img src="' . IMAGE_PATH . 'static/no-pic.jpg" alt="' . $row->name . '" class="img-circle"/>
-                    </div>-->
-                    ';
-        endif;
+        $title = !empty($row->title) ? $row->title : 'Review';
+
         $tstmresult .= '
-                        <!--<div class="texting">
-                            <h5>' . $row->name . '</h5>
-                            <ul class="item-meta">
-                                <li>
-                                    <i class="elegent-icon-pin_alt text-warning"></i> ' . $row->country . '
-                                </li>
-                                <li>|</li>
-                                <li>
-                                    <p class="text-muted testimonial-cite"> ' . date("F d, Y", strtotime($row->added_date)) . ' </p>
-                                </li>
-                            </ul>
-                        </div>-->
-                    </div>
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="mx-auto">
+                    <span class="name">" ' . $title . ' "</span>
+                    <p class="rating">' . trim($rating_stars) . '</p>
                 </div>
+                <a href="https://www.tripadvisor.com/" target="_blank" rel="noreferrer noopener ">
+                    <span class="review-booked-via">
+                    <p>Booked via :</p>
+                    <img src="' . BASE_URL . 'template/web/assets/images/trip-advisor-logo.png" class="trip_advisor_logo" alt="" />
+                    </span>
+                </a>
+                <span class="quote">
+                    <i class="fa-solid fa-quote-left"></i>
+                </span>
             </div>
-             ';
+
+            <p class="mt-4">
+            ' . strip_tags($row->comments) . '
+            </p>
+            <div class="author_info">
+                <p>- ' . $row->name . '</p>
+                <p>Country : ' . $row->country . '</p>
+            </div>
+        </div>';
     }
 }
 

@@ -42,101 +42,94 @@ $jVars["module:home-destination"] = $home_destination;
 
 /* Package Display Using Home Flag */
 $reshome = $grade = $destination_name = $rating = '';
-$homeRec = Package::get_databy_display('homepage', 1, 6);
+$homeRec = Package::get_databy_display('popular', 1, 6);
+
 if (!empty($homeRec)) {
+    $reshome .= '
+    <section class="packages-wrapper components">
+      <header class="page-header">
+        <h4 class="text-center">Popular Packages</h4>
+        <h2 class="green-title text-center">
+          Handpicked <span class="orange-text">Travel</span> Itineraries
+        </h2>
+      </header>
+      <br />
+      <div class="package-grid-wrapper">
+        <div class="packages-grid mx-auto" id="packageGrid">';
+
     foreach ($homeRec as $RecRow) {
-        $img = $tag = '';
+        $img = '';
         // getting image
         $file_path = SITE_ROOT . "images/package/" . @$RecRow->image;
         $img = (!empty($RecRow->image) and file_exists($file_path)) ? IMAGE_PATH . "package/" . $RecRow->image : IMAGE_PATH . "static/home-featured.jpg";
-
-        // getting tags
-        $tag = (!empty($RecRow->tags)) ? '<span class="ribbon_3 ' . $RecRow->color . '">' . $RecRow->tags . '</span>' : '';
         
-        // getting destination name
-        $destination_name = Destination::field_by_id($RecRow->destinationId, 'title');
-
-        // getting avg rating
-        $rating = Package::get_avg_rating($RecRow->id);
+        // getting details
+        $destination_name = !empty($RecRow->destinationId) ? Destination::field_by_id($RecRow->destinationId, 'title') : '';
+        $activityTitle = !empty($RecRow->activityId) ? Activities::field_by_id($RecRow->activityId, 'title') : '';
+        $accomodation = !empty($RecRow->accomodation) ? $RecRow->accomodation : 'N/A';
+        $difficulty = !empty($RecRow->difficulty) ? $RecRow->difficulty : 'Moderate';
         
-        $price_text = '';
-        if(!empty($RecRow->price) and (empty($RecRow->offer_price))){$price_text = '<p class="home-price">Starting USD '.$RecRow->price.'</p>';}
-        if(!empty($RecRow->offer_price)){$price_text = '<p class="home-price">Starting USD <del>'.$RecRow->price.'</del> '.$RecRow->offer_price.'</p>';}
+        // Popular Badge
+        $popularBadge = ($RecRow->popular == 1) ? '<span class="badge">POPULAR</span>' : '';
 
         $reshome .= '
-                <div class="col">
-                    <figure class="tour-grid-item-01">
-                        <a href="' . BASE_URL . 'package/' . $RecRow->slug . '">
-                            <div class="image">
-                                <img src="' . $img . '" alt="' . $RecRow->title . '"/>
-                                
-                                    '.$price_text.'
-                                
-                            </div>
-                            <figcaption class="content ">
-                                '. $tag .'
-                                <h5 class="">' . $RecRow->title . '</h5>
-                                <ul class="item-meta mt-15">
-                                    <li>
-                                        <!--<i class="elegent-icon-pin_alt text-warning"></i>-->
-                                        <i class="far fa-map pr-2"></i>' . $destination_name . '
-                                    </li>
-                                    <!--<li>
-                                        <div class="rating-item rating-sm rating-inline clearfix">
-                                            <div class="rating-icons">
-                                                <input type="hidden" class="rating"
-                                                       data-filled="rating-icon ri-star rating-rated"
-                                                       data-empty="rating-icon ri-star-empty"
-                                                       data-fractions="2"
-                                                       data-readonly value="' . $rating . '"/>
-                                            </div>
-                                        </div>
-                                    </li>-->
-                                    <li>
-                                        <span class="font700 h6"><i class="far fa-hourglass"></i>' . $RecRow->days . ' Days</span>
-                                        <!--<span class="font700 h6">
-                                            <p class="mt-3">Price from <span
-                                                    class="h6 line-1 text-primary font16">$ ' . $RecRow->price . '</span> <span
-                                                    class="text-muted mr-5"></span></p>
-                                        </span>-->
-                                    </li>
-                                </ul>
-                            </figcaption>';
-        if (!empty($RecRow->accomodation)) {
-            $reshome .= '<p class="featured-trip1">';
-            $routes = explode(',', $RecRow->accomodation);
-            foreach ($routes as $route) {
-                $reshome .= (end($routes) == $route) ? $route : $route . ' -> ';
-            }
-            $reshome .= '</p>';
-        }
-        if (!empty($RecRow->difficulty)) {
-            switch ($RecRow->difficulty) {
-                case 'Easy':
-                    $reshome .= '<img src="' . IMAGE_PATH . 'static/meter/1.png" class="new-img3" title="'.$RecRow->difficulty.'" alt="Difficulty">';
-                    break;
-                case 'Moderate':
-                    $reshome .= '<img src="' . IMAGE_PATH . 'static/meter/2.png" class="new-img3" title="'.$RecRow->difficulty.'" alt="Difficulty">';
-                    break;
-                case 'Moderate To Strenous':
-                    $reshome .= '<img src="' . IMAGE_PATH . 'static/meter/3.png" class="new-img3" title="'.$RecRow->difficulty.'" alt="Difficulty">';
-                    break;
-                case 'Strenous':
-                    $reshome .= '<img src="' . IMAGE_PATH . 'static/meter/4.png" class="new-img3" title="'.$RecRow->difficulty.'" alt="Difficulty">';
-                    break;
-                case 'Very Strenous':
-                    $reshome .= '<img src="' . IMAGE_PATH . 'static/meter/5.png" class="new-img3" title="'.$RecRow->difficulty.'" alt="Difficulty">';
-                    break;
-            }
-        }
-        $reshome .= '
-                        </a>
-                    </figure>
-                    
+        <div class="package-card">
+          <div class="image-wrapper">
+            <img src="' . $img . '" alt="' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '" />
+            ' . $popularBadge . '
+          </div>
+
+          <div class="card-content">
+            <h3 class="title">' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '</h3>
+
+            <div class="card-info-wrapper">
+
+              <div class="info-row">
+                <div class="info">
+                  <span class="label">Destination</span>
+                  <span class="value green" title="' . htmlspecialchars($destination_name, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($destination_name, ENT_QUOTES, 'UTF-8') . '</span>
                 </div>
-            
-        ';
+                <div class="row-divider"></div>
+                <div class="info text-right">
+                  <span class="label">Accomodations</span>
+                  <span class="value green" title="' . htmlspecialchars($accomodation, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($accomodation, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+              </div>
+
+              <div class="action-row">
+                <span class="days-badge">' . $RecRow->days . ' days</span>
+                <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $RecRow->slug . '\')">
+                  <p>Explore</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="info-row">
+                <div class="info">
+                  <span class="label">Activities</span>
+                  <span class="value green" title="' . htmlspecialchars($activityTitle, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($activityTitle, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+                <div class="row-divider"></div>
+                <div class="info text-right">
+                  <span class="label">Difficulty-level</span>
+                  <span class="value green" title="' . htmlspecialchars($difficulty, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($difficulty, ENT_QUOTES, 'UTF-8') . '</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>';
     }
+
+    $reshome .= '
+      </div>
+      </div>
+      <button class="explore_btn inquiry-btn mx-auto mt-4" id="toggleBtn" onclick="goToPage(\'' . BASE_URL . 'package_listing.html\')">
+        View More
+      </button>
+    </section>';
 }
 
 $jVars['module:package-home'] = $reshome;
@@ -344,6 +337,8 @@ if (!empty($featureRec)) {
 
 $jVars['module:package-featureside'] = $respkg_feature;
 
+
+
 // Package Detail section 
 $respkg_breadcrumb = $respkg_detail = $send_review = $email_friend = $ask_question = '';
 if (defined('PACKAGE_PAGE')) {
@@ -357,1343 +352,877 @@ if (defined('PACKAGE_PAGE')) {
     $reviews_total = Package::get_review_num($pkgRec->id);
 
     if (!empty($pkgRec)) {
+        
+        $destslug = Destination::field_by_id($pkgRec->destinationId, 'slug');
+        $rating = Package::get_avg_rating($pkgRec->id);
+        $reviews_total = Package::get_review_num($pkgRec->id);
+        
+        $respkg_detail .= '
+        <div class="inner_package_container mt-5">
+            <div class="header">
+                <h2 class="green-title text-center">' . $pkgRec->title . '</h2>
+                <div class="rating">
+                    <div class="stars">';
+        for($i=1; $i<=5; $i++){
+            $respkg_detail .= ($i <= $rating) ? '★' : '☆';
+        }
+        $respkg_detail .= '</div>
+                    <span class="score">' . $rating . '</span>
+                    <span class="reviews">Based on <a href="#reviews">' . $reviews_total . ' Reviews</a></span>
+                </div>
+            </div>
+        ';
 
-        $respkg_detail .= '
-            <section class="page-wrapper page-detail pt-0">
-            <div class="pt-0"></div>
-				<div class="fullwidth-horizon-sticky none-sticky-hide">
-					<div class="fullwidth-horizon-sticky-inner">
-						<div class="container">
-							<div class="fullwidth-horizon-sticky-item clearfix">
-								<ul id="horizon-sticky-nav" class="horizon-sticky-nav clearfix">
-									<li>
-										<a href="#detail-content-sticky-nav-01">Overview</a>
-									</li>
-									<li>
-										<a href="#detail-content-sticky-nav-02">Itinerary</a>
-									</li>';
-        if (!empty($pkgRec->other_info)) {
-            $respkg_detail .= '
-                                    <li>
-										<a href="#detail-content-sticky-nav-08">Note</a>
-									</li>
-            ';
-        }
-        if ($pkgRec->maptype == 1) {
-            $file_path = SITE_ROOT . 'images/package/map/' . $pkgRec->mapimage;
-            if (file_exists($file_path) and !empty($pkgRec->mapimage)) {
-                $respkg_detail .= '
-                                    <li>
-										<a href="#detail-content-sticky-nav-03">Map</a>
-									</li>
-                ';
-            }
-        }
-        if ($pkgRec->maptype == 2 and !empty($pkgRec->mapgoogle)) {
-            $respkg_detail .= '
-                                    <li>
-										<a href="#detail-content-sticky-nav-03">Map</a>
-									</li>
-            ';
-        }
-        if (!empty($pkgRec->incexc)) {
-            $respkg_detail .= '
-                                    <li>
-										<a href="#detail-content-sticky-nav-04">What\'s included</a>
-									</li>
-            ';
-        }
-        $fixedDates = Packagedate::getPackage_limit($pkgRec->id);
-        $fixedDatesIdArr = Packagedate::check_availability($fixedDates, $pkgRec->id, $pkgRec->group_size);
-        if (!empty($fixedDatesIdArr)) {
-            $respkg_detail .= '
-                                    <li>
-										<a href="#detail-content-sticky-nav-05">Availabilities</a>
-									</li>
-            ';
-        }
-        $respkg_detail .= '
-									<li>
-										<a href="#detail-content-sticky-nav-06">FAQ</a>
-									</li>
-									';
-        /*$reviews = Review::find_by_package($pkgRec->id);
-        if(!empty($reviews)){*/
-        $respkg_detail .= '
-                                    <li>
-										<a href="#detail-content-sticky-nav-07">Reviews</a>
-									</li>
-            ';
-        /*}*/
-        $respkg_detail .= '
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				';
-
+        // Gallery
         $sliderImages = PackageImage::getImagelist_by($pkgRec->id);
         if ($sliderImages) {
+            $mainImg = $sliderImages[0]->image;
             $respkg_detail .= '
-                <div class="slick-carousel-wrapper slick-hero-wrapper clearfix">
-					<div class="slick-carousel-inner">
-						<div class="slick-hero">
+            <div class="gallery mb-5">
+                <div class="main-image">
+                    <img src="' . IMAGE_PATH . 'package/galleryimages/' . $mainImg . '" alt="' . $pkgRec->title . '" class="gallery-img" />
+                    <button class="view-more-btn">View all photos</button>
+                </div>
+                <div class="thumbnails">
             ';
-            foreach ($sliderImages as $sliderImage) {
+            for ($i = 1; $i <= min(3, count($sliderImages) - 1); $i++) {
+                $thumbClass = ($i == 3) ? 'thumb view-all' : 'thumb';
                 $respkg_detail .= '
-                        <div class="slick-item">
-                            <div class="image">
-                                <img src="' . IMAGE_PATH . 'package/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" />
-                            </div>
-                        </div>
+                    <div class="' . $thumbClass . '">
+                        <img src="' . IMAGE_PATH . 'package/galleryimages/' . $sliderImages[$i]->image . '" alt="" class="gallery-img">
+                    </div>
                 ';
             }
+            $respkg_detail .= '</div>';
+            
+            $respkg_detail .= '<div style="display:none;" id="hiddenGallery">';
+            foreach ($sliderImages as $sliderImage) {
+                $respkg_detail .= '<img src="' . IMAGE_PATH . 'package/galleryimages/' . $sliderImage->image . '">';
+            }
+            $respkg_detail .= '</div></div>';
+            
+            // Lightbox
             $respkg_detail .= '
-                        </div>
-					</div>
-				</div>
-            ';
-        } else {
-            $respkg_detail .= '
-                <div class="slick-carousel-wrapper slick-hero-wrapper clearfix">
-					<div class="slick-carousel-inner">
-						<div class="slick-hero">
-                            <div class="slick-item">
-                                <div class="image">
-                                    <img src="' . IMAGE_PATH . 'static/package/7.jpg" alt="' . $pkgRec->title . '" />
-                                </div>
-                            </div>
-                            <div class="slick-item">
-                                <div class="image">
-                                    <img src="' . IMAGE_PATH . 'static/package/6.jpg" alt="' . $pkgRec->title . '" />
-                                </div>
-                            </div>
-                            <div class="slick-item">
-                                <div class="image">
-                                    <img src="' . IMAGE_PATH . 'static/package/5.jpg" alt="' . $pkgRec->title . '" />
-                                </div>
-                            </div>
-                        </div>
-					</div>
-				</div>
+              <div class="lightbox" id="lightbox">
+                <span class="close">&times;</span>
+                <button class="nav prev">&#10094;</button>
+                <img class="lightbox-img" id="lightboxImg" />
+                <button class="nav next">&#10095;</button>
+              </div>
             ';
         }
 
-        $dsRec = Destination::find_by_slug($destslug);
-        $respkg_detail .= '   
-				<div class="page-title page-title1 border-bottom pt-25 mb-0 border-bottom-0">
-					<div class="container">
-						<div class="row gap-15 align-items-center">
-							<div class="col-12 col-md-7 detail-bread">
-								<nav aria-label="breadcrumb">
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="' . BASE_URL . 'home"><i class="fas fa-home"></i></a></li>
-										<li class="breadcrumb-item one"><a href="' . BASE_URL . 'destination/' . $dsRec->slug . '">' . $dsRec->title . '</a></li>
-										<li class="breadcrumb-item two"><a href="#" class="">' . $pkgRec->title . '</a></li>
-										<!--<li class="breadcrumb-item active" aria-current="page">Tour detail</li>-->
-									</ol>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="container pt-30">
-					<div class="row gap-20 gap-lg-40">
-						<div class="col-12 col-lg-8">
-							<div class="content-wrapper">
-								<div id="detail-content-sticky-nav-01" class="detail-header mb-30">
-									<div class="row gap-15 align-items-center">
-							            <div class="col-12 col-md-9 d-flex align-items-center">
-								            <h3 class="">' . $pkgRec->title . '</h3>
-								            ';
+        $respkg_detail .= '
+        <section class="package-section">
+          <div class="container">
+            <div class="package-left">
+              <div class="package-info">
+                <h2 class="green-title"><span>About</span> Package</h2>
+                ' . $pkgRec->overview . '
+                
+                <ul class="features-box">
+        ';
+        if (!empty($pkgRec->accomodation)) {
+            $respkg_detail .= '
+                  <li class="feature">
+                    <span>🏨</span>
+                    <h4>Accommodation</h4>
+                    <p>' . $pkgRec->accomodation . '</p>
+                  </li>
+            ';
+        }
+        $actTitle = Activities::field_by_id($pkgRec->activityId, 'title');
+        if (!empty($actTitle)) {
+            $respkg_detail .= '
+                  <li class="feature">
+                    <span>🥾</span>
+                    <h4>Activities</h4>
+                    <p>' . $actTitle . '</p>
+                  </li>
+            ';
+        }
         if (!empty($pkgRec->difficulty)) {
-            switch ($pkgRec->difficulty) {
-                case 'Easy':
-                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/1.png" alt="Difficulty" title="'.$pkgRec->difficulty.'" style="width:100px">';
-                    break;
-                case 'Moderate':
-                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/2.png" alt="Difficulty" title="'.$pkgRec->difficulty.'" style="width:100px">';
-                    break;
-                case 'Moderate To Strenous':
-                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/3.png" alt="Difficulty" title="'.$pkgRec->difficulty.'" style="width:100px">';
-                    break;
-                case 'Strenous':
-                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/4.png" alt="Difficulty" title="'.$pkgRec->difficulty.'" style="width:100px">';
-                    break;
-                case 'Very Strenous':
-                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/5.png" alt="Difficulty" title="'.$pkgRec->difficulty.'" style="width:100px">';
-                    break;
-            }
-        }
-        $respkg_detail .= '
-							            </div>
-							            <div class="col-12 col-md-3">
-								            <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="btn btn-primary btn-block btn-sm mt-3 btn-contact-page" style="color: #232121;
-    background: transparent;border:none;"><i class="far fa-envelope" title="Email a Friend" style="font-size: 30px;float: right; color: #5c4775;"></i></a>
-							            </div>
-						            </div>
-									
-									<div class="d-flex flex-column flex-sm-row align-items-sm-center mb-20">
-										<!--<div class="mr-15 font-lg">
-											Country: <a href="#"><i class="elegent-icon-pin_alt text-warning"></i> ' . $dsRec->title . '</a>
-										</div>
-										<div>
-											<div class="rating-item rating-inline">
-												<div class="rating-icons">
-													<input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="' . $rating . '"/>
-												</div>
-												<p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">' . $rating . '/5</span> ' . $reviews_total . ' reviews</p>
-											</div>
-										</div>-->
-									</div>
-									
-									<ul class="list-inline-block highlight-list mt-30">
-									';
-        if (!empty($pkgRec->gread)) {
             $respkg_detail .= '
-		                                <li>
-									        <span class="icon-font d-block trip-facts">
-												<img src="' . BASE_URL . 'template/web/img/check.png">
-											</span>
-											<p>
-											';
-            for ($i = 0; $i < $pkgRec->gread; $i++) {
-                $respkg_detail .= '<i class="ri-star"></i>';
-            }
-            for ($i = 5; $i > $pkgRec->gread; $i--) {
-                $respkg_detail .= '<i class="ri-star-empty"></i>';
-            }
-            $respkg_detail .= '
-										    </p>
-									    </li>
-		    ';
-        }
-
-        $respkg_detail .= '
-										<li>
-											<span class="icon-font d-block trip-facts">
-												<img src="' . BASE_URL . 'template/web/img/duration.png">
-											</span>
-											';
-        $days = ($pkgRec->days == 1) ? 'day' : 'days';
-        $respkg_detail .= '
-											<p>' . $pkgRec->days . ' ' . $days . '</p>
-										</li>
-										';
-        if (!empty($pkgRec->startpoint) and !empty($pkgRec->endpoint)) {
-            $respkg_detail .= '
-                                        <li>
-											<span class="icon-font d-block trip-facts">
-												<img src="' . BASE_URL . 'template/web/img/start.png">
-											</span>
-											<p>' . $pkgRec->startpoint . '/' . $pkgRec->endpoint . '</p>
-										</li>
+                  <li class="feature">
+                    <span>⛰️</span>
+                    <h4>Difficulty</h4>
+                    <p>' . $pkgRec->difficulty . '</p>
+                  </li>
             ';
         }
-        $respkg_detail .= '
-										<!--
-										<li>
-											<span class="icon-font d-block trip-facts">
-												<img src="' . BASE_URL . 'template/web/img/grade.png">
-											</span>
-											<p>' . $pkgRec->difficulty . '</p>
-										</li>
-										-->
-										';
+        if (!empty($pkgRec->group_size)) {
+            $respkg_detail .= '
+                  <li class="feature">
+                    <span>👥</span>
+                    <h4>Group Size</h4>
+                    <p>' . $pkgRec->group_size . ' people</p>
+                  </li>
+            ';
+        }
+        if (!empty($pkgRec->days)) {
+            $respkg_detail .= '
+                  <li class="feature">
+                    <span>👣</span>
+                    <h4>Trip Duration</h4>
+                    <p>' . $pkgRec->days . ' Days</p>
+                  </li>
+            ';
+        }
         if (!empty($pkgRec->season)) {
             $respkg_detail .= '
-                                        <li>
-											<span class="icon-font d-block trip-facts">
-												<img src="' . BASE_URL . 'template/web/img/season.png">
-											</span>
-											<p>' . $pkgRec->season . '</p>
-										</li>
+                  <li class="feature">
+                    <span>🌸</span>
+                    <h4>Season</h4>
+                    <p>' . $pkgRec->season . '</p>
+                  </li>
             ';
         }
-        $respkg_detail .= '
-										<li>
-											<span class="icon-font d-block trip-facts">
-												<!--<img src="' . BASE_URL . 'template/web/img/group.png">-->
-												<img src="' . BASE_URL . 'template/web/img/people.png">
-											</span>
-											<p>' . $pkgRec->group_size . ' people</p> 
-										</li>
-									</ul>
-									<div class="mb-30"></div>
-									' . $pkgRec->overview . '
-								</div>
-								<div class="mb-50"></div>
-								<div id="detail-content-sticky-nav-02" class="fullwidth-horizon-sticky-section">
-								    
-								    <div class="row">
-								        <div class="col-md-8">
-								            <h4 class="heading-title">Itinerary</h4>
-								        </div>
-								        ';
-        if ($pkgRec->itenaryfile) {
-            $respkg_detail .= '
-                        <div class="col-md-4">
-                            <a href="' . IMAGE_PATH . 'package/docs/' . $pkgRec->itenaryfile . '" target="_blank" class="btn btn-primary btn-block btn-contact-page">Download itinerary</a>
-                        </div>
-            ';
-        }
-        $respkg_detail .= '
-                            </div>
-                            ';
+        $respkg_detail .= '</ul></div>';
 
+        // Itinerary
         $itineraries = Itinerary::getPackage_limit($pkgRec->id);
         if ($itineraries) {
             $respkg_detail .= '
-                <ul class="itinerary-list mt-30">
+              <section class="itinerary-section mt-5">
+                <div class="tour-itinerary-container">
+                  <h2 class="green-title section-title"><span>Trip</span> Itinerary</h2>
+                  <div class="accordion itinerary-accordion mx-auto" id="accordionExample">
             ';
+            $itCount = 1;
             foreach ($itineraries as $itinerary) {
+                $isExpanded = ($itCount == 1) ? 'true' : 'false';
+                $showClass = ($itCount == 1) ? 'show' : '';
+                $collapsedClass = ($itCount == 1) ? '' : 'collapsed';
+                
                 $respkg_detail .= '
-                        <li>
-                            <div class="itinerary-day">
-                                <span>' . $itinerary->day . '</span>
-                            </div>
-                            <h6>' . $itinerary->title . '</h6>
-                            ' . $itinerary->content . '
-                        </li>
-                ';
-            }
-            $respkg_detail .= '
-                </ul>
-            ';
-        }
-
-        $respkg_detail .= '			
-                    <div class="mb-50"></div>
-                </div>
-                                ';
-
-        if (!empty($pkgRec->other_info)) {
-            $respkg_detail .= '
-                    <div id="detail-content-sticky-nav-08" class="fullwidth-horizon-sticky-section">
-                        <h4 class="heading-title">Note</h4> 
-                        ' . $pkgRec->other_info . '
-                        <div class="mb-50"></div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button ' . $collapsedClass . '" type="button" data-bs-toggle="collapse" data-bs-target="#day' . $itCount . '"
+                          aria-expanded="' . $isExpanded . '" aria-controls="day' . $itCount . '">
+                          ' . str_pad($itinerary->day, 2, '0', STR_PAD_LEFT) . ': ' . $itinerary->title . '
+                        </button>
+                      </h2>
+                      <div id="day' . $itCount . '" class="accordion-collapse collapse ' . $showClass . '" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          ' . $itinerary->content . '
+                        </div>
+                      </div>
                     </div>
                 ';
+                $itCount++;
+            }
+            $respkg_detail .= '</div></div></section>';
         }
 
-        if ($pkgRec->maptype == 1) {
-            $file_path = SITE_ROOT . 'images/package/map/' . $pkgRec->mapimage;
-            if (file_exists($file_path) and !empty($pkgRec->mapimage)) {
-                $respkg_detail .= '
-                    <div id="detail-content-sticky-nav-03" class="fullwidth-horizon-sticky-section">
-                        <h4 class="heading-title">Map</h4> 
-                        <img src="' . IMAGE_PATH . 'package/map/' . $pkgRec->mapimage . '" width="100%" height="450">
-                        <div class="mb-50"></div>
-                    </div>
-                ';
-            }
-        }
-        if ($pkgRec->maptype == 2 and !empty($pkgRec->mapgoogle)) {
+        // Map
+        if ($pkgRec->maptype == 1 && file_exists(SITE_ROOT . 'images/package/map/' . $pkgRec->mapimage)) {
             $respkg_detail .= '
-                <div id="detail-content-sticky-nav-03" class="fullwidth-horizon-sticky-section">
-                    <h4 class="heading-title">Map</h4> 
-                    <iframe src=' . $pkgRec->mapgoogle . ' width="100%" height="450"></iframe>
-                    <div class="mb-50"></div>
+              <section class="route-map-section mt-5">
+                <div class="package_destination_map">
+                  <h2 class="green-title section-title"><span>Package</span> Route Map</h2>
+                  <img src="' . IMAGE_PATH . 'package/map/' . $pkgRec->mapimage . '" alt="routes" style="width: 100%;">
                 </div>
+              </section>
+            ';
+        } elseif ($pkgRec->maptype == 2 && !empty($pkgRec->mapgoogle)) {
+            $respkg_detail .= '
+              <section class="route-map-section mt-5">
+                <div class="package_destination_map">
+                  <h2 class="green-title section-title"><span>Package</span> Route Map</h2>
+                  <iframe src="' . $pkgRec->mapgoogle . '" width="100%" height="450"></iframe>
+                </div>
+              </section>
             ';
         }
-
-        if (!empty($pkgRec->incexc)) {
-            $respkg_detail .= '
-                <div id="detail-content-sticky-nav-04" class="fullwidth-horizon-sticky-section">
-                    <h4 class="heading-title">What\'s included</h4>
-                    ' . $pkgRec->incexc . '
-                ';
-            if (!empty($pkgRec->booking_info)) {
-                $respkg_detail .= '
-                    <h5>Not included</h5>
-                    ' . $pkgRec->booking_info . '
-                ';
-            }
-            $respkg_detail .= '
-                    <div class="mb-50"></div>
-                </div>
-            ';
-        }
-
+        
+        $fixedDatesIdArr = [];
         $fixedDates = Packagedate::getPackage_limit($pkgRec->id);
-        //$fixedDatesIdArr = Packagedate::check_availability($fixedDates, $pkgRec->id, $pkgRec->group_size);
         $fixedDatesIdArr = Packagedate::check_availability($fixedDates, $pkgRec->id);
-        if ($fixedDatesIdArr) {
-            $respkg_detail .= '
-                <div id="detail-content-sticky-nav-05" class="fullwidth-horizon-sticky-section">
-                    <h4 class="heading-title">Availabilities</h4>
-                    <div class="mb-20"></div>
-                    <div class="item-text-long-wrapper">
-                    <div class="item-heading text-muted">
-                        <div class="row d-none d-sm-flex">
-                            <div class="col-12 col-sm-9">
-                                <div class="col-inner">
-                                    <div class="row gap-10">
-                                        <div class="col-4">Trip start</div>
-                                        <div class="col-1"></div>
-                                        <div class="col-4">Trip End</div>
-                                        <div class="col-3">Book Before</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-2">
-                                <div class="col-inner">
-                                    <div class="row gap-10">
-                                        <div class="col-6 text-center">status</div>
-                                        <!--<div class="col-6 text-right">price</div>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            ';
 
-            foreach ($fixedDatesIdArr as $fixedDateId) {
-                $fixedDate = Packagedate::find_by_id($fixedDateId);
+        $respkg_detail .= '
+          <div class="modal fade" id="fixedDepartureModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+              <div class="modal-content">
 
-                $today = date('F d, Y');
-                $start_date = date('F d, Y', strtotime($fixedDate->package_date));
-                $start_date_day = date('l', strtotime($fixedDate->package_date));
-                //$closure_date = date('F d, Y', strtotime($fixedDate->package_date . ' - ' . $fixedDate->package_closure . ' days'));
-                $closure_date = date('F d, Y', strtotime($fixedDate->package_closure));
-                $end_date = date('F d, Y', strtotime($fixedDate->package_date . ' + ' . $pkgRec->days . ' days'));
-                $end_date_day = date('l', strtotime($end_date));
-
-                $seats_left = $sold_out = '';
-                $sql = "SELECT SUM(trip_pax) total FROM tbl_bookinginfo WHERE pkg_id=$pkgRec->id AND fixed_date_id=$fixedDate->id";
-                $res = $db->fetch_array($db->query($sql));
-                $total = !empty($res['total']) ? $res['total'] : 0;
-                //@$diff = $pkgRec->group_size - $total;
-                @$diff = $fixedDate->package_seats - $total;
-                $difff = $diff - 1;
-
-                if ($diff > 0) {
-                    $seats_left .= '
-                            <div class="col-12 text-left text-sm-center">
-                                <span class="font-sm">seats left </span>
-                                <strong class="d-block">' . $diff . '</strong>
-                            </div>
-                            <!--<div class="col-6 text-left  text-sm-right">
-                                <strong class="d-block">$ ' . $fixedDate->package_rate . '</strong>
-                                <span class="font-sm">/ person</span>
-                            </div>-->
-                    ';
-                } else {
-                    $sold_out = 'sold-out';
-                    $seats_left .= '
-                            <div class="col-12 text-left text-sm-center">
-                                <strong class="d-block text-success">Sold Out</strong>
-                            </div>
-                            <!--<div class="col-6 text-left  text-sm-right"></div>-->
-                    ';
-                }
-
-                if ((strtotime($closure_date) >= strtotime($today))) {
-                    $respkg_detail .= '
-                        <div class="item-text-long ' . $sold_out . '">
-                            <div class="row align-items-center">
-                                <div class="col-12 col-sm-9">
-                                    <div class="col-inner mb-0 mb-sm-0">
-                                        <div class="row gap-10 align-items-center">
-                                            <div class="col-4"> 
-                                                <span class="font-sm">' . $start_date_day . '</span>
-                                                <strong class="d-block">' . $start_date . '</strong>
-                                            </div>
-                                            <div class="col-1">
-                                                <span class="day-count mt-3">' . $pkgRec->days . '<br/>days</span>
-                                            </div>
-                                            <div class="col-4 text-right text-sm-left">
-                                                <span class="font-sm">' . $end_date_day . '</span>
-                                                <strong class="d-block">' . $end_date . '</strong>
-                                            </div>
-                                            <div class="col-3 ">
-                                                <span class="font-sm">' . date('l', strtotime($fixedDate->package_closure)) . '</span>
-                                                <strong class="d-block">' . date('F d, Y', strtotime($fixedDate->package_closure)) . '</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-8 col-sm-1">
-                                    <div class="col-inner">
-                                        <div class="row gap-10 align-items-center">
-                                            ' . $seats_left . '
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-sm-2">
-                                    <form method="post" action="' . BASE_URL . 'book/package/' . $pkgRec->slug . '">
-                                        <input type="hidden" name="date" value="' . date('Y-m-d', strtotime($fixedDate->package_date)) . '">
-                                        <input type="hidden" name="price" value="' . $fixedDate->package_rate . '">
-                                        <input type="hidden" name="fixed_date_id" value="' . $fixedDate->id . '">
-                                        <input type="hidden" name="max_pax" value="' . $difff . '">
-                                        <button type="submit" class="btn btn-primary btn-block btn-sm mt-3 btn-contact-page">Book now</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    ';
-                }
-
-            }
-
-            $respkg_detail .= '
+                <div class="modal-header ">
+                  <h5 class=" green-title">
+                    Reserve Your <span class="orange-text">Fixed Departure</span> Trip
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="mb-50"></div>
-            </div>
+
+                <div class="modal-body">
+                ';
+        if(!empty($fixedDatesIdArr)) {
+            $firstFixedId = $fixedDatesIdArr[0];
+            $firstFixed = Packagedate::find_by_id($firstFixedId);
+            $start_date = date('d M Y', strtotime($firstFixed->package_date));
+            $end_date_str = date('d M Y', strtotime($firstFixed->package_date . ' + ' . $pkgRec->days . ' days'));
+            
+            $date1 = new DateTime();
+            $date2 = new DateTime($firstFixed->package_closure);
+            $days = $date2->diff($date1)->format('%a');
+            
+            $respkg_detail .= '
+                  <p class="book_before">Book before : '.date('d M Y', strtotime($firstFixed->package_closure)).'</p>
+                  <ul class="fixed_dates">
+                    <li class="trapezium-left">Start Date : '.$start_date.'</li>
+                    <li class="square-middle">'.$days.' days Left</li>
+                    <li class="trapezium-right">End Date : '.$end_date_str.'</li>
+                  </ul>
             ';
         }
+        
+        $respkg_detail .= '
+                  <form>
 
-        // Similar Tours
-        $actSlug = Activities::field_by_id($pkgRec->activityId, 'slug');
-        $sql = "SELECT id FROM tbl_activities WHERE slug='$actSlug' AND status=1";
-        $query = $db->query($sql);
-        $totl = $db->num_rows($query);
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="peopleCount" class="form-label">Number of Travellers <span>*</span></label>
+                        <input type="number" class="peopleCount form-control" id="peopleCount" min="1" value="1"
+                          required>
+                      </div>
 
-        if ($totl > 0) {
+                      <div class="col-md-6 mb-3 d-flex align-items-end">
+                        <div class="total-amount mx-auto">
+                          <label class="form-label">Total Amount</label>
+                          <div class="amount-box">$<span class="amountValue">'.($pkgRec->offer_price ?: $pkgRec->price).'</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label class="form-label">Full Name <span>*</span></label>
+                        <input type="text" class="form-control">
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <label class="form-label">Address <span>*</span></label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <!-- Country -->
+                      <div class="col-md-6 mb-3">
+                        <label class="form-label" for="tripCountry">Country <span>*</span></label>
+                        <select id="tripCountry" class="form-select" required>
+                          <option value="" disabled selected>Select Country</option>
+                          <option value="NP" data-code="+977">Nepal</option>
+                          <option value="IN" data-code="+91">India</option>
+                          <option value="US" data-code="+1">United States</option>
+                          <!-- add more countries -->
+                        </select>
+                      </div>
+
+                      <!-- Code + Phone -->
+                      <div class="col-md-6 mb-3">
+                        <label class="form-label" for="tripPhone">Phone <span>*</span></label>
+                        <div class="input-group">
+                          <!-- Country Code (auto-filled) -->
+                          <span class="input-group-text country-code" id="tripCode">+977</span>
+                          <!-- Phone Number -->
+                          <input type="tel" id="tripPhone" class="form-control" required aria-describedby="tripCode">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">Email <span>*</span></label>
+                      <input class="form-control" type="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label">Message</label>
+                      <textarea class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-50">
+                      Submit
+                    </button>
+
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        ';
+        
+        $respkg_detail .= '
+          <div class="modal fade" id="customizeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title green-title">
+                    Customize <span class="orange-text">Your Trip</span>
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                  <form id="bookingForm" class="grid-form">
+
+                    <!-- ROW 1 -->
+                    <div class="two-col full">
+                      <div class="form-group">
+                        <label>Full Name <span>*</span></label>
+                        <input type="text" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>Address <span>*</span></label>
+                        <input type="text" required>
+                      </div>
+                    </div>
+
+                    <!-- ROW 2 -->
+                    <div class="two-col full">
+                      <!-- Country -->
+                      <div class="form-group">
+                        <label>Country <span>*</span></label>
+                        <select id="customizeCountry" name="country" required>
+                          <option value="">Select a country</option>
+                          <option value="NP" data-code="+977">Nepal</option>
+                          <option value="IN" data-code="+91">India</option>
+                          <option value="US" data-code="+1">United States</option>
+                          <option value="AU" data-code="+61">Australia</option>
+                          <option value="GB" data-code="+44">United Kingdom</option>
+                        </select>
+                      </div>
+
+                      <!-- Phone -->
+                      <div class="form-group">
+                        <label>Phone <span>*</span></label>
+                        <div class="d-flex gap-2">
+                          <input type="text" id="customizeCountryCode" class="country-code" placeholder="Code" readonly
+                            style="max-width:120px">
+                          <input type="tel" id="customizePhone" placeholder="Phone Number" required>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group full">
+                      <label>Email <span>*</span></label>
+                      <input type="email" required>
+                    </div>
+
+                    <div class="form-group full">
+                      <label>Message</label>
+                      <textarea rows="3"></textarea>
+                    </div>
+
+                    <div class="form-check full">
+                      <input type="checkbox" required>
+                      <label>I am not a robot</label>
+                    </div>
+
+                    <div class="form-check full">
+                      <input type="checkbox" required>
+                      <label> <a href="#">Terms and Conditions</a></label>
+                    </div>
+
+                    <div class="text-center mt-3">
+                      <button type="submit" class="confirm-btn">Submit</button>
+                    </div>
+
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        ';
+        
+        $respkg_detail .= '
+          <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+
+                <!-- HEADER -->
+                <div class="modal-header border-0">
+                  <h2 class="green-title">
+                    Your Adventure <span class="orange-text">Starts Here</span>
+                  </h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- BODY -->
+                <div class="modal-body">
+
+
+                  <form id="bookingForm" class="grid-form mt-4">
+
+                    <!-- ROW 1 -->
+                    <div class="form-group">
+                      <label for="travelDate">Select Travel Date <span>*</span></label>
+                      <input type="date" id="travelDate" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="peopleCountBooking">Number of Travellers <span>*</span></label>
+                      <input type="number" id="peopleCountBooking" min="1" value="1" required>
+                    </div>
+
+                    <div class="total-amount mx-auto">
+                      <label>Total Amount</label>
+                      <div class="amount-box">
+                        $<span id="amountValueBooking">'.($pkgRec->offer_price ?: $pkgRec->price).'</span>
+                      </div>
+                    </div>
+
+                    <!-- ROW 2 -->
+                    <div class="two-col full">
+                      <div class="form-group">
+                        <label for="fullName">Full Name <span>*</span></label>
+                        <input type="text" id="fullName" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="address">Address <span>*</span></label>
+                        <input type="text" id="address" required>
+                      </div>
+                    </div>
+
+                    <!-- ROW 3 -->
+                    <div class="two-col full form-row">
+                      <!-- Country -->
+                      <div class="form-group">
+                        <label for="row3Country">Country <span>*</span></label>
+                        <select id="row3Country" required>
+                          <option value="">Choose Your Country</option>
+                          <option value="NP" data-code="+977">Nepal</option>
+                          <option value="IN" data-code="+91">India</option>
+                          <option value="AE" data-code="+971">UAE</option>
+                          <option value="BD" data-code="+880">Bangladesh</option>
+                          <option value="LK" data-code="+94">Sri Lanka</option>
+                        </select>
+                      </div>
+
+                      <!-- Phone -->
+                      <div class="form-group">
+                        <label class="d-block">Phone <span>*</span></label>
+                        <div class="d-flex gap-2">
+                          <input type="text" id="row3CountryCode" class="form-control country-code" placeholder="Code"
+                            readonly style="max-width:120px;">
+                          <input type="tel" id="row3Phone" class="form-control" placeholder="Phone Number" required>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- FULL WIDTH -->
+                    <div class="form-group full">
+                      <label for="email">Email <span>*</span></label>
+                      <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group full">
+                      <label for="message">Message</label>
+                      <textarea id="message" rows="3"></textarea>
+                    </div>
+
+                    <!-- CHECKBOXES -->
+                    <div class="form-check d-flex full">
+                      <input type="checkbox" id="robot" required>
+                      <label for="robot">I am not a robot</label>
+                    </div>
+
+                    <div class="form-check d-flex full">
+                      <input type="checkbox" id="terms" required>
+                      <label for="terms">
+                        I have accepted the <a href="#">Terms and Conditions</a>
+                      </label>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="full text-center">
+                      <button type="submit" class="confirm-btn">Submit</button>
+                    </div>
+
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        ';
+        
+        $respkg_detail .= '
+          <style>
+            .features-column ul { list-style: none !important; padding: 0 !important; }
+            .features-column li { position: relative !important; padding-left: 30px !important; margin-bottom: 10px !important; display: block !important; font-size: 16px; color: #333; }
+            .features-column.include li::before { 
+                content: "✓"; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; 
+                border-radius: 50%; border: 2px solid #2563eb; color: #2563eb; 
+                display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;
+            }
+            .features-column.exclude li::before { 
+                content: "✕"; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; 
+                border-radius: 50%; border: 2px solid #ef4444; color: #ef4444; 
+                display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;
+            }
+          </style>
+          <section class="whats-included-section">
+            <section class="package-features">
+              <h2 class="section-title green-title">
+                <span>What\'s </span> Included?
+              </h2>
+
+              <div class="features-wrapper">
+
+                <!-- INCLUDE -->
+                <div class="features-column include">
+                  <h3>Include</h3>
+                  
+                  ' . $pkgRec->incexc . '
+                  <a href="#" class="view-more hide-on-empty">
+                    <span class="icon plus">+</span> View More
+                  </a>
+                </div>
+
+                <!-- EXCLUDE -->
+                <div class="features-column exclude">
+                  <h3>Exclude</h3>
+                  ' . $pkgRec->booking_info . '
+                  <a href="#" class="view-more hide-on-empty">
+                    <span class="icon plus">+</span> View More
+                  </a>
+                </div>
+
+              </div>
+
+              <!-- POPUP OVERLAY -->
+              <div class="popup-overlay" id="featuresPopup">
+                <div class="popup-content">
+                  <button class="popup-close" id="closePopup">&times;</button>
+                  <div class="popup-sections">
+                    <div class="popup-column">
+                      <h3>Include</h3>
+                      <div class="include_popup_check-list">
+                      ' . $pkgRec->incexc . '
+                      </div>
+                    </div>
+                    <div class="popup-column">
+                      <h3>Exclude</h3>
+                      <div class="exclude_popup_check-list">
+                      ' . $pkgRec->booking_info . '
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+          </section>
+        ';
+
+        $respkg_detail .= '
+            </div>
+            
+            <aside class="package-right">
+
+              <div class="price-card sticky">
+                <!-- Price Card -->
+                <div class="booking-wrapper">
+                  <div class="price-card ">
+                    <div class="price-container">
+                      <h5>Starting</h5>
+                      <div class="price">
+        ';
+        if(!empty($pkgRec->offer_price)){
             $respkg_detail .= '
-                    <div class="fullwidth-horizon-sticky-section">
-                        <h4 class="heading-title">Similar Tour</h4>
-                            <div class="slick-carousel-wrapper gap-5">
-                                <div class="slick-carousel-inner">
-                                    <div class="slick-top-destination-detail activities">
-                ';
-            while ($row = $db->fetch_object($query)) {
-                $similarTours = Package::get_filterpkg_by('', $row->id);
-                foreach ($similarTours as $similarTour) {
-                    $destslug = Destination::field_by_id($similarTour->destinationId, 'slug');
-                    $dsRec = Destination::find_by_slug($destslug);
-                    $rating = Package::get_avg_rating($similarTour->id);
-                    $reviews_total = Package::get_review_num($similarTour->id);
-                    if ($similarTour->id != $pkgRec->id) {
-                        $respkg_detail .= '
-                            <div class="slick-item">
-                             <div class="col">
-                                <figure class="tour-grid-item-01">
-                                    <a href="' . BASE_URL . 'package/' . $similarTour->slug . '">
-                                        <div class="image">
-                                            <img src="' . IMAGE_PATH . 'package/' . $similarTour->image . '" alt="' . $similarTour->title . '" />
+                        <del>&#36;' . $pkgRec->price . '</del>
+                        <span>&#36;' . $pkgRec->offer_price . '</span>
+            ';
+        } else {
+            $respkg_detail .= '
+                        <span>&#36;' . $pkgRec->price . '</span>
+            ';
+        }
+        $respkg_detail .= '
+                        <small>/per person</small>
+                      </div>
 
-                                        </div>
-                                        <figcaption class="content">
-                                            <h5 class="">' . $similarTour->title . '</h5>
-                                            <ul class="item-meta mt-15 detailul">
-                                                <li class="a123">
-                                                    <!--<i class="elegent-icon-pin_alt text-warning"></i>--> 
-                                                    <i class="far fa-map pr-2"></i>' . $dsRec->title . '
-                                                </li>
-                                                <!--<li>
-                                                    <div class="rating-item rating-sm rating-inline clearfix">
-                                                        <div class="rating-icons">
-                                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="' . $rating . '"/>
-                                                        </div>
-                                                    </div>
-                                                </li>-->
-                                                <li><span class="font700 h6"><i class="far fa-hourglass"></i>' . $similarTour->days . ' days</span></li>
-                                            </ul>
-                                            <!--<ul class="item-meta mt-15">
-                                                <li><span class="font700 h6">' . $similarTour->days . ' days</span></li>
-                                                <li>
-                                                    <p class="mt-3">Price from <span class="h6 line-1 text-primary font16">$ ' . $similarTour->price . '</span> <span class="text-muted mr-5"></span></p>
-                                                </li>
-                                            </ul>-->
-                                        </figcaption>';
-                        if (!empty($similarTour->accomodation)) {
-                            $respkg_detail .= '<p class="featured-trip1">';
-                            $routes = explode(',', $similarTour->accomodation);
-                            foreach ($routes as $route) {
-                                $respkg_detail .= (end($routes) == $route) ? $route : $route . ' -> ';
-                            }
-                            $respkg_detail .= '</p>';
-                        }
-                        if (!empty($similarTour->difficulty)) {
-                            switch ($similarTour->difficulty) {
-                                case 'Easy':
-                                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/1.png" class="new-img3 ulnew-img3" title="'.$similarTour->difficulty.'" alt="Difficulty">';
-                                    break;
-                                case 'Moderate':
-                                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/2.png" class="new-img3 ulnew-img3" title="'.$similarTour->difficulty.'" alt="Difficulty">';
-                                    break;
-                                case 'Moderate To Strenous':
-                                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/3.png" class="new-img3 ulnew-img3" title="'.$similarTour->difficulty.'" alt="Difficulty">';
-                                    break;
-                                case 'Strenous':
-                                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/4.png" class="new-img3 ulnew-img3" title="'.$similarTour->difficulty.'" alt="Difficulty">';
-                                    break;
-                                case 'Very Strenous':
-                                    $respkg_detail .= '<img src="' . IMAGE_PATH . 'static/meter/5.png" class="new-img3 ulnew-img3" title="'.$similarTour->difficulty.'" alt="Difficulty">';
-                                    break;
-                            }
-                        }
-                        $respkg_detail .= '
-                                    </a>
-                                </figure>
-                            </div>
-                            </div>
-                        ';
+                      <ul class="check-list">
+                        <li>Your Safety is Our Top Priority</li>
+                        <li>Travel with our experienced local guides</li>
+                        <li>The cost will depend on the group size.</li>
+                      </ul>
+                      <button class="book-btn " data-bs-toggle="modal" data-bs-target="#bookingModal">
+                        Book Now
+                      </button>
+
+                    </div><br>
+
+
+                    <div class="price-container">
+                      <section class="help-box mx-auto">
+                        <header>
+                          <button class="customize-btn" data-bs-toggle="modal" data-bs-target="#customizeModal">
+                            Customize Your Trip
+                          </button>
+
+                        </header>
+
+                        <address>
+                          <ul class="contact-list">
+                            <li>
+                              <img src="https://flagcdn.com/w40/np.png" alt="Nepal Flag">
+                              <span>+977 9761161318</span>
+                              <i class="fa-brands fa-whatsapp whatsapp"></i>
+                            </li>
+
+                            <li>
+                              <img src="https://flagcdn.com/w40/bt.png" alt="Bhutan Flag">
+                              <span>+49 15229228976</span>
+                              <i class="fa-brands fa-whatsapp whatsapp"></i>
+                            </li>
+
+                            <li class="email">
+                              <i class="fa-solid fa-envelope"></i>
+                              <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-title="himmalagaritravels@gmail.com">
+                                <a href="mailto:himmalagaritravels@gmail.com">Email Us</a>
+                              </span>
+                            </li>
+
+                          </ul>
+                        </address>
+
+                        <p class="tagline text-center">
+                          "Your Trip, Your Way"
+                        </p>
+                      </section>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+            </div>
+            
+        </section>
+        
+        <!-- Popular Packages similarly structured like in template -->
+        <section class="popular-packages packages-wrapper deals-grid text-center components">
+          <h2 class="green-title text-center" id="packagesTitle">
+            Similar <span class="orange-text">Packages</span>
+          </h2>
+          <br>
+          <div class="package-grid-wrapper">
+            <ul class="package-grid owl-carousel owl-theme" id="packageGrid">
+        ';
+
+        $similarTours = Package::get_filterpkg_by('', $pkgRec->activityId);
+        foreach ($similarTours as $similarTour) {
+            if ($similarTour->id != $pkgRec->id) {
+                $file_path = SITE_ROOT . "images/package/" . $similarTour->image;
+                $img = (!empty($similarTour->image) and file_exists($file_path)) ? IMAGE_PATH . "package/" . $similarTour->image : IMAGE_PATH . "static/home-featured.jpg";
+                $destslug = Destination::field_by_id($similarTour->destinationId, 'slug');
+                $dsRec = Destination::find_by_slug($destslug);
+                $simAct = Activities::field_by_id($similarTour->activityId, 'title');
+                
+                $respkg_detail .= '
+              <li class="package-card">
+                <div class="image-wrapper">
+                  <img src="' . $img . '" alt="' . $similarTour->title . '">
+                  <span class="badge">' . ($similarTour->tags ?: "POPULAR") . '</span>
+                </div>
+
+                <div class="card-content">
+                  <h3 class="title">' . $similarTour->title . '</h3>
+
+                  <div class="info-grid mx-auto">
+
+                    <div class="info">
+                      <span class="label">Destination</span>
+                      <span class="value green">' . $dsRec->title . '</span>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="info">
+                      <span class="label">Accomodations</span>
+                      <span class="value green">Hotels</span>
+                    </div>
+
+                    <div class="info">
+                      <span class="label">Activities</span>
+                      <span class="value green">' . $simAct . '</span>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="info">
+                      <span class="label">Difficulty-level</span>
+                      <span class="value green">' . $similarTour->difficulty . '</span>
+                    </div>
+
+                    <!-- FLOATING ELEMENTS -->
+                    <span class="days-badge">' . $similarTour->days . ' days</span>
+
+                    <button class="explore_btn" onclick="window.location.href=\'' . BASE_URL . 'package/' . $similarTour->slug . '\'">
+                      <p>Explore</p>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                      </svg>
+                    </button>
+
+                  </div>
+                </div>
+              </li>
+                ';
+            }
+        }
+
+        $respkg_detail .= '
+            </ul>
+          </div>
+        </section>
+        </div>
+        ';
+        $respkg_detail .= '
+        <script>
+            // Package specific scripts
+            document.addEventListener("DOMContentLoaded", () => {
+                // Lightbox
+                const galleryImages = Array.from(document.querySelectorAll("#hiddenGallery img")).map(img => img.src);
+                const visibleImgs = document.querySelectorAll(".main-image img.gallery-img, .thumbnails img.gallery-img");
+
+                if (galleryImages.length > 0) {
+                    const lightbox = document.getElementById("lightbox");
+                    const lightboxImg = document.getElementById("lightboxImg");
+                    let index = 0;
+
+                    visibleImgs.forEach((img, i) => {
+                        img.addEventListener("click", () => {
+                            index = i;
+                            lightboxImg.src = galleryImages[index];
+                            lightbox.style.display = "flex";
+                        });
+                    });
+
+                    const viewAllBtn = document.querySelector(".view-more-btn");
+                    if (viewAllBtn) {
+                        viewAllBtn.addEventListener("click", () => {
+                            index = 0;
+                            lightboxImg.src = galleryImages[index];
+                            lightbox.style.display = "flex";
+                        });
+                    }
+                    
+                    if (document.querySelector(".next")) {
+                        document.querySelector(".next").onclick = () => {
+                            index = (index + 1) % galleryImages.length;
+                            lightboxImg.src = galleryImages[index];
+                        };
+                    }
+                    
+                    if (document.querySelector(".prev")) {
+                        document.querySelector(".prev").onclick = () => {
+                            index = (index - 1 + galleryImages.length) % galleryImages.length;
+                            lightboxImg.src = galleryImages[index];
+                        };
+                    }
+                    
+                    if (document.querySelector(".close")) {
+                        document.querySelector(".close").onclick = () => {
+                            lightbox.style.display = "none";
+                        };
                     }
                 }
-            }
-            $respkg_detail .= '
-                                </div>
-                            </div>
-                            </div>
-                        <div class="mb-50"></div>
-                    </div>
-                ';
-        }
-
-        $respkg_detail .= '
-            <div id="detail-content-sticky-nav-06" class="fullwidth-horizon-sticky-section">
-                <h4 class="heading-title">FAQ</h4>
-                <div class="faq-item-long-wrapper">
-                    ' . $pkgRec->availability . '
-                </div>
                 
-                <div class="row mt-25">
-                    <div class="col-12 col-md-8 col-lg-9">
-                        <div class="col-inner">
-                            <a href="#askquestions" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false" class="btn btn-primary btn-wide btn-contact-page">Ask a question</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-50"></div>
-            </div>
-            <div id="detail-content-sticky-nav-07" class="fullwidth-horizon-sticky-section expert1">
-                    
-                        <h4 class="heading-title">Reviews</h4>';
+                // Features Popup
+                const popup = document.getElementById("featuresPopup");
+                const closeBtn = document.getElementById("closePopup");
 
-        $reviews = Review::find_by_package($pkgRec->id);
-        if ($reviews) {
-            $respkg_detail .= '            
-                        <ul class="review-list">
-                        ';
-            foreach ($reviews as $review) {
-                $linkstart = (!empty($review->linksrc)) ? '<a href="#" target="_blank">' : '';
-                $linkend = (!empty($review->linksrc)) ? '</a>' : '';
-                $respkg_detail .= '
-                            <li>
-                                <div class="review-man d-flex">
-                                    <div class="image mr-15">
-                                        ' . $linkstart . '<img src="' . IMAGE_PATH . 'package/review/' . $review->image . '" alt="' . $review->name . '" class="image-circle" />' . $linkend . '
-                                    </div>
-                                    <div class="line-125">
-                                        <h6 class="line-125 mb-3">' . $review->name . '</h6>
-                                        <div class="rating-item rating-sm">
-                                            <div class="rating-icons">
-                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="' . $review->rating . '"/>
-                                            </div>
-                                        </div>
-                                        <!--<span class="text-muted font-sm font600">' . date("M d, Y", strtotime($review->added_date)) . '</span>-->
-                                        <span class="text-muted font-sm font600">' . $review->country . '</span>
-                                    </div>
-                                </div>
-                                <div class="review-content">
-                                    <p>' . $review->comments . '</p>
-                                </div>
-                            </li>
-                ';
-            }
-            $respkg_detail .= '
-                        </ul>
-                        ';
-        }
+                document.querySelectorAll(".view-more").forEach(btn => {
+                    btn.addEventListener("click", e => {
+                        e.preventDefault();
+                        if (popup) {
+                            popup.style.display = "flex";
+                            document.body.style.overflow = "hidden";
+                        }
+                    });
+                });
 
-        $respkg_detail .= '
-                    <div class="row mt-25">
-                        <div class="col-12 col-md-8 col-lg-9">
-                            <div class="col-inner">
-                                <a data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-wide btn-contact-page" style="color:#fff">Write Your Review</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        ';
-
-        $pkgExperts = unserialize($pkgRec->expert_id);
-        if (is_array($pkgExperts) and !empty($pkgExperts)) {
-            $respkg_detail .= '
-                    <div class="fullwidth-horizon-sticky-section ">
-                        <h4 class="heading-title">Experts</h4>
-            ';
-            foreach ($pkgExperts as $pkgExpert) {
-                $expert = Expert::find_by_id($pkgExpert[0][0]);
-                if ($expert) {
-                    $respkg_detail .= '
-                        <div class="blog-author bg-light">
-                            <div class="author-label">
-                                <img src="' . IMAGE_PATH . 'expert/' . $expert->image . '" alt="' . $expert->name . '" class="img-circle" />
-                            </div>
-                            <div class="author-details">
-                                <h5 class="heading">' . $expert->name . '</h5>
-                                ' . $expert->description . '
-                            </div>
-                        </div>
-                    ';
-                }
-            }
-            $respkg_detail .= '
-                        <div class="mb-50"></div>
-                    </div>
-            ';
-        }
-
-        
-        $respkg_detail .= '          
-                </div>
-            </div>
-                    <div class="col-12 col-lg-4">
-                        <aside class="sticky-kit-02 sidebar-wrapper no-border mt-20 mt-lg-0">
-        ';
-        $price_text = '';
-        if(!empty($pkgRec->price) and empty($pkgRec->offer_price)){
-            $price_text .= '   
-                            <div class="book-now-detail">
-                                <p class="price-book">
-                                    <span class="text">Starting Price:</span>
-                                    <ins style="text-decoration: none;"><span><span>USD</span>' . $pkgRec->price . '</span></ins>
-                                    <span class="text">per person</span>
-                                </p>
-                            </div>
-            ';
-        }
-        
-        if(!empty($pkgRec->offer_price)){
-            $price_text .= '
-                            <div class="book-now-detail">
-                                <p class="price-book">
-                                    <span class="text">Starting Price:</span>
-                                    <del style="color: red;"><ins style="text-decoration: none;"><span><span>USD</span>' . $pkgRec->price . '</span></ins></del>
-                                    <span class="text">per person</span>
-                                </p>
-                                <p class="price-book">
-                                    <span class="text">Offer Price:</span>
-                                    <ins style="text-decoration: none;"><span><span>USD</span>' . $pkgRec->offer_price . '</span></ins>
-                                    <span class="text">per person</span>
-                                </p>
-                            </div>
-            ';
-        }
-        
-        $respkg_detail .= '
-                            <div class="booking-box">
-                                <div class="box-heading"><h3 class="h6 text-white text-uppercase">Make a booking</h3></div>
-                                <div class="box-content enquiry-box">
-                                    '.$price_text.'
-                                    <p class="d-none d-xl-block d-lg-block d-xl-none">
-                                        <a class="btn btn-primary btn-block btn_map" href="' . BASE_URL . 'enquiry/package/' . $pkgRec->slug . '">Make an Enquiry <br> or <br> contact for group discount</a>
-                                    </p>
-                                    ';
-
-        if (!empty($pkgRec->group_size_price1) OR !empty($pkgRec->group_size_price2) OR !empty($pkgRec->group_size_price3) OR (!empty($pkgRec->group_size_price4)) OR !empty($pkgRec->group_size_price5)) {
-            $respkg_detail .= '
-                    <a class="showStandardPP">Group Booking Discount </a>
-                    <div class="standardPP border-top">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-list table-hover" style="border-bottom: 1px solid #ccc;">
-                                    <thead>
-                                        <tr>
-                                            <th>No. of People</th>
-                                            <th class="text-right">Price per person</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-            for ($i = 1; $i <= 5; $i++) {
-                $col_name_size = "group_size_price" . $i;
-                $col_name_discouont = "discount" . $i;
-                if (!empty($pkgRec->$col_name_size) AND !empty($pkgRec->$col_name_discouont)) {
-                    $discount = $pkgRec->price - ($pkgRec->price * $pkgRec->$col_name_discouont / 100);
-                    $respkg_detail .= '
-                                        <tr>
-                                            <td> ' . $pkgRec->$col_name_size . ' </td>
-                                            <td class="text-right">
-                                            &nbsp; <span class="groupNewPrice">
-                                            USD ' . $discount . ' </span>
-                                            </td>
-                                        </tr>
-                ';
-                }
-            }
-            $respkg_detail .= '
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-            ';
-        }
-
-        $respkg_detail .= '
-                                    <a href="' . BASE_URL . 'book/package/' . $pkgRec->slug . '" class="btn btn-primary btn-block btn-contact-page">Book Now</a>
-                                </div>';
-
-        $fixedDates = Packagedate::getPackage_limit($pkgRec->id, 5);
-        //$fixedDatesIdArr = Packagedate::check_availability($fixedDates, $pkgRec->id, $pkgRec->group_size);
-        $fixedDatesIdArr = Packagedate::check_availability($fixedDates, $pkgRec->id);
-        if (!empty($fixedDatesIdArr)) {
-            $respkg_detail .= '
-                    <div class="box-content col-md-12 enquiry-box">
-                        <div class="downloadNote">
-                            <h4>Fixed Departure</h4>
-                            <div class="item-text-long-wrapper">
-                                <div class="item-text-long side123">
-            ';
-
-            foreach ($fixedDatesIdArr as $fixedDateId) {
-                $fixedDate = Packagedate::find_by_id($fixedDateId);
-
-                $start_date = date('F d, Y', strtotime($fixedDate->package_date));
-                $start_date_day = date('l', strtotime($fixedDate->package_date));
-                $sql = "SELECT SUM(trip_pax) total FROM tbl_bookinginfo WHERE pkg_id=$pkgRec->id AND fixed_date_id=$fixedDate->id";
-                $res = $db->fetch_array($db->query($sql));
-                $total = !empty($res['total']) ? $res['total'] : 0;
-                @$diff = $pkgRec->group_size - $total;
-                $difff = $diff - 1;
-
-                //getting days left
-                $date1 = new DateTime();
-                $date2 = new DateTime($fixedDate->package_closure);
-                $days = $date2->diff($date1)->format('%a');
-                $days++;
-
-                $left = '';
-                if (strtotime(date('Y-m-d')) < strtotime($fixedDate->package_closure)) {
-                    $left = ($days == 1) ? $days . '<br/>day left' : $days . '<br/>days left<style>.hn' . $fixedDate->id . '{height:58px !important}</style>';
-                } else {
-                    $left = 'Last day';
+                if (closeBtn) {
+                    closeBtn.addEventListener("click", () => {
+                        popup.style.display = "none";
+                        document.body.style.overflow = "";
+                    });
                 }
 
-                $respkg_detail .= '
-                        <div class="row align-items-center">
-                            <div class="col-12 col-sm-7">
-                                <div class="col-inner mb-10 mb-sm-0">
-                                    <div class="row gap-10 align-items-center">
-                                        <div class="col-5">
-                                            <span class="day-count mt-3 count123 hn' . $fixedDate->id . '">' . $left . '</span>
-                                        </div>
-                                        <div class="col-7 text-right text-sm-left">
-                                            <span class="font-sm">' . $start_date_day . '</span>
-                                            <strong class="d-block">' . $start_date . '</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4 col-sm-5 sidebtn">
-                                <form method="post" action="' . BASE_URL . 'book/package/' . $pkgRec->slug . '">
-                                    <input type="hidden" name="date" value="' . date('Y-m-d', strtotime($fixedDate->package_date)) . '">
-                                    <input type="hidden" name="price" value="' . $fixedDate->package_rate . '">
-                                    <input type="hidden" name="fixed_date_id" value="' . $fixedDate->id . '">
-                                    <input type="hidden" name="max_pax" value="' . $difff . '">
-                                    <button type="submit" class="btn btn-primary btn-block btn-sm mt-3 btn-contact-page">Book now</button>
-                                </form>
-                            </div>
-                        </div>
-                ';
-            }
-
-            $respkg_detail .= '
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            ';
-        }
-        $respkg_detail .= '
-                                <div class="box-content col-md-12" style="background: #f2f0d0;">
-                                <div class="downloadNote">
-                                    <h4>Your Perfect Tour Experience</h4>
-                                    <p>ABC and EBC, one of the leading trekking agencies of Nepal, would like to invite you to discover the diversity and wonders and beauties of the Himalayas</p>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a href="../customize" class="btn btn-primary btn-block btn-contact-page mt-3">
-                                            Customize Trip</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="box-bottom bg-light">
-                                    <h6 class="font-sm">We are the best tour operator</h6>
-                                    <p class="font-sm">Our custom tour program, direct call <br><br><span class="text-primary"><a href="tel:+977 9856073085"> +977 9856073085</a></span> Whatsapp<br><br><a href="tel:+977 9817163085"> +977 9817163085</a> KTM</span><br><br><a href="tel:+977 061 467525"> +977 061 467525</a> PKR</span> </p><br>
-                                </div>
-                            </div>
-                        </aside>
-                    </div>
-                </div>
-            </div>
-        </section>
+                if (popup) {
+                    popup.addEventListener("click", e => {
+                        if (e.target === popup) {
+                            popup.style.display = "none";
+                            document.body.style.overflow = "";
+                        }
+                    });
+                }
+                
+                // Similar Packages Carousel
+                if (typeof $ !== "undefined" && typeof $.fn.owlCarousel !== "undefined") {
+                     $("#packageGrid").owlCarousel({
+                        loop: true,
+                        margin: 20,
+                        items: 3,
+                        autoplay: true,
+                        autoWidth: false,
+                        autoHeight: true,
+                        autoplayTimeout: 3500,
+                        autoplayHoverPause: true,
+                        dots: true,
+                        nav: false,
+                        stagePadding: 0,
+                        responsive: {
+                            0: { items: 1 },
+                            768: { items: 2 },
+                            1200: { items: 3 }
+                        }
+                    });
+                }
+                
+                // Booking calculation
+                const peopleInput = document.getElementById("peopleCountBooking");
+                const amountSpan = document.getElementById("amountValueBooking");
+                if (peopleInput && amountSpan) {
+                    const pricePerPerson = parseFloat(amountSpan.textContent) || 0;
+                    peopleInput.addEventListener("input", function() {
+                        const count = parseInt(this.value) || 1;
+                        amountSpan.textContent = count * pricePerPerson;
+                    });
+                }
+                
+                // Travel date validation
+                const today = new Date().toISOString().split("T")[0];
+                document.querySelectorAll("input[type=\'date\']").forEach(input => {
+                    input.setAttribute("min", today);
+                });
+            });
+            
+            // Tooltips
+            document.addEventListener("DOMContentLoaded", function () {
+              if (typeof bootstrap !== "undefined" && typeof bootstrap.Tooltip !== "undefined") {
+                  const tooltipTriggerList = document.querySelectorAll("[data-bs-toggle=\'tooltip\']");
+                  const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+              }
+            });
+        </script>
         ';
-
-
-        // Review Modal
-        $send_review .= '
-            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-     aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Write Your Review</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="review_form" method="post" action="">
-                                <div class="row gap-15">
-                                    <div class="col-4 col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <label>Trip Title</label>
-                                            <input type="text" class="form-control" name="package_title" value="' . $pkgRec->title . '" readonly/>
-                                            <input type="hidden" name="package_id" value="' . $pkgRec->id . '" readonly/>
-                                        </div>
-                                    </div>
-            
-                                    <div class="w-100 d-block d-md-none"></div>
-            
-                                    <div class="col-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Full Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="full_name" placeholder="Full name"/>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Gender <span class="text-danger">*</span></label>
-                                            <select data-placeholder="Select" class="chosen-the-basi form-control" name="gender" tabindex="2">
-                                                <option value="" disabled selected>Select Gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                                <option value="0">Others</option>
-                                            </select>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Country <span class="text-danger">*</span></label>
-                                            <select data-placeholder="Select" class="chosen-the-basi form-control" name="country" tabindex="2">
-                                                <option value="" disabled selected>Select</option>';
-        $countries = Countries::find_all();
-        foreach ($countries as $country) {
-            $send_review .= '<option value="' . $country->country_name . '">' . $country->country_name . '</option>';
-        }
-        $send_review .= '
-                                            </select>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Upload Image <span class="text-danger">*</span></label>
-                                            <input type="file" name="review_img" id="review_img" class="transparent no-shadow">
-                                            <div id="preview_Image"></div>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-6 col-sm-6 col-md-7">
-                                        <div class="form-group">
-                                            <label>Email <span class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" name="email" placeholder="Email address"/>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-12 col-sm-6 col-md-5">
-                                        <div class="form-group">
-                                            <label>Phone <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="phone" placeholder="Phone number"/>
-                                        </div>
-                                    </div>';
-        $send_review .= '
-                                    <div class="col-12 col-sm-6 col-md-12">
-                                        <div class="form-group">
-                                            <label>Overall Rating <span class="text-danger">*</span></label>
-                                            <span class="starRating">
-                                              <input id="rating5a" type="radio" name="overall_rating" value="5">
-                                              <label for="rating5a">5</label>
-                                              <input id="rating4a" type="radio" name="overall_rating" value="4">
-                                              <label for="rating4a">4</label>
-                                              <input id="rating3a" type="radio" name="overall_rating" value="3">
-                                              <label for="rating3a">3</label>
-                                              <input id="rating2a" type="radio" name="overall_rating" value="2">
-                                              <label for="rating2a">2</label>
-                                              <input id="rating1a" type="radio" name="overall_rating" value="1">
-                                              <label for="rating1a">1</label>
-                                            </span>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Pre-trip Info <span class="text-danger">*</span></label>
-                                            <span class="starRating1">
-                                              <input id="rating5b" type="radio" name="pre_trip_rating" value="5">
-                                              <label for="rating5b">5</label>
-                                              <input id="rating4b" type="radio" name="pre_trip_rating" value="4">
-                                              <label for="rating4b">4</label>
-                                              <input id="rating3b" type="radio" name="pre_trip_rating" value="3">
-                                              <label for="rating3b">3</label>
-                                              <input id="rating2b" type="radio" name="pre_trip_rating" value="2">
-                                              <label for="rating2b">2</label>
-                                              <input id="rating1b" type="radio" name="pre_trip_rating" value="1">
-                                              <label for="rating1b">1</label>
-                                            </span>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Transportation<span class="text-danger">*</span></label>
-                                            <span class="starRating">
-                                              <input id="rating5c" type="radio" name="transportation_rating" value="5">
-                                              <label for="rating5c">5</label>
-                                              <input id="rating4c" type="radio" name="transportation_rating" value="4">
-                                              <label for="rating4c">4</label>
-                                              <input id="rating3c" type="radio" name="transportation_rating" value="3">
-                                              <label for="rating3c">3</label>
-                                              <input id="rating2c" type="radio" name="transportation_rating" value="2">
-                                              <label for="rating2c">2</label>
-                                              <input id="rating1c" type="radio" name="transportation_rating" value="1">
-                                              <label for="rating1c">1</label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Accommodation<span class="text-danger">*</span></label>
-                                            <span class="starRating">
-                                              <input id="rating5e" type="radio" name="accommodation_rating" value="5">
-                                              <label for="rating5e">5</label>
-                                              <input id="rating4e" type="radio" name="accommodation_rating" value="4">
-                                              <label for="rating4e">4</label>
-                                              <input id="rating3e" type="radio" name="accommodation_rating" value="3">
-                                              <label for="rating3e">3</label>
-                                              <input id="rating2e" type="radio" name="accommodation_rating" value="2">
-                                              <label for="rating2e">2</label>
-                                              <input id="rating1e" type="radio" name="accommodation_rating" value="1">
-                                              <label for="rating1e">1</label>
-                                            </span>
-                                        </div>
-                                    </div>';
-        $send_review .= '                                    
-                                    <div class="col-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Meals<span class="text-danger">*</span></label>
-                                            <span class="starRating">
-                                              <input id="rating5d" type="radio" name="meals_rating" value="5">
-                                              <label for="rating5d">5</label>
-                                              <input id="rating4d" type="radio" name="meals_rating" value="4">
-                                              <label for="rating4d">4</label>
-                                              <input id="rating3d" type="radio" name="meals_rating" value="3">
-                                              <label for="rating3d">3</label>
-                                              <input id="rating2d" type="radio" name="meals_rating" value="2">
-                                              <label for="rating2d">2</label>
-                                              <input id="rating1d" type="radio" name="meals_rating" value="1">
-                                              <label for="rating1d">1</label>
-                                            </span>
-                                        </div>
-                                    </div>
-            
-                                    <div class="col-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Staffs <span class="text-danger">*</span></label>
-                                            <span class="starRating">
-                                              <input id="rating5f" type="radio" name="staffs_rating" value="5">
-                                              <label for="rating5f">5</label>
-                                              <input id="rating4f" type="radio" name="staffs_rating" value="4">
-                                              <label for="rating4f">4</label>
-                                              <input id="rating3f" type="radio" name="staffs_rating" value="3">
-                                              <label for="rating3f">3</label>
-                                              <input id="rating2f" type="radio" name="staffs_rating" value="2">
-                                              <label for="rating2f">2</label>
-                                              <input id="rating1f" type="radio" name="staffs_rating" value="1">
-                                              <label for="rating1f">1</label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Value for Money <span class="text-danger">*</span></label>
-                                            <span class="starRating">
-                                              <input id="rating5g" type="radio" name="money_rating" value="5">
-                                              <label for="rating5g">5</label>
-                                              <input id="rating4g" type="radio" name="money_rating" value="4">
-                                              <label for="rating4g">4</label>
-                                              <input id="rating3g" type="radio" name="money_rating" value="3">
-                                              <label for="rating3g">3</label>
-                                              <input id="rating2g" type="radio" name="money_rating" value="2">
-                                              <label for="rating2g">2</label>
-                                              <input id="rating1g" type="radio" name="money_rating" value="1">
-                                              <label for="rating1g">1</label>
-                                            </span>
-                                        </div>
-                                    </div>';
-        $send_review .= '
-                                    <div class="col-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="comment-message">Message <span class="text-danger">*</span></label>
-                                            <textarea name="message" id="comment-message" class="form-control" rows="8"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="alert alert-success" id="msg" style="display:none;"></div>
-                                
-                        </div>
-            
-                        <div class="modal-footer">
-                            <button type="submit" id="submit" class="btn btn-primary btn-contact-page">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ';
-
-        // Email a friend
-        $email_friend .= '
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Send a Email</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="email_a_friend" method="post" action="">
-                                <div class="" id="msg" style="display:none;"></div>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Trip Name</label>
-                                    <input type="text" class="form-control" id="recipient-name" value="' . $pkgRec->title . '" readonly>
-                                    <input type="hidden" class="form-control" name="package_id" value="' . $pkgRec->id . '">
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-email" class="col-form-label">Email Address<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="recipient-email" name="primary_email" placeholder="To:">
-                                    <small class="text-muted">Single email</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="recipient-emails" class="col-form-label">Email Address (Optional)</label>
-                                    <input type="text" class="form-control" id="recipient-emails" name="cc_emails" placeholder="Cc:">
-                                    <small class="text-muted">Use commas to separate multiple emails</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comment-message">Message<span class="text-danger">*</span></label>
-                                    <textarea name="message" id="comment-message" name="message" class="form-control" rows="6"></textarea>
-                                </div>
-                                
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="submit" class="btn btn-primary btn-contact-page #exampleModal">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ';
-
-        //Ask a Question
-        $ask_question .= '
-            <div class="modal fade modal-with-tabs form-login-modal" id="loginFormTabInModal" aria-labelledby="modalWIthTabsLabel"
-     tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content shadow-lg">
-            
-                        <nav class="d-none">
-                            <ul class="nav external-link-navs clearfix">
-                                <li><a data-toggle="tab" href="#loginFormTabInModal-login">Sign-in</a></li>
-                                <li><a data-toggle="tab" href="#loginFormTabInModal-register">Register </a></li>
-                                <li><a data-toggle="tab" href="#loginFormTabInModal-forgot-pass">Forgot Password </a></li>
-                            </ul>
-                        </nav>
-            
-                        <div class="tab-content">
-            
-                            <div role="tabpanel" class="tab-pane active" id="askquestions">
-            
-                                <div class="form-login">
-            
-                                    <div class="form-header">
-                                        <h4>Ask A Question</h4>
-                                    </div>
-            
-                                    <div class="form-body">
-                                        <form method="post" action="" id="ask_question_form">
-                                            <div class="d-flex flex-column flex-lg-row align-items-stretch">
-                                                <div class="flex-md-grow-1 bg-primary-light">
-                                                    <div class="row">
-                                                        <div class="col-12 col-md-10 col-lg-8">
-                                                        <div class="" id="msgg" style="display:none;"></div>
-                                                            <div class="form-group">
-                                                                <label>Full name</label>
-                                                                <input type="text" name="full_name" class="form-control"/>
-                                                                <input type="hidden" name="package_name" value="' . $pkgRec->title . '"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Email adress</label>
-                                                                <input type="text" name="email" class="form-control"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Question</label>
-                                                                <textarea name="message" id="comment-message" class="form-control" rows="6"></textarea>
-                                                            </div>
-                                                            <button type="submit" id="submit" class="btn btn-primary btn-wide btn-contact-page">Submit</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-            
-                            </div>';
-
-        $ask_question .= '
-                            <div role="tabpanel" class="tab-pane fade in" id="emailfriend">
-            
-                                <div class="form-login">
-            
-                                    <div class="form-header">
-                                        <h4>Ask A Questions</h4>
-                                    </div>
-            
-                                    <div class="form-body">
-            
-                                        <form method="post" action="#">
-            
-                                            <div class="d-flex flex-column flex-lg-row align-items-stretch">
-            
-                                                <div class="flex-grow-1 bg-primary-light">
-            
-                                                    <div class="form-inner">
-                                                        <div class="form-group">
-                                                            <label>Full name</label>
-                                                            <input type="text" class="form-control"/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Email adress</label>
-                                                            <input type="text" class="form-control"/>
-                                                        </div>
-                                                        <div class="row cols-2 gap-10">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Password</label>
-                                                                    <input type="password" class="form-control"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Confirm password</label>
-                                                                    <input type="password" class="form-control"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-            
-                                                </div>
-            
-                                                <div class="form-login-socials">
-                                                    <div class="login-socials-inner">
-                                                        <h5 class="mb-20">Or sign-in with your socials</h5>
-                                                        <button class="btn btn-login-with btn-facebook btn-block"><i
-                                                                class="fab fa-facebook"></i> facebook
-                                                        </button>
-                                                        <button class="btn btn-login-with btn-google btn-block"><i
-                                                                class="fab fa-google"></i> google
-                                                        </button>
-                                                        <button class="btn btn-login-with btn-twitter btn-block"><i
-                                                                class="fab fa-twitter"></i> google
-                                                        </button>
-                                                    </div>
-                                                </div>
-            
-                                            </div>
-            
-                                            <div class="d-flex flex-column flex-md-row mt-30 mt-lg-10">
-                                                <div class="flex-shrink-0">
-                                                    <a href="#" class="btn btn-primary btn-wide mt-5">Sign-up</a>
-                                                </div>
-                                                <div class="pt-1 ml-0 ml-md-15 mt-15 mt-md-0">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="loginFormTabInModal-acceptTerm">
-                                                        <label class="custom-control-label line-145"
-                                                               for="loginFormTabInModal-acceptTerm">By clicking this, you are agree
-                                                            to to our <a href="#">terms of use</a> and <a href="#">privacy
-                                                                policy</a> including the use of cookies</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-            
-                                        </form>
-            
-                                    </div>
-            
-                                    <div class="form-footer">
-                                        <p>Already a member? <a href="#loginFormTabInModal-login" class="tab-external-link font600">Sign
-                                            in</a></p>
-                                    </div>
-            
-                                </div>
-            
-                            </div>
-            
-                            <div role="tabpanel" class="tab-pane fade in" id="loginFormTabInModal-forgot-pass">
-            
-                                <div class="form-login">
-            
-                                    <div class="form-header">
-                                        <h4>Lost your password?</h4>
-                                        <p>Please provide your detail.</p>
-                                    </div>
-            
-                                    <div class="form-body">
-                                        <form method="post" action="#">
-                                            <p class="line-145">We\'ll send password reset instructions to the email address associated with your account.</p>
-                                            <div class="row">
-                                                <div class="col-12 col-md-10 col-lg-8">
-                                                    <div class="form-group">
-                                                        <input type="password" class="form-control" placeholder="password"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-primary mt-5">Retreive password</button>
-                                        </form>
-                                    </div>
-            
-                                    <div class="form-footer">
-                                        <p>Back to <a href="#loginFormTabInModal-login" class="tab-external-link font600">Sign
-                                            in</a> or <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign
-                                            up</a></p>
-                                    </div>
-            
-                                </div>
-            
-                            </div>
-            
-                        </div>
-            
-                        <div class="text-center pb-20">
-                            <button type="button" class="close" data-dismiss="modal" aria-labelledby="Close">
-                                <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ';
-
     } else {
         $url = BASE_URL . 'pages/errors';
         redirect_to($url);
     }
 }
+
 
 $jVars['module:package-breadcrumb'] = $respkg_breadcrumb;
 $jVars['module:package-detail'] = $respkg_detail;
@@ -1703,26 +1232,107 @@ $jVars['module:package-ask-question-modal'] = $ask_question;
 
 
 // Fixed package for home
-$reshfix = '';
-$sql = "SELECT MAX(pd.package_currency), MAX(pd.package_rate), MIN(pd.package_date) AS package_date, p.slug, p.title, p.image, p.tags, p.breif, p.days, p.gread, p.pdate, p.destinationId, p.activityId FROM tbl_package_date AS pd 
-    INNER JOIN tbl_package AS p ON pd.package_id = p.id 
-    WHERE 
-    p.status='1' AND pd.status='1' AND package_date>=CURDATE() GROUP BY pd.package_id ORDER BY COUNT(package_date) ASC  LIMIT 4 ";
-$query = $db->query($sql);
-$totl = $db->num_rows($query);
-if ($totl > 0) {
-    while ($row = $db->fetch_object($query)) {
-        $reshfix .= '<div class="dpt">
-            <a class="link" href="' . BASE_URL . 'package/' . $row->slug . '">
-                <div class="row">
-                    <div class="col-xs-4 date">' . date('d M Y', strtotime($row->package_date)) . '</div>
-                    <div class="col-xs-8 title">' . $row->title . '</div> 
+$resfixed = '';
+if (defined('HOME_PAGE')) {
+    $sql = "SELECT pd.*, p.title as pkg_title, p.slug as pkg_slug, p.image as pkg_image, p.days as pkg_days, p.popular as pkg_popular
+            FROM tbl_package_date pd
+            JOIN tbl_package p ON pd.package_id = p.id
+            WHERE pd.status = '1' AND pd.package_date >= CURDATE()
+            ORDER BY pd.package_date ASC
+            LIMIT 4";
+    $fixedRec = Packagedate::find_by_sql($sql);
+
+    if ($fixedRec) {
+        $resfixed .= '
+        <section class="packages-wrapper components text-center">
+            <header class="page-header text-center">
+                <h4 class="text-center">Fixed Departure</h4>
+                <h2 class="mb-3 green-title text-center">
+                    Hassle-Free
+                    <span class="orange-text">Fixed Departure</span> Adventures.
+                </h2>
+            </header>
+            <br />
+
+            <div class="packages-grid mx-auto">';
+
+        foreach ($fixedRec as $row) {
+            $file_path = SITE_ROOT . "images/package/" . $row->pkg_image;
+            $img = (!empty($row->pkg_image) and file_exists($file_path)) ? IMAGE_PATH . "package/" . $row->pkg_image : IMAGE_PATH . "static/home-featured.jpg";
+            
+            $popularBadge = ($row->pkg_popular == 1) ? '<span class="badge">POPULAR</span>' : '';
+            
+            $startDate = date('d M Y', strtotime($row->package_date));
+            $endDate = date('d M Y', strtotime($row->package_date . ' + ' . $row->pkg_days . ' days'));
+            $bookBefore = date('d M Y', strtotime($row->package_closure));
+
+            $resfixed .= '
+            <div class="package-card">
+                <div class="image-wrapper">
+                    <img src="' . $img . '" alt="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '" />
+                    ' . $popularBadge . '
                 </div>
-            </a>
-        </div>';
+
+                <div class="card-content">
+                    <h3 class="title">' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '</h3>
+
+                    <div class="info-grid mx-auto">
+                        <div class="info">
+                            <span class="label">Trip Start Date</span>
+                            <span class="value green">' . $startDate . '</span>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="info">
+                            <span class="label">Seats Available</span>
+                            <span class="value green">' . $row->package_seats . '</span>
+                        </div>
+
+                        <div class="info">
+                            <span class="label">Book Before</span>
+                            <span class="value green">' . $bookBefore . '</span>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="info">
+                            <span class="label">Trip End Date</span>
+                            <span class="value green">' . $endDate . '</span>
+                        </div>
+
+                        <!-- FLOATING ELEMENTS -->
+                        <span class="days-badge">' . $row->pkg_days . ' days</span>
+
+                        <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" 
+                                data-seats="' . $row->package_seats . '" 
+                                data-pkgid="' . $row->package_id . '" 
+                                data-dateid="' . $row->id . '"
+                                data-price="' . $row->package_rate . '"
+                                data-title="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '"
+                                data-start="' . $startDate . '"
+                                data-end="' . $endDate . '"
+                                data-before="' . $bookBefore . '">
+                            <p>Book Now</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>';
+        }
+
+        $resfixed .= '
+            </div>
+            <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'fixed_listing.html\')">
+                <p>View More</p>
+            </button>
+        </section>';
     }
 }
 
-$jVars['module:package-fixedHome'] = $reshfix;
+$jVars['module:fixed-departure-home'] = $resfixed;
 
 ?>

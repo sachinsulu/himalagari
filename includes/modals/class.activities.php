@@ -61,7 +61,7 @@ class Activities extends DatabaseObject {
 	public static function homepageActivities($limit=''){
 		global $db;
 		$lmt = !empty($limit)?' LIMIT '.$limit:'';
-		$sql="SELECT * FROM ".self::$table_name." WHERE status='1' AND homepage='1' ORDER BY sortorder ASC $lmt";
+		$sql="SELECT * FROM ".self::$table_name." WHERE status='1' AND parentOf='0' ORDER BY sortorder ASC $lmt";
 		return self::find_by_sql($sql);
 	}
 

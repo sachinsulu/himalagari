@@ -41,9 +41,6 @@ if ($faqRec) {
     $resfaq .= '
         </div>
 
-        <button class="explore_btn inquiry-btn mx-auto mt-4">
-            View More
-        </button>
     </section>';
 }
 

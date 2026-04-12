@@ -481,11 +481,11 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Route :
+                            Accommodation :
                         </label>
                     </div>
                     <div class="form-input col-md-20">
-                        <input placeholder="Route (Separate with commas)" class="col-md-4 validate[length[0,200]]" type="text"
+                        <input placeholder="Accommodation (Separate with commas)" class="col-md-4 validate[length[0,200]]" type="text"
                                name="accomodation" id="accomodation"
                                value="<?php echo !empty($packageInfo->accomodation) ? $packageInfo->accomodation : ""; ?>">
                     </div>

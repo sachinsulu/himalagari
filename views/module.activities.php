@@ -225,4 +225,56 @@ if (empty($activity_package_cards)) {
 
 $jVars['module:activity-bread'] = $activity_hero;
 $jVars['module:activity-package-cards'] = $activity_package_cards;
+
+/*
+* Home Activities
+*/
+$homeActivities = '';
+if (defined('HOME_PAGE')) {
+    $actRec = Activities::homepageActivities();
+    if ($actRec) {
+        $homeActivities .= '
+        <section class="activities mt-5 text-center">
+            <h4>Holiday Types</h4>
+            <h2 class="green-title mb-5">
+                Find the Perfect <span class="orange-text">Holiday</span> for Every
+                <span class="orange-text">Travel Style</span>
+            </h2>
+
+            <div class="activities_container">
+                <ul class="card-container d-flex gap-5">';
+        
+        foreach ($actRec as $actRow) {
+            $file_path = SITE_ROOT . 'images/activities/' . $actRow->image;
+            $img = (file_exists($file_path) && !empty($actRow->image)) ? IMAGE_PATH . 'activities/' . $actRow->image : BASE_URL . 'template/web/assets/images/tour.png';
+            
+            $packageCount = Package::get_total_activities_packages($actRow->id);
+
+            $homeActivities .= '
+                <li class="custom-card">
+                    <img src="' . $img . '" alt="' . $actRow->title . '" />
+                    <div class="activities_overlay"></div>
+                    <span class="badge-label">
+                        <span class="badge-text">' . $packageCount . ' ' . $actRow->title . '</span>
+                    </span>
+                    <div class="activity_card_content">
+                        <h2 class="text-center">' . (!empty($actRow->title_brief) ? $actRow->title_brief : 'Chase the Thrill.') . '</h2>
+                        <p>' . strip_tags($actRow->brief) . '</p>
+
+                        <div class="activity_btn">
+                            <button class="explore_btn inquiry-btn mx-auto" onclick="goToPage(\'' . BASE_URL . 'activity/' . $actRow->slug . '\')">
+                                <p>View Trip</p>
+                            </button>
+                        </div>
+                    </div>
+                </li>';
+        }
+
+        $homeActivities .= '
+                </ul>
+            </div>
+        </section>';
+    }
+}
+$jVars['module:home-activities'] = $homeActivities;
 ?>

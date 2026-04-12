@@ -3,10 +3,10 @@
 
 <head>
   <!-- Title Of Site -->
-  <jcms:site:seotitle />
+  <jcms:site:seotitle/>
 
   <!-- Fav and Touch Icons -->
-  <jcms:site:fevicon />
+  <jcms:site:fevicon/>
 
   <!-- Font Awesome -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel="stylesheet" />
@@ -35,11 +35,88 @@
     rel="stylesheet" />
   <!-- swiperjs -->
   <link href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' rel="stylesheet" />
+  <link href="./package_listing.css" rel="stylesheet" />
 
   <style>
     /* Force explore-box icons to appear white */
     .explore-box img {
       filter: brightness(0) invert(1) !important;
+    }
+
+    /* Force all section headings to be centered */
+    .green-title, 
+    .page-header h4,
+    .page-header h2,
+    .packages-wrapper header h4,
+    .packages-wrapper header h2,
+    .explore-content h4,
+    .explore-content h2,
+    .popular-packages h4,
+    .popular-packages h2,
+    .footer-title,
+    .footer-subtitle,
+    .footer-bottom li {
+      text-align: center !important;
+      display: block !important;
+      width: 100%;
+    }
+
+    .footer-line {
+        justify-content: center;
+    }
+
+    .about-text {
+        text-align: center;
+        width: 100%;
+    }
+
+    .review {
+        background: #f8fdf8;
+        border: 1px solid #e0eee0;
+        border-radius: 24px;
+        padding: clamp(30px, 5%, 50px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .left-review {
+        flex: 1;
+        text-align: left;
+    }
+
+    .left-review p:first-child {
+        font-size: clamp(24px, 3vw, 32px);
+        font-weight: 700;
+        color: var(--green);
+        margin-bottom: 12px;
+    }
+
+    .left-review p:last-child {
+        color: #666;
+        line-height: 1.6;
+        font-size: 16px;
+    }
+
+    .review img {
+        width: 140px;
+        height: 140px;
+        background: #fff;
+        padding: 10px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 768px) {
+        .review {
+            flex-direction: column;
+            text-align: center;
+        }
+        .left-review {
+            text-align: center;
+        }
     }
   </style>
 </head>
@@ -78,7 +155,7 @@
     </div>
   </section>
 
-  <jcms:module:header_components />
+  <jcms:module:header_components/>
 
   <!-- MENU OFFCANVAS -->
 
@@ -88,422 +165,17 @@
   <!-- inquiry_offcanvas -->
 
   <!-- activities -->
-  <section class="activities mt-5 text-center">
-    <h4>Holiday Types</h4>
-    <h2 class="green-title mb-5">
-      Find the Perfect <span class="orange-text">Holiday</span> for Every
-      <span class="orange-text">Travel Style</span>
-    </h2>
-
-    <div class="activities_container">
-      <ul class="card-container d-flex gap-5">
-        <li class="custom-card">
-          <img src="./assets/images/tour.png" alt="Tours" />
-          <div class="activities_overlay"></div>
-          <span class="badge-label">
-            <span class="badge-text">24 Tours</span>
-          </span>
-          <div class="activity_card_content">
-            <h2 class="text-center">Chase the Thrill.</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Unde, modi?
-            </p>
-
-            <div class="activity_btn">
-              <button class="explore_btn inquiry-btn mx-auto" onclick="goToPage('./holiday_types_inner.html')">
-                <p>View Trip</p>
-              </button>
-            </div>
-          </div>
-        </li>
-
-        <li class="custom-card">
-          <img src="./assets/images/trekking.png" alt="Trekking" />
-          <div class="activities_overlay"></div>
-          <span class="badge-label">
-            <span class="badge-text"> 18 Trekking</span>
-          </span>
-          <div class="activity_card_content">
-            <h2 class="text-center">Chase the Thrill.</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Unde, modi?
-            </p>
-
-            <div class="activity_btn">
-              <button class="explore_btn inquiry-btn mx-auto" onclick="goToPage('./holiday_types_inner.html')">
-                <p>View Trip</p>
-              </button>
-            </div>
-          </div>
-        </li>
-
-        <li class="custom-card">
-          <img src="./assets/images/adventures.png" alt="Adventures" />
-          <div class="activities_overlay"></div>
-          <span class="badge-label">
-            <span class="badge-text">12 Adventures</span>
-          </span>
-          <div class="activity_card_content">
-            <h2 class="text-center">Chase the Thrill.</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Unde, modi?
-            </p>
-
-            <div class="activity_btn">
-              <button class="explore_btn inquiry-btn mx-auto" onclick="goToPage('./holiday_types_inner.html')">
-                <p>View Trip</p>
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
+  <jcms:module:home-activities/>
 
   <!-- activities-end -->
 
   <!-- popular packages -->
   <!-- updated -->
-  <section class="packages-wrapper components">
-    <header class="page-header">
-      <h4 class="text-center">Popular Packages</h4>
-      <h2 class="green-title">
-        Handpicked <span class="orange-text">Travel</span> Itineraries
-      </h2>
-    </header>
-    <br />
-
-    <div class="packages-grid mx-auto">
-      <!-- CARD -->
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Destination</span>
-              <span class="value green">Nepal</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Accomodations</span>
-              <span class="value green">Hotels</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Activities</span>
-              <span class="value green">Tour and Adventure</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Difficulty-level</span>
-              <span class="value green">Moderate to Difficult</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-seats="12"
-              onclick="goToPage('./package-inner.html')">
-              <p>Explore</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Destination</span>
-              <span class="value green">Nepal</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Accomodations</span>
-              <span class="value green">Hotels</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Activities</span>
-              <span class="value green">Tour and Adventure</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Difficulty-level</span>
-              <span class="value green">Moderate to Difficult</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-seats="12"
-              onclick="goToPage('./package-inner.html')">
-              <p>Explore</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Destination</span>
-              <span class="value green">Nepal</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Accomodations</span>
-              <span class="value green">Hotels</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Activities</span>
-              <span class="value green">Tour and Adventure</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Difficulty-level</span>
-              <span class="value green">Moderate to Difficult</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-seats="12"
-              onclick="goToPage('./package-inner.html')">
-              <p>Explore</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Destination</span>
-              <span class="value green">Nepal</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Accomodations</span>
-              <span class="value green">Hotels</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Activities</span>
-              <span class="value green">Tour and Adventure</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Difficulty-level</span>
-              <span class="value green">Moderate to Difficult</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-seats="12"
-              onclick="goToPage('./package-inner.html')">
-              <p>Explore</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Destination</span>
-              <span class="value green">Nepal</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Accomodations</span>
-              <span class="value green">Hotels</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Activities</span>
-              <span class="value green">Tour and Adventure</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Difficulty-level</span>
-              <span class="value green">Moderate to Difficult</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-seats="12"
-              onclick="goToPage('./package-inner.html')">
-              <p>Explore</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Destination</span>
-              <span class="value green">Nepal</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Accomodations</span>
-              <span class="value green">Hotels</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Activities</span>
-              <span class="value green">Tour and Adventure</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Difficulty-level</span>
-              <span class="value green">Moderate to Difficult</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-seats="12"
-              onclick="goToPage('./package-inner.html')">
-              <p>Explore</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- uiverse btn -->
-    </div>
-    <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage('./package_listing.html')">
-      <p>View More</p>
-    </button>
-  </section>
+  <jcms:module:package-home/>
   <!-- popular packages-end -->
 
   <!-- about-section -->
-  <section class="about-hero components">
-    <div class="about-hero-inner">
-      <!-- LEFT CONTENT -->
-      <div class="about-text">
-        <span class="about-label">About Us</span>
-
-        <h2>Journeys Crafted with Care, Trust & Experience</h2>
-
-        <p>
-          Your trusted local travel partner based in the heart of Kathmandu,
-          Nepal. We are here to curate your memorable and bespoke adventure
-          in the Himalayas. Passionate travel planners and skilled local
-          experts - waiting to be part of your journey in cultural
-          immersion, delightful holidays, and safe and eco-friendly travel
-          experiences.
-        </p>
-        <!-- uiverse btn -->
-        <button class="explore_btn inquiry-btn" onclick="goToPage('./about.html')">
-          <p>View More</p>
-        </button>
-      </div>
-
-      <!-- RIGHT IMAGE -->
-      <div class="about-media">
-        <img src="./assets/images/aboutimg2.jpg" alt="Travel Adventure" />
-      </div>
-    </div>
-  </section>
+  <jcms:module:showhome/>
 
   <!-- about-section-end -->
 
@@ -820,9 +492,9 @@
 
   <!-- explore-start -->
 
-  <section class="explore-content mb-5 pb-5 components">
+  <section class="explore-content mb-5 pb-5 components text-center">
     <h4>Explore Locally</h4>
-    <h2 class="mb-4 green-title">
+    <h2 class="mb-4 green-title text-center">
       Why Choose <span class="orange-text">Himmalagari Travels ?</span>
     </h2>
     <ul class="explore-box-grid mx-auto">
@@ -880,10 +552,11 @@
   </section>
 
   <!-- explore-end -->
+
   <!-- blog -->
   <section class="popular-packages mx-auto blog_wrapper deals-grid text-center components">
-    <h4>Top Travel Inspirations</h4>
-    <h2 class="mb-5 green-title">
+    <h4 class="text-center">Top Travel Inspirations</h4>
+    <h2 class="mb-5 green-title text-center">
       Destinations and stories
       <span class="orange-text">Worth Exploring</span>
     </h2>
@@ -916,7 +589,6 @@
             <div class="author">
               <p>Continue Reading</p>
               <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m14 16l4-4m0 0l-4-4m4 4H6"/></svg>         -->
             </div>
           </a>
         </div>
@@ -949,7 +621,6 @@
             <div class="author">
               <p>Continue Reading</p>
               <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m14 16l4-4m0 0l-4-4m4 4H6"/></svg>         -->
             </div>
           </a>
         </div>
@@ -982,120 +653,19 @@
             <div class="author">
               <p>Continue Reading</p>
               <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m14 16l4-4m0 0l-4-4m4 4H6"/></svg>         -->
-            </div>
-          </a>
-        </div>
-      </li>
-
-      <li class="package-card deal-card">
-        <div class="deal-image">
-          <a href="./blog.html">
-            <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" /></a>
-        </div>
-        <div class="card-content">
-          <div class="author">
-            <p>By Admin</p>
-            <p>
-              <span>20</span> <sup>th</sup> Jan <br />
-              2023
-            </p>
-          </div>
-
-          <div class="blog-content">
-            <a href="./blog.html">
-              <h6>Worshipping Vehicles</h6>
-            </a>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Dolores nesciunt incidunt dicta maxime deserunt.
-            </p>
-          </div>
-          <hr />
-          <a href="./blog.html">
-            <div class="author">
-              <p>Continue Reading</p>
-              <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m14 16l4-4m0 0l-4-4m4 4H6"/></svg>         -->
-            </div>
-          </a>
-        </div>
-      </li>
-
-      <li class="package-card deal-card">
-        <div class="deal-image">
-          <a href="./blog.html">
-            <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" /></a>
-        </div>
-        <div class="card-content">
-          <div class="author">
-            <p>By Admin</p>
-            <p>
-              <span>20</span> <sup>th</sup> Jan <br />
-              2023
-            </p>
-          </div>
-
-          <div class="blog-content">
-            <a href="./blog.html">
-              <h6>Worshipping Vehicles</h6>
-            </a>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Dolores nesciunt incidunt dicta maxime deserunt.
-            </p>
-          </div>
-          <hr />
-          <a href="./blog.html">
-            <div class="author">
-              <p>Continue Reading</p>
-              <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m14 16l4-4m0 0l-4-4m4 4H6"/></svg>         -->
-            </div>
-          </a>
-        </div>
-      </li>
-
-      <li class="package-card deal-card">
-        <div class="deal-image">
-          <a href="./blog.html"><img src="./assets/images/everestbasecamp.jpg" alt="Nepal" /></a>
-        </div>
-        <div class="card-content">
-          <div class="author">
-            <p>By Admin</p>
-            <p>
-              <span>20</span> <sup>th</sup> Jan <br />
-              2023
-            </p>
-          </div>
-
-          <div class="blog-content">
-            <a href="./blog.html">
-              <h6>Worshipping Vehicles</h6>
-            </a>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Dolores nesciunt incidunt dicta maxime deserunt.
-            </p>
-          </div>
-          <hr />
-          <a href="./blog.html">
-            <div class="author">
-              <p>Continue Reading</p>
-              <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m14 16l4-4m0 0l-4-4m4 4H6"/></svg>         -->
             </div>
           </a>
         </div>
       </li>
     </ul>
-    <!-- uiverse btn -->
+
     <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage('./blog_listing.html')">
       <p>View More</p>
     </button>
   </section>
-
   <!-- blog-end -->
+
+
   <!-- testimonial -->
   <section class="testimonial-wrapper components text-center">
     <h4>Our Happy Travellers</h4>
@@ -1103,99 +673,12 @@
       What Our <span class="orange-text">Clients Say ?</span>
     </h2>
     <div class="owl-carousel owl-theme testimonial-carousel">
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <div class="mx-auto">
-            <span class="name">" Guide Was the Highlight of the Trip "</span>
-            <p class="rating">★ ★ ★ ★ ★</p>
-          </div>
-          <a href="https://www.tripadvisor.com/" target="_blank" rel="noreferrer noopener ">
-            <span class="review-booked-via">
-              <p>Booked via :</p>
-              <img src="./assets/images/trip-advisor-logo.png" class="trip_advisor_logo" alt="" />
-            </span>
-          </a>
-          <span class="quote">
-            <i class="fa-solid fa-quote-left"></i>
-          </span>
-        </div>
-
-        <p class="mt-4">
-          We completed the Annapurna Base Camp trek and we had an absolutely
-          great experience. They were very flexible as during the trek we
-          changed our itinerary. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Corrupti fugit maiores vel in facere dolore
-          reprehenderit rem, voluptatibus suscipit nobis nulla incidunt
-          impedit sint nemo quo quod cumque libero
-        </p>
-        <div class="author_info">
-          <p>- Name</p>
-          <p>Country : USA</p>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <div class="mx-auto">
-            <span class="name">" Guide Was the Highlight of the Trip "</span>
-            <p class="rating">★ ★ ★ ★ ★</p>
-          </div>
-          <span class="review-booked-via">
-            <p>Booked via :</p>
-            <a href="https://www.tripadvisor.com/"><img src="./assets/images/trip-advisor-logo.png"
-                class="trip_advisor_logo" alt="" /></a>
-          </span>
-          <span class="quote">
-            <i class="fa-solid fa-quote-left"></i>
-          </span>
-        </div>
-
-        <p class="mt-4">
-          We completed the Annapurna Base Camp trek and we had an absolutely
-          great experience. They were very flexible as during the trek we
-          changed our itinerary. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Corrupti fugit maiores vel in facere dolore
-          reprehenderit rem, voluptatibus suscipit nobis nulla incidunt
-          impedit sint nemo quo quod cumque libero
-        </p>
-        <div class="author_info">
-          <p>- Name</p>
-          <p>Country : USA</p>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <div class="mx-auto">
-            <span class="name">" Guide Was the Highlight of the Trip "</span>
-            <p class="rating">★ ★ ★ ★ ★</p>
-          </div>
-          <span class="review-booked-via">
-            <p>Booked via :</p>
-            <a href="https://www.tripadvisor.com/"><img src="./assets/images/trip-advisor-logo.png"
-                class="trip_advisor_logo" alt="" /></a>
-          </span>
-          <span class="quote">
-            <i class="fa-solid fa-quote-left"></i>
-          </span>
-        </div>
-
-        <p class="mt-4">
-          We completed the Annapurna Base Camp trek and we had an absolutely
-          great experience. They were very flexible as during the trek we
-          changed our itinerary. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Corrupti fugit maiores vel in facere dolore
-          reprehenderit rem, voluptatibus suscipit nobis nulla incidunt
-          impedit sint nemo quo quod cumque libero
-        </p>
-        <div class="author_info">
-          <p>- Name</p>
-          <p>Country : USA</p>
-        </div>
-      </div>
+      <jcms:module:testimonial-list/>
     </div>
   </section>
   <!-- testimonial-end -->
+
+
   <!-- write_a_review -->
   <section class="review mt-5">
     <div class="left-review">
@@ -1212,307 +695,10 @@
     <img src="./assets/images/qr.png" alt="qr" />
   </section>
 
-  <section class="packages-wrapper components">
-    <header class="page-header">
-      <h4 class="text-center">Fixed Departure</h4>
-      <h2 class="mb-3 green-title">
-        Hassle-Free
-        <span class="orange-text">Fixed Departure</span> Adventures.
-      </h2>
-    </header>
-    <br />
+  <!-- fixed departure -->
+  <jcms:module:fixed-departure-home/>
+  <!-- fixed departure end -->
 
-    <div class="packages-grid mx-auto">
-      <!-- CARD -->
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Trip Start Date</span>
-              <span class="value green">22 Aug 2025</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Seats Available</span>
-              <span class="value green">12</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Book Before</span>
-              <span class="value green">25th Aug 2026</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Trip End Date</span>
-              <span class="value green">12 Aug 2025</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" data-seats="12">
-              <p>Book Now</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Trip Start Date</span>
-              <span class="value green">22 Aug 2025</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Seats Available</span>
-              <span class="value green">12</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Book Before</span>
-              <span class="value green">25th Aug 2026</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Trip End Date</span>
-              <span class="value green">12 Aug 2025</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" data-seats="12">
-              <p>Book Now</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Trip Start Date</span>
-              <span class="value green">22 Aug 2025</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Seats Available</span>
-              <span class="value green">12</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Book Before</span>
-              <span class="value green">25th Aug 2026</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Trip End Date</span>
-              <span class="value green">12 Aug 2025</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" data-seats="12">
-              <p>Book Now</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Trip Start Date</span>
-              <span class="value green">22 Aug 2025</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Seats Available</span>
-              <span class="value green">12</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Book Before</span>
-              <span class="value green">25th Aug 2026</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Trip End Date</span>
-              <span class="value green">12 Aug 2025</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" data-seats="12">
-              <p>Book Now</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Trip Start Date</span>
-              <span class="value green">22 Aug 2025</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Seats Available</span>
-              <span class="value green">12</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Book Before</span>
-              <span class="value green">25th Aug 2026</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Trip End Date</span>
-              <span class="value green">12 Aug 2025</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" data-seats="12">
-              <p>Book Now</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="package-card">
-        <div class="image-wrapper">
-          <img src="./assets/images/everestbasecamp.jpg" alt="Nepal" />
-          <span class="badge">POPULAR</span>
-        </div>
-
-        <div class="card-content">
-          <h3 class="title">Classic Nepal Tour</h3>
-
-          <div class="info-grid mx-auto">
-            <div class="info">
-              <span class="label">Trip Start Date</span>
-              <span class="value green">22 Aug 2025</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Seats Available</span>
-              <span class="value green">12</span>
-            </div>
-
-            <div class="info">
-              <span class="label">Book Before</span>
-              <span class="value green">25th Aug 2026</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="info">
-              <span class="label">Trip End Date</span>
-              <span class="value green">12 Aug 2025</span>
-            </div>
-
-            <!-- FLOATING ELEMENTS -->
-            <span class="days-badge">4 days</span>
-
-            <button class="explore_btn" data-bs-toggle="modal" data-bs-target="#fixedDepartureModal" data-seats="12">
-              <p>Book Now</p>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- uiverse btn -->
-    </div>
-    <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage('./fixed_listing.html')">
-      <p>View More</p>
-    </button>
-  </section>
   <!-- Fixed Departure Booking Modal -->
   <div class="modal fade" id="fixedDepartureModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -1607,93 +793,7 @@
 
   <section class="parent_faq_mountain">
     <!-- faqs -->
-    <section class="faq-wrapper components">
-      <h4 class="text-center mb-2">Frequently Asked Questions</h4>
-
-      <h2 class="text-center green-title mb-5">
-        Everything you need to <span class="orange-text">know.</span>
-      </h2>
-
-      <div class="accordion container faq_content" id="accordionExample">
-        <!-- FAQ 1 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne"
-              aria-expanded="true" aria-controls="faqOne">
-              What are the Best Things to Do in Nepal?
-            </button>
-          </h2>
-
-          <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>1. Trekking:</strong> Everest Base Camp, Annapurna
-              Base Camp/Circuit, and Langtang Valley offer stunning
-              Himalayan views.<br /><br />
-
-              <strong>2. Mountain Flight to Everest:</strong> Enjoy a scenic
-              flight from Kathmandu to see Mount Everest up close without
-              trekking.<br /><br />
-
-              <strong>3. Paragliding in Pokhara:</strong> Fly over Phewa
-              Lake with panoramic mountain scenery.<br /><br />
-
-              <strong>4. Jungle Safari:</strong> Spot rhinos, tigers,
-              elephants, and birdlife in Chitwan or Bardia National Parks.
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ 2 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo"
-              aria-expanded="false" aria-controls="faqTwo">
-              Best Festivals & Celebrations in Nepal?
-            </button>
-          </h2>
-
-          <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Nepal celebrates vibrant festivals like Dashain, Tihar, Holi,
-              Buddha Jayanti, and Teej, offering deep cultural insight and
-              colorful traditions.
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ 3 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#faqThree" aria-expanded="false" aria-controls="faqThree">
-              Can I Book Flights, Hotels, and Tours Separately?
-            </button>
-          </h2>
-
-          <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Yes, you can book flights, hotels, and tours separately.
-              However, booking a complete travel package can save time and
-              often offers better value.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <button class="explore_btn inquiry-btn mx-auto mt-4">
-        <p>Load More</p>
-      </button>
-    </section>
-
-    <!-- faqs-end-->
-    <section class="parallax-divider">
-      <!-- <p class="parallax-quote">
-    Every journey leaves a story behind — some written on maps, some on the soul.
-  </p> -->
-      <div class="mountain">
-        <img src="./assets/images/mountain.png" alt="" />
-      </div>
-    </section>
+    <jcms:module:faq-destination/>
   </section>
   <!-- footer -->
 
@@ -1820,50 +920,73 @@
 
   <script>
     let maxSeats = 1;
+    let pricePerPerson = 400;
 
-    // When user clicks Explore
-    document.querySelectorAll(".explore_btn").forEach((btn) => {
+    // When user clicks Explore (Fixed Departure Book Now)
+    document.querySelectorAll(".explore_btn[data-bs-target=\'#fixedDepartureModal\']").forEach((btn) => {
       btn.addEventListener("click", function () {
-        maxSeats = parseInt(this.dataset.seats);
-
+        maxSeats = parseInt(this.dataset.seats) || 1;
+        pricePerPerson = parseFloat(this.dataset.price) || 0;
+        
         const peopleInput = document.getElementById("peopleCount");
         peopleInput.value = 1;
         peopleInput.max = maxSeats;
 
-        // Update amount for 1 person
-        document.getElementById("amountValue").textContent = 400;
+        // Update modal content
+        const modal = document.querySelector("#fixedDepartureModal");
+        if (modal) {
+            const titleEl = modal.querySelector(".modal-header .green-title");
+            if (titleEl) titleEl.innerHTML = `Reserve Your <span class="orange-text">Fixed Departure</span> Trip : ${this.dataset.title}`;
+            
+            const beforeEl = modal.querySelector(".book_before");
+            if (beforeEl) beforeEl.textContent = `Book before : ${this.dataset.before}`;
+            
+            const startEl = modal.querySelector(".trapezium-left");
+            if (startEl) startEl.textContent = `Start Date : ${this.dataset.start}`;
+            
+            const endEl = modal.querySelector(".trapezium-right");
+            if (endEl) endEl.textContent = `End Date : ${this.dataset.end}`;
+
+            const amountValueEl = modal.querySelector(".amountValue");
+            if (amountValueEl) amountValueEl.textContent = pricePerPerson;
+        }
       });
     });
 
-    // Prevent exceeding seats
+    // Handle people input change
     const peopleInput = document.getElementById("peopleCount");
-    const amountSpan = document.getElementById("amountValue");
-    const pricePerPerson = 400;
+    if (peopleInput) {
+        peopleInput.addEventListener("input", function () {
+            let value = parseInt(this.value) || 1;
+            const amountSpan = document.querySelector(".amountValue");
 
-    peopleInput.addEventListener("input", function () {
-      let value = parseInt(this.value) || 1;
+            if (value > maxSeats) {
+                value = maxSeats;
+                this.value = maxSeats;
+                alert(`Only ${maxSeats} seats are available for this departure.`);
+            }
 
-      if (value > maxSeats) {
-        value = maxSeats;
-        this.value = maxSeats;
-        alert(`Only ${maxSeats} seats are available for this departure.`);
-      }
+            if (value < 1) {
+                value = 1;
+                this.value = 1;
+            }
 
-      if (value < 1) {
-        value = 1;
-        this.value = 1;
-      }
+            if (amountSpan) {
+                amountSpan.textContent = value * pricePerPerson;
+            }
+        });
+    }
 
-      amountSpan.textContent = value * pricePerPerson;
-    });
-    const planCountry = document.getElementById("planCountry");
-    const planCountryCode = document.getElementById("planCountryCode");
-
-    planCountry.addEventListener("change", function () {
-      const selected = this.selectedOptions[0];
-      const code = selected.getAttribute("data-code") || "";
-      planCountryCode.value = code;
-    });
+    // Country code handling for Review (if present)
+    const tripCountry = document.getElementById("tripCountry");
+    const tripCode = document.getElementById("tripCode");
+    if (tripCountry && tripCode) {
+        tripCountry.addEventListener("change", function () {
+            const selected = this.selectedOptions[0];
+            const code = selected.getAttribute("data-code") || "";
+            tripCode.textContent = code;
+        });
+    }
   </script>
 
 
