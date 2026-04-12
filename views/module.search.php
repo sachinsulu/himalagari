@@ -21,9 +21,12 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = Package::get_total_destination_packages($destinationRow->id);
         $destination_filter .= '
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qdestination" name="qdestination[]" ' . $sel . ' id="dest-' . $destinationRow->id . '" value="' . $destinationRow->id . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="dest-' . $destinationRow->id . '">' . $destinationRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                <div class="form-check mb-2">
+                    <input class="form-check-input qdestination" type="checkbox" name="qdestination[]" ' . $sel . ' id="dest-' . $destinationRow->id . '" value="' . $destinationRow->id . '">
+                    <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="dest-' . $destinationRow->id . '">
+                        <span>' . $destinationRow->title . '</span>
+                        <span class="badge rounded-pill bg-light text-dark border">' . $tot . '</span>
+                    </label>
                 </div>
         ';
     }
@@ -41,9 +44,12 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         $tot += Package::get_total_activities_packages($ActivitiesRow->id);
         $activities_filter .= '
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qactivities" name="qactivities[]" ' . $sel . ' id="acti-' . $ActivitiesRow->id . '" value="' . $ActivitiesRow->id . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="acti-' . $ActivitiesRow->id . '">' . $ActivitiesRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                <div class="form-check mb-2">
+                    <input class="form-check-input qactivities" type="checkbox" name="qactivities[]" ' . $sel . ' id="acti-' . $ActivitiesRow->id . '" value="' . $ActivitiesRow->id . '">
+                    <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="acti-' . $ActivitiesRow->id . '">
+                        <span>' . $ActivitiesRow->title . '</span>
+                        <span class="badge rounded-pill bg-light text-dark border">' . $tot . '</span>
+                    </label>
                 </div>
         ';
     }
@@ -58,27 +64,16 @@ if (defined('SEARCH_PAGE')) {
         $sql = "SELECT id FROM tbl_package WHERE difficulty='" . $v . "' AND status=1";
         $tot = $db->num_rows($db->query($sql));
         $difficulty_filter .= '
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input gdifficulty" name="gdifficulty[]" ' . $sel . ' id="diff-' . $k . '" value="' . $k . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="diff-' . $k . '">' . $v . ' <span class="checkbox-count">' . $tot . '</span></label>
+                <div class="form-check mb-2">
+                    <input class="form-check-input gdifficulty" type="checkbox" name="gdifficulty[]" ' . $sel . ' id="diff-' . $k . '" value="' . $k . '">
+                    <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="diff-' . $k . '">
+                        <span>' . $v . '</span>
+                        <span class="badge rounded-pill bg-light text-dark border">' . $tot . '</span>
+                    </label>
                 </div>
         ';
     }
     /* Activity Level filter end*/
-
-    /* Price Range start*/
-    $price_filter = '';
-    $priceRec = array('1000' => 'Below USD 1000', '2000' => 'USD 1000 - 2000', 'morethan2000' => 'USD 2000 above');
-    foreach ($priceRec as $k => $v) {
-        $sel = ($k == @$gprice) ? 'checked' : '';
-        $price_filter .= '
-            <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input gprice" name="gprice" ' . $sel . ' id="price-' . $k . '" value="' . $k . '">
-                            <label class="custom-control-label d-flex justify-content-between" for="price-' . $k . '">' . $v . ' <span class="checkbox-count">(123)</span></label>
-                        </div>
-        ';
-    }
-    /* Price Range end*/
 
     /* Duration start*/
     $duration_filter = '';
@@ -102,58 +97,67 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = $db->num_rows($db->query($sql));
         $duration_filter .= '
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input gdays" name="days" ' . $sel . ' id="days-' . $k . '" value="' . $k . '">
-                        <label class="custom-control-label d-flex justify-content-between" for="days-' . $k . '">' . $v . ' <span class="checkbox-count">' . $tot . '</span></label>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input gdays" type="radio" name="days" ' . $sel . ' id="days-' . $k . '" value="' . $k . '">
+                        <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="days-' . $k . '">
+                            <span>' . $v . '</span>
+                            <span class="badge rounded-pill bg-light text-dark border">' . $tot . '</span>
+                        </label>
                     </div>
         ';
     }
     /* Duration end*/
 
     $resisearch .= '
-            <aside class="sidebar-wrapper pv">
-                <!--<div class="secondary-search-box mb-30">-->
-                    <!--<h4 class="">Search</h4>-->
+            <aside class="sidebar-wrapper pv p-4 bg-white shadow-sm rounded-4">
                     <form action="' . BASE_URL . 'searchlist" method="post" id="search_form">
                                                
-                        <div class="sidebar-box">
-                            <div class="box-title"><h5>Activities</h5></div>
-                            <div class="box-content">
+                        <div class="sidebar-box mb-4">
+                            <div class="box-title mb-3 border-bottom pb-2"><h5 class="fw-bold text-dark">Destination</h5></div>
+                            <div class="box-content custom-scrollbar" style="max-height: 250px; overflow-y: auto; padding-right: 10px;">
                                 ' . $destination_filter . '
                             </div>
                         </div>
         
-                        <div class="sidebar-box">
-                            <div class="box-title"><h5>Region</h5></div>
-                            <div class="box-content">
+                        <div class="sidebar-box mb-4">
+                            <div class="box-title mb-3 border-bottom pb-2"><h5 class="fw-bold text-dark">Activities</h5></div>
+                            <div class="box-content custom-scrollbar" style="max-height: 250px; overflow-y: auto; padding-right: 10px;">
                                 ' . $activities_filter . '
                             </div>
                         </div>
                         
-                        <div class="sidebar-box">
-                            <div class="box-title"><h5>Duration</h5></div>
+                        <div class="sidebar-box mb-4">
+                            <div class="box-title mb-3 border-bottom pb-2"><h5 class="fw-bold text-dark">Duration</h5></div>
                             <div class="box-content">
                                 ' . $duration_filter . '
                             </div>
                         </div>
         
-                        <div class="sidebar-box">
-                            <div class="box-title"><h5>Activity Level</h5></div>
+                        <div class="sidebar-box mb-4">
+                            <div class="box-title mb-3 border-bottom pb-2"><h5 class="fw-bold text-dark">Activity Level</h5></div>
                             <div class="box-content">
                                 ' . $difficulty_filter . '
                             </div>
                         </div>
-        
-                        <!--<div class="sidebar-box">
-                            <div class="box-title"><h5>Price Range</h5></div>
-                            <div class="box-content">
-                                ' . $price_filter . '
-                            </div>
-                        </div>-->
-                
-                    </form>
 
+                    </form>
             </aside>
+            <style>
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #28a745; 
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #218838; 
+                }
+            </style>
             ';
     /* search page search form end*/
 
@@ -257,157 +261,8 @@ if (defined('SEARCH_PAGE')) {
     }
 
     /* Breadcrumb Start*/
-    if (!empty($gdestination_slug)) {
-        $destt = Destination::find_by_slug($gdestination_slug);
-        $total = Package::get_total_destination_packages($destt->id);
-        $imgs = unserialize($destt->gallery);
-        if ($imgs != "a:0:{}") {
-            $file_path = SITE_ROOT . 'images/destination/gallery/' . $imgs[0];
-            if (file_exists($file_path)) {
-                $bread .= '<style>.about-banner{background: linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),url(' . IMAGE_PATH . 'destination/gallery/' . $imgs[0] . ') !important;}</style>';
-            }
-        }
-        $bread .= '
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . 'home"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item one"><a href="' . BASE_URL . 'destination-list">Destination</a></li>
-                        <li class="breadcrumb-item two active" aria-current="page">' . $destt->title . '</li>
-                    </ol>
-                </nav>
-                <!--<h4 class="mt-0 line-125 title-breadcrum">' . $total . ' Trip Packages in ' . $destt->title . '</h4>-->
-        ';
-        if ($destt->id == 11) {
-            $bread_title .= '
-                <h2><span><span style="color:#3a3838">Packages for ' . $destt->title . '</span></span></h2>
-            ';
-        } else {
-            $bread_title .= '
-                <h2><span><span style="color:#3a3838">Tour Packages in ' . $destt->title . '</span></span></h2>
-            ';
-        }
-        $brief = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', $destt->content);
-        $bread_text .= '
-                <h2>' . $destt->title . '</h2>';
-        if (!empty($brief[0])) {
-            $bread_text .= '
-                <p>' . strip_tags($brief[0]) . '
-                    <a href="#" id="read_more">Read More</a>
-                </p>
-            ';
-        }
-        if (!empty($brief[1])) {
-            $bread_text_extra .= '
-                <h4>' . $destt->title . '</h4>
-                    ' . $brief[1] . '
-            ';
-        }
-    }
-    if (!empty($qdestination[0])) {
-        if ($qdestination[0] == 'all') {
-            $total = Package::get_total_destination_packages(10);
-            $bread .= '
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . 'home"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item one"><a href="' . BASE_URL . 'destination-list">Destination</a></li>
-                        <li class="breadcrumb-item two active" aria-current="page">All</li>
-                    </ol>
-                </nav>
-                <!--<h4 class="mt-0 line-125 title-breadcrum">' . $total . ' Trip Packages in Nepal</h4>-->
-        ';
-        } else {
-            $destt = Destination::find_by_id($qdestination[0]);
-            $total = Package::get_total_destination_packages($destt->id);
-            $imgs = unserialize($destt->gallery);
-            if ($imgs != "a:0:{}") {
-                $file_path = SITE_ROOT . 'images/destination/gallery/' . $imgs[0];
-                if (file_exists($file_path)) {
-                    $bread .= '<style>.about-banner{background: linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),url(' . IMAGE_PATH . 'destination/gallery/' . $imgs[0] . ') !important;}</style>';
-                }
-            }
-            $bread .= '
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . 'home"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item one"><a href="' . BASE_URL . 'destination-list">Destination</a></li>
-                        <li class="breadcrumb-item two active" aria-current="page">' . $destt->title . '</li>
-                    </ol>
-                </nav>
-                <!--<h4 class="mt-0 line-125 title-breadcrum">' . $total . ' Trip Packages in ' . $destt->title . '</h4>-->
-            ';
-            if ($qdestination[0] == 11) {
-                $bread_title .= '
-                <h2><span><span style="color:#3a3838">Packages for ' . $destt->title . '</span></span></h2>
-                ';
-            } else {
-                $bread_title .= '
-                <h2><span><span style="color:#3a3838">Tour Packages in ' . $destt->title . '</span></span></h2>
-                ';
-            }
-            $brief = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', $destt->content);
-            $bread_text .= '
-                <h2>' . $destt->title . '</h2>';
-            if (!empty($brief[0])) {
-                $bread_text .= '
-                <p>' . strip_tags($brief[0]) . '
-                    <a href="#" id="read_more">Read More</a>
-                </p>
-                ';
-            }
-            if (!empty($brief[1])) {
-                $bread_text_extra .= '
-                <h4>' . $destt->title . '</h4>
-                    ' . $brief[1] . '
-                ';
-            }
-        }
-    }
-    if (!empty($gactivity_slug)) {
-        $totalIds = Activities::get_id_by_slug($gactivity_slug);
-        $tot = 0;
-        foreach ($totalIds as $totalId) {
-            $tot += Package::get_total_activities_packages($totalId->id);
-        }
-        $actt = Activities::find_by_slug($gactivity_slug);
-        $destt = Destination::find_by_id($actt->destinationId);
-        if (!empty($actt->banner_image)) {
-            $file_path = SITE_ROOT . 'images/activities/banner/' . $actt->banner_image;
-            if (file_exists($file_path)) {
-                $bread .= '<style>.about-banner{background: linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),url(' . IMAGE_PATH . 'activities/banner/' . $actt->banner_image . ') !important;}</style>';
-            }
-        }
-        $bread .= '
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . 'home"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item one"><a href="' . BASE_URL . 'activity-list/' . $destt->slug . '">Activity</a></li>
-                        <li class="breadcrumb-item two active" aria-current="page">' . $actt->title . '</li>
-                    </ol>
-                </nav>
-                <!--<h4 class="mt-0 line-125 title-breadcrum">' . $tot . ' Trip Packages in ' . $actt->title . '</h4>-->
-        ';
-        $bread_title .= '
-            <h2><span><span style="color:#3a3838">' . $actt->title . ' Packages</span></span></h2>
-        ';
-        $brief = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', $actt->content);
-        $bread_text .= '
-                <h2>' . $actt->title . '</h2>';
-        if (!empty($brief[0])) {
-            $bread_text .= '
-                <p>' . strip_tags($brief[0]) . '
-                    <a href="#" id="read_more">Read More</a>
-                </p>
-            ';
-        }
-        if (!empty($brief[0])) {
-            $bread_text_extra .= '
-                <h4>' . $actt->title . '</h4>
-                    ' . $brief[1] . '
-            ';
-        }
-
-    }
+    $bread = '';
+    /* Breadcrumb End*/        
     /* Breadcrumb End*/
 
     $page = (isset($_REQUEST["pageno"]) and !empty($_REQUEST["pageno"])) ? $_REQUEST["pageno"] : 1;
@@ -424,92 +279,85 @@ if (defined('SEARCH_PAGE')) {
 //     echo '<pre>'; print_r($sql); die();
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
-            if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
-                $sql = "SELECT AVG(rating) 'rating' FROM tbl_review WHERE package_id=" . $rows['id'];
-                $ratingObj = $db->fetch_object($db->query($sql));
-                $rating_float = (float)$ratingObj->rating;
-                $rating_floor = floor($rating_float);
-                $rating = ($rating_float <= ($rating_floor + 0.5)) ? ($rating_floor + 0.5) : (ceil($rating_float));
-                $days = ($rows['days'] == 1) ? 'day' : 'days';
-                
-                $price_text = '';
-                if (!empty($rows['price']) and (empty($rows['offer_price']))) {
-                    $price_text = '<p class="home-price">Starting USD ' . $rows['price'] . '</p>';
-                }
-                if (!empty($rows['offer_price'])) {
-                    $price_text = '<p class="home-price">Starting USD <del>' . $rows['price'] . '</del> ' . $rows['offer_price'] . '</p>';
-                }
-        
-                $respkglist .= '<div class="col">
-                    <figure class="tour-grid-item-01">
-                        <a href="' . BASE_URL . 'package/' . $rows['slug'] . '">
-                            
-                                    <div class="image">
-                                        <img src="' . IMAGE_PATH . 'package/' . $rows['image'] . '" alt="' . $rows['title'] . '"/>
-                                        ' . $price_text . '
-                                    </div>
-                              
-                                    <figcaption class="content">
-                                        <h5 class="">' . $rows['title'] . '</h5>
-                                        <ul class="item-meta mt-15">
-                                            <li>
-                                                <!--<i class="elegent-icon-pin_alt text-warning"></i>-->
-                                                <i class="far fa-map pr-2"></i>' . $rows['destination'] . '
-                                            </li>
-                                            <!--<li>
-                                                <div class="rating-item rating-sm rating-inline clearfix">
-                                                    <div class="rating-icons">
-                                                        <input type="hidden" class="rating"
-                                                               data-filled="rating-icon ri-star rating-rated"
-                                                               data-empty="rating-icon ri-star-empty"
-                                                               data-fractions="2" data-readonly
-                                                               value="' . $rating . '"/>
-                                                    </div>
-                                                </div>
-                                            </li>-->
-                                            <li ><span class="font700 h6" ><i class="far fa-hourglass"></i> ' . $rows['days'] . ' ' . $days . ' </span ></li >
-                                        </ul>
-                                        <!--<p>' . $rows['breif'] . ' </p >-->
-                                        
-                                    </figcaption >';
-                if (!empty($rows['accomodation'])) {
-                    $respkglist .= '<p class="featured-trip1">';
-                    $routes = explode(',', $rows['accomodation']);
-                    foreach ($routes as $route) {
-                        if (end($routes) == $route) {
-                            $respkglist .= $route;
-                        } else {
-                            $respkglist .= $route . ' -> ';
-                        }
-                    }
-                    $respkglist .= '</p>';
-                }
-                if (!empty($rows['difficulty'])) {
-                    switch ($rows['difficulty']) {
-                        case 'Easy':
-                            $respkglist .= '<img src="' . IMAGE_PATH . 'static/meter/1.png" class="new-img3">';
-                            break;
-                        case 'Moderate':
-                            $respkglist .= '<img src="' . IMAGE_PATH . 'static/meter/2.png" class="new-img3">';
-                            break;
-                        case 'Moderate To Strenous':
-                            $respkglist .= '<img src="' . IMAGE_PATH . 'static/meter/3.png" class="new-img3">';
-                            break;
-                        case 'Strenous':
-                            $respkglist .= '<img src="' . IMAGE_PATH . 'static/meter/4.png" class="new-img3">';
-                            break;
-                        case 'Very Strenous':
-                            $respkglist .= '<img src="' . IMAGE_PATH . 'static/meter/5.png" class="new-img3">';
-                            break;
-                    }
-                }
-                $respkglist .= '
-                        </a >
-                    </figure >
-                    </div>
-                ';
+            $file_path = SITE_ROOT . 'images/package/' . $rows['image'];
+            $img = (!empty($rows['image']) and file_exists($file_path)) ? IMAGE_PATH . 'package/' . $rows['image'] : IMAGE_PATH . 'static/home-destination.jpg';
 
+            $destinationTitle = !empty($rows['destination']) ? $rows['destination'] : '';
+            if (isset($rows['activityId'])) {
+                $activityTitle = !empty($rows['activityId']) ? Activities::field_by_id((int) $rows['activityId'], 'title') : '';
+            } else {
+                $activityTitle = ''; // activityId is not selected in current query
             }
+            $accomodation = !empty($rows['accomodation']) ? $rows['accomodation'] : 'N/A';
+            $difficulty = !empty($rows['difficulty']) ? $rows['difficulty'] : 'Moderate';
+            $days = !empty($rows['days']) ? (int) $rows['days'] : 0;
+            
+            $popularBadge = '';
+            if (isset($rows['popular']) && $rows['popular'] == 1) {
+                $popularBadge = '<span class="badge">POPULAR</span>';
+            }
+
+            $destinationTitleClean = trim(strip_tags((string) $destinationTitle));
+            $activityTitleClean = trim(strip_tags((string) $activityTitle));
+            $accomodationClean = trim(strip_tags((string) $accomodation));
+            $difficultyClean = trim(strip_tags((string) $difficulty));
+
+            $destinationTitleDisplay = (strlen($destinationTitleClean) > 32) ? substr($destinationTitleClean, 0, 29) . '...' : $destinationTitleClean;
+            $activityTitleDisplay = (strlen($activityTitleClean) > 32) ? substr($activityTitleClean, 0, 29) . '...' : $activityTitleClean;
+            $accomodationDisplay = $accomodationClean;
+            $difficultyDisplay = $difficultyClean;
+
+            $respkglist .= '<div class="package-card">
+                        <div class="image-wrapper">
+                            <img src="' . $img . '" alt="' . htmlspecialchars($rows['title'], ENT_QUOTES, 'UTF-8') . '">
+                            ' . $popularBadge . '
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="title">' . htmlspecialchars($rows['title'], ENT_QUOTES, 'UTF-8') . '</h3>
+
+                            <div class="card-info-wrapper">
+
+                                <div class="info-row">
+                                    <div class="info">
+                                        <span class="label">Destination</span>
+                                        <span class="value green" title="' . htmlspecialchars($destinationTitleClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($destinationTitleDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                    <div class="row-divider"></div>
+                                    <div class="info text-right">
+                                        <span class="label">Accomodations</span>
+                                        <span class="value green" title="' . htmlspecialchars($accomodationClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($accomodationDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                </div>
+
+                                <div class="action-row">
+                                    <span class="days-badge">' . $days . ' days</span>
+                                    <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $rows['slug'] . '\')">
+                                        <p>Explore</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="info-row">';
+            // We ignore activityTitle display if empty, to match original logic or just don't show it
+            if ($activityTitleDisplay) {
+                $respkglist .= '
+                                    <div class="info">
+                                        <span class="label">Activities</span>
+                                        <span class="value green" title="' . htmlspecialchars($activityTitleClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($activityTitleDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                    <div class="row-divider"></div>';
+            }
+            $respkglist .= '
+                                    <div class="info text-right">
+                                        <span class="label">Difficulty-level</span>
+                                        <span class="value green" title="' . htmlspecialchars($difficultyClean, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($difficultyDisplay, ENT_QUOTES, 'UTF-8') . '</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
         }
         $navigation .= '
                     <div class="pager-innner">
@@ -526,9 +374,9 @@ if (defined('SEARCH_PAGE')) {
         ';
     } else {
         $respkglist .= '
-            <figure class="tour-long-item-01">
+            <div class="col-12 text-center" style="grid-column: 1 / -1;">
                 <h3>No Result Found</h3>
-             </figure>';
+             </div>';
     }
     /*}else{
         $url = BASE_URL.'pages / errors';

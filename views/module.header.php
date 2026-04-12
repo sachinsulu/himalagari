@@ -7,6 +7,28 @@ $header_components = '';
 $header1 = '';
 $home_header = '';
 
+$destinationsHTML = '<option value="" disabled selected>Where to?</option>';
+$destinationRec = Destination::get_destination();
+if ($destinationRec) {
+    foreach ($destinationRec as $dstRow) {
+        $destinationsHTML .= '<option value="' . $dstRow->id . '">' . $dstRow->title . '</option>';
+    }
+}
+
+$activitiesHTML = '<option value="" disabled selected>Select activity</option>';
+$ActivitiesRec = Activities::get_activities();
+if ($ActivitiesRec) {
+    foreach ($ActivitiesRec as $actRow) {
+        $activitiesHTML .= '<option value="' . $actRow->id . '">' . $actRow->title . '</option>';
+    }
+}
+
+$durationHTML = '<option value="" disabled selected>Select duration</option>';
+$durationRec = array('5' => '1-5 Days', '10' => '6-10 Days', '15' => '11-15 Days', 'morethan15' => 'More than 15 Days');
+foreach ($durationRec as $k => $v) {
+    $durationHTML .= '<option value="' . $k . '">' . $v . '</option>';
+}
+
 $header_components = '
       <div class="offcanvas offcanvas-end" id="menuCanvas">
         <div class="offcanvas-header">
@@ -26,44 +48,34 @@ $header_components = '
       <div class="bottom-search bottomSearch" id="bottomSearch">
         <div class="container">
           <!-- FORM -->
-          <form class="row g-3 align-items-center" id="navSearchForm">
+          <form class="row g-3 align-items-center" id="navSearchForm" action="' . BASE_URL . 'searchlist" method="post">
             <div class="col-md-3">
               <label class="form-label">Destination</label>
-              <select id="destination" class="form-control">
-                <option value="" disabled selected>Where to?</option>
-                <option value="Nepal">Nepal</option>
-                <option value="Bhutan">Bhutan</option>
-                <option value="Tibet">Tibet</option>
+              <select id="destination" name="qdestination[]" class="form-control">
+                ' . $destinationsHTML . '
               </select>
             </div>
 
             <div class="col-md-3">
               <label class="form-label">Activity</label>
-              <select id="activity" class="form-control">
-                <option value="" disabled selected>Select activity</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Relaxation">Relaxation</option>
-                <option value="Culture">Culture</option>
+              <select id="activity" name="qactivities[]" class="form-control">
+                ' . $activitiesHTML . '
               </select>
             </div>
 
             <div class="col-md-3">
               <label class="form-label">Duration</label>
-              <select id="duration" class="form-control">
-                <option value="" disabled selected>Select duration</option>
-                <option value="4-5 days">4-5 days</option>
-                <option value="10-15 days">10-15 days</option>
-                <option value="1-3 months">1-3 months</option>
+              <select id="duration" name="days" class="form-control">
+                ' . $durationHTML . '
               </select>
             </div>
 
             <div class="col-md-3 d-grid">
-              <button class="explore_btn" id="inquiry-btn">Search</button>
+              <button type="submit" class="explore_btn" id="inquiry-btn">Search</button>
             </div>
           </form>
         </div>
       </div>
-
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
         <div class="offcanvas-header">
           <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
