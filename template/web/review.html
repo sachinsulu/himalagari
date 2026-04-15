@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Your Experience</title>
+  <link rel="icon" href="template/web/assets/images/logo.png">
+  <link href="./style.css" rel="stylesheet">
+  <!-- bootstrp -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet">
+
+  <!-- font-awesome -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com' rel="preconnect" />
+  <link href='https://fonts.gstatic.com' rel="preconnect" crossorigin />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+</head>
+
+<body>
+  <section class="scroll-wrapper">
+    <!-- navbar -->
+    <jcms:module:header/>
+
+    <br><br><br>
+
+    <!-- write_a_review -->
+    <section class="review mt-5 container" id="share-experience">
+      <div class="left-review">
+        <p>Share Your Experience</p>
+        <p>
+          Your feedback helps us improve our services and create better travel
+          experiences. We value your opinion to help us serve you better.
+        </p>
+      </div>
+      <div class="right-review" style="flex: 1; max-width: 600px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 0 auto;">
+          <div id="reviewMsg"></div>
+          <form id="reviewForm">
+            <div class="mb-3">
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+            <div class="mb-3">
+              <textarea name="message" class="form-control" rows="5" placeholder="Write your experience..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Submit Review</button>
+          </form>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <jcms:module:footer/>
+
+  </section>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

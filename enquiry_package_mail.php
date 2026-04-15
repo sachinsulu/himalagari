@@ -23,6 +23,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forEnquiry')):
     $enq->message = $message;
     $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
     $enq->ip_address = $_SERVER['REMOTE_ADDR'];
+    $enq->status = 1;
+    $enq->is_deleted = 0;
     $enq->save();
 
     $body = '<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
@@ -55,8 +57,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forEnquiry')):
 			  </tr>
 			</table>';
 
-    $mail = new PHPMailer(); // defaults to using php "mail()"
-    $mail->SetFrom($email, $full_name);
+    $mail = get_mailer();
     $mail->AddReplyTo($email, $full_name);
     $mail->AddAddress($usermail, $sitename);
 
@@ -66,11 +67,11 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forEnquiry')):
             $mail->AddCC($v, $sitename);
         }
     }
-    $mail->Subject = "Enquiry from " . $full_name . " for " . $trip_name;
-
+    $mail->Subject = "Enquiry from " . $full_name . " for " . (isset($trip_name) ? $trip_name : 'a trip');
     $mail->MsgHTML($body);
 
     if (!$mail->Send()):
+        error_log('enquiry_package_mail PHPMailer error: ' . $mail->ErrorInfo);
         echo json_encode(array("action" => "unsuccess", "message" => "Sorry! could not send your message."));
     else:
         echo json_encode(array("action" => "success", "message" => "Your message has been successfully received."));

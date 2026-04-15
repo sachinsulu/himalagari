@@ -204,19 +204,18 @@
 
 
   <!-- write_a_review -->
-  <section class="review mt-5">
+  <section class="review mt-5" id="share-experience">
     <div class="left-review">
       <p>Share Your Experience</p>
       <p>
         Your feedback helps us improve our services and create better travel
-        experiences. Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Aliquam nesciunt velit minima, quae adipisci accusantium
-        distinctio provident doloremque voluptatem reiciendis est dolor at
-        autem tempora facilis officiis illo harum quam.
+        experiences. We value your opinion to help us serve you better.
       </p>
     </div>
     <!-- qr -->
-    <img src="./assets/images/qr.png" alt="qr" />
+    <a href="./review.html" title="Click to open the Review form">
+      <img src="./assets/images/qr.png" alt="qr" style="cursor: pointer;" />
+    </a>
   </section>
 
   <!-- fixed departure -->
@@ -243,11 +242,15 @@
             <li class="trapezium-right">End Date : 22Aug 2025</li>
           </ul>
 
-          <form>
+          <div id="bookmsg" class="mb-3"></div>
+          <form id="fixedDepartureForm">
+            <!-- Included package id invisibly -->
+            <input type="hidden" name="pkg_id" id="fd_pkg_id" value="0" />
+            <input type="hidden" name="date" id="fd_trip_date" value="" />
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="peopleCount" class="form-label">Number of Travellers <span>*</span></label>
-                <input type="number" class="peopleCount form-control" id="peopleCount" min="1" value="1" required />
+                <input type="number" name="pax" class="peopleCount form-control" id="peopleCount" min="1" value="1" required />
               </div>
 
               <div class="col-md-6 mb-3 d-flex align-items-end">
@@ -263,23 +266,25 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Full Name <span>*</span></label>
-                <input type="text" class="form-control" />
+                <input type="text" name="full_name" class="form-control" required/>
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Address<span>*</span></label>
-                <input type="text" class="form-control" />
+                <input type="text" name="address1" class="form-control" required/>
               </div>
             </div>
             <div class="row">
               <!-- Country -->
               <div class="col-md-6 mb-3">
                 <label class="form-label" for="tripCountry">Country<span>*</span></label>
-                <select id="tripCountry" class="form-select" required>
+                <select id="tripCountry" name="country" class="form-select" required>
                   <option value="" disabled selected>Select Country</option>
-                  <option value="NP" data-code="+977">Nepal</option>
-                  <option value="IN" data-code="+91">India</option>
-                  <option value="US" data-code="+1">United States</option>
+                  <option value="Nepal" data-code="+977">Nepal</option>
+                  <option value="India" data-code="+91">India</option>
+                  <option value="United States" data-code="+1">United States</option>
+                  <option value="United Kingdom" data-code="+44">United Kingdom</option>
+                  <option value="Australia" data-code="+61">Australia</option>
                   <!-- add more countries -->
                 </select>
               </div>
@@ -291,19 +296,19 @@
                   <!-- Country Code (auto-filled) -->
                   <span class="input-group-text country-code" id="tripCode">+977</span>
                   <!-- Phone Number -->
-                  <input type="tel" id="tripPhone" class="form-control" required aria-describedby="tripCode" />
+                  <input type="tel" id="tripPhone" name="phone" class="form-control" required aria-describedby="tripCode" />
                 </div>
               </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Email<span>*</span></label>
-              <input class="form-control" rows="3" />
+              <input type="email" name="email" class="form-control" rows="3" required/>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Message</label>
-              <textarea class="form-control" rows="3"></textarea>
+              <textarea name="message" class="form-control" rows="3"></textarea>
             </div>
 
             <button type="submit" class="btn btn-success w-50">
@@ -332,8 +337,7 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
   <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
-
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
 
   <script>
     const swiper = new Swiper(".image-swiper", {
@@ -446,11 +450,12 @@
     let maxSeats = 1;
     let pricePerPerson = 400;
 
-    // When user clicks Explore (Fixed Departure Book Now)
     document.querySelectorAll(".explore_btn[data-bs-target=\'#fixedDepartureModal\']").forEach((btn) => {
       btn.addEventListener("click", function () {
         maxSeats = parseInt(this.dataset.seats) || 1;
         pricePerPerson = parseFloat(this.dataset.price) || 0;
+        let pkgId = this.dataset.id || 0;
+        let startDate = this.dataset.start || '';
 
         const peopleInput = document.getElementById("peopleCount");
         peopleInput.value = 1;
@@ -459,6 +464,11 @@
         // Update modal content
         const modal = document.querySelector("#fixedDepartureModal");
         if (modal) {
+          const fdPkgId = modal.querySelector("#fd_pkg_id");
+          if (fdPkgId) fdPkgId.value = pkgId;
+          const fdTripDate = modal.querySelector("#fd_trip_date");
+          if (fdTripDate) fdTripDate.value = startDate;
+
           const titleEl = modal.querySelector(".modal-header .green-title");
           if (titleEl) titleEl.innerHTML = `Reserve Your <span class="orange-text">Fixed Departure</span> Trip : ${this.dataset.title}`;
 

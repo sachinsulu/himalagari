@@ -53,11 +53,8 @@ require_once("includes/initialize.php");
 		
 		
 	if($_POST['action']=="forcareer"):
-	$mail = new PHPMailer(); // defaults to using php "mail()"
-	
-	$mail->SetFrom($email, $fname);
-	$mail->AddReplyTo($email,$fname);
-	
+	$mail = get_mailer();
+	$mail->AddReplyTo($email, $fname);
 	$mail->AddAddress($usermail, $sitename);
 	// if add extra email address on back end
 	if(!empty($ccusermail)){
@@ -68,12 +65,10 @@ require_once("includes/initialize.php");
 			}		
 		}
 	}
-	
-	$mail->Subject    = 'Application mail from '.$fname;
-	
+	$mail->Subject = 'Application mail from '.$fname;
 	$mail->MsgHTML($body);
-	
 	if(!$mail->Send()) {
+		error_log('career_mail PHPMailer error: ' . $mail->ErrorInfo);
 		echo json_encode(array("action"=>"unsuccess","message"=>"We could not sent your request at the time. Please try again later."));
 	}else{
 		echo json_encode(array("action"=>"success","message"=>"Your request has been successfully received, You will be shortly informed through mail with you verified by admin."));

@@ -94,17 +94,18 @@ if (defined('CONTACTUS_PAGE')) {
           <div class="contact-form">
             <h2 class="orange-text text-start">Get In Touch</h2>
             <h3 class="mb-4">We’re here to help with your travel plans.</h3>
-            <form>
+            <div id="contactMsg"></div>
+            <form id="contactForm">
               <label class="form-label">
                 Full Name <span class="required">*</span>
               </label>
-              <input type="text" placeholder="Full Name " required />
+              <input type="text" name="name" placeholder="Full Name " required />
               <label class="form-label"> Address </label>
-              <input type="text" placeholder="Address " required />
+              <input type="text" name="address" placeholder="Address " required />
               <label class="form-label">
                 Email Address <span class="required">*</span>
               </label>
-              <input type="email" placeholder="Email Address " required />
+              <input type="email" name="email" placeholder="Email Address " required />
 
               <div class="form-row">
                 <select title="country" id="countrySelect" required onchange="document.getElementById(\'countryCode\').value = this.options[this.selectedIndex].getAttribute(\'data-code\') || \'\';">
@@ -126,21 +127,23 @@ if (defined('CONTACTUS_PAGE')) {
                     readonly
                   />
 
-                  <input type="text" placeholder="Phone Number " required />
+                  <input type="text" name="emobile" placeholder="Phone Number " required />
                 </p>
               </div>
               <label class="form-label">
                 Questions & Comments <span class="required">*</span>
               </label>
               <textarea
+                name="message"
                 placeholder="Any Suggestions , Inquiry , Feedbacks ? "
                 required
               ></textarea>
-              <button class="uiverseButton w-50">
+              <button type="submit" class="uiverseButton w-50">
                 Submit
               </button>
             </form>
           </div>
+
         </section>
 
         <!-- LOCATIONS -->

@@ -3,7 +3,7 @@
 $usermail = User::get_UseremailAddress_byId(1);
 //$ccusermail = User::field_by_id(1,'optional_email');
 $sitename = Config::getField('sitename', true);
-$pkgRec = Package::find_by_id($pkg_id);
+$pkgRec = !empty($pkg_id) ? Package::find_by_id($pkg_id) : null;
 
 $body = '
 	<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
@@ -15,12 +15,12 @@ $body = '
             <td><p><span style="color:#0065B3; font-size:14px; font-weight:bold">Booking message</span><br/>
                 The details provided are:</p>
                 <p>
-                    <strong>Fullname</strong> : ' . $full_name . '<br/>
-                    <strong>E-mail Address</strong>: ' . $email . '<br/>
-                    <strong>Phone</strong> : ' . $phone . '<br/>
-                    <strong>Address</strong> : ' . $address1 . ' / ' . $address2 . '<br/>
-                    <strong>Country</strong> : ' . $country . '<br/>
-                    <strong>Zip Code</strong> : ' . $zipcode . '<br/>';
+                    <strong>Fullname</strong> : ' . (isset($full_name) ? $full_name : '') . '<br/>
+                    <strong>E-mail Address</strong>: ' . (isset($email) ? $email : '') . '<br/>
+                    <strong>Phone</strong> : ' . (isset($phone) ? $phone : '') . '<br/>
+                    <strong>Address</strong> : ' . (isset($address1) ? $address1 : '') . ' / ' . (isset($address2) ? $address2 : '') . '<br/>
+                    <strong>Country</strong> : ' . (isset($country) ? $country : '') . '<br/>
+                    <strong>Zip Code</strong> : ' . (isset($zipcode) ? $zipcode : '') . '<br/>';
 if (!empty($province)) {
     $body .= '    <strong>Province(City)</strong> : ' . $province . '<br/>';
 }
@@ -77,9 +77,8 @@ $body .= '<tr>
 /*
 * mail info
 */
-$mail = new PHPMailer(); // defaults to using php "mail()"
-$mail->SetFrom($email, $full_name);
-$mail->AddReplyTo($email, $full_name);
+$mail = get_mailer();
+$mail->AddReplyTo(isset($email) ? $email : SMTP_FROM, isset($full_name) ? $full_name : SMTP_FROMNAME);
 $mail->AddAddress($usermail, $sitename);
 // if add extra email address on back end
 if (!empty($ccusermail)) {
@@ -90,7 +89,10 @@ if (!empty($ccusermail)) {
         }
     }
 }
-$mail->Subject = 'Booking mail from ' . $full_name . ' for ' . $pkgRec->title;
+$pkgTitle = $pkgRec ? $pkgRec->title : 'General Booking';
+$mail->Subject = 'Booking enquiry from ' . (isset($full_name) ? $full_name : '') . ' for ' . $pkgTitle;
 $mail->MsgHTML($body);
-$mail->Send();
+if (!$mail->Send()) {
+    error_log('book_mail PHPMailer error: ' . $mail->ErrorInfo);
+}
 ?>

@@ -41,8 +41,8 @@
 			$bokRec->person_address	= $address1;
 			$bokRec->person_country = $country;
 			$bokRec->person_country_code = Countries::find_by_name($country);
-			$bokRec->person_city 	= $province;
-			$bokRec->person_postal 	= $state;
+			$bokRec->person_city 	= isset($province) ? $province : '';
+			$bokRec->person_postal 	= isset($state) ? $state : '';
 //			$bokRec->person_ctype 	= implode(' / ', $person_ctype); // (!empty($person_ctype[0])?$person_ctype[0]:'').' '.(!empty($person_ctype[1])?$person_ctype[1]:'');
             $bokRec->person_hear    = (!empty($address2)) ? $address2 : '';
 			$bokRec->person_comment = $message;
@@ -62,13 +62,15 @@
                 $enq->email = $email;
                 $enq->phone = $phone;
                 $enq->country = $country;
-                $enq->city = $province;
+                $enq->city = isset($province) ? $province : '';
                 $enq->trip_name = Package::field_by_id($pkg_id, 'title');
                 $enq->trip_date = getDateFormat($date);
                 $enq->pax = (int)$pax + 1;
                 $enq->message = $message;
                 $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
                 $enq->ip_address = $_SERVER['REMOTE_ADDR'];
+                $enq->status = 1;
+                $enq->is_deleted = 0;
                 $enq->save();
 
                 include(SITE_ROOT.'book_mail.php');

@@ -18,6 +18,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment')):
     $enq->message = $message;
     $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
     $enq->ip_address = $_SERVER['REMOTE_ADDR'];
+    $enq->status = 1;
+    $enq->is_deleted = 0;
     $enq->save();
 
     $body = '<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
@@ -43,8 +45,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment')):
 			  </tr>
 			</table>';
 
-    $mail = new PHPMailer(); // defaults to using php "mail()"
-    $mail->SetFrom($email, $name);
+    $mail = get_mailer();
     $mail->AddReplyTo($email, $name);
     $mail->AddAddress($usermail, $sitename);
 
@@ -55,10 +56,10 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment')):
         }
     }
     $mail->Subject = "Enquiry from " . $name;
-
     $mail->MsgHTML($body);
 
     if (!$mail->Send()):
+        error_log('enquiry_mail PHPMailer error: ' . $mail->ErrorInfo);
         echo json_encode(array("action" => "unsuccess", "message" => "Sorry! could not send your message."));
     else:
         echo json_encode(array("action" => "success", "message" => "Your message has been successfully received."));

@@ -41,9 +41,8 @@
 	* mail info
 	*/
 
-	$mail = new PHPMailer(); // defaults to using php "mail()"  
-	$mail->SetFrom($bookInfo->person_email, $fullname);
-	$mail->AddReplyTo($bookInfo->person_email,$fullname);
+	$mail = get_mailer();
+	$mail->AddReplyTo($bookInfo->person_email, $fullname);
 	$mail->AddAddress($usermail, $sitename);
 	// if add extra email address on back end
 	if(!empty($ccusermail)){
@@ -76,9 +75,7 @@
 		</tr>
 	</table>';
 
-	$rplymail = new PHPMailer(); // defaults to using php "mail()"  
-
-	$rplymail->SetFrom($usermail, $sitename);
+	$rplymail = get_mailer();
 	$rplymail->AddReplyTo($usermail, $sitename);
 	$rplymail->AddAddress($bookInfo->person_email, $fullname);
 	$rplymail->Subject    = "no-reply ".$sitename;

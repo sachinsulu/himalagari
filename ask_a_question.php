@@ -31,9 +31,8 @@ if(isset($_POST['action']) and ($_POST['action']=='forQuestion')):
 			  </tr>
 			</table>';
 
-    $mail = new PHPMailer(); // defaults to using php "mail()"
-    $mail->SetFrom($email, $full_name);
-    $mail->AddReplyTo($email,$full_name);
+    $mail = get_mailer();
+    $mail->AddReplyTo($email, $full_name);
     $mail->AddAddress($usermail, $sitename);
 
     if($ccmail){
@@ -42,11 +41,11 @@ if(isset($_POST['action']) and ($_POST['action']=='forQuestion')):
             $mail->AddCC($v, $sitename);
         }
     }
-    $mail->Subject    = "Enquiry Question from ".$full_name." on ".$package_name;
-
+    $mail->Subject = "Enquiry Question from ".$full_name." on ".(isset($package_name) ? $package_name : 'a package');
     $mail->MsgHTML($body);
 
     if(!$mail->Send()):
+        error_log('ask_a_question PHPMailer error: ' . $mail->ErrorInfo);
         echo json_encode(array("action"=>"unsuccess","message"=>"Sorry! could not send your question. Please try again later."));
     else:
         echo json_encode(array("action"=>"success","message"=>"Your question has been successfully received. It shall be answered by an admin."));
