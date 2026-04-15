@@ -10,6 +10,16 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment')):
         $$key = $val;
     }
 
+    $enq = new Enquiry();
+    $enq->type = Enquiry::TYPE_CONTACT;
+    $enq->full_name = $name;
+    $enq->email = $email;
+    $enq->phone = isset($emobile) ? $emobile : null; // Contact page uses emobile
+    $enq->message = $message;
+    $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+    $enq->ip_address = $_SERVER['REMOTE_ADDR'];
+    $enq->save();
+
     $body = '<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
 			  <tr>
 				<td><p>Dear Sir,</p>

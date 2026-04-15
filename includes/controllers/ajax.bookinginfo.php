@@ -55,6 +55,22 @@
 
             $db->begin();
             if ($bokRec->save()) {
+                
+                $enq = new Enquiry();
+                $enq->type = Enquiry::TYPE_BOOKING;
+                $enq->full_name = $full_name;
+                $enq->email = $email;
+                $enq->phone = $phone;
+                $enq->country = $country;
+                $enq->city = $province;
+                $enq->trip_name = Package::field_by_id($pkg_id, 'title');
+                $enq->trip_date = getDateFormat($date);
+                $enq->pax = (int)$pax + 1;
+                $enq->message = $message;
+                $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+                $enq->ip_address = $_SERVER['REMOTE_ADDR'];
+                $enq->save();
+
                 include(SITE_ROOT.'book_mail.php');
                 $db->commit();
                 if (!empty($additional_name)) {

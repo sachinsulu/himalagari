@@ -11,17 +11,20 @@ if ($_POST['action'] == "forCustomize"):
         $$key = $val;
     }
 
-    $sql = "INSERT INTO tbl_customize_trip (name, trip, trip_date, pax, email, phone, address, country, message)
-            VALUES ('" . $full_name . "', 
-                    '" . $trip . "', 
-                    '" . $trip_date . "', 
-                    '" . $pax . "', 
-                    '" . $email . "', 
-                    '" . $phone . "',
-                    '" . $address . "',
-                    '" . $country . "',
-                    '" . $message . "')";
-    $res = $db->query($sql);
+    $enq = new Enquiry();
+    $enq->type = Enquiry::TYPE_PLAN;
+    $enq->full_name = $full_name;
+    $enq->email = $email;
+    $enq->phone = $phone;
+    $enq->country = isset($country) ? $country : null;
+    $enq->city = isset($address) ? $address : null; // using address as city/address
+    $enq->trip_name = isset($trip) ? $trip : null;
+    $enq->trip_date = isset($trip_date) && !empty($trip_date) ? getDateFormat($trip_date) : null;
+    $enq->pax = isset($pax) ? (int)$pax : null;
+    $enq->message = $message;
+    $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+    $enq->ip_address = $_SERVER['REMOTE_ADDR'];
+    $res = $enq->save();
 
     if ($res) {
         $body = '
