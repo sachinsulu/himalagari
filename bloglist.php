@@ -6,9 +6,9 @@ define('JCMSTYPE', 0); // Track Current site language.
 
 require_once("includes/initialize.php");
 
-$currentTemplate	= Config::getCurrentTemplate('template');
-$jVars 				= array();
-$template 			= "template/{$currentTemplate}/blog-list.html";
+$currentTemplate = Config::getCurrentTemplate('template');
+$jVars = array();
+$template = "template/{$currentTemplate}/blog_listing.html";
 
 require_once('views/modules.php');
 
