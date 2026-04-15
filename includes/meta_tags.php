@@ -149,11 +149,16 @@ function MetaTagsFor_SEO()
 
     //Facebook and twitter sharing
     if ($class == 'CombinedNews') {
-        $seoSources .= '<meta property="og:title" content="' . $rec->title . '">
-            <meta property="og:description" content="' . $rec->brief . '">
-            <meta property="og:image" content="' . IMAGE_PATH . 'combinednews/' . $rec->image . '">
-            <meta property="twitter:image" content="' . IMAGE_PATH . 'preference/' . $rec->image . '">
-            <meta property="og:url" content="' . BASE_URL . 'blog/' . $rec->slug . '">
+        $newsTitle = (isset($rec) && is_object($rec) && !empty($rec->title)) ? $rec->title : $sitetitle;
+        $newsBrief = (isset($rec) && is_object($rec) && !empty($rec->brief)) ? $rec->brief : $description;
+        $newsImage = (isset($rec) && is_object($rec) && !empty($rec->image)) ? $rec->image : $config->fb_upload;
+        $newsSlug = (isset($rec) && is_object($rec) && !empty($rec->slug)) ? $rec->slug : '';
+
+        $seoSources .= '<meta property="og:title" content="' . $newsTitle . '">
+            <meta property="og:description" content="' . $newsBrief . '">
+            <meta property="og:image" content="' . IMAGE_PATH . 'combinednews/' . $newsImage . '">
+            <meta property="twitter:image" content="' . IMAGE_PATH . 'preference/' . $newsImage . '">
+            <meta property="og:url" content="' . BASE_URL . (!empty($newsSlug) ? 'blog/' . $newsSlug : '') . '">
             <meta property="og:type" content="website">
             <meta property="twitter:card" content="summary_large_image">' . "\n\n";
     }else{

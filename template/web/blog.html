@@ -6,32 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blogs</title>
   <link rel="icon" href="./assets/images/logo.png">
-  <link rel="stylesheet" href="./blog.css">
+  <link href="./blog.css" rel="stylesheet" >
   <!-- bootstrp -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet">
   <!-- font-awesome -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' rel="stylesheet">
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com' rel="preconnect" />
-  <link href="https://fonts.gstatic.com" crossorigin rel="preconnect" />
+  <link href='https://fonts.gstatic.com' crossorigin rel="preconnect" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    href='https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
     rel="stylesheet" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    href='https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
     rel="stylesheet" />
 </head>
 
 <body>
   <section class="scroll-wrapper">
     <section class="blog-wrapper">
+
+      <jcms:module:header/>
       
       <jcms:module:blog-detail/>
 
+      <jcms:module:footer/>
+
     </section>
 
+  </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const toggleBtns = document.querySelectorAll(".searchToggle");
@@ -78,7 +83,6 @@
       });
     </script>
 
-  </section>
 </body>
 
 </html>
