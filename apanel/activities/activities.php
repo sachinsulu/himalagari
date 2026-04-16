@@ -273,6 +273,33 @@ if (isset($_GET['page']) && $_GET['page'] == "activities" && isset($_GET['mode']
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-label col-md-12">
+                        <label for="">
+                            packing_essentials :
+                        </label>
+                        <textarea name="packing_essentials" id="packing_essentials"
+                                  class="large-textarea validate[required]"><?php echo !empty($activitiesInfo->packing_essentials) ? $activitiesInfo->packing_essentials : ""; ?></textarea>
+                    </div>
+                </div>
+                                <div class="form-row">
+                    <div class="form-label col-md-12">
+                        <label for="">
+                            money_expenses :
+                        </label>
+                        <textarea name="money_expenses" id="money_expenses"
+                                  class="large-textarea validate[required]"><?php echo !empty($activitiesInfo->money_expenses) ? $activitiesInfo->money_expenses : ""; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label col-md-12">
+                        <label for="">
+                            best_time_visit :
+                        </label>
+                        <textarea name="best_time_visit" id="best_time_visit"
+                                  class="large-textarea validate[required]"><?php echo !empty($activitiesInfo->best_time_visit) ? $activitiesInfo->best_time_visit : ""; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="status" id="check1"
                                value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
@@ -337,7 +364,7 @@ if (isset($_GET['page']) && $_GET['page'] == "activities" && isset($_GET['mode']
     </div>
     <script>
         var base_url = "<?php echo ASSETS_PATH; ?>";
-        var editor_arr = ["content"];
+        var editor_arr = ["content","packing_essentials","money_expenses","best_time_visit"];
         create_editor(base_url, editor_arr);
     </script>
 

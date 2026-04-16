@@ -86,11 +86,16 @@ if(isset($_GET['id']) && !empty($_GET['id'])):
         $enquiryRow->save();
     }
 endif;  
+
+$estimatedPrice = 'N/A';
+if(!empty($enquiryRow->message) && preg_match('/(?:^|\R)Price\s*:\s*(.+)$/mi', $enquiryRow->message, $priceMatch)) {
+    $estimatedPrice = trim($priceMatch[1]);
+}
 ?>
 
 <h3>
     View Enquiry
-    <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="<?php echo ADMIN_URL;?>enquiry/list">
+    <a class="btn medium bg-blue-alt float-right" href="<?php echo ADMIN_URL;?>enquiry/list">
         <span class="glyph-icon icon-separator">
             <i class="glyph-icon icon-arrow-circle-left"></i>
         </span>
@@ -118,6 +123,7 @@ endif;
                 <li><strong>Trip Name : </strong><?php echo set_na($enquiryRow->trip_name);?></li>
                 <li><strong>Trip Date : </strong><?php echo set_na($enquiryRow->trip_date);?></li>
                 <li><strong>No. of Pax : </strong><?php echo set_na($enquiryRow->pax);?></li>
+                <li><strong>Estimated Price : </strong><?php echo set_na($estimatedPrice);?></li>
                 <li><strong>Inquiry Date : </strong><?php echo set_na($enquiryRow->added_date);?></li>
                 <li><strong>Inquiry IP : </strong><?php echo set_na($enquiryRow->ip_address);?></li>
             </ul>

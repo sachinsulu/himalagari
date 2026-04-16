@@ -2,7 +2,7 @@
 class Activities extends DatabaseObject {
 
 	protected static $table_name = "tbl_activities";
-	protected static $db_fields = array('id', 'slug', 'parentOf', 'destinationId', 'title', 'title_brief', 'image', 'banner_image', 'brief', 'content', 'status', 'sortorder', 'meta_keywords', 'meta_description', 'added_date');
+	protected static $db_fields = array('id', 'slug', 'parentOf', 'destinationId', 'title', 'title_brief', 'image', 'banner_image', 'brief', 'content','packing_essentials','money_expenses','best_time_visit', 'status', 'sortorder', 'meta_keywords', 'meta_description', 'added_date');
 	
 	public $id;
 	public $slug;
@@ -14,6 +14,9 @@ class Activities extends DatabaseObject {
 	public $banner_image;
 	public $brief;
 	public $content;
+	public $packing_essentials;
+	public $money_expenses;
+	public $best_time_visit;
 	public $status;
 	public $sortorder;
 	public $meta_keywords;

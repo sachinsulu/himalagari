@@ -29,6 +29,23 @@
 			}
 			foreach($_POST as $key=>$val) { $$key=$val; }
 
+			$pkgRec = Package::find_by_id($pkg_id);
+			$ratePerPerson = isset($price_per_person) ? floatval($price_per_person) : 0;
+			$totalAmount = isset($total_amount) ? floatval($total_amount) : 0;
+			$countryCode = isset($country_code) ? trim($country_code) : '';
+			if($ratePerPerson <= 0 && $pkgRec) {
+				$ratePerPerson = !empty($pkgRec->offer_price) ? floatval($pkgRec->offer_price) : floatval($pkgRec->price);
+			}
+			if($totalAmount <= 0 && $ratePerPerson > 0) {
+				$totalAmount = $ratePerPerson * ((int)$pax > 0 ? (int)$pax : 1);
+			}
+			$tripCurrency = (!empty($pkgRec) && !empty($pkgRec->currency)) ? $pkgRec->currency : 'USD';
+			if(empty($countryCode) && !empty($country)) {
+				$countryCode = Countries::find_by_name($country);
+			}
+			$phoneDisplay = trim((!empty($countryCode) ? $countryCode.' ' : '').$phone);
+			$totalAmountDisplay = ($totalAmount > 0) ? trim($tripCurrency.' '.number_format($totalAmount, 2, '.', '')) : '';
+
 			// For tbl_bookinginfo
 			$bokRec = new Bookinginfo();
 
@@ -36,8 +53,8 @@
 			$bokRec->pkg_id 		= $pkg_id;
             $bokRec->fixed_date_id = (!empty($fixed_date_id)) ? $fixed_date_id : '';
 			$bokRec->trip_date 		= $date;
-			$bokRec->trip_currency  = 'USD';
-//			$bokRec->date_rate 		= $n[1];
+			$bokRec->trip_currency  = $tripCurrency;
+			$bokRec->date_rate 		= $ratePerPerson;
 			$bokRec->trip_pax		= $pax + 1;
 //			$bokRec->trip_flight 	= $trip_flight;
 //			$bokRec->accesskey		= $trans_key;
@@ -46,19 +63,20 @@
 //			$bokRec->person_mname 	= $person_mname;
 //			$bokRec->person_lname	= $person_lname;
 
-			$bokRec->person_phone 	= $phone;
+			$bokRec->person_phone 	= $phoneDisplay;
 			$bokRec->person_email	= $email;
 			$bokRec->person_address	= $address1;
 			$bokRec->person_country = $country;
-			$bokRec->person_country_code = Countries::find_by_name($country);
+			$bokRec->person_country_code = $countryCode;
 			$bokRec->person_city 	= isset($province) ? $province : '';
-			$bokRec->person_postal 	= isset($state) ? $state : '';
+			$bokRec->person_postal 	= isset($zipcode) ? $zipcode : (isset($state) ? $state : '');
 //			$bokRec->person_ctype 	= implode(' / ', $person_ctype); // (!empty($person_ctype[0])?$person_ctype[0]:'').' '.(!empty($person_ctype[1])?$person_ctype[1]:'');
             $bokRec->person_hear    = (!empty($address2)) ? $address2 : '';
 			$bokRec->person_comment = $message;
 
 			$bokRec->ip_address 	= $_SERVER['REMOTE_ADDR'];
 			$bokRec->pay_type 		= 'Inquiry';
+			$bokRec->pay_amt 		= $totalAmount;
 			$bokRec->sortorder 		= Bookinginfo::find_maximum();;
 			$bokRec->added_date 	= registered();
 
@@ -70,13 +88,13 @@
                 $enq->type = Enquiry::TYPE_BOOKING;
                 $enq->full_name = $full_name;
                 $enq->email = $email;
-                $enq->phone = $phone;
+				$enq->phone = $phoneDisplay;
                 $enq->country = $country;
                 $enq->city = isset($province) ? $province : '';
                 $enq->trip_name = Package::field_by_id($pkg_id, 'title');
                 $enq->trip_date = getDateFormat($date);
                 $enq->pax = (int)$pax + 1;
-                $enq->message = $message;
+				$enq->message = $message . (!empty($totalAmountDisplay) ? "\n\nPrice: " . $totalAmountDisplay : '');
                 $enq->source_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
                 $enq->ip_address = $_SERVER['REMOTE_ADDR'];
                 $enq->status = 1;

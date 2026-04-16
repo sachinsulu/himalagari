@@ -54,6 +54,24 @@ if(isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode']
 if(isset($_GET['id']) && !empty($_GET['id'])):
     $bookingId   = addslashes($_REQUEST['id']);
     $bookingRow  = Bookinginfo::find_by_id($bookingId);
+    $pkgRow = Package::find_by_id($bookingRow->pkg_id);
+
+    $displayCurrency = !empty($bookingRow->trip_currency) ? $bookingRow->trip_currency : (!empty($pkgRow->currency) ? $pkgRow->currency : 'USD');
+    $pricePerPax = 0;
+    if(!empty($bookingRow->date_rate) && $bookingRow->date_rate > 0) {
+        $pricePerPax = (float)$bookingRow->date_rate;
+    } elseif($pkgRow) {
+        $fallbackRate = !empty($pkgRow->offer_price) ? $pkgRow->offer_price : $pkgRow->price;
+        $pricePerPax = !empty($fallbackRate) ? (float)$fallbackRate : 0;
+    }
+
+    $totalAmount = !empty($bookingRow->pay_amt) ? (float)$bookingRow->pay_amt : 0;
+    if($totalAmount <= 0 && $pricePerPax > 0 && !empty($bookingRow->trip_pax)) {
+        $totalAmount = $pricePerPax * (int)$bookingRow->trip_pax;
+    }
+
+    $pricePerPaxDisplay = ($pricePerPax > 0) ? trim($displayCurrency.' '.number_format($pricePerPax, 2, '.', '')) : '';
+    $totalAmountDisplay = ($totalAmount > 0) ? trim($displayCurrency.' '.number_format($totalAmount, 2, '.', '')) : '';
 endif;  
 ?>
 
@@ -89,7 +107,8 @@ endif;
                 <li><strong>Order Id : </strong><?php echo set_na($bookingRow->accesskey);?></li>
                 <li><strong>Trip Name : </strong><?php echo set_na(Package::field_by_id($bookingRow->pkg_id, 'title'));?></li>
                 <li><strong>Trip Date : </strong><?php echo set_na($bookingRow->trip_date);?></li>
-                <li><strong>Trip Rate : </strong><?php echo set_na($bookingRow->trip_currency.' '.$bookingRow->date_rate);?></li>
+                <li><strong>Price (Per Pax) : </strong><?php echo set_na($pricePerPaxDisplay);?></li>
+                <li><strong>Total Amount : </strong><?php echo set_na($totalAmountDisplay);?></li>
                 <li><strong>No. of Pax. : </strong><?php echo set_na($bookingRow->trip_pax);?></li>
                 <li><strong>Flight Require : </strong><?php echo set_na($bookingRow->trip_flight);?></li>
                 <li><strong>Inquiry Date : </strong><?php echo set_na($bookingRow->added_date);?></li>

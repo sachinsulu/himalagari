@@ -30,6 +30,9 @@
 			$record->image		= $_REQUEST['imageArrayname'];
 			$record->banner_image = $_REQUEST['imageArrayname2'];	
 			$record->content	= $_REQUEST['content'];
+			$record->packing_essentials	= $_REQUEST['packing_essentials'];
+			$record->money_expenses	= $_REQUEST['money_expenses'];
+			$record->best_time_visit	= $_REQUEST['best_time_visit'];
 			$record->status		= $_REQUEST['status'];
 			$record->meta_keywords		= $_REQUEST['meta_keywords'];
 			$record->meta_description	= $_REQUEST['meta_description'];
@@ -71,6 +74,9 @@
 			$record->image		= $_REQUEST['imageArrayname'];
 			$record->banner_image = $_REQUEST['imageArrayname2'];
 			$record->content	= $_REQUEST['content'];
+			$record->packing_essentials	= $_REQUEST['packing_essentials'];
+			$record->money_expenses	= $_REQUEST['money_expenses'];
+			$record->best_time_visit	= $_REQUEST['best_time_visit'];
 			$record->status		= $_REQUEST['status'];
 			$record->meta_keywords		= $_REQUEST['meta_keywords'];
 			$record->meta_description	= $_REQUEST['meta_description'];
@@ -93,7 +99,7 @@
 			reOrderSub("tbl_activities", "sortorder", "parentOf",$record->parentOf);
 			$message  = sprintf($GLOBALS['basic']['deletedSuccess_'], "Activities '".$record->title."'");
 			echo json_encode(array("action"=>"success","message"=>$message));	
-			log_action("Activitiess  [".$record->name."]".$GLOBALS['basic']['deletedSuccess'],1,6);
+			log_action("Activitiess  [".$record->title."]".$GLOBALS['basic']['deletedSuccess'],1,6);
 		break;
 		
 		// Module Setting Sections  >> <<

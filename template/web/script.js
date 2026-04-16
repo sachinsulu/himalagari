@@ -515,4 +515,40 @@ $(document).ready(function() {
   // Initial call to set price if something is already selected
   updateInquiryPrice();
 
+  // 11. Homepage package sections: show 8 cards first, reveal more on click
+  document.querySelectorAll(".packages-wrapper").forEach(function(section) {
+    const cards = Array.from(section.querySelectorAll(".packages-grid .package-card"));
+    const btn = section.querySelector(".js-load-more-packages");
+
+    if (!btn || !cards.length) return;
+
+    const initial = parseInt(btn.getAttribute("data-initial"), 10) || 8;
+    const step = parseInt(btn.getAttribute("data-step"), 10) || 4;
+    const loadMoreWrap = btn.closest(".load-more-wrap");
+
+    if (cards.length <= initial) {
+      if (loadMoreWrap) loadMoreWrap.style.display = "none";
+      return;
+    }
+
+    let shown = initial;
+    cards.forEach(function(card, index) {
+      if (index >= shown) {
+        card.style.display = "none";
+      }
+    });
+
+    btn.addEventListener("click", function() {
+      const next = Math.min(shown + step, cards.length);
+      for (let i = shown; i < next; i++) {
+        cards[i].style.display = "";
+      }
+      shown = next;
+
+      if (shown >= cards.length && loadMoreWrap) {
+        loadMoreWrap.style.display = "none";
+      }
+    });
+  });
+
 });

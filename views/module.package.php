@@ -40,9 +40,70 @@ if (defined("HOME_PAGE")) {
 }
 $jVars["module:home-destination"] = $home_destination;
 
+/* Hero Best Seller Card (homepage) */
+$home_best_seller = '';
+$bestSellerSql = "SELECT p.*, COALESCE(SUM(CASE WHEN b.trip_pax IS NULL OR b.trip_pax = '' THEN 1 ELSE CAST(b.trip_pax AS UNSIGNED) END), 0) AS total_pax
+                  FROM tbl_package p
+                  LEFT JOIN tbl_bookinginfo b ON b.pkg_id = p.id
+                  WHERE p.status = 1 AND p.popular = 1
+                  GROUP BY p.id
+                  ORDER BY total_pax DESC, p.sortorder ASC
+                  LIMIT 1";
+$bestSellerQuery = $db->query($bestSellerSql);
+$bestSellerPkg = ($db->num_rows($bestSellerQuery) > 0) ? $db->fetch_object($bestSellerQuery) : null;
+$bestSellerTotalTrekkers = 0;
+
+if (!empty($bestSellerPkg) && isset($bestSellerPkg->total_pax)) {
+  $bestSellerTotalTrekkers = (int)$bestSellerPkg->total_pax;
+}
+
+if (empty($bestSellerPkg)) {
+    $popularFallback = Package::get_databy_display('popular', 1, 1);
+    if (!empty($popularFallback)) {
+        $bestSellerPkg = $popularFallback[0];
+    }
+}
+
+if (!empty($bestSellerPkg) && !empty($bestSellerPkg->slug)) {
+    $bestTitle = htmlspecialchars($bestSellerPkg->title, ENT_QUOTES, 'UTF-8');
+    $bestDays = !empty($bestSellerPkg->days) ? (int)$bestSellerPkg->days : 0;
+    $destinationTitle = !empty($bestSellerPkg->destinationId) ? Destination::field_by_id($bestSellerPkg->destinationId, 'title') : 'Nepal';
+    $destinationTitle = htmlspecialchars($destinationTitle, ENT_QUOTES, 'UTF-8');
+    $difficultyText = !empty($bestSellerPkg->difficulty) ? $bestSellerPkg->difficulty : 'Moderate';
+    $difficultyText = htmlspecialchars($difficultyText, ENT_QUOTES, 'UTF-8');
+    $seasonText = !empty($bestSellerPkg->season) ? $bestSellerPkg->season : 'All Season';
+    $seasonText = htmlspecialchars($seasonText, ENT_QUOTES, 'UTF-8');
+    $totalTrekkers = $bestSellerTotalTrekkers;
+    $trekkerLine = ($totalTrekkers > 0)
+        ? '🔥 ' . number_format($totalTrekkers) . '+ trekkers booked'
+        : '🔥 Be first to book this adventure';
+
+    $subtitle = ($bestDays > 0 ? $bestDays . ' Days' : 'Custom Duration') . ' • ' . $destinationTitle;
+
+    $home_best_seller = '
+      <div class="best-seller-card">
+        <span class="bs-badge">Best Seller</span>
+
+        <h2 class="bs-title">' . $bestTitle . '</h2>
+        <p class="bs-subtitle">' . $subtitle . '</p>
+
+        <div class="bs-info">
+          <p>' . $trekkerLine . '</p>
+          <p><strong>Difficulty Level : </strong> ' . $difficultyText . '</p>
+          <p><strong>Best Season : </strong> ' . $seasonText . '</p>
+        </div>
+
+        <a href="' . BASE_URL . 'package/' . $bestSellerPkg->slug . '" class="explore_btn inquiry-btn mx-auto">
+          <p>View Packages</p>
+        </a>
+      </div>';
+}
+
+$jVars['module:home-best-seller'] = $home_best_seller;
+
 /* Package Display Using Home Flag */
 $reshome = $grade = $destination_name = $rating = '';
-$homeRec = Package::get_databy_display('popular', 1, 6);
+$homeRec = Package::get_databy_display('popular', 1, 24);
 
 if (!empty($homeRec)) {
     $reshome .= '
@@ -125,6 +186,11 @@ if (!empty($homeRec)) {
 
     $reshome .= '
       </div>
+      <div class="load-more-wrap text-center mt-4">
+        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="8" data-step="4">
+          <p>Load More Packages</p>
+        </button>
+      </div>
       </div>
     </section>';
 }
@@ -133,7 +199,7 @@ $jVars['module:package-home'] = $reshome;
 
 /* Top-Rated Family Packages — shown on homepage */
 $res_toprated = '';
-$topRatedRec = Package::get_top_rated_packages(4, 6);
+$topRatedRec = Package::get_top_rated_packages(4, 24);
 
 if (!empty($topRatedRec)) {
     $res_toprated .= '
@@ -229,10 +295,15 @@ if (!empty($topRatedRec)) {
 
     $res_toprated .= '
       </div>
+      <div class="load-more-wrap text-center mt-4">
+        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="8" data-step="4">
+          <p>Load More Packages</p>
+        </button>
+      </div>
     </section>';
 } else {
     // Fallback: show section with popular packages if no rated ones exist
-    $fallbackRec = Package::get_databy_display('popular', 1, 6);
+    $fallbackRec = Package::get_databy_display('popular', 1, 24);
     if (!empty($fallbackRec)) {
         $res_toprated .= '
     <section class="packages-wrapper components">
@@ -304,6 +375,11 @@ if (!empty($topRatedRec)) {
         </div>';
         }
         $res_toprated .= '
+      </div>
+      <div class="load-more-wrap text-center mt-4">
+        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="8" data-step="4">
+          <p>Load More Packages</p>
+        </button>
       </div>
     </section>';
     }
@@ -948,6 +1024,8 @@ if (defined('PACKAGE_PAGE')) {
                   <form id="bookingForm" class="grid-form mt-4">
                     <input type="hidden" name="pkg_id" value="' . $pkgRec->id . '">
                     <input type="hidden" name="action" value="request_inquiry">
+                    <input type="hidden" name="price_per_person" id="pricePerPersonBooking" value="' . ($pkgRec->offer_price ?: $pkgRec->price) . '">
+                    <input type="hidden" name="total_amount" id="totalAmountBooking" value="' . ($pkgRec->offer_price ?: $pkgRec->price) . '">
 
                     <!-- ROW 1 -->
                     <div class="form-group">
@@ -1378,11 +1456,16 @@ if (defined('PACKAGE_PAGE')) {
                 // Booking calculation
                 const peopleInput = document.getElementById("peopleCountBooking");
                 const amountSpan = document.getElementById("amountValueBooking");
+                const totalAmountInput = document.getElementById("totalAmountBooking");
                 if (peopleInput && amountSpan) {
                     const pricePerPerson = parseFloat(amountSpan.textContent) || 0;
                     peopleInput.addEventListener("input", function() {
                         const count = parseInt(this.value) || 1;
-                        amountSpan.textContent = count * pricePerPerson;
+                    const totalAmount = count * pricePerPerson;
+                    amountSpan.textContent = totalAmount;
+                    if (totalAmountInput) {
+                      totalAmountInput.value = totalAmount;
+                    }
                     });
                 }
                 

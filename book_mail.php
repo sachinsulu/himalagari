@@ -5,6 +5,18 @@ $usermail = User::get_UseremailAddress_byId(1);
 $sitename = Config::getField('sitename', true);
 $pkgRec = !empty($pkg_id) ? Package::find_by_id($pkg_id) : null;
 
+$countryCodeText = isset($country_code) ? trim($country_code) : '';
+$phoneText = isset($phone) ? trim($phone) : '';
+$phoneDisplay = trim((!empty($countryCodeText) ? $countryCodeText . ' ' : '') . $phoneText);
+$bookingCurrency = ($pkgRec && !empty($pkgRec->currency)) ? $pkgRec->currency : 'USD';
+$bookingAmountValue = isset($total_amount) ? floatval($total_amount) : 0;
+if ($bookingAmountValue <= 0 && isset($bokRec) && !empty($bokRec->pay_amt)) {
+    $bookingAmountValue = floatval($bokRec->pay_amt);
+}
+$amountRow = ($bookingAmountValue > 0)
+    ? '<strong>Amount</strong> : ' . $bookingCurrency . ' ' . number_format($bookingAmountValue, 2, '.', '') . '<br/>'
+    : '';
+
 $body = '
 	<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
         <tr>
@@ -17,7 +29,7 @@ $body = '
                 <p>
                     <strong>Fullname</strong> : ' . (isset($full_name) ? $full_name : '') . '<br/>
                     <strong>E-mail Address</strong>: ' . (isset($email) ? $email : '') . '<br/>
-                    <strong>Phone</strong> : ' . (isset($phone) ? $phone : '') . '<br/>
+                    <strong>Phone</strong> : ' . $phoneDisplay . '<br/>
                     <strong>Address</strong> : ' . (isset($address1) ? $address1 : '') . ' / ' . (isset($address2) ? $address2 : '') . '<br/>
                     <strong>Country</strong> : ' . (isset($country) ? $country : '') . '<br/>
                     <strong>Zip Code</strong> : ' . (isset($zipcode) ? $zipcode : '') . '<br/>';
@@ -36,6 +48,7 @@ if (!empty($fixed_date_id)) {
     $body .= '      <strong>Trip Date</strong> : ' . $date . '<br/>';
 }
 $body .= '
+                    ' . $amountRow . '
                     <strong>Message</strong>: ' . str_replace('\'', '', $message) . '<br/>
                 </p>
             </td>

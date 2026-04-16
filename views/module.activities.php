@@ -8,6 +8,7 @@
 $act_bread = $act_list = '';
 $activity_hero = '';
 $activity_package_cards = '';
+$activity_travel_guides = '';
 if (defined('ACTIVITIES_PAGE') and !empty($_REQUEST['slug'])) {
     $slug = addslashes($_REQUEST['slug']);
     $destt = Destination::find_by_slug($slug);
@@ -223,8 +224,78 @@ if (empty($activity_package_cards)) {
 }
 
 
+if (isset($selectedActivity) && $selectedActivity) {
+    $hasMeaningfulContent = function ($html) {
+        if ($html === null) {
+            return false;
+        }
+
+        $plain = html_entity_decode(strip_tags((string)$html), ENT_QUOTES, 'UTF-8');
+        $plain = str_replace(array("\xc2\xa0", '&nbsp;'), ' ', $plain);
+        return trim($plain) !== '';
+    };
+
+    $tabs = array();
+
+    if ($hasMeaningfulContent($selectedActivity->packing_essentials)) {
+        $tabs[] = array(
+            'id' => 'todo',
+            'title' => 'Packing Essentials',
+            'content' => $selectedActivity->packing_essentials
+        );
+    }
+
+    if ($hasMeaningfulContent($selectedActivity->money_expenses)) {
+        $tabs[] = array(
+            'id' => 'visit',
+            'title' => 'Money & Expenses',
+            'content' => $selectedActivity->money_expenses
+        );
+    }
+
+    if ($hasMeaningfulContent($selectedActivity->best_time_visit)) {
+        $tabs[] = array(
+            'id' => 'stay',
+            'title' => 'Best Time to Visit',
+            'content' => $selectedActivity->best_time_visit
+        );
+    }
+
+    if (!empty($tabs)) {
+        $tabNavHtml = '';
+        $tabContentHtml = '';
+
+        foreach ($tabs as $index => $tab) {
+            $isActive = ($index === 0);
+            $activeClass = $isActive ? ' active' : '';
+            $paneClass = $isActive ? 'tab-pane fade show active' : 'tab-pane fade';
+
+            $tabNavHtml .= '
+                <li class="nav-item">
+                    <button class="nav-link' . $activeClass . '" data-bs-toggle="tab" data-bs-target="#' . $tab['id'] . '">' . $tab['title'] . '</button>
+                </li>';
+
+            $tabContentHtml .= '
+                <div class="' . $paneClass . '" id="' . $tab['id'] . '">' . $tab['content'] . '</div>';
+        }
+
+        $activity_travel_guides = '
+            <section class="travel_guides components mx-auto">
+                <h2 class="green-title text-center">Essential <span class="orange-text">Travel Guides</span> for Tour in Nepal</h2><br>
+                <ul class="nav nav-underline">' . $tabNavHtml . '
+                </ul>
+
+                <div class="tab-content">' . $tabContentHtml . '
+                </div>
+            </section>
+        ';
+    }
+}
+
+
 $jVars['module:activity-bread'] = $activity_hero;
 $jVars['module:activity-package-cards'] = $activity_package_cards;
+$jVars['module:activity-travel-guides'] = $activity_travel_guides;
 
 /*
 * Home Activities

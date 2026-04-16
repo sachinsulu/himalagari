@@ -20,6 +20,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
         $$key = $val;
     }
 
+    $priceValue = isset($price) ? trim($price) : '';
+
     $enq = new Enquiry();
     
     if ($_POST['action'] == 'plan_trip') {
@@ -37,7 +39,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
         $enq->trip_name = $pkgTitle;
         $enq->trip_date = $trip_date;
         $enq->pax = $pax;
-        $enq->message = $message . "\n\nPrice: " . $price;
+        $enq->message = $message . (!empty($priceValue) ? "\n\nPrice: " . $priceValue : '');
     } else {
         $enq->type = Enquiry::TYPE_CONTACT;
         $enq->full_name = $name;
@@ -54,6 +56,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
     $enq->save();
 
     if ($_POST['action'] == 'plan_trip') {
+      $priceHtmlRow = !empty($priceValue) ? '<strong>Estimated Price</strong> : ' . $priceValue . '<br />' : '';
         $body = '<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
                   <tr>
                     <td><p>Dear Sir,</p></td>
@@ -69,7 +72,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
                             <strong>Package</strong> : ' . $pkgTitle . '<br />	
                             <strong>Travel Date</strong> : ' . $trip_date . '<br />	
                             <strong>No. of Pax</strong> : ' . $pax . '<br />	
-                            <strong>Estimated Price</strong> : ' . $price . '<br />	
+                            ' . $priceHtmlRow . '
                             <strong>Message / Details</strong>: <br />' . nl2br($message) . '<br />
                         </p>
                     </td>
