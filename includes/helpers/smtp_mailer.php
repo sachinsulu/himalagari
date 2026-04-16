@@ -15,6 +15,9 @@
 function get_mailer() {
     $mail = new PHPMailer();
 
+    // ── Point to class.smtp.php location ─────────────────────────────
+    $mail->PluginDir = __DIR__ . DIRECTORY_SEPARATOR;
+
     // ── Use SMTP ──────────────────────────────────────────
     $mail->IsSMTP();
     $mail->SMTPAuth   = true;

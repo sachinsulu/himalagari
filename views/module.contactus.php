@@ -79,36 +79,40 @@ if (defined('CONTACTUS_PAGE')) {
                ';
 
 
-  $rescontct1 = '
-    
+  $locationInfo = $jVars['module:locationinfo'];
+  $baseUrl      = BASE_URL;
+
+  $rescontct1 = <<<HTML
+
     <section class="contact-section">
         <h2 class="contact-title green-title text-center">
-          Let’s Start Planning Your
+          Let's Start Planning Your
           <span class="orange-text">Journey</span> Together
         </h2>
         <section class="contact-wrapper">
           <!-- LEFT -->
-          ' . $jVars['module:locationinfo'] . '
+          {$locationInfo}
 
           <!-- FORM -->
           <div class="contact-form">
             <h2 class="orange-text text-start">Get In Touch</h2>
-            <h3 class="mb-4">We’re here to help with your travel plans.</h3>
+            <h3 class="mb-4">We're here to help with your travel plans.</h3>
             <div id="contactMsg"></div>
             <form id="contactForm">
               <label class="form-label">
                 Full Name <span class="required">*</span>
               </label>
-              <input type="text" name="name" placeholder="Full Name " required />
-              <label class="form-label"> Address </label>
-              <input type="text" name="address" placeholder="Address " required />
+              <input type="text" name="name" placeholder="Full Name" required />
+              <label class="form-label">Address</label>
+              <input type="text" name="address" placeholder="Address" />
               <label class="form-label">
                 Email Address <span class="required">*</span>
               </label>
-              <input type="email" name="email" placeholder="Email Address " required />
+              <input type="email" name="email" placeholder="Email Address" required />
 
               <div class="form-row">
-                <select title="country" id="countrySelect" required onchange="document.getElementById(\'countryCode\').value = this.options[this.selectedIndex].getAttribute(\'data-code\') || \'\';">
+                <select name="country" title="country" id="countrySelect" required
+                  onchange="document.getElementById('countryCode').value = this.options[this.selectedIndex].getAttribute('data-code') || '';">
                   <option value="" data-code="">Choose Your Country</option>
                   <option value="Nepal" data-code="+977">Nepal</option>
                   <option value="India" data-code="+91">India</option>
@@ -123,19 +127,18 @@ if (defined('CONTACTUS_PAGE')) {
                     id="countryCode"
                     class="country-code"
                     placeholder="Code"
-                    required
                     readonly
                   />
-
-                  <input type="text" name="emobile" placeholder="Phone Number " required />
+                  <input type="text" name="emobile" placeholder="Phone Number" required />
                 </p>
               </div>
+
               <label class="form-label">
-                Questions & Comments <span class="required">*</span>
+                Questions &amp; Comments <span class="required">*</span>
               </label>
               <textarea
                 name="message"
-                placeholder="Any Suggestions , Inquiry , Feedbacks ? "
+                placeholder="Any Suggestions, Inquiry, Feedbacks?"
                 required
               ></textarea>
               <button type="submit" class="uiverseButton w-50">
@@ -153,39 +156,30 @@ if (defined('CONTACTUS_PAGE')) {
           </h2>
           <ul class="locations-grid">
             <li class="location-card">
-              <img src="' . BASE_URL . 'template/web/assets/images/Flag_of_India.png" alt="india" />
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_India.png" alt="india" />
               <h4>INDIA OFFICE</h4>
               <p>Unit No 217 ILD Trade Centre, Sohna Road, Gurugram – India</p>
             </li>
-
             <li class="location-card">
-              <img
-                src="' . BASE_URL . 'template/web/assets/images/Flag_of_the_United_Arab_Emirates.png"
-                alt="dubai"
-              />
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_the_United_Arab_Emirates.png" alt="dubai" />
               <h4>DUBAI OFFICE</h4>
               <p>Level 3, Latifa Tower, Shaikh Zayed Road, Dubai – UAE</p>
             </li>
-
             <li class="location-card">
-              <img
-                src="' . BASE_URL . 'template/web/assets/images/Flag_of_Bangladesh.png"
-                alt="bangladesh"
-              />
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_Bangladesh.png" alt="bangladesh" />
               <h4>BANGLADESH OFFICE</h4>
               <p>Gulshan – 02, Dhaka - 1212, Bangladesh</p>
             </li>
-
             <li class="location-card">
-              <img src="' . BASE_URL . 'template/web/assets/images/Flag_of_Sri_Lanka.png" alt="srilanka" />
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_Sri_Lanka.png" alt="srilanka" />
               <h4>SRI LANKA OFFICE</h4>
               <p>World Trade Center, Colombo 01 – Sri Lanka</p>
             </li>
           </ul>
         </section>
       </section>
-    
-    ';
+
+HTML;
 }
 
 $jVars['module:contactus-breadcrumb'] = $rescntbdc;

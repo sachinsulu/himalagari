@@ -1,52 +1,52 @@
 <script language="javascript">
 
-function recordDelete(id){
-	if(confirm("Are you sure you want to delete this enquiry?")) {
-		$.ajax({
-			type: "POST",
-			dataType:"JSON",
-			url:  "<?php echo ADMIN_URL;?>ajax/ajax.enquiry.php",
-			data: "action=delete&id="+id,
-			success: function(data) {
-				var msg = eval(data);  
-				if(msg.action=='success') {
-					$('.my-msg').html('<div class="infobox info-bg-success"><p>'+msg.message+'</p></div>').show().fadeOut(3000);
-					$('#'+id).remove();
-				} else {
-					$('.my-msg').html('<div class="infobox info-bg-error"><p>'+msg.message+'</p></div>').show().fadeOut(3000);
-				}
-			}
-		});
-	}
+function getLocation(){
+	return '<?php echo BASE_URL;?>includes/controllers/ajax.enquiry.php';
+}
+function getTableId(){
+	return 'example';
 }
 
-$(document).ready(function(){
-	// Status Toggler
-	$('.statusToggler').on('click', function(){
-		var id = $(this).attr('moduleId');
-		var status = $(this).attr('status');
-		var newStatus = (status == 1) ? 0 : 1;
-		var $this = $(this);
-		$.ajax({
-			type: "POST",
-			dataType: "JSON",
-			url: "<?php echo ADMIN_URL;?>ajax/ajax.enquiry.php",
-			data: "action=toggleStatus&id="+id+"&status="+newStatus,
-			success: function(data) {
-				if(data.action == 'success'){
-					$this.attr('status', newStatus);
-					if(newStatus == 1){
-						$this.removeClass('bg-red').addClass('bg-green');
-						$this.attr('title', 'Mark as Unseen');
-						$this.find('i').removeClass('icon-eye-slash').addClass('icon-check');
-					}else{
-						$this.removeClass('bg-green').addClass('bg-red');
-						$this.attr('title', 'Mark as Seen');
-						$this.find('i').removeClass('icon-check').addClass('icon-eye-slash');
-					}
+$(document).ready(function() {
+	oTable = $('#example').dataTable({
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers",
+		"fnDrawCallback": function (oSettings) {
+			/* Need to redo the counters if filtered or sorted */
+			if (oSettings.bSorted || oSettings.bFiltered) {
+				for (var i = 0, iLen = oSettings.aiDisplay.length; i < iLen; i++) {
+					$('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html(i + 1);
 				}
 			}
-		});
+		}
 	});
 });
+
+// Single Record Delete
+function recordDelete(Re){
+	$('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'],"Enquiry")?>');															
+	$('.pText').html('Click on yes button to delete this enquiry permanently.!!');
+	$('.divMessageBox').fadeIn();
+	$('.MessageBoxContainer').fadeIn(1000);
+	
+	$(".botTempo").on("click",function(){						
+		var popAct=$(this).attr("id");						
+		if(popAct=='yes'){
+			$.ajax({
+			   type: "POST",
+			   dataType:"JSON",
+			   url:  getLocation(),
+			   data: 'action=delete&id='+Re,
+			   success: function(data){
+				 var msg = eval(data);  
+				 showMessage(msg.action,msg.message);
+				 $('#'+Re).remove();
+				 reStructureList(getTableId());
+			   }
+			});
+		}else{ Re = null;}
+		$('.divMessageBox').fadeOut();
+		$('.MessageBoxContainer').fadeOut(1000);
+	});	
+}
 </script>

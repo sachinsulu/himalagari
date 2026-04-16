@@ -11,27 +11,28 @@ if(isset($_GET['page']) && $_GET['page'] == "enquiry" && isset($_GET['mode']) &&
     <table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
         <thead>
             <tr>
-               <th class="text-center">S.No.</th>
+               <th style="display:none;"></th>
+               <th class="text-center"><input class="check-all" type="checkbox"/></th>
                <th>Type</th>
                <th>Full Name</th> 
                <th>Contact Info</th>                   
                <th>Added Date</th> 
-               <th>Status</th>
+               <th class="text-center">Status</th>
                <th class="text-center"><?php echo $GLOBALS['basic']['action'];?></th>
             </tr>
         </thead> 
             
         <tbody>
             <?php $records = Enquiry::find_all_active(); 
-            $cn=1;
-            foreach($records as $record): ?>    
+            foreach($records as $key=>$record): ?>    
             <tr id="<?php echo $record->id;?>">
-                <td class="text-center"><?php echo $cn++;?></td>                
+                <td style="display:none;"><?php echo $key+1;?></td>                
+                <td class="text-center"><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id;?>"/></td>                
                 <td><?php echo set_na($record->type);?></td>                             
                 <td><?php echo set_na($record->full_name);?></td>
                 <td>Email: <?php echo set_na($record->email);?><br />Phone: <?php echo set_na($record->phone);?></td>
                 <td><?php echo $record->added_date;?></td>
-                <td>
+                <td class="text-center">
                     <?php
                     $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
                     $statusText = ($record->status == 1) ? "Mark as Unseen" : "Mark as Seen";
@@ -57,6 +58,19 @@ if(isset($_GET['page']) && $_GET['page'] == "enquiry" && isset($_GET['mode']) &&
         </tbody>
     </table>
     </div>
+    <div class="pad0L col-md-2">
+        <select name="dropdown" id="groupTaskField" class="custom-select">
+            <option value="0"><?php echo $GLOBALS['basic']['choseAction'];?></option>
+            <option value="delete"><?php echo $GLOBALS['basic']['delete'];?></option>
+            <option value="toggleStatus"><?php echo $GLOBALS['basic']['toggleStatus'];?></option>
+        </select>
+    </div>
+    <a class="btn medium primary-bg" href="javascript:void(0);" id="applySelected_btn">
+        <span class="glyph-icon icon-separator float-right">
+          <i class="glyph-icon icon-cog"></i>
+        </span>
+        <span class="button-content"> Click </span>
+    </a>
 </div>
 
 <?php elseif(isset($_GET['mode']) && $_GET['mode'] == "view"): 

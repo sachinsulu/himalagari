@@ -40,9 +40,9 @@
 		
 		case "toggleStatus":
 			$id = $_REQUEST['id'];
-			$status = $_REQUEST['status'];
 			$record = Enquiry::find_by_id($id);
 			if($record) {
+				$status = (isset($_REQUEST['status'])) ? $_REQUEST['status'] : ($record->status == 1 ? 0 : 1);
 				$record->status = $status;
 				if($record->save()){
 					echo json_encode(array("action"=>"success", "message"=>"Status updated successfully."));
@@ -51,6 +51,40 @@
 				}
 			} else {
 				echo json_encode(array("action"=>"error", "message"=>"Record not found."));
+			}
+		break;
+
+		case "bulkToggleStatus":
+			$id = $_REQUEST['idArray'];
+			$allid = explode("|", $id);
+			$return = "0";
+			for($i=1; $i<count($allid); $i++){
+				$record = Enquiry::find_by_id($allid[$i]);
+				$record->status = ($record->status == 1) ? 0 : 1 ;
+				$record->save();
+			}
+			echo "";
+		break;
+
+		case "bulkDelete":
+			$id = $_REQUEST['idArray'];
+			$allid = explode("|", $id);
+			$return = "0";
+			$db->begin();
+			for($i=1; $i<count($allid); $i++){
+				$record = Enquiry::find_by_id($allid[$i]);
+				if($record) {
+					$record->is_deleted = 1;
+					$res = $record->save();
+					$return = 1;
+				}
+			}
+			if($return == 1) {
+				$db->commit();
+				echo json_encode(array("action"=>"success", "message"=>"Selected enquiries have been deleted."));
+			} else {
+				$db->rollback();
+				echo json_encode(array("action"=>"error", "message"=>"No records were deleted."));
 			}
 		break;
 	}
