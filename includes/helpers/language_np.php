@@ -60,7 +60,7 @@ $GLOBALS['pages']['first'] 			= 'प्रथम';
 $GLOBALS['pages']['firstPage'] 		= 'प्रथम पेज';
 $GLOBALS['pages']['previous']		= 'पहिलो';
 $GLOBALS['pages']['previousPage']	= 'पहिलो पेज';
-$GLOBALS['pages']['goToPage']		= 'पेजमा जाने';
+
 $GLOBALS['pages']['next'] 			= 'अर्को';
 $GLOBALS['pages']['nextPage'] 		= 'अर्को पेज';
 $GLOBALS['pages']['last'] 			= 'अन्तिम';

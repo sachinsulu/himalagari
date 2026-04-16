@@ -7,6 +7,8 @@ $header_components = '';
 $header1 = '';
 $home_header = '';
 
+$header_components .= '<script src="https://www.google.com/recaptcha/api.js" async defer></script>';
+
 $destinationsHTML = '<option value="" disabled selected>Where to?</option>';
 $destinationRec = Destination::get_destination();
 if ($destinationRec) {
@@ -166,7 +168,8 @@ $header_components = '
           <div class="offcanvas-body">
             <div class="inquiry_title orange-text">
               <span>Plan</span> Your Trip
-              <form>
+              <div id="planTripMsg"></div>
+              <form id="planTripForm">
                 <!-- Packages & Date -->
                 <div class="form-row">
                   <div class="form-group">
@@ -178,7 +181,7 @@ $header_components = '
 
                   <div class="form-group">
                     <label>Travel Date <span>*</span></label>
-                    <input type="date" class="travel-date" required />
+                    <input type="date" name="trip_date" id="inq_date" class="travel-date" required />
                   </div>
                 </div>
 
@@ -186,12 +189,12 @@ $header_components = '
                 <div class="form-row">
                   <div class="form-group">
                     <label>No. of Pax <span class="required">*</span></label>
-                    <input type="number" id="inq_pax" name="pax" min="1" required />
+                    <input type="number" id="inq_pax" name="pax" min="1" value="1" required />
                   </div>
 
                   <div class="form-group">
                     <label>Price <span class="required">*</span></label>
-                    <input type="text" id="inq_price" name="price" required />
+                    <input type="text" id="inq_price" name="price" readonly required />
                   </div>
                 </div>
 
@@ -199,12 +202,12 @@ $header_components = '
                 <div class="form-row">
                   <div class="form-group">
                     <label>Full Name <span class="required">*</span></label>
-                    <input type="text" required />
+                    <input type="text" name="name" id="inq_name" required />
                   </div>
 
                   <div class="form-group">
                     <label>Email Address <span class="required">*</span></label>
-                    <input type="email" required />
+                    <input type="email" name="email" id="inq_email" required />
                   </div>
                 </div>
 
@@ -222,66 +225,23 @@ $header_components = '
                     <input
                       type="text"
                       id="planCountryCode"
+                      name="country_code"
                       readonly
                     />
                   </div>
 
                   <div class="form-group phone-box">
                     <label>Contact No. <span class="required">*</span></label>
-                    <input type="tel" required />
+                    <input type="tel" name="phone" id="inq_phone" required />
                   </div>
                 </div>
 
-                <!-- Message -->
-                <div class="form-group">
-                  <label>Tour Details <span class="required">*</span></label>
-                  <textarea required></textarea>
-                </div>
+                  <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+                  </div>
 
                 <button type="submit">Submit</button>
               </form>
-              <script>
-                (function() {
-                  var sel = document.getElementById("planCountry");
-                  var codeInput = document.getElementById("planCountryCode");
-                  if (sel && codeInput) {
-                    sel.addEventListener("change", function() {
-                      var opt = this.options[this.selectedIndex];
-                      codeInput.value = opt.getAttribute("data-code") || "";
-                    });
-                  }
-
-                  var pkgSel = document.getElementById("inq_package");
-                  var priceInput = document.getElementById("inq_price");
-                  var paxInput = document.getElementById("inq_pax");
-
-                  function updatePrice() {
-                    var opt = pkgSel.options[pkgSel.selectedIndex];
-                    if (!opt) return;
-                    var priceAttr = opt.getAttribute("data-price");
-                    
-                    if (priceAttr) {
-                      var priceVal = parseFloat(priceAttr);
-                      if (!isNaN(priceVal)) {
-                        var pax = parseInt(paxInput.value) || 1;
-                        priceInput.value = priceVal * pax;
-                      } else {
-                        priceInput.value = priceAttr;
-                      }
-                    } else {
-                      priceInput.value = "";
-                    }
-                  }
-
-                  if (pkgSel && priceInput && paxInput) {
-                    pkgSel.addEventListener("change", function() {
-                      if (!paxInput.value) paxInput.value = 1;
-                      updatePrice();
-                    });
-                    paxInput.addEventListener("input", updatePrice);
-                  }
-                })();
-              </script>
             </div>
           </div>
         </div>

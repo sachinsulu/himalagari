@@ -477,44 +477,13 @@
 
   </section>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+  <script src="script.js"></script>
 
   <script>
-    // button on click
-    function goToPage(page) {
-      window.location.href = page;
-    }
-
-
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const toggleBtns = document.querySelectorAll(".searchToggle");
-      const bottomSearch = document.querySelector(".bottomSearch");
-
-      // Toggle on button click
-      toggleBtns.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation(); // prevent document click from firing
-          bottomSearch.classList.toggle("active");
-        });
-      });
-
-      // Click outside to close
-      document.addEventListener("click", (e) => {
-        const clickedInsideSearch = bottomSearch.contains(e.target);
-        const clickedToggleBtn = [...toggleBtns].some((btn) =>
-          btn.contains(e.target)
-        );
-
-        if (!clickedInsideSearch && !clickedToggleBtn) {
-          bottomSearch.classList.remove("active");
-        }
-      });
-    });
-
     $(document).ready(function () {
       $('.owl-carousel').owlCarousel({
         items: 3,
@@ -526,97 +495,57 @@
         stagePadding: 10,
         navText: ["<span class='owl-prev'>&lt</span>", "<span class='owl-next'>&gt</span>"],
         responsive: {
-          0: {
-            items: 1
-          },
-          600: {
-            items: 2
-          },
-          1000: {
-            items: 3
-          }
+          0: { items: 1 },
+          600: { items: 2 },
+          1000: { items: 3 }
         }
       })
     });
 
-  </script>
-
-  <script>
     const grid = document.getElementById("packageGrid");
     const wrapper = document.querySelector(".package-grid-wrapper");
     const toggleBtn = document.getElementById("toggleBtn");
     const title = document.getElementById("packagesTitle");
 
-    const cardTemplate = grid.children[0].outerHTML;
-    const cardsPerRow = 3;
-    let expanded = false;
+    if (grid && wrapper && toggleBtn && title ) {
+        const cardTemplate = grid.children[0].outerHTML;
+        const cardsPerRow = 3;
+        let expanded = false;
 
-    function updateHeight() {
-      wrapper.style.maxHeight = grid.scrollHeight + "px";
-    }
-
-    updateHeight();
-    // Debounced resize to prevent too many calls
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        updateHeight();
-      }, 100); // 100ms delay
-    });
-
-    toggleBtn.addEventListener("click", () => {
-
-      if (!expanded) {
-        /* LOAD MORE */
-        for (let i = 0; i < cardsPerRow; i++) {
-          grid.insertAdjacentHTML("beforeend", cardTemplate);
+        function updateHeight() {
+        wrapper.style.maxHeight = grid.scrollHeight + "px";
         }
 
-        requestAnimationFrame(updateHeight);
-        toggleBtn.childNodes[0].textContent = "Load Less";
-        expanded = true;
-
-      } else {
-        /* LOAD LESS */
-        const cards = [...grid.children].slice(-cardsPerRow);
-
-        cards.forEach(card => card.classList.add("removing"));
-
-        // 🔹 Smooth scroll to title
-        title.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
+        updateHeight();
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            updateHeight();
+        }, 100);
         });
 
-        setTimeout(() => {
-          cards.forEach(card => card.remove());
-          updateHeight();
-        }, 350);
-
-        toggleBtn.childNodes[0].textContent = "Load More";
-        expanded = false;
-      }
-    });
-    const planCountry = document.getElementById("planCountry");
-    const planCountryCode = document.getElementById("planCountryCode");
-
-    planCountry.addEventListener("change", function () {
-      const selected = this.selectedOptions[0];
-      const code = selected.getAttribute("data-code") || "";
-      planCountryCode.value = code;
-    });
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const today = new Date().toISOString().split("T")[0];
-
-      // Apply to all date inputs (safe & future-proof)
-      document.querySelectorAll('input[type="date"]').forEach(input => {
-        input.setAttribute("min", today);
-      });
-    });
+        toggleBtn.addEventListener("click", () => {
+        if (!expanded) {
+            for (let i = 0; i < cardsPerRow; i++) {
+            grid.insertAdjacentHTML("beforeend", cardTemplate);
+            }
+            requestAnimationFrame(updateHeight);
+            toggleBtn.childNodes[0].textContent = "Load Less";
+            expanded = true;
+        } else {
+            const cards = [...grid.children].slice(-cardsPerRow);
+            cards.forEach(card => card.classList.add("removing"));
+            title.scrollIntoView({ behavior: "smooth", block: "start" });
+            setTimeout(() => {
+            cards.forEach(card => card.remove());
+            updateHeight();
+            }, 350);
+            toggleBtn.childNodes[0].textContent = "Load More";
+            expanded = false;
+        }
+        });
+    }
   </script>
 
 </body>

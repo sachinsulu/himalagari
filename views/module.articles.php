@@ -58,9 +58,9 @@ if (defined('HOME_PAGE')) {
                     ' . strip_tags($content[0]) . '
                     </p>
                     <!-- uiverse btn -->
-                    <button class="explore_btn inquiry-btn" onclick="goToPage(\'' . BASE_URL . 'pages/' .  'about-us' . '\')">
+                    <a href="' . BASE_URL . 'pages/about-us" class="explore_btn inquiry-btn">
                     <p>View More</p>
-                    </button>
+                    </a>
                 </div>
 
                 <!-- RIGHT IMAGE -->
@@ -139,9 +139,9 @@ if (defined('HOME_PAGE')) {
 
         $resbloghome .= '
             </ul>
-            <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'blog_listing.html\')">
+            <a href="' . BASE_URL . 'blog_listing.html" class="explore_btn inquiry-btn mx-auto mt-4">
                 <p>View More</p>
-            </button>
+            </a>
         </section>';
     }
 }

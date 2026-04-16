@@ -123,6 +123,7 @@ if (defined('CONTACTUS_PAGE')) {
                 <p class="phone-field">
                   <input
                     type="text"
+                    name="country_code"
                     title="country-code"
                     id="countryCode"
                     class="country-code"
@@ -141,6 +142,9 @@ if (defined('CONTACTUS_PAGE')) {
                 placeholder="Any Suggestions, Inquiry, Feedbacks?"
                 required
               ></textarea>
+              <div class="form-group mb-3">
+                <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+              </div>
               <button type="submit" class="uiverseButton w-50">
                 Submit
               </button>
@@ -151,31 +155,7 @@ if (defined('CONTACTUS_PAGE')) {
 
         <!-- LOCATIONS -->
         <section class="branches">
-          <h2 class="text-center green-title mt-5">
-            Our <span class="orange-text">Branches</span>
-          </h2>
-          <ul class="locations-grid">
-            <li class="location-card">
-              <img src="{$baseUrl}template/web/assets/images/Flag_of_India.png" alt="india" />
-              <h4>INDIA OFFICE</h4>
-              <p>Unit No 217 ILD Trade Centre, Sohna Road, Gurugram – India</p>
-            </li>
-            <li class="location-card">
-              <img src="{$baseUrl}template/web/assets/images/Flag_of_the_United_Arab_Emirates.png" alt="dubai" />
-              <h4>DUBAI OFFICE</h4>
-              <p>Level 3, Latifa Tower, Shaikh Zayed Road, Dubai – UAE</p>
-            </li>
-            <li class="location-card">
-              <img src="{$baseUrl}template/web/assets/images/Flag_of_Bangladesh.png" alt="bangladesh" />
-              <h4>BANGLADESH OFFICE</h4>
-              <p>Gulshan – 02, Dhaka - 1212, Bangladesh</p>
-            </li>
-            <li class="location-card">
-              <img src="{$baseUrl}template/web/assets/images/Flag_of_Sri_Lanka.png" alt="srilanka" />
-              <h4>SRI LANKA OFFICE</h4>
-              <p>World Trade Center, Colombo 01 – Sri Lanka</p>
-            </li>
-          </ul>
+          {$jVars['module:locationbreif']}
         </section>
       </section>
 

@@ -136,9 +136,9 @@ if (defined('HOME_PAGE')) {
       ' . $homebloglist . '
     </ul>
 
-    <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'blog\')">
+    <a href="' . BASE_URL . 'blog" class="explore_btn inquiry-btn mx-auto mt-4">
       <p>View More</p>
-    </button>
+    </a>
   </section>';
     }
 }

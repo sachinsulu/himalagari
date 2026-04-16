@@ -71,8 +71,8 @@ $footer1 .= '
 
           
           <div class="footer-curve mt-3">
-            ' . $siteRegulars->breif . '
-
+            <h4>Our Affiliations &amp; Awards</h4>
+              <br/><p>Join Hands with Our Trusted Partners to Discover Exclusive Travel Experiences, Unmatched Comfort, and Seamless Journeys Worldwide</p>
             <div class="curve-logos d-flex flex-wrap gap-5">
               <a href="' . BASE_URL . '"><img src="' . BASE_URL . 'template/web/assets/images/affiliation1.png" alt=""></a>
               <a href="#"><img src="' . BASE_URL . 'template/web/assets/images/affiliation2.png" alt=""></a>

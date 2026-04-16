@@ -1379,6 +1379,7 @@ box-sizing: border-box;
   border: none;
   cursor: pointer;
   padding: 0;
+  text-decoration: none;
 }
 
 /* Clip the hover underline inside the button, suppress double-text ghost */

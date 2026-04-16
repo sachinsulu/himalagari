@@ -2,6 +2,8 @@
 /*
  * Location Information
  */
+
+$reslocbreif = '';
 $emlAddress = str_replace('@', '&#64;', $siteRegulars->email_address);
 $emlAddress = str_replace('.', '&#46;', $emlAddress);
 $emails = explode("<br>", $emlAddress);
@@ -107,7 +109,15 @@ $reslocinfo1 = '
           </div>
 ';
 
+$reslocbreif .= '
+'.$siteRegulars->breif.' 
+';
+
 $jVars['module:locationinfo'] = $reslocinfo1;
+
+$jVars['module:locationbreif'] = $reslocbreif;
+
+
 
 /*
 /top helpline

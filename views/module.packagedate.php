@@ -104,9 +104,9 @@ if (defined('HOME_PAGE')) {
 
         $resfixed .= '
             </div>
-            <button class="explore_btn inquiry-btn mx-auto mt-4" onclick="goToPage(\'' . BASE_URL . 'fixed_listing.html\')">
+            <a href="' . BASE_URL . 'fixed_listing.html" class="explore_btn inquiry-btn mx-auto mt-4">
                 <p>View More</p>
-            </button>
+            </a>
         </section>';
     }
 }

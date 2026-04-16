@@ -31,75 +31,28 @@
   <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' rel="stylesheet">
   <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'
     rel="stylesheet">
-  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' rel="stylesheet">
-  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'
-    rel="stylesheet">
-  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel="stylesheet">
-
-
 </head>
 
 <body>
   <section class="scroll-wrapper">
     <!-- navbar -->
-
-
     <jcms:module:header/>
+
     <!-- inner-package-main -->
     <jcms:module:package-detail/>
 
     <!-- footer -->
-
     <jcms:module:footer/>
-
 
   </section>
 
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
-
-
-
+  <script src="script.js"></script>
 
   <script>
-    function goToPage(page) {
-      window.location.href = page;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const toggleBtns = document.querySelectorAll(".searchToggle");
-      const bottomSearch = document.querySelector(".bottomSearch");
-
-      // Toggle on button click
-      toggleBtns.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation(); // prevent document click from firing
-          bottomSearch.classList.toggle("active");
-        });
-      });
-
-      // Click outside to close
-      document.addEventListener("click", (e) => {
-        const clickedInsideSearch = bottomSearch.contains(e.target);
-        const clickedToggleBtn = [...toggleBtns].some((btn) =>
-          btn.contains(e.target)
-        );
-
-        if (!clickedInsideSearch && !clickedToggleBtn) {
-          bottomSearch.classList.remove("active");
-        }
-      });
-    });
     $(document).ready(function () {
       $('.owl-carousel').owlCarousel({
         items: 3,
@@ -124,29 +77,22 @@
       });
 
       const dateInput = document.getElementById('travelDate');
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.min = today;
-
-
+      if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+      }
     });
 
+    const peopleCount = document.getElementById("peopleCount");
+    const totalAmount = document.getElementById("totalAmount");
+    const basePrice = 400;
+    if (peopleCount && totalAmount) {
+        peopleCount.addEventListener("input", () => {
+        const people = parseInt(peopleCount.value) || 1;
+        totalAmount.value = basePrice * people;
+        });
+    }
 
-
-
-    // span.onclick = () => modal.style.display = "none";
-    // window.onclick = e => { if(e.target == modal) modal.style.display = "none"; }
-
-
-    peopleCount.addEventListener("input", () => {
-      const people = parseInt(peopleCount.value) || 1;
-      totalAmount.value = basePrice * people;
-    });
-
-    document.getElementById("bookingForm").addEventListener("submit", e => {
-      e.preventDefault();
-      alert("Booking Confirmed! Thank you.");
-      modal.style.display = "none";
-    });
 
     const popup = document.getElementById("featuresPopup");
     const closeBtn = document.getElementById("closePopup");
@@ -154,49 +100,29 @@
     document.querySelectorAll(".view-more").forEach(btn => {
       btn.addEventListener("click", e => {
         e.preventDefault();
-        popup.style.display = "flex";
-        document.body.style.overflow = "hidden";
+        if (popup) {
+            popup.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
       });
     });
 
-    closeBtn.addEventListener("click", () => {
-      popup.style.display = "none";
-      document.body.style.overflow = "";
-    });
-
-    popup.addEventListener("click", e => {
-      if (e.target === popup) {
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
         popup.style.display = "none";
         document.body.style.overflow = "";
-      }
-    });
+        });
+    }
 
-    // const viewBtn = document.querySelector(".view-more-btn");
-    // const popupgallery = document.getElementById("popupGallery");
-    // const closeBtngallery = document.querySelector(".close-popup");
+    if (popup) {
+        popup.addEventListener("click", e => {
+        if (e.target === popup) {
+            popup.style.display = "none";
+            document.body.style.overflow = "";
+        }
+        });
+    }
 
-    // viewBtn.addEventListener("click", () => {
-    //   popupgallery.style.display = "flex";
-    // });
-
-    // closeBtngallery.addEventListener("click", () => {
-    //   popupgallery.style.display = "none";
-    // });
-
-    // popupgallery.addEventListener("click", (e) => {
-    //   if (e.target === popupgallery) popupgallery.style.display = "none";
-    // });
-
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-      const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
-    });
-  </script>
-
-  <script>
     $(document).ready(function () {
       $('#packageGrid').owlCarousel({
         loop: true,
@@ -212,183 +138,104 @@
         stagePadding: 0,
 
         responsive: {
-          0: {
-            items: 1
-          },
-          768: {
-            items: 2
-          },
-          1200: {
-            items: 3
-          }
+          0: { items: 1 },
+          768: { items: 2 },
+          1200: { items: 3 }
         }
       });
     });
 
     const pricePerPerson = 400;
-
     const peopleInput = document.getElementById("peopleCount");
     const amountSpan = document.getElementById("amountValue");
 
     function updateTotal() {
+      if (!peopleInput || !amountSpan) return;
       const count = parseInt(peopleInput.value) || 1;
       amountSpan.textContent = count * pricePerPerson;
     }
 
-    // Update on change & typing
-    peopleInput.addEventListener("input", updateTotal);
-
-    // Initial calculation
-    updateTotal();
-
-
+    if (peopleInput) {
+        peopleInput.addEventListener("input", updateTotal);
+        updateTotal();
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
-
       const visible = document.querySelectorAll(".gallery-img");
       const hidden = document.querySelectorAll("#hiddenGallery img");
-
-      console.log("Visible images:", visible.length);
-      console.log("Hidden images:", hidden.length);
-
       const galleryImages = [
         ...Array.from(visible).map(img => img.src),
         ...Array.from(hidden).map(img => img.src)
       ];
 
-      console.log("TOTAL gallery images:", galleryImages.length);
-      console.log(galleryImages);
-
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightboxImg");
-
       let index = 0;
 
       visible.forEach((img, i) => {
         img.addEventListener("click", () => {
           index = i;
-          lightboxImg.src = galleryImages[index];
-          lightbox.style.display = "flex";
+          if (lightboxImg) lightboxImg.src = galleryImages[index];
+          if (lightbox) lightbox.style.display = "flex";
         });
       });
 
-      document.querySelector(".next").onclick = () => {
-        index = (index + 1) % galleryImages.length;
-        lightboxImg.src = galleryImages[index];
-      };
+      const nextBtn = document.querySelector(".next");
+      if (nextBtn) {
+          nextBtn.onclick = () => {
+            index = (index + 1) % galleryImages.length;
+            lightboxImg.src = galleryImages[index];
+          };
+      }
 
+      const prevBtn = document.querySelector(".prev");
+      if (prevBtn) {
+          prevBtn.onclick = () => {
+            index = (index - 1 + galleryImages.length) % galleryImages.length;
+            lightboxImg.src = galleryImages[index];
+          };
+      }
 
-      document.querySelector(".prev").onclick = () => {
-        index = (index - 1 + galleryImages.length) % galleryImages.length;
-        lightboxImg.src = galleryImages[index];
-      };
-
-      document.querySelector(".close").onclick = () => {
-        lightbox.style.display = "none";
-      };
+      const closeLightboxBtn = document.querySelector(".close");
+      if (closeLightboxBtn) {
+          closeLightboxBtn.onclick = () => {
+            lightbox.style.display = "none";
+          };
+      }
+      
       const viewAllBtn = document.querySelector('.view-more-btn');
       const firstGalleryImage = document.querySelector('.gallery-img');
-
-      viewAllBtn.addEventListener('click', () => {
-        firstGalleryImage.click();
-      });
-
-    });
-
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-      // Get all selects and code inputs
-      const countrySelects = document.querySelectorAll(".country-select");
-      const countryCodes = document.querySelectorAll(".country-code");
-
-      // Country code map
-      const countryCodeMap = {
-        Nepal: "+977",
-        India: "+91",
-        UAE: "+971",
-        Bangladesh: "+880",
-        "Sri Lanka": "+94"
-      };
-
-      // Loop through each select
-      countrySelects.forEach((select, index) => {
-        select.addEventListener("change", () => {
-          const code = countryCodeMap[select.value] || "";
-          if (countryCodes[index]) {
-            countryCodes[index].value = code;
-          }
-        });
-      });
+      if (viewAllBtn && firstGalleryImage) {
+          viewAllBtn.addEventListener('click', () => {
+            firstGalleryImage.click();
+          });
+      }
     });
 
     const customizeBtn = document.querySelector(".customize_btn");
     const customizeBooking = document.getElementById("customize_booking");
     const closeCustomize = document.querySelector(".close-customize");
 
-    // Show modal
-    customizeBtn.addEventListener("click", () => {
-      customizeBooking.style.display = "flex";
-      customizeBooking.scrollIntoView({ behavior: "smooth" });
-    });
+    if (customizeBtn && customizeBooking) {
+        customizeBtn.addEventListener("click", () => {
+        customizeBooking.style.display = "flex";
+        customizeBooking.scrollIntoView({ behavior: "smooth" });
+        });
+    }
 
-    // Close modal
-    closeCustomize.addEventListener("click", () => {
-      customizeBooking.style.display = "none";
-    });
-
-    // Close modal when clicking outside content
-    customizeBooking.addEventListener("click", (e) => {
-      if (e.target === customizeBooking) {
+    if (closeCustomize && customizeBooking) {
+        closeCustomize.addEventListener("click", () => {
         customizeBooking.style.display = "none";
-      }
-    });
+        });
+    }
 
-    const planCountry = document.getElementById("planCountry");
-    const planCountryCode = document.getElementById("planCountryCode");
-
-    planCountry.addEventListener("change", function () {
-      const selected = this.selectedOptions[0];
-      const code = selected.getAttribute("data-code") || "";
-      planCountryCode.value = code;
-    });
-
-
+    if (customizeBooking) {
+        customizeBooking.addEventListener("click", (e) => {
+        if (e.target === customizeBooking) {
+            customizeBooking.style.display = "none";
+        }
+        });
+    }
   </script>
-
-  <script>
-    const customizeCountry = document.getElementById("customizeCountry");
-    const customizeCountryCode = document.getElementById("customizeCountryCode");
-
-    customizeCountry.addEventListener("change", function () {
-      const selectedOption = this.selectedOptions[0];
-      const code = selectedOption.getAttribute("data-code") || "";
-      customizeCountryCode.value = code;
-    });
-  </script>
-
-  <script>
-    const row3Country = document.getElementById("row3Country");
-    const row3CountryCode = document.getElementById("row3CountryCode");
-
-    row3Country.addEventListener("change", function () {
-      const selectedOption = this.selectedOptions[0];
-      const code = selectedOption.getAttribute("data-code") || "";
-      row3CountryCode.value = code;
-    });
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const today = new Date().toISOString().split("T")[0];
-
-      // Apply to all date inputs (safe & future-proof)
-      document.querySelectorAll('input[type="date"]').forEach(input => {
-        input.setAttribute("min", today);
-      });
-    });
-  </script>
-
 </body>
-
 </html>

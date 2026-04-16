@@ -57,16 +57,12 @@
 
     </section>
 
-    <!-- JS -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+    <script src="script.js"></script>
 
-    <script type="text/javascript">
-        var base_url = "<?php echo BASE_URL; ?>"; // The template parser might not parse php inside template, let's keep base_url from earlier. Wait, where was it?
-        // Let's get url from <base url="..."> or just hardcode if it was getting from base.
-    </script>
-    <!-- We must properly get base_url. The original code had: var base_url = jQuery('base').attr('url'); -->
     <script type="text/javascript">
         var base_url = jQuery('base').attr('url') || '/';
 
@@ -77,11 +73,6 @@
                 scrollTop: eval($("#read").offset().top - 100)
             }, 700);
         });
-
-        // function to setup explore button routing
-        function goToPage(page) {
-            window.location.href = page;
-        }
 
         // form filtering data
         function triggerFilter() {

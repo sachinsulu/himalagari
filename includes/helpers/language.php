@@ -71,7 +71,7 @@ $GLOBALS['pages']['first'] 			= 'First';
 $GLOBALS['pages']['firstPage'] 		= 'First Page';
 $GLOBALS['pages']['previous']		= 'Previous';
 $GLOBALS['pages']['previousPage']	= 'Previous Page';
-$GLOBALS['pages']['goToPage']		= 'Go to page';
+
 $GLOBALS['pages']['next'] 			= 'Next';
 $GLOBALS['pages']['nextPage'] 		= 'Next Page';
 $GLOBALS['pages']['last'] 			= 'Last';

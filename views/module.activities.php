@@ -190,12 +190,12 @@ if ($packageRows) {
 
                                 <div class="action-row">
                                     <span class="days-badge">' . $days . ' days</span>
-                                    <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $packageRow->slug . '\')">
+                                    <a href="' . BASE_URL . 'package/' . $packageRow->slug . '" class="explore_btn">
                                         <p>Explore</p>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                         </svg>
-                                    </button>
+                                    </a>
                                 </div>
                                 <div class="info-row">';
         if ($activityTitleDisplay) {
@@ -262,9 +262,9 @@ if (defined('HOME_PAGE')) {
                         <p>' . strip_tags($actRow->brief) . '</p>
 
                         <div class="activity_btn">
-                            <button class="explore_btn inquiry-btn mx-auto" onclick="goToPage(\'' . BASE_URL . 'activity/' . $actRow->slug . '\')">
+                            <a href="' . BASE_URL . 'activity/' . $actRow->slug . '" class="explore_btn inquiry-btn mx-auto">
                                 <p>View Trip</p>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </li>';

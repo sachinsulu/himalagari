@@ -224,6 +224,10 @@ $customize .= '
                 
                 <div class="" id="msg" style="display:none;"></div>
 
+                <div class="col-12 col-md-12 mb-3">
+                    <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+                </div>
+
                 <div class="col-sm-8 col-md-6">
                     <button type="submit" id="submit" class="btn btn-primary btn-contact-page">Submit</button>
                 </div>

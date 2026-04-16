@@ -119,6 +119,14 @@
         text-align: center;
       }
     }
+
+    .error, label.error, span.error, .invalid-feedback, [id$="-error"] {
+      color: #ff0000 !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      display: block !important;
+      margin-top: 4px !important;
+    }
   </style>
 </head>
 
@@ -145,9 +153,9 @@
           <p><strong>Best Season : </strong> Mar–May, Sep–Nov</p>
         </div>
 
-        <button class="explore_btn inquiry-btn mx-auto" onclick="goToPage('./package-inner.html')">
+        <a href="./package-inner.html" class="explore_btn inquiry-btn mx-auto">
           <p>View Packages</p>
-        </button>
+        </a>
       </div>
     </div>
   </section>
@@ -385,10 +393,6 @@
         },
       });
     });
-    // button on click
-    function goToPage(page) {
-      window.location.href = page;
-    }
 
     document.addEventListener("DOMContentLoaded", () => {
       const scrollNavbar = document.querySelector(".scroll-navbar");

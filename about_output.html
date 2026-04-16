@@ -1,0 +1,564 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="icon" href="template/web/assets/images/logo.png">
+  <link rel="stylesheet" href="http://localhost/himalgari/template/web/./about.css" rel="stylesheet">
+  <!-- bootstrp -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet">
+
+  <!-- font-awesome -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com' rel="preconnect" />
+  <link href='https://fonts.gstatic.com' rel="preconnect" crossorigin />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+    rel="stylesheet" />
+  <!-- owl carousel  -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' rel="stylesheet" />
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'
+    rel="stylesheet" />
+</head>
+
+<body>
+  <section class="scroll-wrapper">
+    <!-- navbar -->
+    
+
+
+      <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+          <!-- LOGO (ALWAYS) -->
+          <a class="navbar-brand" href="http://localhost/himalgari/home" title="Himmalagari Travels">
+									<img src="http://localhost/himalgari/images/preference/tbeEX-logo.png" alt="Himmalagari Travels" />
+								</a>
+									
+
+          <!-- NAV LINKS -->
+
+        <ul class="navbar-nav flex-row ms-auto gap-3 align-items-center"><li class="nav-item d-none d-lg-block"><a class="nav-link " href="http://localhost/himalgari/home">Home</a></li><li class="nav-item d-none d-lg-block"><a class="nav-link  active" href="http://localhost/himalgari/pages/about-us">About us</a></li><li class="nav-item dropdown d-none d-lg-block"><a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown">Holiday Types</a><ul class="dropdown-menu dropdown-menu-dark"><li><a class="dropdown-item " href="http://localhost/himalgari/activity/wilderness-trekking">Wilderness Trekking</a></li><li><a class="dropdown-item " href="http://localhost/himalgari/activity/manaslu-region">Manaslu Region</a></li><li><a class="dropdown-item " href="http://localhost/himalgari/activity/langtang-region">Langtang</a></li></ul></li><li class="nav-item dropdown d-none d-lg-block"><a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown">Destination</a><ul class="dropdown-menu dropdown-menu-dark"><li><a class="dropdown-item " href="http://localhost/himalgari/destination/trekking-in-nepal">Trekking in Nepal</a></li><li><a class="dropdown-item " href="http://localhost/himalgari/destination/tours-in-nepal">Tours in Nepal</a></li><li><a class="dropdown-item " href="http://localhost/himalgari/destination/rafting-in-nepal">Rafting in Nepal</a></li><li><a class="dropdown-item " href="http://localhost/himalgari/destination/peak-climbing">Peak Climbing</a></li><li><a class="dropdown-item " href="http://localhost/himalgari/destination/day-tours">Day Tours</a></li></ul></li><li class="nav-item d-none d-lg-block"><a class="nav-link " href="http://localhost/himalgari/contact-us">Contact Us</a></li></ul>
+
+          <!-- RIGHT ICONS (ALWAYS) -->
+          <div class="d-flex align-items-center gap-3">
+            <!-- SEARCH ICON -->
+            <button
+              title="search"
+              class="icon-btn searchToggle"
+              id="searchToggle"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <button
+              id="inquiry-btn"
+              class="explore_btn"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvas_inquiry"
+              class="d-none d-sm-block"
+            >
+              <p>Plan Your Trip</p>
+            </button>
+
+            <button
+              title="menu"
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#menuCanvas"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      
+  
+      <div class="offcanvas offcanvas-end" id="menuCanvas">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button
+            class="btn-close"
+            title="menu"
+            data-bs-dismiss="offcanvas"
+          ></button>
+        </div>
+        <div class="offcanvas-body sidebar">
+          <ul class="list-unstyled"><li class="menu-item">Home</li><li class="menu-item">About us</li>
+            <li class="accordion menu-item" id="accordion_532">
+              <div class="accordion-item border-0">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed custom-accordion-btn"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse_532"
+                  >
+                    Holiday Types
+                  </button>
+                </h2>
+                <div id="collapse_532" class="accordion-collapse collapse">
+                  <div class="accordion-body p-0">
+                    <ul class="submenu list-unstyled"><li>Wilderness Trekking</li><li>Manaslu Region</li><li>Langtang</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="accordion menu-item" id="accordion_591">
+              <div class="accordion-item border-0">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed custom-accordion-btn"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse_591"
+                  >
+                    Destination
+                  </button>
+                </h2>
+                <div id="collapse_591" class="accordion-collapse collapse">
+                  <div class="accordion-body p-0">
+                    <ul class="submenu list-unstyled"><li>Trekking in Nepal</li><li>Tours in Nepal</li><li>Rafting in Nepal</li><li>Peak Climbing</li><li>Day Tours</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li><li class="menu-item">Contact Us</li></ul>
+        </div>
+      </div>
+
+
+      <div class="bottom-search bottomSearch" id="bottomSearch">
+        <div class="container">
+          <!-- FORM -->
+          <form class="row g-3 align-items-end" id="navSearchForm" action="http://localhost/himalgari/searchlist" method="post">
+            <div class="col-md-3">
+              <label class="form-label">Destination</label>
+              <select id="destination" name="qdestination[]" class="form-control">
+                <option value="" disabled selected>Where to?</option><option value="10">Trekking in Nepal</option><option value="11">Tours in Nepal</option><option value="14">Rafting in Nepal</option><option value="12">Peak Climbing</option><option value="15">Day Tours</option><option value="16">Helicopter Tours</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Activity</label>
+              <select id="activity" name="qactivities[]" class="form-control">
+                <option value="" disabled selected>Select activity</option><option value="54">Everest Region</option><option value="62">Annapurna Region</option><option value="56">Mustang Region</option><option value="58">Langtang Region</option><option value="57">Manaslu Region</option><option value="59">Wilderness Trekking</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Duration</label>
+              <select id="duration" name="days" class="form-control">
+                <option value="" disabled selected>Select duration</option><option value="5">1-5 Days</option><option value="10">6-10 Days</option><option value="15">11-15 Days</option><option value="morethan15">More than 15 Days</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 d-grid">
+              <button type="submit" class="explore_btn" id="inquiry-btn">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
+        <div class="offcanvas-header">
+          <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="inquiry_text">
+          <div class="offcanvas-body">
+            <div class="inquiry_title orange-text">
+              <span>Plan</span> Your Trip
+              <div id="planTripMsg"></div>
+              <form id="planTripForm">
+                <!-- Packages & Date -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Package <span>*</span></label>
+                    <select id="inq_package" name="package" required>
+                      <option value="" disabled selected>Select a Package</option><option value="253" data-price=""> Trekking Ganesh Himal Ruby Valley</option><option value="263" data-price="">ABC and EBC Special Tour</option><option value="230" data-price="997">Annapurna Base Camp Trekking</option><option value="231" data-price="1247">Annapurna Circuit Trekking</option><option value="223" data-price="797">Buddhist Pilgrimage Tour </option><option value="232" data-price="1497">Everest Base Camp Trekking</option><option value="261" data-price="">Everest Chartered Helicopter Tour </option><option value="210" data-price="1697">Everest Gokyo Lake Trekking</option><option value="233" data-price="1147">Everest Panorama Trekking</option><option value="186" data-price="647">Ghorepani Poon Hill Trekking</option><option value="187" data-price="797">Gosainkunda Lake Trek</option><option value="229" data-price="">Island Peak Climbing</option><option value="235" data-price="2497">Kanchenjunga Base Camp Trek</option><option value="212" data-price="747">Kathmandu Pokhara Chitwan Tour</option><option value="208" data-price="497">Kathmandu Pokhara Tour</option><option value="193" data-price="77">Kathmandu Sightseeing Tour</option><option value="215" data-price="397">Kathmandu Valley Rim Trek </option><option value="213" data-price="">Langtang Valley Trek</option><option value="204" data-price="">Lobuche Peak Climbing</option><option value="190" data-price="1597">Manaslu Circuit Trekking</option><option value="266" data-price="897">Mardi Himal Trek</option><option value="206" data-price="">Mera Peak Climbing </option><option value="262" data-price="897">Muktinath Tours</option><option value="216" data-price="97">Nagarkot Changu Narayan Day Hiking</option><option value="249" data-price="">Nepal Adventure Tour</option><option value="256" data-price="97">Paragliding in Pokhara</option><option value="226" data-price="997">Photography Tour</option><option value="258" data-price="97">Pokhara Sightseeing Day Tour</option><option value="255" data-price="97">Sarangkot Naudanda Hike</option><option value="260" data-price="">Seti River Rafting Adventure </option><option value="257" data-price="97">Shivapuri Day Hiking</option><option value="264" data-price="2697">The Manaslu Tsum Valley Trek </option><option value="241" data-price="2895">Trekking in the Dolpo</option><option value="259" data-price="">Trishuli River Rafting Adventure</option><option value="181" data-price="1447">Tsum Valley Trek</option><option value="242" data-price="2897">Upper Mustang Trekking</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Travel Date <span>*</span></label>
+                    <input type="date" name="trip_date" id="inq_date" class="travel-date" required />
+                  </div>
+                </div>
+
+                <!-- Pax & Price -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>No. of Pax <span class="required">*</span></label>
+                    <input type="number" id="inq_pax" name="pax" min="1" value="1" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Price <span class="required">*</span></label>
+                    <input type="text" id="inq_price" name="price" readonly required />
+                  </div>
+                </div>
+
+                <!-- Name & Email -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" name="name" id="inq_name" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" id="inq_email" required />
+                  </div>
+                </div>
+
+                <!-- Country, Code & Phone -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Country <span class="required">*</span></label>
+                    <select id="planCountry" name="country" required>
+                      <option value="" disabled selected>Select Country</option><option value="AF" data-code="+93">Afghanistan</option><option value="AL" data-code="+355">Albania</option><option value="DZ" data-code="+213">Algeria</option><option value="AR" data-code="+54">Argentina</option><option value="AU" data-code="+61">Australia</option><option value="AT" data-code="+43">Austria</option><option value="BD" data-code="+880">Bangladesh</option><option value="BE" data-code="+32">Belgium</option><option value="BR" data-code="+55">Brazil</option><option value="CA" data-code="+1">Canada</option><option value="CN" data-code="+86">China</option><option value="CO" data-code="+57">Colombia</option><option value="HR" data-code="+385">Croatia</option><option value="CZ" data-code="+420">Czech Republic</option><option value="DK" data-code="+45">Denmark</option><option value="EG" data-code="+20">Egypt</option><option value="FI" data-code="+358">Finland</option><option value="FR" data-code="+33">France</option><option value="DE" data-code="+49">Germany</option><option value="GR" data-code="+30">Greece</option><option value="HK" data-code="+852">Hong Kong</option><option value="HU" data-code="+36">Hungary</option><option value="IN" data-code="+91">India</option><option value="ID" data-code="+62">Indonesia</option><option value="IE" data-code="+353">Ireland</option><option value="IL" data-code="+972">Israel</option><option value="IT" data-code="+39">Italy</option><option value="JP" data-code="+81">Japan</option><option value="JO" data-code="+962">Jordan</option><option value="KZ" data-code="+7">Kazakhstan</option><option value="KE" data-code="+254">Kenya</option><option value="KR" data-code="+82">South Korea</option><option value="KW" data-code="+965">Kuwait</option><option value="MY" data-code="+60">Malaysia</option><option value="MX" data-code="+52">Mexico</option><option value="NL" data-code="+31">Netherlands</option><option value="NZ" data-code="+64">New Zealand</option><option value="NG" data-code="+234">Nigeria</option><option value="NO" data-code="+47">Norway</option><option value="NP" data-code="+977">Nepal</option><option value="OM" data-code="+968">Oman</option><option value="PK" data-code="+92">Pakistan</option><option value="PH" data-code="+63">Philippines</option><option value="PL" data-code="+48">Poland</option><option value="PT" data-code="+351">Portugal</option><option value="QA" data-code="+974">Qatar</option><option value="RO" data-code="+40">Romania</option><option value="RU" data-code="+7">Russia</option><option value="SA" data-code="+966">Saudi Arabia</option><option value="SG" data-code="+65">Singapore</option><option value="ZA" data-code="+27">South Africa</option><option value="ES" data-code="+34">Spain</option><option value="LK" data-code="+94">Sri Lanka</option><option value="SE" data-code="+46">Sweden</option><option value="CH" data-code="+41">Switzerland</option><option value="TH" data-code="+66">Thailand</option><option value="TR" data-code="+90">Turkey</option><option value="AE" data-code="+971">UAE</option><option value="GB" data-code="+44">United Kingdom</option><option value="US" data-code="+1">United States</option><option value="VN" data-code="+84">Vietnam</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group" style="max-width: 90px;">
+                    <label>Code</label>
+                    <input
+                      type="text"
+                      id="planCountryCode"
+                      name="country_code"
+                      readonly
+                    />
+                  </div>
+
+                  <div class="form-group phone-box">
+                    <label>Contact No. <span class="required">*</span></label>
+                    <input type="tel" name="phone" id="inq_phone" required />
+                  </div>
+                </div>
+
+                  <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+                  </div>
+
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+    <!-- ABOUT US SECTION -->
+    
+            <section class="about-section">
+	<h2 class="green-title mb-5">
+		Get To Know <span class="orange-text">About Us</span></h2>
+	<div class="about-wrapper">
+		<!-- LEFT IMAGE -->
+		<div class="about-image">
+			<img alt="About Us" src="/himalgari/userfiles/images/team-pic.jpg" /></div>
+		<!-- RIGHT CONTENT -->
+		<div class="about-content">
+			<p class="about_quotes">
+				&quot;Every journey we plan is a story waiting to be written.&quot;</p>
+			<p>
+				We are a passionate travel company dedicated to creating meaningful journeys and unforgettable experiences. From personalized itineraries to seamless travel arrangements, we ensure every trip is carefully planned and perfectly executed.</p>
+			<p>
+				With years of experience and local expertise, we guide travelers across breathtaking destinations while maintaining comfort, safety, and authenticity. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, magnam voluptatem animi dicta, libero id rem assumenda incidunt a, delectus ex sapiente vero veritatis modi quisquam tempora. Necessitatibus, quos porro, molestiae quam numquam accusamus voluptatum optio fugiat ea odit omnis adipisci iure, corporis modi saepe quo enim voluptates! Incidunt, facilis!</p>
+		</div>
+	</div>
+</section>
+<p>
+	&nbsp;</p>
+
+            
+
+    <!-- OUR TEAM SECTION -->
+
+    
+    <h2 class="green-title">Meet Our <span class="orange-text">Team</span></h2>
+    <section class="team-section container mx-auto">
+
+      <!-- Tabs -->
+      <div class="team-tabs"><button class="tab active" data-tab="executive">Executive Team</button><button class="tab" data-tab="meet">Tour Guides</button></div>
+        <!-- Executive Team -->
+        <div class="team-content active" id="executive">
+                <div class="team-member">
+                  <img src="http://localhost/himalgari/images/team/xO1eJ-sample_person.jpg" alt="Hari Khadka">
+                  <div class="member-info">
+                    <span class="position">Managing Director</span>
+                    <h3 class="name">Hari Khadka</h3>
+                    <p class="description">
+	Mr Hari Khadka, the Founder and Managing Director of &quot;Welcome Nepal Treks Pvt. Ltd.&quot; is a well-established name in the tourism field of Nepal. He has widely traveled abroad and is fluent in English and basic Spanish and Chinese. He sp...</p>
+                    <a href="#" class="show-more">+ show more</a>
+                    <div class="popup-overlay">
+                      <div class="popup-box">
+                        <a href="#" class="close-btn">&times;</a>
+                        <h2>Managing Director</h2>
+                        <p class="name-text">Hari Khadka</p>
+                        <div class="detail-desc">
+                          <p>
+	Mr Hari Khadka, the Founder and Managing Director of &quot;Welcome Nepal Treks Pvt. Ltd.&quot; is a well-established name in the tourism field of Nepal. He has widely traveled abroad and is fluent in English and basic Spanish and Chinese. He spends his free time to develop new tourism concepts and making new business links with both foreign &amp; Nepalese travel trade personalities. Mr Hari Khadka, the Founder and Managing Director of &quot;Welcome Nepal Treks Pvt. Ltd.&quot; is a well-established name in the tourism field of Nepal. He has widely traveled abroad and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing Director of &quot;Welcome Nepal Treks Pvt. Ltd.&quot; is a well-established name in the tourism field of Nepal. He has widely traveled abroad and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div></div>
+        <!-- Meet the Team (Tour Guides) -->
+        <div class="team-content" id="meet">
+                <div class="team-member">
+                  <img src="http://localhost/himalgari/images/team/kcn87-sample_person.jpg" alt="Ram Bahadur">
+                  <div class="member-info">
+                    <span class="position">Guide</span>
+                    <h3 class="name">Ram Bahadur</h3>
+                    <p class="description">Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic S...</p>
+                    <a href="#" class="show-more">+ show more</a>
+                    <div class="popup-overlay">
+                      <div class="popup-box">
+                        <a href="#" class="close-btn">&times;</a>
+                        <h2>Guide</h2>
+                        <p class="name-text">Ram Bahadur</p>
+                        <div class="detail-desc">
+                          <p>Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. He spends his free time to develop
+                  new tourism concepts and making new business links with both foreign & Nepalese travel trade
+                  personalities.
+                  Mr Hari Khadka, the Founder and Managing Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Mr Hari Khadka, the Founder and Managing
+                  Director of "Welcome Nepal Treks Pvt. Ltd."
+                  is a well-established name in the tourism field of Nepal. He has widely traveled abroad
+                  and is fluent in English and basic Spanish and Chinese. Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Ex exercitationem eaque quae tenetur beatae sed deleniti, reprehenderit maxime
+                  repellendus rem soluta, aliquam illo sapiente sequi veniam praesentium excepturi expedita quam.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div></div></section>
+
+
+    
+
+
+
+
+    <!-- documents -->
+    <section class="documents">
+      <h2 class="text-center green-title achievement mb-5">Our Achievement & <span class="orange-text">Honors</span>
+      </h2>
+      <ul class="awards-list">
+        <li>
+          <img src="http://localhost/himalgari/template/web/./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+        </li>
+        <li>
+          <img src="http://localhost/himalgari/template/web/./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+        </li>
+        <li>
+          <img src="http://localhost/himalgari/template/web/./assets/images/tripadvisor_award.svg" alt="TripAdvisor award">
+        </li>
+      </ul>
+    </section>
+
+  
+        <h2 class="green-title">Legal <span class="orange-text">Documents</span></h2>
+        <section class="team-section legal-section container mx-auto">
+          <!-- legal docs -->
+          <div class="legal">
+            <ul class="legal-grid">
+                <li>
+                  <div class="docs_wrapper">
+                    <img src="http://localhost/himalgari/images/gallery/galleryimages/wZUMQ-cv.png" class="popup-img" alt="3">
+                    <span class="search-icon">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                  </div>
+                </li>
+                <li>
+                  <div class="docs_wrapper">
+                    <img src="http://localhost/himalgari/images/gallery/galleryimages/PuDCA-tour.png" class="popup-img" alt="2">
+                    <span class="search-icon">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                  </div>
+                </li>
+                <li>
+                  <div class="docs_wrapper">
+                    <img src="http://localhost/himalgari/images/gallery/galleryimages/jleWW-cv.png" class="popup-img" alt="1">
+                    <span class="search-icon">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                  </div>
+                </li>
+            </ul>
+          </div>
+          <!-- Lightbox Popup Structure (shared by the images) -->
+          <div id="imgPopup" class="img-popup">
+            <span class="close">&times;</span>
+            <button class="nav-btn prev">&#10094;</button>
+            <img class="popup-content" id="popupImage" alt="">
+            <button class="nav-btn next">&#10095;</button>
+          </div>
+        </section>
+    <!-- footer -->
+
+    
+
+     <footer class="footer ">
+      <div class="container-fluid position-relative">
+
+        <div class="footer-flex flex-wrap">
+          
+          <div class=" footer_info footer-col">
+            <h4 class="footer-title">Himmalagari Travels</h4>
+
+            <div class="footer-line">
+              <i class="fa-solid fa-location-dot "></i>
+              <span class="fw-semibold">NEPAL (REGISTERED OFFICE)</span>
+            </div>
+
+            <p class="footer-text">
+             Paknajol Marg, PO Box: 729, Thamel, KTM, Nepal<br>Street No. 5 Lakeside-6, Pokhara
+            </p>
+            <br>
+            <div class="footer-line">
+              <i class="fa-solid fa-envelope "></i>
+              <a href="mailto:info&#64;abcandebcnepaltrekking&#46;com">info&#64;abcandebcnepaltrekking&#46;com</a>
+            </div>
+            
+            <div class="footer-line">
+              <i class="fa-solid fa-phone "></i>
+              <a href="tel:+977 9856073085">+977 9856073085 (Whats App) </a>
+            </div>
+            <div class="footer-line">
+              <i class="fa-solid fa-phone "></i>
+              <a href="tel:+977 9817163085">+977 9817163085 (KTM)</a>
+            </div>
+            <div class="footer-line">
+              <i class="fa-solid fa-phone "></i>
+              <a href="tel:+977 61 457525">+977 61 457525 (PKR)</a>
+            </div>
+          </div>
+          
+          <div class="footer-col footer_quicklinks">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-list">
+              <li><a href='https://localhost/himalgari/pages/about-us#'>Everest Region</a></li><li><a href='https://localhost/himalgari/pages/about-us#'>Annapurna Region</a></li><li><a href='https://localhost/himalgari/pages/about-us#'>Mustang Region</a></li><li><a href='https://localhost/himalgari/pages/about-us#'>Langtang Region</a></li><li><a href='https://localhost/himalgari/pages/about-us#'>Manaslu Region</a></li><li><a href='https://localhost/himalgari/pages/about-us#'>Dolpo Region</a></li>
+            </ul>
+          </div>
+          
+          <div class=" footer-col">
+            <h4 class="footer-title">Destination</h4>
+            <ul class="footer-list">
+              <li>
+		    	<a href="http://localhost/himalgari/destination/trekking-in-nepal">Trekking in Nepal</a>
+		    </li><li>
+		    	<a href="http://localhost/himalgari/destination/tours-in-nepal">Tours in Nepal</a>
+		    </li><li>
+		    	<a href="http://localhost/himalgari/destination/rafting-in-nepal">Rafting in Nepal</a>
+		    </li><li>
+		    	<a href="http://localhost/himalgari/destination/peak-climbing">Peak Climbing</a>
+		    </li><li>
+		    	<a href="http://localhost/himalgari/destination/day-tours">Day Tours</a>
+		    </li><li>
+		    	<a href="http://localhost/himalgari/destination/helicopter-tours">Helicopter Tours</a>
+		    </li>
+            </ul>
+          </div>
+
+          
+          <div class="footer-curve mt-3">
+                      <h2 class="text-center green-title mt-5">
+            Our <span class="orange-text">Branches</span>
+          </h2>
+          <ul class="locations-grid">
+            <li class="location-card">
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_India.png" alt="india" />
+              <h4>INDIA OFFICE</h4>
+              <p>Unit No 217 ILD Trade Centre, Sohna Road, Gurugram – India</p>
+            </li>
+            <li class="location-card">
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_the_United_Arab_Emirates.png" alt="dubai" />
+              <h4>DUBAI OFFICE</h4>
+              <p>Level 3, Latifa Tower, Shaikh Zayed Road, Dubai – UAE</p>
+            </li>
+            <li class="location-card">
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_Bangladesh.png" alt="bangladesh" />
+              <h4>BANGLADESH OFFICE</h4>
+              <p>Gulshan – 02, Dhaka - 1212, Bangladesh</p>
+            </li>
+            <li class="location-card">
+              <img src="{$baseUrl}template/web/assets/images/Flag_of_Sri_Lanka.png" alt="srilanka" />
+              <h4>SRI LANKA OFFICE</h4>
+              <p>World Trade Center, Colombo 01 – Sri Lanka</p>
+            </li>
+          </ul>
+
+            <div class="curve-logos d-flex flex-wrap gap-5">
+              <a href="http://localhost/himalgari/"><img src="http://localhost/himalgari/template/web/assets/images/affiliation1.png" alt=""></a>
+              <a href="#"><img src="http://localhost/himalgari/template/web/assets/images/affiliation2.png" alt=""></a>
+              <a href="#"><img src="http://localhost/himalgari/template/web/assets/images/affiliation3.png" alt=""></a>
+              <a href="#"><img src="http://localhost/himalgari/template/web/assets/images/affilisation3.png" alt=""></a>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      
+      <ul class="footer-bottom mt-4 ">
+
+        
+        <li class="footer-social">
+          <h4 class="footer-subtitle stay-connected">Stay Connected</h4>
+           <a href="https://www.facebook.com/abcandebcnepal" target="_blank" ><i class="fa-brands fa-facebook"></i></a> <a href="https://www.instagram.com/abcebctrekkingadventure?igsh=MWgwY3hyaWFnbTIwNA==" target="_blank" ><i class="fa-brands fa-instagram"></i></a> <a href="https://www.youtube.com/channel/UC9ltkrACsUEHDNkQRkCPl_Q/videos" target="_blank" ><i class="fa-brands fa-youtube"></i></a> <a href="https://www.linkedin.com/" target="_blank" ><i class="fa-brands fa-linkedin"></i></a> 
+        </li>
+
+        
+        <li class="footer_we_accept">
+          <h4 class="footer-subtitle we-accept">We Accept</h4>
+          <div class="footer-payments">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Visa_Inc._logo_%282021%E2%80%93present%29.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="">
+            <img src="http://localhost/himalgari/template/web/assets/images/maestro-logo-copy.png" alt="">
+          </div>
+        </li>
+        <li>Copyright © 2026 Himmalagari Travels. All Rights Reserved.</li>
+      </ul>
+
+    </footer>
+
+
+
+
+
+  </section>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+  <script src="http://localhost/himalgari/template/web/script.js"></script>
+</body>
+
+</html>

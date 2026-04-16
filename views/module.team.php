@@ -15,17 +15,18 @@ if ($executives || $guides) {
       <!-- Tabs -->
       <div class="team-tabs">';
         if ($executives) {
-            $res_team .= '<button class="tab" data-tab="executive">Executive Team</button>';
+            $res_team .= '<button class="tab active" data-tab="executive">Executive Team</button>';
         }
         if ($guides) {
-            $res_team .= '<button class="tab" data-tab="meet">Tour Guides</button>';
+            $guide_active = (!$executives) ? ' active' : '';
+            $res_team .= '<button class="tab' . $guide_active . '" data-tab="meet">Tour Guides</button>';
         }
     $res_team .= '</div>';
 
     if ($executives) {
         $res_team .= '
         <!-- Executive Team -->
-        <div class="team-content" id="executive">';
+        <div class="team-content active" id="executive">';
             foreach ($executives as $row) {
                 $imgNm = '';
                 $file_path = SITE_ROOT . 'images/team/' . $row->image;
@@ -63,9 +64,10 @@ if ($executives || $guides) {
     }
 
     if ($guides) {
+        $guide_active = (!$executives) ? ' active' : '';
         $res_team .= '
         <!-- Meet the Team (Tour Guides) -->
-        <div class="team-content" id="meet">';
+        <div class="team-content' . $guide_active . '" id="meet">';
             foreach ($guides as $row) {
                 $imgNm = '';
                 $file_path = SITE_ROOT . 'images/team/' . $row->image;

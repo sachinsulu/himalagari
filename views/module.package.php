@@ -98,12 +98,12 @@ if (!empty($homeRec)) {
 
               <div class="action-row">
                 <span class="days-badge">' . $RecRow->days . ' days</span>
-                <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $RecRow->slug . '\')">
+                <a href="' . BASE_URL . 'package/' . $RecRow->slug . '" class="explore_btn">
                   <p>Explore</p>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
-                </button>
+                </a>
               </div>
 
               <div class="info-row">
@@ -195,12 +195,12 @@ if (!empty($topRatedRec)) {
 
               <div class="action-row">
                 <span class="days-badge">' . $pkg->days . ' days</span>
-                <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $pkg->slug . '\')">
+                <a href="' . BASE_URL . 'package/' . $pkg->slug . '" class="explore_btn">
                   <p>Explore</p>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
-                </button>
+                </a>
               </div>
 
               <div class="info-row">
@@ -279,12 +279,12 @@ if (!empty($topRatedRec)) {
 
               <div class="action-row">
                 <span class="days-badge">' . $pkg->days . ' days</span>
-                <button class="explore_btn" onclick="goToPage(\'' . BASE_URL . 'package/' . $pkg->slug . '\')">
+                <a href="' . BASE_URL . 'package/' . $pkg->slug . '" class="explore_btn">
                   <p>Explore</p>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
-                </button>
+                </a>
               </div>
 
               <div class="info-row">
@@ -523,6 +523,8 @@ if (defined('PACKAGE_PAGE')) {
     $slug = (isset($_REQUEST['slug']) and !empty($_REQUEST['slug'])) ? addslashes($_REQUEST['slug']) : '';
     $pkgRec = Package::find_by_slug($slug);
 
+    $respkg_detail .= '<script src="https://www.google.com/recaptcha/api.js" async defer></script>';
+
     $destslug = Destination::field_by_id($pkgRec->destinationId, 'slug');
 
     // getting avg rating
@@ -752,12 +754,16 @@ if (defined('PACKAGE_PAGE')) {
         }
         
         $respkg_detail .= '
-                  <form>
+                  <form id="fixedDepartureForm">
+                    <input type="hidden" name="pkg_id" value="' . $pkgRec->id . '">
+                    <input type="hidden" name="fixed_date_id" value="' . (!empty($fixedDatesIdArr) ? $fixedDatesIdArr[0] : '') . '">
+                    <input type="hidden" name="date" value="' . (!empty($firstFixed) ? $firstFixed->package_date : '') . '">
+                    <input type="hidden" name="action" value="request_inquiry">
 
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="peopleCount" class="form-label">Number of Travellers <span>*</span></label>
-                        <input type="number" class="peopleCount form-control" id="peopleCount" min="1" value="1"
+                        <input type="number" name="pax" class="peopleCount form-control" id="peopleCount" min="1" value="1"
                           required>
                       </div>
 
@@ -772,23 +778,23 @@ if (defined('PACKAGE_PAGE')) {
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label class="form-label">Full Name <span>*</span></label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="full_name" class="form-control" required>
                       </div>
 
                       <div class="col-md-6 mb-3">
                         <label class="form-label">Address <span>*</span></label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="address1" class="form-control" required>
                       </div>
                     </div>
                     <div class="row">
                       <!-- Country -->
                       <div class="col-md-6 mb-3">
                         <label class="form-label" for="tripCountry">Country <span>*</span></label>
-                        <select id="tripCountry" class="form-select" required>
+                        <select id="tripCountry" name="country" class="form-select tripCountry" required>
                           <option value="" disabled selected>Select Country</option>
-                          <option value="NP" data-code="+977">Nepal</option>
-                          <option value="IN" data-code="+91">India</option>
-                          <option value="US" data-code="+1">United States</option>
+                          <option value="Nepal" data-code="+977">Nepal</option>
+                          <option value="India" data-code="+91">India</option>
+                          <option value="United States" data-code="+1">United States</option>
                           <!-- add more countries -->
                         </select>
                       </div>
@@ -798,22 +804,28 @@ if (defined('PACKAGE_PAGE')) {
                         <label class="form-label" for="tripPhone">Phone <span>*</span></label>
                         <div class="input-group">
                           <!-- Country Code (auto-filled) -->
-                          <span class="input-group-text country-code" id="tripCode">+977</span>
+                          <input type="text" name="country_code" class="input-group-text country-code-input" id="tripCode" value="+977" readonly style="width:80px;">
                           <!-- Phone Number -->
-                          <input type="tel" id="tripPhone" class="form-control" required aria-describedby="tripCode">
+                          <input type="tel" name="phone" id="tripPhone" class="form-control" required aria-describedby="tripCode">
                         </div>
                       </div>
                     </div>
 
                     <div class="mb-3">
                       <label class="form-label">Email <span>*</span></label>
-                      <input class="form-control" type="email" required>
+                      <input class="form-control" name="email" type="email" required>
                     </div>
 
                     <div class="mb-3">
                       <label class="form-label">Message</label>
-                      <textarea class="form-control" rows="3"></textarea>
+                      <textarea class="form-control" name="message" rows="3"></textarea>
                     </div>
+
+                    <div class="mb-3">
+                        <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+                    </div>
+
+                    <div id="bookmsg"></div>
 
                     <button type="submit" class="btn btn-success w-50">
                       Submit
@@ -843,18 +855,20 @@ if (defined('PACKAGE_PAGE')) {
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                  <form id="bookingForm" class="grid-form">
+                  <form id="customizeForm" class="grid-form">
+                    <input type="hidden" name="package" value="' . $pkgRec->id . '">
+                    <input type="hidden" name="action" value="plan_trip">
 
                     <!-- ROW 1 -->
                     <div class="two-col full">
                       <div class="form-group">
                         <label>Full Name <span>*</span></label>
-                        <input type="text" required>
+                        <input type="text" name="name" required>
                       </div>
 
                       <div class="form-group">
                         <label>Address <span>*</span></label>
-                        <input type="text" required>
+                        <input type="text" name="address" required>
                       </div>
                     </div>
 
@@ -863,13 +877,13 @@ if (defined('PACKAGE_PAGE')) {
                       <!-- Country -->
                       <div class="form-group">
                         <label>Country <span>*</span></label>
-                        <select id="customizeCountry" name="country" required>
+                        <select id="customizeCountry" name="country" class="customizeCountry" required>
                           <option value="">Select a country</option>
-                          <option value="NP" data-code="+977">Nepal</option>
-                          <option value="IN" data-code="+91">India</option>
-                          <option value="US" data-code="+1">United States</option>
-                          <option value="AU" data-code="+61">Australia</option>
-                          <option value="GB" data-code="+44">United Kingdom</option>
+                          <option value="Nepal" data-code="+977">Nepal</option>
+                          <option value="India" data-code="+91">India</option>
+                          <option value="United States" data-code="+1">United States</option>
+                          <option value="Australia" data-code="+61">Australia</option>
+                          <option value="United Kingdom" data-code="+44">United Kingdom</option>
                         </select>
                       </div>
 
@@ -877,9 +891,9 @@ if (defined('PACKAGE_PAGE')) {
                       <div class="form-group">
                         <label>Phone <span>*</span></label>
                         <div class="d-flex gap-2">
-                          <input type="text" id="customizeCountryCode" class="country-code" placeholder="Code" readonly
+                          <input type="text" name="country_code" id="customizeCountryCode" class="country-code" placeholder="Code" readonly
                             style="max-width:120px">
-                          <input type="tel" id="customizePhone" placeholder="Phone Number" required>
+                          <input type="tel" name="phone" id="customizePhone" placeholder="Phone Number" required>
                         </div>
                       </div>
                     </div>
@@ -887,23 +901,19 @@ if (defined('PACKAGE_PAGE')) {
 
                     <div class="form-group full">
                       <label>Email <span>*</span></label>
-                      <input type="email" required>
+                      <input type="email" name="email" required>
                     </div>
 
                     <div class="form-group full">
                       <label>Message</label>
-                      <textarea rows="3"></textarea>
+                      <textarea name="message" rows="3"></textarea>
                     </div>
 
-                    <div class="form-check full">
-                      <input type="checkbox" required>
-                      <label>I am not a robot</label>
+                    <div class="form-group full">
+                        <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
                     </div>
 
-                    <div class="form-check full">
-                      <input type="checkbox" required>
-                      <label> <a href="#">Terms and Conditions</a></label>
-                    </div>
+                    <div id="planTripMsg"></div>
 
                     <div class="text-center mt-3">
                       <button type="submit" class="confirm-btn">Submit</button>
@@ -936,16 +946,18 @@ if (defined('PACKAGE_PAGE')) {
 
 
                   <form id="bookingForm" class="grid-form mt-4">
+                    <input type="hidden" name="pkg_id" value="' . $pkgRec->id . '">
+                    <input type="hidden" name="action" value="request_inquiry">
 
                     <!-- ROW 1 -->
                     <div class="form-group">
                       <label for="travelDate">Select Travel Date <span>*</span></label>
-                      <input type="date" id="travelDate" required>
+                      <input type="date" name="date" id="travelDate" required>
                     </div>
 
                     <div class="form-group">
                       <label for="peopleCountBooking">Number of Travellers <span>*</span></label>
-                      <input type="number" id="peopleCountBooking" min="1" value="1" required>
+                      <input type="number" name="pax" id="peopleCountBooking" min="1" value="1" required>
                     </div>
 
                     <div class="total-amount mx-auto">
@@ -959,12 +971,12 @@ if (defined('PACKAGE_PAGE')) {
                     <div class="two-col full">
                       <div class="form-group">
                         <label for="fullName">Full Name <span>*</span></label>
-                        <input type="text" id="fullName" required>
+                        <input type="text" name="full_name" id="fullName" required>
                       </div>
 
                       <div class="form-group">
                         <label for="address">Address <span>*</span></label>
-                        <input type="text" id="address" required>
+                        <input type="text" name="address1" id="address" required>
                       </div>
                     </div>
 
@@ -973,13 +985,13 @@ if (defined('PACKAGE_PAGE')) {
                       <!-- Country -->
                       <div class="form-group">
                         <label for="row3Country">Country <span>*</span></label>
-                        <select id="row3Country" required>
+                        <select name="country" id="row3Country" class="row3Country" required>
                           <option value="">Choose Your Country</option>
-                          <option value="NP" data-code="+977">Nepal</option>
-                          <option value="IN" data-code="+91">India</option>
-                          <option value="AE" data-code="+971">UAE</option>
-                          <option value="BD" data-code="+880">Bangladesh</option>
-                          <option value="LK" data-code="+94">Sri Lanka</option>
+                          <option value="Nepal" data-code="+977">Nepal</option>
+                          <option value="India" data-code="+91">India</option>
+                          <option value="UAE" data-code="+971">UAE</option>
+                          <option value="Bangladesh" data-code="+880">Bangladesh</option>
+                          <option value="Sri Lanka" data-code="+94">Sri Lanka</option>
                         </select>
                       </div>
 
@@ -987,9 +999,9 @@ if (defined('PACKAGE_PAGE')) {
                       <div class="form-group">
                         <label class="d-block">Phone <span>*</span></label>
                         <div class="d-flex gap-2">
-                          <input type="text" id="row3CountryCode" class="form-control country-code" placeholder="Code"
+                          <input type="text" name="country_code" id="row3CountryCode" class="form-control country-code" placeholder="Code"
                             readonly style="max-width:120px;">
-                          <input type="tel" id="row3Phone" class="form-control" placeholder="Phone Number" required>
+                          <input type="tel" name="phone" id="row3Phone" class="form-control" placeholder="Phone Number" required>
                         </div>
                       </div>
                     </div>
@@ -997,26 +1009,21 @@ if (defined('PACKAGE_PAGE')) {
                     <!-- FULL WIDTH -->
                     <div class="form-group full">
                       <label for="email">Email <span>*</span></label>
-                      <input type="email" id="email" required>
+                      <input type="email" name="email" id="email" required>
                     </div>
 
                     <div class="form-group full">
                       <label for="message">Message</label>
-                      <textarea id="message" rows="3"></textarea>
+                      <textarea name="message" id="message" rows="3"></textarea>
                     </div>
 
-                    <!-- CHECKBOXES -->
-                    <div class="form-check d-flex full">
-                      <input type="checkbox" id="robot" required>
-                      <label for="robot">I am not a robot</label>
+                    <!-- RECAPTCHA -->
+                    <div class="form-group full">
+                        <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
                     </div>
 
-                    <div class="form-check d-flex full">
-                      <input type="checkbox" id="terms" required>
-                      <label for="terms">
-                        I have accepted the <a href="#">Terms and Conditions</a>
-                      </label>
-                    </div>
+
+                    <div id="bookingMsg"></div>
 
                     <!-- BUTTON -->
                     <div class="full text-center">

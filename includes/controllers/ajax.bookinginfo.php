@@ -17,6 +17,16 @@
 	switch($action) 
 	{						
 		case "request_inquiry":
+			// reCAPTCHA validation
+			if (isset($_POST['g-recaptcha-response'])) {
+				$secret = '6LdNE7osAAAAAGfi-AdaaLGAnpNqwoRtgqSN79-9';
+				$verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+				$responseData = json_decode($verifyResponse);
+				if (!$responseData->success) {
+					echo json_encode(array("action" => "unsuccess", "message" => "reCAPTCHA verification failed. Please try again."));
+					exit;
+				}
+			}
 			foreach($_POST as $key=>$val) { $$key=$val; }
 
 			// For tbl_bookinginfo

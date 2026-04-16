@@ -331,6 +331,14 @@ form button {
   margin-top: 10px;
 }
 
+label.error {
+  color: red;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  display: block;
+}
+
 /* form button:hover {
   background: #6c8b4a;
 } */
