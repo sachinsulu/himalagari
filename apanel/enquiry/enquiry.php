@@ -2,7 +2,16 @@
 $moduleTablename  = "tbl_enquiries";
 $moduleId 		  = 50;				
 
-if(isset($_GET['page']) && $_GET['page'] == "enquiry" && isset($_GET['mode']) && $_GET['mode']=="list"):     
+$enquiryTypes = array('list', 'contact', 'customize', 'plantrip', 'booking');
+$currentMode = isset($_GET['mode']) ? strtolower($_GET['mode']) : '';
+
+if(isset($_GET['page']) && $_GET['page'] == "enquiry" && in_array($currentMode, $enquiryTypes)):
+    
+    $type_filter = '';
+    if ($currentMode == 'contact') $type_filter = 'Contact';
+    elseif ($currentMode == 'customize') $type_filter = 'Customize';
+    elseif ($currentMode == 'plantrip') $type_filter = 'Plan Trip';
+    elseif ($currentMode == 'booking') $type_filter = 'Booking';
 ?>
 <h3>List Enquiries</h3>
 <div class="my-msg"></div>
@@ -23,7 +32,8 @@ if(isset($_GET['page']) && $_GET['page'] == "enquiry" && isset($_GET['mode']) &&
         </thead> 
             
         <tbody>
-            <?php $records = Enquiry::find_all_active(); 
+            <?php 
+            $records = Enquiry::find_all_active($type_filter); 
             foreach($records as $key=>$record): ?>    
             <tr id="<?php echo $record->id;?>">
                 <td style="display:none;"><?php echo $key+1;?></td>                

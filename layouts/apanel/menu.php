@@ -46,6 +46,15 @@ if(!empty($slg) AND !empty($mm) AND !in_array($mm->id, $mod_chk)) { redirect_to(
             if($pid){
                 $actvpage = ($pid->parent_id==$val->id)?' active':'';
             }
+            // Also keep parent active when navigating enquiry sub-pages via ?mode=
+            if (!$actvpage && $page == 'enquiry' && isset($_GET['mode'])) {
+                $safeMode = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['mode']);
+                $childByMode = Module::find_by_sql("SELECT * FROM tbl_modules WHERE mode='" . $safeMode . "' AND parent_id=" . (int)$val->id . " LIMIT 1");
+                if (!empty($childByMode)) {
+                    $currpage = '';
+                    $actvpage = ' active';
+                }
+            }
 
             $childmenu = Module::find_child_by($val->id);
             $pagelink  = !empty($childmenu)?'javascript:void(0);':ADMIN_URL.$val->link;
@@ -57,8 +66,9 @@ if(!empty($slg) AND !empty($mm) AND !in_array($mm->id, $mod_chk)) { redirect_to(
                 if(!empty($childmenu)){
                 echo '<ul>';
                     foreach ($childmenu as $k=>$v) {
-                        if(in_array($v->id, $mod_chk)) { 
-                            $subcurrent = ($page==$v->mode)?'current-page':'';
+                        if(in_array($v->id, $mod_chk)) {
+                            // Match either direct page mode or ?mode= query param for enquiry-style sub-pages
+                            $subcurrent = ($page==$v->mode || (isset($_GET['mode']) && $_GET['mode']==$v->mode)) ? 'current-page' : '';
                             echo '<li class="'.$subcurrent.'">
                                     <a href="'.ADMIN_URL.$v->link.'" title="'.$v->name.'">
                                         <i class="glyph-icon '.$v->icon_link.'"></i>

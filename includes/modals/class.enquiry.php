@@ -25,12 +25,17 @@ class Enquiry extends DatabaseObject {
 	const TYPE_CONTACT = 'Contact';
 	const TYPE_ENQUIRY = 'Enquiry';
 	const TYPE_PLAN    = 'Plan Trip';
+	const TYPE_CUSTOMIZE = 'Customize';
 	const TYPE_BOOKING = 'Booking';
 
 	//Find all the active rows in the current database table.
-	public static function find_all_active() {
+	public static function find_all_active($type = '') {
 		global $db;
-		return self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE is_deleted=0 ORDER BY added_date DESC");
+        $cond = "";
+        if(!empty($type)) {
+            $cond = " AND type='".$db->escape_value($type)."'";
+        }
+		return self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE is_deleted=0{$cond} ORDER BY added_date DESC");
 	}
 
 	//Find a single row in the database where id is provided and not deleted.

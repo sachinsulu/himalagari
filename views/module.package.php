@@ -624,7 +624,7 @@ if (defined('PACKAGE_PAGE')) {
         }
         $respkg_detail .= '</div>
                     <span class="score">' . $rating . '</span>
-                    <span class="reviews">Based on <a href="#reviews">' . $reviews_total . ' Reviews</a></span>
+                    <span class="reviews">Based on ' . $reviews_total . ' Reviews</span>
                 </div>
             </div>
         ';
@@ -933,7 +933,7 @@ if (defined('PACKAGE_PAGE')) {
 
                   <form id="customizeForm" class="grid-form">
                     <input type="hidden" name="package" value="' . $pkgRec->id . '">
-                    <input type="hidden" name="action" value="plan_trip">
+                    <input type="hidden" name="action" value="customize">
 
                     <!-- ROW 1 -->
                     <div class="two-col full">
@@ -989,7 +989,7 @@ if (defined('PACKAGE_PAGE')) {
                         <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
                     </div>
 
-                    <div id="planTripMsg"></div>
+                    <div id="customizeMsg"></div>
 
                     <div class="text-center mt-3">
                       <button type="submit" class="confirm-btn">Submit</button>
@@ -1202,14 +1202,20 @@ if (defined('PACKAGE_PAGE')) {
             $respkg_detail .= '
                         <del>&#36;' . $pkgRec->price . '</del>
                         <span>&#36;' . $pkgRec->offer_price . '</span>
+                         <small>/per person</small>
+            ';
+        } elseif(!empty($pkgRec->price)) {
+            $respkg_detail .= '
+                        <span>&#36;' . $pkgRec->price . '</span>
+                         <small>/per person</small>
             ';
         } else {
             $respkg_detail .= '
-                        <span>&#36;' . $pkgRec->price . '</span>
+                        <span>Contact Us</span>
             ';
         }
         $respkg_detail .= '
-                        <small>/per person</small>
+                       
                       </div>
 
                       <ul class="check-list">
@@ -1232,29 +1238,79 @@ if (defined('PACKAGE_PAGE')) {
                           </button>
 
                         </header>
+';
 
+        $siteRegulars = Config::find_by_id(1);
+
+        $emlAddress = str_replace('@', '&#64;', $siteRegulars->email_address);
+        $emlAddress = str_replace('.', '&#46;', $emlAddress);
+        $emails = explode("<br>", $emlAddress);
+        $mail = '';
+        $rawMail = '';
+        if (!empty($emails)) {
+            $mail = $emails[0];
+            $rawMail = strip_tags(str_replace(['&#64;', '&#46;'], ['@', '.'], $emails[0]));
+        }
+
+        $contacts = explode("<br>", $siteRegulars->contact_info);
+        $respkg_detail .= '
                         <address>
                           <ul class="contact-list">
-                            <li>
-                              <img src="https://flagcdn.com/w40/np.png" alt="Nepal Flag">
-                              <span>+977 9761161318</span>
-                              <i class="fa-brands fa-whatsapp whatsapp"></i>
-                            </li>
+';
 
-                            <li>
-                              <img src="https://flagcdn.com/w40/bt.png" alt="Bhutan Flag">
-                              <span>+49 15229228976</span>
-                              <i class="fa-brands fa-whatsapp whatsapp"></i>
-                            </li>
+        foreach ($contacts as $contact) {
+            if (empty(trim($contact))) continue;
+            
+            $lowercaseContact = strtolower($contact);
+            if (strpos($lowercaseContact, 'whatsapp') === false && strpos($lowercaseContact, 'whats app') === false) {
+                continue;
+            }
 
+            $numbers = explode("(", $contact);
+            $tel = trim($numbers[0]);
+            
+            $icon = '<i class="fa-brands fa-whatsapp whatsapp"></i>';
+            
+            $flag = '';
+            if(strpos($tel, '+977') !== false) {
+                $flag = '<img src="https://flagcdn.com/w40/np.png" alt="Nepal Flag">';
+            } elseif(strpos($tel, '+49') !== false) {
+                $flag = '<img src="https://flagcdn.com/w40/de.png" alt="Germany Flag">';
+            } elseif(strpos($tel, '+975') !== false) {
+                $flag = '<img src="https://flagcdn.com/w40/bt.png" alt="Bhutan Flag">';
+            } elseif(strpos($tel, '+1') !== false) {
+                $flag = '<img src="https://flagcdn.com/w40/us.png" alt="US Flag">';
+            } elseif(strpos($tel, '+44') !== false) {
+                $flag = '<img src="https://flagcdn.com/w40/gb.png" alt="UK Flag">';
+            } elseif(strpos($tel, '+61') !== false) {
+                $flag = '<img src="https://flagcdn.com/w40/au.png" alt="Australia Flag">';
+            } else {
+                $flag = '<i class="fa-solid fa-phone" style="margin-right: 8px;"></i>';
+            }
+
+            $cleanWaNum = preg_replace('/[^0-9]/', '', $tel);
+            $respkg_detail .= '
+                            <li>
+                              '.$flag.'
+                              <span><a href="https://wa.me/'.$cleanWaNum.'" target="_blank" style="color:inherit;text-decoration:none;">'.$tel.'</a></span>
+                              <a href="https://wa.me/'.$cleanWaNum.'" target="_blank" style="color:inherit;text-decoration:none;">'.$icon.'</a>
+                            </li>';
+            
+            break;
+        }
+
+        if (!empty($rawMail)) {
+            $respkg_detail .= '
                             <li class="email">
                               <i class="fa-solid fa-envelope"></i>
                               <span data-bs-toggle="tooltip" data-bs-placement="right"
-                                data-bs-title="himmalagaritravels@gmail.com">
-                                <a href="mailto:himmalagaritravels@gmail.com">Email Us</a>
+                                data-bs-title="'.$rawMail.'">
+                                <a href="mailto:'.$rawMail.'">Email Us</a>
                               </span>
-                            </li>
+                            </li>';
+        }
 
+        $respkg_detail .= '
                           </ul>
                         </address>
 

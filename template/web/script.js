@@ -171,14 +171,16 @@ $(document).ready(function() {
           data: formData,
           dataType: "json",
           success: function(response) {
-            $("#planTripMsg").html('<div class="alert alert-' + (response.action === 'success' ? 'success' : 'danger') + '">' + response.message + '</div>');
+            $("#customizeMsg").html('<div class="alert alert-' + (response.action === 'success' ? 'success' : 'danger') + '">' + response.message + '</div>');
             if (response.action === "success") {
               form.reset();
-              if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+              if (typeof grecaptcha !== "undefined") {
+                  try { grecaptcha.reset(); } catch(e) {}
+              }
             }
           },
           error: function() {
-            $("#planTripMsg").html('<div class="alert alert-danger">An error occurred while processing your request. Please try again.</div>');
+            $("#customizeMsg").html('<div class="alert alert-danger">An error occurred while processing your request. Please try again.</div>');
           },
           complete: function() {
             $btn.text(btnText).prop("disabled", false);

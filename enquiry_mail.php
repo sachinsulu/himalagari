@@ -1,7 +1,7 @@
 <?php
 require_once("includes/initialize.php");
 
-if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['action'] == 'plan_trip')):
+if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['action'] == 'plan_trip' || $_POST['action'] == 'customize')):
     // reCAPTCHA validation
     if (isset($_POST['g-recaptcha-response'])) {
         $secret = '6LdNE7osAAAAAGfi-AdaaLGAnpNqwoRtgqSN79-9';
@@ -24,8 +24,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
 
     $enq = new Enquiry();
     
-    if ($_POST['action'] == 'plan_trip') {
-        $enq->type = Enquiry::TYPE_PLAN;
+    if ($_POST['action'] == 'plan_trip' || $_POST['action'] == 'customize') {
+        $enq->type = ($_POST['action'] == 'customize') ? Enquiry::TYPE_CUSTOMIZE : Enquiry::TYPE_PLAN;
         $enq->full_name = $name;
         $enq->email = $email;
         $enq->phone = $country_code . ' ' . $phone;
@@ -37,8 +37,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
             if ($pkgRec) $pkgTitle = $pkgRec->title;
         }
         $enq->trip_name = $pkgTitle;
-        $enq->trip_date = $trip_date;
-        $enq->pax = $pax;
+        $enq->trip_date = isset($trip_date) ? $trip_date : '';
+        $enq->pax = isset($pax) ? $pax : '';
         $enq->message = $message . (!empty($priceValue) ? "\n\nPrice: " . $priceValue : '');
     } else {
         $enq->type = Enquiry::TYPE_CONTACT;
@@ -55,14 +55,15 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
     $enq->is_deleted = 0;
     $enq->save();
 
-    if ($_POST['action'] == 'plan_trip') {
+    if ($_POST['action'] == 'plan_trip' || $_POST['action'] == 'customize') {
+        $mail_header = ($_POST['action'] == 'customize') ? 'Customize Your Trip Details' : 'Plan Your Trip Details';
       $priceHtmlRow = !empty($priceValue) ? '<strong>Estimated Price</strong> : ' . $priceValue . '<br />' : '';
         $body = '<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
                   <tr>
                     <td><p>Dear Sir,</p></td>
                   </tr>
                   <tr>
-                    <td><p><span style="color:#0065B3; font-size:14px; font-weight:bold">Plan Your Trip Details</span><br />
+                    <td><p><span style="color:#0065B3; font-size:14px; font-weight:bold">' . $mail_header . '</span><br />
                       The details provided are:</p>
                         <p>
                             <strong>Full Name</strong> : ' . $name . '<br />	
@@ -70,8 +71,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
                             <strong>Country</strong> : ' . $country . '<br />	
                             <strong>Contact No</strong> : ' . $country_code . ' ' . $phone . '<br />	
                             <strong>Package</strong> : ' . $pkgTitle . '<br />	
-                            <strong>Travel Date</strong> : ' . $trip_date . '<br />	
-                            <strong>No. of Pax</strong> : ' . $pax . '<br />	
+                            <strong>Travel Date</strong> : ' . (isset($trip_date) ? $trip_date : 'N/A') . '<br />	
+                            <strong>No. of Pax</strong> : ' . (isset($pax) ? $pax : 'N/A') . '<br />	
                             ' . $priceHtmlRow . '
                             <strong>Message / Details</strong>: <br />' . nl2br($message) . '<br />
                         </p>
@@ -84,7 +85,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'forcoment' || $_POST['acti
                     </p></td>
                   </tr>
                 </table>';
-        $subject = "Trip Plan Inquiry from " . $name;
+        $subject = ($_POST['action'] == 'customize') ? "Trip Customize Inquiry from " . $name : "Trip Plan Inquiry from " . $name;
     } else {
         $body = '<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
                   <tr>
