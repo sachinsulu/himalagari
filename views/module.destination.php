@@ -291,6 +291,18 @@ if ($packageRows) {
         }
         $hero_bg = !empty($banner_img) ? 'style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(' . $banner_img . ');"' : '';
 
+        global $siteRegulars;
+        if (!empty($siteRegulars->contact_info2)) {
+            $mobile_arr = explode(',', $siteRegulars->contact_info2);
+            $tel_link = preg_replace('/\s+/', '', trim($mobile_arr[0]));
+        } elseif (!empty($siteRegulars->contact_info)) {
+            $contacts_arr = explode('<br>', $siteRegulars->contact_info);
+            $cleanContact = preg_replace('/\s*\(.*?\)/', '', trim($contacts_arr[0]));
+            $tel_link = preg_replace('/\s+/', '', str_replace(',', '', $cleanContact));
+        }
+        $wa_number = preg_replace('/[^\d]/', '', $tel_link);
+        $href = !empty($wa_number) ? 'https://wa.me/' . $wa_number : 'tel:' . $tel_link;
+
     $bread .= '<section class="nepal-hero-content nepal mt-4">
             <section class="hero" ' .$hero_bg. ' >
                 <div class="overlay"></div>
@@ -300,7 +312,7 @@ if ($packageRows) {
                     ' . (isset($content[0]) ? $content[0] : '') . '
 
                     <div class="hero-buttons">
-                        <a href="tel:+9779800000000" class="btn btn-secondary">Talk to a Travel Advisor</a>
+                        <a href="' . $href . '" target="_blank" class="btn btn-secondary">Talk to a Travel Advisor</a>
                     </div>
 
                     ' . (isset($content[1]) ? $content[1] : '') . '
