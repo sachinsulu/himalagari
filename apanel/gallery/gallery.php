@@ -37,7 +37,11 @@ if (isset($_GET['page']) && $_GET['page'] == "gallery" && isset($_GET['mode']) &
                 foreach ($records as $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td style="display:none;"><?php echo $record->sortorder; ?></td>
-                        <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/></td>
+                        <td>
+                            <?php if ($record->id != 6): ?>
+                                <input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/>
+                            <?php endif; ?>
+                        </td>
                         <td>
                             <div class="top-icon-bar dropdown">
                                 <a href="javascript:void(0);" title="" class="user-ico clearfix" data-toggle="dropdown">
@@ -76,14 +80,18 @@ if (isset($_GET['page']) && $_GET['page'] == "gallery" && isset($_GET['mode']) &
                                moduleId="<?php echo $record->id; ?>">
                                 <i class="glyph-icon icon-flag"></i>
                             </a>
-                            <a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button"
-                               data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-edit"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
-                               title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-remove"></i>
-                            </a>
+                            <?php if ($record->id != 6): ?>
+                                <a href="javascript:void(0);"
+                                   class="loadingbar-demo btn small bg-blue-alt tooltip-button"
+                                   data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
+                                    <i class="glyph-icon icon-edit"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="btn small bg-red tooltip-button"
+                                   data-placement="top"
+                                   title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
+                                    <i class="glyph-icon icon-remove"></i>
+                                </a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
