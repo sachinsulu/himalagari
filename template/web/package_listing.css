@@ -213,14 +213,116 @@ width: 95%;
     position: relative;
     transition: width 0.3s ease-in-out, transform 0.2s ease;
 }
-#inquiry-btn {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: none;
+.inquiry-btn {
   background-color: #94ce94;
   color: #000;
+  border: none;
   font-weight: 500;
   white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: clamp(14px, 1.4vw, 20px) !important;
+  padding: clamp(6px, 1vw, 8px) clamp(14px, 2vw, 18px);
+  border-radius: clamp(16px, 2vw, 20px);
+  margin: 10px;
+  height: clamp(36px, 5vw, 42px);
+  gap: clamp(6px, 1vw, 10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.inquiry-btn::after {
+  display: none !important;
+}
+
+
+.inquiry-btn p {
+  margin: 0;
+  position: relative;
+  color: #000;
+  font-weight: 600;
+}
+
+.inquiry-btn p::before {
+  display: none !important;
+}
+
+.inquiry-btn svg {
+  width: clamp(14px, 2vw, 18px);
+  height: clamp(14px, 2vw, 18px);
+}
+
+@media (max-width: 480px) {
+  .inquiry-btn svg {
+    display: none;
+  }
+}
+
+/* Premium Button Style */
+.btn-premium {
+    background-color: #94ce94;
+    color: #000;
+    border: none;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--font-poppin);
+    
+    font-size: clamp(14px, 1.4vw, 17px) !important;
+    padding: clamp(6px, 1vw, 10px) clamp(16px, 2vw, 24px);
+    border-radius: clamp(18px, 2.5vw, 25px);
+    height: 38px;
+    gap: clamp(8px, 1vw, 12px);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.search {
+    margin-block: auto;
+}
+
+.btn-premium p {
+    margin: 0;
+    position: relative;
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-premium p::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    left: 0;
+    bottom: -2px;
+    background: var(--primary-color, #1C6408);
+    height: 2px;
+    transition: 0.3s ease-out;
+}
+
+.btn-premium:hover p::after {
+    width: 80%;
+}
+
+.btn-premium:hover {
+    background-color: #85bc85;
+}
+
+.btn-premium svg {
+    width: clamp(14px, 2vw, 18px);
+    height: clamp(14px, 2vw, 18px);
+    transition: transform 0.3s ease;
+}
+
+.btn-premium:hover svg {
+    transform: translateX(4px);
 }
 .explore_btn {
     --primary-color: #111;
@@ -241,44 +343,36 @@ width: 95%;
   color: var(--primary-color);
 }
 
+/* Underline is now on the <p> so it never exceeds text width */
 .explore_btn::after {
-  position: absolute;
-  content: "";
-  width: 10px;
-  left: 10;
-  bottom: 10px;
-  background: var(--hovered-color);
-  height: 2px;
-  transition: 0.3s ease-out;
+  display: none;   /* disabled — underline moved to p::after */
 }
 
-.explore_btn p::before {
+.explore_btn p::after {
   position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Explore";
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
+  content: "";
+  width: 0;
+  left: 0;
+  bottom: -3px;
+  background: var(--hovered-color);
+  height: 2px;
+  border-radius: 2px;
+  transition: width 0.3s ease-out;
 }
-#inquiry-btn p::before {
-  position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Plan Your Trip";
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
-}
+
 .explore_btn:hover::after {
-  width: 60%;
+  display: none;
+}
+
+.explore_btn:hover p::after {
+  width: 80%;
 }
 
 .explore_btn:hover p::before {
-  width: 100%;
+  display: none !important;
 }
+
+
 
 .explore_btn:hover svg {
   transform: translateX(4px);
@@ -293,11 +387,27 @@ width: 95%;
   transition-delay: 0.2s;
 }
 
+/* Action-row explore btn: underline inside the green pill, dark color */
+.action-row .explore_btn::after {
+  display: none;   /* global ::after is off; we use p::after below */
+}
+.action-row .explore_btn p::after {
+  background: #1a3d08;  /* dark green — visible on green pill */
+  bottom: -2px;
+  left: 0;
+}
+.action-row .explore_btn:hover p::after {
+  width: 80%;
+}
+.action-row .explore_btn p::before {
+  display: none !important;
+}
 
-#offcanvas_inquiry{
-   overflow-y: auto;   
+
+#offcanvas_inquiry {
+  overflow-y: auto;
   max-height: 100vh;
-  width: 738px;
+  width: min(100%, 738px) !important;
 }
 .inquiry_text{
   margin-block:auto ;
@@ -309,6 +419,12 @@ width: 95%;
 }
 .inquiry_title form{
   margin-top: 30px;
+}
+
+/* Target rows ONLY inside the inquiry offcanvas to prevent breaking other forms */
+#offcanvas_inquiry .form-row {
+  display: flex;
+  gap: 12px;
 }
 
 .form-row {
@@ -348,7 +464,6 @@ form button {
   border-radius: 20px;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .inquiry_title span{
@@ -394,39 +509,30 @@ label {
   position: relative;
 }
 
-.dropdown-menu .dropdown-item {
-  padding: 8px 20px;
+/* Force hide all horizontal navlinks on mobile to prevent layout crowding */
+@media (max-width: 991px) {
+  .navbar-nav {
+    display: none !important;
+  }
 }
 
-.navbar .dropdown-menu {
-  position: absolute !important;  
-  top: 100%;                     
-  left: 0;
-  margin: 0;                   
-  display: none;                
-  z-index: 2000;                
-}
+/* Removed broken CSS fragments */
 
-
-.navbar .dropdown-menu .show {
-  display: block;
-}
-
-.offcanvas {
-      padding-left: 40px;
-          padding-top: 60px;
+#menuCanvas {
+  padding-left: 40px;
+  padding-top: 60px;
   z-index: 10000 !important;
   font-family: var(--font-poppin);
 }
 
 
-.offcanvas input.form-control {
+#menuCanvas input.form-control {
   background-color: #222;
   color: #fff;
   border: none;
 }
 
-.offcanvas input.form-control::placeholder {
+#menuCanvas input.form-control::placeholder {
   color: #aaa;
 }
 .sidebar {
@@ -440,6 +546,10 @@ label {
   cursor: pointer;
   background: none;
   box-shadow: none;
+}
+.list-unstyled .menu-item a{
+      text-decoration: none;
+    color: black;
 }
 .submenu li{
   list-style: disc;
@@ -491,9 +601,7 @@ label {
   padding-left: 15px;
 }
 @media (max-width: 360px) {
-  #inquiry-btn p {
-    font-size: 11px;
-  }
+
     .package-card img {
     margin-inline: calc(-1 * clamp(8px, 3vw, 25px));
     width: calc(100% + (2 * clamp(8px, 3vw, 25px)));
@@ -516,10 +624,7 @@ label {
 }
 
   /* PLAN BUTTON – CRITICAL */
- #inquiry-btn {
-  padding: clamp(4px, 1.5vw, 8px)
-           clamp(8px, 3vw, 18px);
-}
+
 
   .explore_btn p {
     font-size: 12px;
@@ -577,11 +682,7 @@ font-size: clamp(13px, 3.2vw, 16px);
 
 
   /* PLAN YOUR TRIP BUTTON */
-#inquiry-btn {
-  padding: clamp(6px, 2.5vw, 8px)
-           clamp(12px, 4vw, 18px);
-  border-radius: clamp(14px, 4vw, 20px);
-}
+
 
   .explore_btn p {
     font-size: 14px;
@@ -655,7 +756,7 @@ font-size: clamp(13px, 3.2vw, 16px);
 } */
 
 .package-card img {
-  width: 103%;           
+  width: 100%;           
   height:420px;         
   object-fit: cover;     
   display: block;   
@@ -734,11 +835,12 @@ font-size: clamp(13px, 3.2vw, 16px);
   display: flex;
   flex-direction: column;
   font-family: var(--font-poppin);
+  height: 100%;
 }
 
 
 .package-card img {
-  width: 103%;           
+  width: 100%;           
   height:420px;         
   object-fit: cover;     
   display: block;   
@@ -753,6 +855,9 @@ font-size: clamp(13px, 3.2vw, 16px);
 .card-content a{
   text-decoration: none;
   color: black;
+      display: flex;
+    justify-content: space-between;
+        /* width: 95%; */
 }
 .card-content-left{
   border-right: 1px solid #2d2e2d;
@@ -968,43 +1073,33 @@ width: 95%;
 .explore_btn p {
   margin: 0;
   position: relative;
-  font-size: 16px;
+      font-size: 13px;
   color: var(--primary-color);
 }
 
+/* Underline anchored to <p> — never exceeds text width */
 .explore_btn::after {
-  position: absolute;
-  content: "";
-  width: 10px;
-  left: 10;
-  bottom: 10px;
-  background: var(--hovered-color);
-  height: 2px;
-  transition: 0.3s ease-out;
+  display: none;
 }
 
-.explore_btn p::before {
+.explore_btn p::after {
   position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Explore";
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
+  content: "";
+  width: 0;
+  left: 0;
+  bottom: -3px;
+  background: var(--hovered-color);
+  height: 2px;
+  border-radius: 2px;
+  transition: width 0.3s ease-out;
 }
-#inquiry-btn p::before {
-  position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Plan Your Trip";
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
-}
+
 .explore_btn:hover::after {
-  width: 60%;
+  display: none;
+}
+
+.explore_btn:hover p::after {
+  width: 80%;
 }
 
 .explore_btn:hover p::before {
@@ -1137,7 +1232,7 @@ width: 95%;
 }
 
 .deal-image img {
-  width: 103%;
+  width: 100%;
   height: 250px;
   object-fit: cover;
   display: block;
@@ -1193,7 +1288,7 @@ img {
 .packages-grid {
     padding: clamp(16px, 6vw, 25px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 352px));
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
     gap: clamp(24px, 2vw, 60px);
     justify-content: center;
     width: 90%;
@@ -1256,9 +1351,6 @@ box-sizing: border-box;
   }
 }
 @media (max-width: 350px) {
-  .package-card {
-    padding-inline: 8px;
-  }
 
   .package-card img {
     width: 100%;
@@ -1287,7 +1379,8 @@ box-sizing: border-box;
 /* IMAGE */
 .image-wrapper {
   position: relative;
-  height: clamp(233px, 55%, 268px);
+  height: 250px;
+  overflow: hidden;
 }
 
 .image-wrapper img {
@@ -1312,7 +1405,10 @@ box-sizing: border-box;
 .card-content {
   padding: clamp(10px, 4%, 25px);
   position: relative;
-    min-width: unset;
+  min-width: unset;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -1321,19 +1417,35 @@ box-sizing: border-box;
   color: var(--primary-color);
 }
 
-/* CARD INFO WRAPPER */
+/* CARD INFO WRAPPER — full-height center pole */
 .card-info-wrapper {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: auto;
+  position: relative;
 }
 
-/* INFO ROW: left label | divider | right label */
+/* Single continuous vertical line (the signpost pole) */
+.card-info-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: #ddd;
+  z-index: 0;
+}
+
+/* INFO ROW: left label | (pole) | right label */
 .info-row {
   display: flex;
   align-items: flex-start;
   gap: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .info-row .info {
@@ -1342,52 +1454,88 @@ box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 3px;
+      text-align: left;
 }
 
 .info-row .info.text-right {
   text-align: right;
 }
 
+/* row-divider is now just a spacer; the pole comes from ::before */
 .row-divider {
   flex-shrink: 0;
   width: 1px;
-  background: #ddd;
+  background: transparent;
   align-self: stretch;
   min-height: 36px;
   margin-inline: 8px;
 }
 
-/* ACTION ROW: days-badge and explore btn centered + overlapping */
+/* ACTION ROW: absolutely anchored to center pole */
 .action-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 4px 0;
-}
-
-.action-row .days-badge {
   position: relative;
   z-index: 1;
+  height: 50px;
+  margin: 4px 0;
 }
 
+/* Days badge — right edge exactly at center pole, sits LOWER */
+.action-row .days-badge {
+  position: absolute;
+  right: 50%;             /* flat right edge touches the center pole */
+  top: 50%;
+  transform: translateY(calc(-50% + 10px));
+  background: rgba(149, 191, 87, 0.45);
+  color: #1c6408;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 12px 8px 16px;
+  border-radius: 20px 0 0 20px;
+  clip-path: none;
+  white-space: nowrap;
+  display: block;
+}
+
+/* Explore btn — left edge exactly at center pole, sits HIGHER */
 .action-row .explore_btn {
-  position: relative;
-  z-index: 2;
-  margin-left: -18px;
-  background: transparent;
+  position: absolute;
+  left: 50%;              /* flat left edge touches the center pole */
+  top: 50%;
+  transform: translateY(calc(-50% - 10px));
+  background: #9bcc60;
   border: none;
   cursor: pointer;
-  padding: 0;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px 8px 12px;
+  border-radius: 0 20px 20px 0;
+  clip-path: none;
+  white-space: nowrap;
+  justify-content: center;
 }
-
-/* Clip the hover underline inside the button, suppress double-text ghost */
-.action-row .explore_btn {
-  overflow: hidden;
+.action-row .explore_btn:hover {
+  background: #89b957;
 }
+.action-row .explore_btn p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  color: #1a3d08;
+}
+.action-row .explore_btn p::after,
 .action-row .explore_btn p::before {
   display: none !important;
+}
+.action-row .explore_btn svg {
+  color: #1a3d08;
+  width: 14px;
+  height: 14px;
 }
 
 /* LABELS & VALUES */
@@ -1406,7 +1554,7 @@ box-sizing: border-box;
   color: #1c6408;
 }
 
-/* DAYS BADGE */
+/* DAYS BADGE — base (non-action-row contexts) */
 .days-badge {
   display: inline-block;
   background: rgba(149, 191, 87, 0.28);
@@ -1417,6 +1565,14 @@ box-sizing: border-box;
   border-radius: 20px;
 }
 
+/* NORMAL BUTTON width override */
+.normal_button {
+  width: 170px;
+}
+/*about package*/
+.highlights-text{
+  font-size: 20px !important;
+}
 /* FOOTER */
 .mountain_with_footer {
   position: relative;
@@ -1472,7 +1628,7 @@ box-sizing: border-box;
   flex-direction: column;
 box-sizing: border-box;
   width: 100%;       /* fill grid column */
-      max-width: 360px !important;   /* limit card growth */
+      max-width: 450px !important;   /* limit card growth */
   margin: 0 auto; 
    font-family: var(--font-poppin);   /* center if extra space */
 }
@@ -1589,7 +1745,7 @@ width: 5%;
 /* WHITE CURVE */
 .footer-curve {
  position: absolute;
-    right: -164px;
+    right: -87px;
 
     top: 132%;
     transform: translateY(-50%);
@@ -1862,31 +2018,31 @@ width: 25%;
   display: none;
 }
 
-.packages-wrapper .days-badge {
-  position: relative;
-  left: auto;
-  top: auto;
-  transform: none;
-  grid-column: 1;
-  grid-row: 2;
-  justify-self: start;
-  align-self: center;
-  border-radius: 24px;
-  padding: 6px 16px;
+/* Action-row overrides for packages-wrapper — anchored to center pole */
+.packages-wrapper .action-row .days-badge {
+  position: absolute !important;
+  right: 50% !important;     /* right flat edge exactly at center pole */
+  left: auto !important;
+  top: 50% !important;
+  transform: translateY(calc(-50% + 10px)) !important;
+  border-radius: 20px 0 0 20px;
+  padding: 8px 12px 8px 16px;
   white-space: nowrap;
+  grid-column: unset;
+  grid-row: unset;
 }
 
-.packages-wrapper .card-content .explore_btn {
-  position: relative;
-  top: auto;
-  left: auto;
+.packages-wrapper .action-row .explore_btn {
+  position: absolute !important;
+  left: 50% !important;      /* left flat edge exactly at center pole */
+  right: auto !important;
+  top: 50% !important;
+  transform: translateY(calc(-50% - 10px)) !important;
+  border-radius: 0 20px 20px 0;
+  padding: 8px 16px 8px 12px;
   margin: 0;
-  grid-column: 3;
-  grid-row: 2;
-  justify-self: end;
-  align-self: center;
-  border-radius: 0 24px 24px 0;
-  padding: 10px 14px;
+  grid-column: unset;
+  grid-row: unset;
 }
 
 .packages-wrapper .info-grid > .info {
@@ -1899,3 +2055,148 @@ width: 25%;
   line-height: 1.3;
 }
 
+
+
+/* =========================
+   PACKAGE GRID (SHARED)
+========================= */
+.packages-grid { 
+    padding: clamp(16px, 6vw, 25px); 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); 
+    row-gap: clamp(60px, 8vw, 100px) !important; 
+    column-gap: clamp(24px, 2vw, 60px); 
+    justify-content: center; 
+    width: 90%; 
+    margin: 0 auto;
+}
+
+@media (max-width: 992px) { .packages-grid { padding-inline: 16px; } }
+@media (max-width: 768px) { .packages-grid { padding-inline: 8px; row-gap: 40px !important; column-gap: 16px; } }
+@media (max-width: 576px) { .packages-grid { padding-inline: 0; row-gap: 55px !important; column-gap: 12px; } }
+
+@media (max-width: 768px) {
+  #offcanvas_inquiry .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  #offcanvas_inquiry .inquiry_title {
+    font-size: 28px;
+  }
+  #offcanvas_inquiry .inquiry_text {
+    margin-inline: 4%;
+  }
+  /* Handle inline max-width for country code when stacked */
+  #offcanvas_inquiry .form-group[style*="max-width: 90px"] {
+    max-width: 100% !important;
+  }
+}
+
+/* Prevent horizontal scroll globally */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+
+/* Global Navbar & Dropdown Fixes */
+.navbar .dropdown, .original_nav .dropdown {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.navbar .dropdown-menu, .original_nav .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  margin: 0 !important;
+  display: none;
+  z-index: 2000;
+  background: #ffffff;
+  border: 1px solid #e0eee0;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(28, 100, 8, 0.15);
+  padding: 10px 0;
+  min-width: 220px;
+  float: none !important;
+}
+.dropdown-menu .dropdown-item {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.dropdown-menu .dropdown-item:hover {
+  background: #f8fdf8;
+  color: #1C6408;
+  padding-left: 25px;
+}
+.dropdown-menu .dropdown-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 0;
+  height: 2px;
+  background: #1C6408;
+  transition: width 0.3s ease;
+}
+.dropdown-menu .dropdown-item:hover::after {
+  width: 30px;
+}
+.navbar .dropdown-menu.show, .original_nav .dropdown-menu.show {
+  display: block !important;
+}
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  height: 100% !important;
+  
+}
+.navbar .container-fluid, .original_nav .container-fluid {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  padding: 0 1.5rem !important;
+}
+
+
+/* Standardized Package Card and Grid */
+.packages-grid { 
+    padding: clamp(16px, 6vw, 25px) !important; 
+    display: grid !important; 
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)) !important; 
+    row-gap: clamp(60px, 8vw, 100px) !important; 
+    column-gap: clamp(24px, 2vw, 60px) !important; 
+    justify-content: center !important; 
+    width: 95% !important; 
+    margin: 0 auto !important; 
+        max-width: 1300px;
+}
+
+.package-card { 
+    background: #fff !important; 
+    border-radius: 22px !important; 
+    overflow: hidden !important; 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    box-sizing: border-box !important; 
+    width: 100% !important; 
+    max-width: 425px !important;
+    margin: 0 auto !important; 
+    font-family: var(--font-poppin) !important; 
+    text-align: left !important; 
+    height: 100% !important; 
+    transition: transform 0.3s ease !important; 
+}
+.package-card:hover { transform: translateY(-5px) !important; }
+
+.package-card .info-row { display: flex !important; }

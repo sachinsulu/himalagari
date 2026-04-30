@@ -58,7 +58,7 @@ if (defined('HOME_PAGE')) {
                     ' . strip_tags($content[0]) . '
                     </p>
                     <!-- uiverse btn -->
-                    <a href="' . BASE_URL . 'pages/about-us" class="explore_btn inquiry-btn">
+                    <a href="' . BASE_URL . 'pages/about-us" class="explore_btn normal_button mx-auto inquiry-btn">
                     <p>View More</p>
                     </a>
                 </div>

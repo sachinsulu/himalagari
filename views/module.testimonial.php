@@ -88,7 +88,7 @@ if ($tmonialRec) {
                 </span>
             </div>
 
-            <p class="mt-4">
+            <p class="mt-4 testimonial-card-content">
             ' . strip_tags($comments) . '
             </p>
             <div class="author_info">

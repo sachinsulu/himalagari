@@ -144,9 +144,9 @@ if ($packageRows) {
                            ' . (isset($content[0]) ? $content[0] : '') . '
 
 
-                        <div class="hero-buttons">
-                            <a href="' . $href . '" target="_blank" class="btn btn-secondary">Talk to a Travel Advisor</a>
-                        </div>
+                         <div class="hero-buttons">
+                        <a href="' . $href . '" target="_blank" class="btn btn-secondary">Talk to a Travel Advisor</a>
+                    </div>
 
                     ' . (isset($content[1]) ? $content[1] : '') . '
                     </div>
@@ -319,12 +319,12 @@ if (defined('HOME_PAGE')) {
         $homeActivities .= '
         <section class="activities mt-5 text-center">
             <h4>Holiday Types</h4>
-            <h2 class="green-title mb-5">
+            <h2 class="green-title mb-5 mx-auto">
                 Find the Perfect <span class="orange-text">Holiday</span> for Every
                 <span class="orange-text">Travel Style</span>
             </h2>
 
-            <div class="activities_container">
+            <div class="activities_container container px-3 px-md-5">
                 <ul class="card-container d-flex gap-5">';
         
         foreach ($actRec as $actRow) {
@@ -345,7 +345,7 @@ if (defined('HOME_PAGE')) {
                         <p>' . strip_tags($actRow->brief) . '</p>
 
                         <div class="activity_btn">
-                            <a href="' . BASE_URL . 'activity/' . $actRow->slug . '" class="explore_btn inquiry-btn mx-auto">
+                            <a href="' . BASE_URL . 'activity/' . $actRow->slug . '" class="explore_btn inquiry-btn normal_button mx-auto">
                                 <p>View Trip</p>
                             </a>
                         </div>

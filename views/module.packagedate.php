@@ -12,7 +12,7 @@ if (defined('HOME_PAGE')) {
             JOIN tbl_package p ON pd.package_id = p.id
             WHERE pd.status = '1' AND pd.package_date >= CURDATE()
             ORDER BY pd.package_date ASC
-            LIMIT 6";
+            LIMIT 24";
     $fixedRec = Packagedate::find_by_sql($sql);
 
     if ($fixedRec) {
@@ -29,7 +29,9 @@ if (defined('HOME_PAGE')) {
 
             <div class="packages-grid mx-auto">';
 
+        $fdCount = 0;
         foreach ($fixedRec as $row) {
+            $fdCount++;
             $file_path = SITE_ROOT . "images/package/" . $row->pkg_image;
             $img = (!empty($row->pkg_image) and file_exists($file_path)) ? IMAGE_PATH . "package/" . $row->pkg_image : IMAGE_PATH . "static/home-featured.jpg";
             
@@ -42,9 +44,10 @@ if (defined('HOME_PAGE')) {
 
             // Determine price
             $actualPrice = !empty($row->package_rate) ? $row->package_rate : (!empty($row->pkg_offer_price) ? $row->pkg_offer_price : $row->pkg_price);
+            $hideStyle = ($fdCount > 6) ? ' style="display:none;"' : '';
 
             $resfixed .= '
-            <div class="package-card">
+            <div class="package-card"'. $hideStyle .'>
                 <div class="image-wrapper">
                     <img src="' . $img . '" alt="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '" />
                     ' . $popularBadge . '
@@ -103,10 +106,18 @@ if (defined('HOME_PAGE')) {
         }
 
         $resfixed .= '
-            </div>
-            <a href="' . BASE_URL . 'fixed_listing.html" class="explore_btn inquiry-btn mx-auto mt-4">
-                <p>View More</p>
-            </a>
+            </div>';
+        
+        if (count($fixedRec) > 6) {
+            $resfixed .= '
+            <div class="load-more-wrap text-center mt-4">
+                <button type="button" class="explore_btn mx-auto inquiry-btn js-load-more-packages" data-initial="6" data-step="24">
+                    <p>Load More Packages</p>
+                </button>
+            </div>';
+        }
+
+        $resfixed .= '
         </section>';
     }
 }

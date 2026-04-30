@@ -26,7 +26,7 @@ if ($menuRec):
         if ($menusubRec):
             $result .= '<li class="nav-item dropdown d-none d-lg-block">';
             $result .= '<a class="nav-link dropdown-toggle ' . $linkActive . $PlinkActive . '" href="#" role="button" data-bs-toggle="dropdown">' . $menuRow->name . '</a>';
-            $result .= '<ul class="dropdown-menu dropdown-menu-dark">';
+            $result .= '<ul class="dropdown-menu">';
             foreach ($menusubRec as $menusubRow):
                 $subactive = (substr($_SERVER['REQUEST_URI'], $tot) == $menusubRow->linksrc) ? " active" : "";
                 $result .= '<li><a class="dropdown-item ' . $subactive . '" href="' . BASE_URL . $menusubRow->linksrc . '">' . $menusubRow->name . '</a></li>';
@@ -67,7 +67,7 @@ if ($menuRec):
         if ($menusubRec):
             $menu_home .= '<li class="nav-item dropdown d-none d-lg-block">';
             $menu_home .= '<a class="nav-link dropdown-toggle ' . $linkActive . $PlinkActive . '" href="#" role="button" data-bs-toggle="dropdown">' . $menuRow->name . '</a>';
-            $menu_home .= '<ul class="dropdown-menu dropdown-menu-dark">';
+            $menu_home .= '<ul class="dropdown-menu">';
             foreach ($menusubRec as $menusubRow):
                 $subactive = (substr($_SERVER['REQUEST_URI'], $tot) == $menusubRow->linksrc) ? " active" : "";
                 $menu_home .= '<li><a class="dropdown-item ' . $subactive . '" href="' . BASE_URL . $menusubRow->linksrc . '">' . $menusubRow->name . '</a></li>';
@@ -111,7 +111,7 @@ if ($menuRec):
                   <div class="accordion-body p-0">
                     <ul class="submenu list-unstyled">';
             foreach ($menusubRec as $menusubRow):
-                $res_offcanvas .= '<li>' . $menusubRow->name . '</li>';
+                $res_offcanvas .= '<li><a href="'.$menusubRow->linksrc .'">' . $menusubRow->name . '</a></li>';
             endforeach;
             $res_offcanvas .= '
                     </ul>
@@ -120,7 +120,7 @@ if ($menuRec):
               </div>
             </li>';
         else:
-            $res_offcanvas .= '<li class="menu-item">' . $menuRow->name . '</li>';
+            $res_offcanvas .= '<li class="menu-item"><a href="'.$menuRow->linksrc .'">' . $menuRow->name . '</a></li>';
         endif;
     endforeach;
     $res_offcanvas .= '</ul>';

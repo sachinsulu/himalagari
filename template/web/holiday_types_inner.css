@@ -157,6 +157,7 @@ width: 95%;
   transition: transform 0.4s ease;
   font-family: var(--font-poppin);
   z-index: 1050;
+  width: 50vw;
   max-width: 1020px;
   border-radius: 30px;
 }
@@ -166,14 +167,69 @@ width: 95%;
 }
 
 
-#inquiry-btn {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: none;
-  background-color: #94ce94;
-  color: #000;
-  font-weight: 500;
-  white-space: nowrap;
+/* Premium Button Style */
+.btn-premium {
+    background-color: #94ce94;
+    color: #000;
+    border: none;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--font-poppin);
+    
+    font-size: clamp(14px, 1.4vw, 17px) !important;
+    padding: clamp(6px, 1vw, 10px) clamp(16px, 2vw, 24px);
+    border-radius: clamp(18px, 2.5vw, 25px);
+    height: 38px;
+    gap: clamp(8px, 1vw, 12px);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.search{
+margin-block: auto;
+}
+
+.btn-premium p {
+    margin: 0;
+    position: relative;
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-premium p::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    left: 0;
+    bottom: -2px;
+    background: var(--primary-color, #1C6408);
+    height: 2px;
+    transition: 0.3s ease-out;
+}
+
+.btn-premium:hover p::after {
+    width: 80%;
+}
+
+.btn-premium:hover {
+    background-color: #85bc85;
+}
+
+.btn-premium svg {
+    width: clamp(14px, 2vw, 18px);
+    height: clamp(14px, 2vw, 18px);
+    transition: transform 0.3s ease;
+}
+
+.btn-premium:hover svg {
+    transform: translateX(4px);
 }
 .explore_btn {
     --primary-color: #111;
@@ -242,16 +298,7 @@ width: 95%;
   overflow: hidden;
   transition: 0.3s ease-out;
 }
-#inquiry-btn p::before {
-  position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Plan Your Trip";
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
-}
+
 .explore_btn:hover::after {
   width: 60%;
 }
@@ -274,10 +321,10 @@ width: 95%;
 }
 
 
-#offcanvas_inquiry{
-   overflow-y: auto;   
+#offcanvas_inquiry {
+  overflow-y: auto;
   max-height: 100vh;
-  width: 738px;
+  width: min(100%, 738px) !important;
 }
 .inquiry_text{
   margin-block:auto ;
@@ -402,21 +449,21 @@ label {
   display: block;
 }
 
-.offcanvas {
-      padding-left: 40px;
-          padding-top: 60px;
+#menuCanvas {
+  padding-left: 40px;
+  padding-top: 60px;
   z-index: 10000 !important;
   font-family: var(--font-poppin);
 }
 
 
-.offcanvas input.form-control {
+#menuCanvas input.form-control {
   background-color: #222;
   color: #fff;
   border: none;
 }
 
-.offcanvas input.form-control::placeholder {
+#menuCanvas input.form-control::placeholder {
   color: #aaa;
 }
 .sidebar {
@@ -430,6 +477,10 @@ label {
   cursor: pointer;
   background: none;
   box-shadow: none;
+}
+.menu-item a{
+      text-decoration: none;
+    color: black;
 }
 .submenu li{
   list-style: disc;
@@ -480,11 +531,7 @@ label {
 .submenu li {
   padding-left: 15px;
 }
-@media (max-width: 360px) {
-  #inquiry-btn p {
-    font-size: 11px;
-  }
-}
+
 
 @media (max-width: 380px) {
 
@@ -499,11 +546,7 @@ label {
   width: clamp(48px, 10vw, 80px);
 }
 
-  /* PLAN BUTTON – CRITICAL */
- #inquiry-btn {
-  padding: clamp(4px, 1.5vw, 8px)
-           clamp(8px, 3vw, 18px);
-}
+
 
   .explore_btn p {
     font-size: 12px;
@@ -560,12 +603,7 @@ font-size: clamp(13px, 3.2vw, 16px);
 
 
 
-  /* PLAN YOUR TRIP BUTTON */
-#inquiry-btn {
-  padding: clamp(6px, 2.5vw, 8px)
-           clamp(12px, 4vw, 18px);
-  border-radius: clamp(14px, 4vw, 20px);
-}
+
 
   .explore_btn p {
     font-size: 14px;
@@ -759,9 +797,10 @@ font-size: clamp(28px, 6vw, 48px);
 /* Optional: adjust responsiveness */
 @media (max-width: 768px) {
     .hero-title-trapezium {
-        font-size: 32px;
-        padding: 15px 0;
-        clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%);
+        font-size: clamp(20px, 6vw, 28px);
+        padding: 15px 25px;
+        width: 95%;
+        clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
     }
       .hero-content {
         text-align: start;
@@ -1188,16 +1227,7 @@ width: 50% !important;
   overflow: hidden;
   transition: 0.3s ease-out;
 }
-#inquiry-btn p::before {
-  position: absolute;
-  /*   box-sizing: border-box; */
-  content: "Plan Your Trip";
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
-}
+
 .explore_btn:hover::after {
   width: 60%;
 }
@@ -1712,4 +1742,27 @@ width: 25%;
   }
 
   
+}
+
+@media (max-width: 768px) {
+  #offcanvas_inquiry .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  #offcanvas_inquiry .inquiry_title {
+    font-size: 28px;
+  }
+  #offcanvas_inquiry .inquiry_text {
+    margin-inline: 4%;
+  }
+  /* Handle inline max-width for country code when stacked */
+  #offcanvas_inquiry .form-group[style*="max-width: 90px"] {
+    max-width: 100% !important;
+  }
+}
+
+/* Prevent horizontal scroll globally */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
 }

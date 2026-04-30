@@ -5,7 +5,7 @@ $faqRec = Faq::find_all();
 
 if ($faqRec) {
     $resfaq .= '
-    <section class="faq-wrapper components">
+    <section class="faq-wrapper components" style="margin-bottom: 80px;">
         <h4 class="text-center mb-2">
             Frequently Asked Questions
         </h4>
