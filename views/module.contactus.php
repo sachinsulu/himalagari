@@ -143,7 +143,7 @@ if (defined('CONTACTUS_PAGE')) {
                 required
               ></textarea>
               <div class="form-group mb-3">
-                <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+                <div class="g-recaptcha" data-sitekey="6LcXLDMsAAAAAOcRdgFpghRi7swX639Y1zIo6EJ3"></div>
               </div>
               <button type="submit" class="uiverseButton w-50">
                 Submit

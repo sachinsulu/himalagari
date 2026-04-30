@@ -93,7 +93,7 @@ if (!empty($bestSellerPkg) && !empty($bestSellerPkg->slug)) {
           <p><strong>Best Season : </strong> ' . $seasonText . '</p>
         </div>
 
-        <a href="' . BASE_URL . 'package/' . $bestSellerPkg->slug . '" class="explore_btn inquiry-btn mx-auto">
+        <a href="' . BASE_URL . 'package/' . $bestSellerPkg->slug . '" class="explore_btn normal_button inquiry-btn mx-auto">
           <p>View Packages</p>
         </a>
       </div>';
@@ -117,8 +117,10 @@ if (!empty($homeRec)) {
       <br />
       <div class="package-grid-wrapper">
         <div class="packages-grid mx-auto" id="packageGrid">';
-
+    
+    $homeCount = 0;
     foreach ($homeRec as $RecRow) {
+        $homeCount++;
         $img = '';
         // getting image
         $file_path = SITE_ROOT . "images/package/" . @$RecRow->image;
@@ -132,9 +134,10 @@ if (!empty($homeRec)) {
         
         // Popular Badge
         $popularBadge = ($RecRow->popular == 1) ? '<span class="badge">POPULAR</span>' : '';
+        $hideHomeStyle = ($homeCount > 6) ? ' style="display:none;"' : '';
 
         $reshome .= '
-        <div class="package-card">
+        <div class="package-card"'. $hideHomeStyle .'>
           <div class="image-wrapper">
             <img src="' . $img . '" alt="' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '" />
             ' . $popularBadge . '
@@ -185,12 +188,16 @@ if (!empty($homeRec)) {
     }
 
     $reshome .= '
-      </div>
+      </div>';
+    if (count($homeRec) > 6) {
+        $reshome .= '
       <div class="load-more-wrap text-center mt-4">
-        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="8" data-step="4">
+        <button type="button" class="explore_btn mx-auto inquiry-btn js-load-more-packages" data-initial="6" data-step="24">
           <p>Load More Packages</p>
         </button>
-      </div>
+      </div>';
+    }
+    $reshome .= '
       </div>
     </section>';
 }
@@ -199,7 +206,7 @@ $jVars['module:package-home'] = $reshome;
 
 /* Top-Rated Family Packages — shown on homepage */
 $res_toprated = '';
-$topRatedRec = Package::get_top_rated_packages(4, 24);
+$topRatedRec = Package::get_top_rated_packages(1, 24);
 
 if (!empty($topRatedRec)) {
     $res_toprated .= '
@@ -213,7 +220,9 @@ if (!empty($topRatedRec)) {
       <br />
       <div class="packages-grid mx-auto">';
 
+    $trCount = 0;
     foreach ($topRatedRec as $pkg) {
+        $trCount++;
         $file_path = SITE_ROOT . 'images/package/' . @$pkg->image;
         $img = (!empty($pkg->image) && file_exists($file_path))
             ? IMAGE_PATH . 'package/' . $pkg->image
@@ -237,8 +246,10 @@ if (!empty($topRatedRec)) {
 
         $popularBadge = '<span class="badge" style="background:var(--green);">TOP RATED</span>';
 
+        $hideStyle = ($trCount > 6) ? ' style="display:none;"' : '';
+
         $res_toprated .= '
-        <div class="package-card">
+        <div class="package-card"'. $hideStyle .'>
           <div class="image-wrapper">
             <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
             ' . $popularBadge . '
@@ -281,25 +292,22 @@ if (!empty($topRatedRec)) {
                 </div>
               </div>
               
-              <div class="info-row" style="margin-top: 10px; justify-content: center;">
-                <div class="info text-center">
-                  <span class="label">Rating</span>
-                  <span class="value">' . $stars . ' <small style="color:#666;font-size:11px;">(' . $avg . '/5)</small></span>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>';
     }
 
     $res_toprated .= '
-      </div>
+      </div>';
+    if (count($topRatedRec) > 6) {
+        $res_toprated .= '
       <div class="load-more-wrap text-center mt-4">
-        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="8" data-step="4">
+        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="6" data-step="24">
           <p>Load More Packages</p>
         </button>
-      </div>
+      </div>';
+    }
+    $res_toprated .= '
     </section>';
 } else {
     // Fallback: show section with popular packages if no rated ones exist
@@ -315,7 +323,9 @@ if (!empty($topRatedRec)) {
       </header>
       <br />
       <div class="packages-grid mx-auto">';
+        $fbCount = 0;
         foreach ($fallbackRec as $pkg) {
+            $fbCount++;
             $file_path = SITE_ROOT . 'images/package/' . @$pkg->image;
             $img = (!empty($pkg->image) && file_exists($file_path))
                 ? IMAGE_PATH . 'package/' . $pkg->image
@@ -326,8 +336,9 @@ if (!empty($topRatedRec)) {
                 ? Activities::field_by_id($pkg->activityId, 'title') : '';
             $accomodation = !empty($pkg->accomodation) ? $pkg->accomodation : 'N/A';
             $difficulty   = !empty($pkg->difficulty)   ? $pkg->difficulty   : 'Moderate';
+            $hideStyle = ($fbCount > 6) ? ' style="display:none;"' : '';
             $res_toprated .= '
-        <div class="package-card">
+        <div class="package-card"'. $hideStyle .'>
           <div class="image-wrapper">
             <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
             <span class="badge">POPULAR</span>
@@ -375,12 +386,16 @@ if (!empty($topRatedRec)) {
         </div>';
         }
         $res_toprated .= '
-      </div>
+      </div>';
+    if (count($fallbackRec) > 6) {
+        $res_toprated .= '
       <div class="load-more-wrap text-center mt-4">
-        <button type="button" class="explore_btn inquiry-btn js-load-more-packages" data-initial="8" data-step="4">
+        <button type="button" class="explore_btn inquiry-btn mx-auto js-load-more-packages" data-initial="6" data-step="24">
           <p>Load More Packages</p>
         </button>
-      </div>
+      </div>';
+    }
+    $res_toprated .= '
     </section>';
     }
 }
@@ -674,7 +689,7 @@ if (defined('PACKAGE_PAGE')) {
             <div class="package-left">
               <div class="package-info">
                 <h2 class="green-title"><span>About</span> Package</h2>
-                ' . $pkgRec->overview . '
+                ' . preg_replace('/<(h[23])(.*?)>(Highlights)(.*?)<\/\1>/i', '<$1 class="green-title highlights-text"$2><span>$3</span>$4</$1>', $pkgRec->overview) . '
                 
                 <ul class="features-box">
         ';
@@ -1329,7 +1344,7 @@ if (defined('PACKAGE_PAGE')) {
         </section>
         
         <!-- Popular Packages similarly structured like in template -->
-        <section class="popular-packages packages-wrapper deals-grid text-center components">
+        <section class="popular-packages packages-wrapper deals-grid components">
           <h2 class="green-title text-center" id="packagesTitle">
             Similar <span class="orange-text">Packages</span>
           </h2>
@@ -1357,41 +1372,41 @@ if (defined('PACKAGE_PAGE')) {
                 <div class="card-content">
                   <h3 class="title">' . $similarTour->title . '</h3>
 
-                  <div class="info-grid mx-auto">
+                  <div class="card-info-wrapper">
 
-                    <div class="info">
-                      <span class="label">Destination</span>
-                      <span class="value green">' . $dsRec->title . '</span>
+                    <div class="info-row">
+                      <div class="info">
+                        <span class="label">Destination</span>
+                        <span class="value green" title="' . $dsRec->title . '">' . $dsRec->title . '</span>
+                      </div>
+                      <div class="row-divider"></div>
+                      <div class="info text-right">
+                        <span class="label">Accomodations</span>
+                        <span class="value green" title="Hotels">Hotels</span>
+                      </div>
                     </div>
 
-                    <div class="divider"></div>
-
-                    <div class="info">
-                      <span class="label">Accomodations</span>
-                      <span class="value green">Hotels</span>
+                    <div class="action-row">
+                      <span class="days-badge">' . $similarTour->days . ' days</span>
+                      <a href="' . BASE_URL . 'package/' . $similarTour->slug . '" class="explore_btn box_explore_btn">
+                        <p>Explore</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </a>
                     </div>
 
-                    <div class="info">
-                      <span class="label">Activities</span>
-                      <span class="value green">' . $simAct . '</span>
+                    <div class="info-row">
+                      <div class="info">
+                        <span class="label">Activities</span>
+                        <span class="value green" title="' . $simAct . '">' . $simAct . '</span>
+                      </div>
+                      <div class="row-divider"></div>
+                      <div class="info text-right">
+                        <span class="label">Difficulty-level</span>
+                        <span class="value green" title="' . $similarTour->difficulty . '">' . $similarTour->difficulty . '</span>
+                      </div>
                     </div>
-
-                    <div class="divider"></div>
-
-                    <div class="info">
-                      <span class="label">Difficulty-level</span>
-                      <span class="value green">' . $similarTour->difficulty . '</span>
-                    </div>
-
-                    <!-- FLOATING ELEMENTS -->
-                    <span class="days-badge">' . $similarTour->days . ' days</span>
-
-                    <button class="explore_btn" onclick="window.location.href=\'' . BASE_URL . 'package/' . $similarTour->slug . '\'">
-                      <p>Explore</p>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                      </svg>
-                    </button>
 
                   </div>
                 </div>

@@ -111,7 +111,7 @@ foreach ($countriesList as $iso => $info) {
     $countriesHTML .= '<option value="' . $iso . '" data-code="' . $info['code'] . '">' . $info['name'] . '</option>';
 }
 
-$header_components = '
+$header_components .= '
       <div class="offcanvas offcanvas-end" id="menuCanvas">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title">Menu</h5>
@@ -152,15 +152,16 @@ $header_components = '
               </select>
             </div>
 
-            <div class="col-md-3 d-grid">
-              <button type="submit" class="explore_btn" id="inquiry-btn">Search</button>
+            <div class="col-md-3 search">
+              <label class="form-label d-none d-md-block">&nbsp;</label>
+              <button type="submit" class="btn-premium w-100" id="inquiry-btn"><p>Search</p></button>
             </div>
           </form>
         </div>
       </div>
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header justify-content-end">
           <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -236,12 +237,14 @@ $header_components = '
                   </div>
                 </div>
 
-                  <div class="form-group">
-                    <div class="g-recaptcha" data-sitekey="6LdNE7osAAAAAArEtmA_zi-0FsIsmxHtYF_mH4ZZ"></div>
+                  <div class="form-group mb-3">
+                    <div class="g-recaptcha" data-sitekey="6LcXLDMsAAAAAOcRdgFpghRi7swX639Y1zIo6EJ3"></div>
                   </div>
 
-                <button type="submit">Submit</button>
-              </form>
+                  <div class="form-row justify-content-center">
+                    <button type="submit" class="btn-premium"><p>Submit Inquiry</p></button>
+                  </div>
+                </form>
             </div>
           </div>
         </div>
@@ -250,8 +253,35 @@ $header_components = '
 
 
 $header1 = '
-
-
+<style>
+/* Global fix to ensure navbar links hide on mobile devices across all pages */
+@media (max-width: 991px) {
+  .navbar-nav { display: none !important; }
+}
+/* Urgent fix for burger icon cutoff on mobile devices (iPhone Pro Max) */
+@media (max-width: 480px) {
+  .navbar, .original_nav { padding-left: 8px !important; padding-right: 12px !important; }
+  .navbar .container-fluid, .original_nav .container-fluid { padding: 0 !important; }
+  .navbar-brand img { width: 45px !important; }
+  .navbar .inquiry-btn, .original_nav .inquiry-btn { margin: 0 2px !important; padding: 5px 8px !important; font-size: 11px !important; height: 30px !important; }
+  .navbar .d-flex, .original_nav .d-flex { gap: 2px !important; }
+  .navbar .icon-btn, .original_nav .icon-btn { margin-left: 0 !important; width: 28px !important; height: 28px !important; font-size: 14px !important; }
+  .navbar .navbar-toggler, .original_nav .navbar-toggler { padding: 2px !important; margin-left: 0 !important; width: auto !important; }
+  .navbar-toggler-icon { width: 1.1em !important; height: 1.1em !important; }
+}
+/* Urgent fix for burger icon cutoff on mobile devices (iPhone Pro Max) */
+@media (max-width: 480px) {
+  .navbar, .original_nav { padding-left: 8px !important; padding-right: 12px !important; }
+  .navbar .container-fluid, .original_nav .container-fluid { padding: 0 !important; }
+  .navbar-brand img { width: 45px !important; }
+  .navbar .inquiry-btn, .original_nav .inquiry-btn { margin: 0 2px !important; padding: 5px 8px !important; font-size: 11px !important; height: 30px !important; }
+  .navbar .d-flex, .original_nav .d-flex { gap: 2px !important; }
+  .navbar .icon-btn, .original_nav .icon-btn { margin-left: 0 !important; width: 28px !important; height: 28px !important; font-size: 14px !important; }
+  .navbar .navbar-toggler, .original_nav .navbar-toggler { padding: 2px !important; margin-left: 0 !important; width: auto !important; }
+  .navbar-toggler-icon { width: 1.1em !important; height: 1.1em !important; }
+}
+</style>
+<div class="header-container">
       <nav class="navbar navbar-dark">
         <div class="container-fluid">
           <!-- LOGO (ALWAYS) -->
@@ -272,13 +302,7 @@ $header1 = '
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
-            <button
-              id="inquiry-btn"
-              class="explore_btn"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvas_inquiry"
-              class="d-none d-sm-block"
-            >
+         <button class="explore_btn inquiry-btn actual_navbar normal_button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_inquiry">
               <p>Plan Your Trip</p>
             </button>
 
@@ -301,7 +325,23 @@ $header1 = '
 
 
   $home_header = '
-  
+<style>
+/* Global fix to ensure navbar links hide on mobile devices across all pages */
+@media (max-width: 991px) {
+  .navbar-nav { display: none !important; }
+}
+/* Urgent fix for burger icon cutoff on mobile devices (iPhone Pro Max) */
+@media (max-width: 480px) {
+  .navbar, .original_nav { padding-left: 8px !important; padding-right: 12px !important; }
+  .navbar .container-fluid, .original_nav .container-fluid { padding: 0 !important; }
+  .navbar-brand img { width: 45px !important; }
+  .navbar .inquiry-btn, .original_nav .inquiry-btn { margin: 0 2px !important; padding: 5px 8px !important; font-size: 11px !important; height: 30px !important; }
+  .navbar .d-flex, .original_nav .d-flex { gap: 2px !important; }
+  .navbar .icon-btn, .original_nav .icon-btn { margin-left: 0 !important; width: 28px !important; height: 28px !important; font-size: 14px !important; }
+  .navbar .navbar-toggler, .original_nav .navbar-toggler { padding: 2px !important; margin-left: 0 !important; width: auto !important; }
+  .navbar-toggler-icon { width: 1.1em !important; height: 1.1em !important; }
+}
+</style>
         <nav class="navbar navbar-dark original_nav">
         <div class="container-fluid">
           <!-- LOGO (ALWAYS) -->
@@ -317,7 +357,7 @@ $header1 = '
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
-            <button class="explore_btn inquiry-btn actual_navbar" data-bs-toggle="offcanvas"
+            <button class="explore_btn inquiry-btn actual_navbar normal_button" data-bs-toggle="offcanvas"
               data-bs-target="#offcanvas_inquiry">
               <p>Plan Your Trip</p>
             </button>

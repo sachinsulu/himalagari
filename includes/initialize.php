@@ -31,8 +31,8 @@ if($online)
 {
     $base_protocol = 'http';
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {$base_protocol .= 's';}
-	defined('SITE_ROOT')  		? NULL : define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'].DS);
-	defined('BASE_URL')   		? NULL : define('BASE_URL', $base_protocol . '://'.$_SERVER['HTTP_HOST'].'/');
+	defined('SITE_ROOT')  		? NULL : define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'].DS.SITE_FOLDER.DS);
+	defined('BASE_URL')   		? NULL : define('BASE_URL', $base_protocol . '://'.$_SERVER['HTTP_HOST'].'/'.SITE_FOLDER.'/');
 	
 } else {
 	defined('SITE_ROOT')  		? NULL : define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'].DS.str_replace('::','/',SITE_STR).DS.SITE_FOLDER.DS);

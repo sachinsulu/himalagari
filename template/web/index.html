@@ -12,7 +12,7 @@
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel="stylesheet" />
 
   <!-- Bootstrap CSS -->
-  <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet" />
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel="stylesheet" />
   <!-- Bootstrap Icons -->
   <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css' rel="stylesheet" />
   <!-- Google Fonts -->
@@ -27,15 +27,21 @@
   <link
     href='https://fonts.googleapis.com/css2?family=Anton&family=Corinthia:wght@400;700&family=Dancing+Script:wght@400..700&display=swap'
     rel="stylesheet" />
+  <style>
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+  </style>
   <!-- Custom CSS -->
-  <link href="style.css" rel="stylesheet" />
+  <link href="style.css?v=20260430" rel="stylesheet" />
   <!-- owl-carousel -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' rel="stylesheet" />
   <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'
     rel="stylesheet" />
   <!-- swiperjs -->
   <link href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' rel="stylesheet" />
-  <link href="./package_listing.css" rel="stylesheet" />
+  <link href="./package_listing.css?v=20260430" rel="stylesheet" />
 
   <style>
     /* Force explore-box icons to appear white */
@@ -53,18 +59,6 @@
     .explore-content h2,
     .popular-packages h4,
     .popular-packages h2,
-    .footer-title,
-    .footer-subtitle,
-    .footer-bottom li {
-      text-align: center !important;
-      display: block !important;
-      width: 100%;
-    }
-
-    .footer-line {
-      justify-content: center;
-    }
-
     .about-text {
       text-align: center;
       width: 100%;
@@ -74,12 +68,15 @@
       background: #f8fdf8;
       border: 1px solid #e0eee0;
       border-radius: 24px;
-      padding: clamp(30px, 5%, 50px);
+      padding: clamp(20px, 4vw, 40px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 30px;
       margin-top: 50px;
+      box-shadow: 0 10px 30px rgba(28, 100, 8, 0.03);
+      height: auto !important; /* Fix for fixed height issues */
+      min-height: fit-content;
     }
 
     .left-review {
@@ -88,35 +85,52 @@
     }
 
     .left-review p:first-child {
-      font-size: clamp(24px, 3vw, 32px);
+      font-size: clamp(22px, 3vw, 28px);
       font-weight: 700;
-      color: var(--green);
-      margin-bottom: 12px;
+      color: #1C6408;
+      margin-bottom: 8px;
     }
 
     .left-review p:last-child {
       color: #666;
       line-height: 1.6;
-      font-size: 16px;
+      font-size: clamp(14px, 1.2vw, 16px);
+      margin-bottom: 0;
     }
 
-    .review img {
-      width: 140px;
-      height: 140px;
+    .review-qr {
+      width: clamp(100px, 15vw, 140px);
+      height: auto;
       background: #fff;
       padding: 10px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .review-qr:hover {
+      transform: scale(1.05);
     }
 
     @media (max-width: 768px) {
       .review {
         flex-direction: column;
         text-align: center;
+        padding: 30px 20px;
+        gap: 20px;
+        height: auto !important;
       }
 
       .left-review {
         text-align: center;
+      }
+
+      .left-review p:last-child {
+        margin-bottom: 10px;
+      }
+      
+      .review-qr {
+        width: 120px;
       }
     }
 
@@ -197,19 +211,21 @@
 
 
   <!-- write_a_review -->
-  <section class="review mt-5" id="share-experience">
-    <div class="left-review">
-      <p>Share Your Experience</p>
-      <p>
-        Your feedback helps us improve our services and create better travel
-        experiences. We value your opinion to help us serve you better.
-      </p>
-    </div>
-    <!-- qr -->
-    <a href="./review.html" title="Click to open the Review form">
-      <img src="./assets/images/qr.png" alt="qr" style="cursor: pointer;" />
-    </a>
-  </section>
+  <div class="container">
+    <section class="review mt-5" id="share-experience">
+      <div class="left-review">
+        <p>Share Your Experience</p>
+        <p>
+          Your feedback helps us improve our services and create better travel
+          experiences. We value your opinion to help us serve you better.
+        </p>
+      </div>
+      <!-- qr -->
+      <a href="./review.html" title="Click to open the Review form">
+        <img src="./assets/images/qr.png" alt="qr" class="review-qr" />
+      </a>
+    </section>
+  </div>
 
   <!-- fixed departure -->
   <jcms:module:fixed-departure-home/>
@@ -304,7 +320,7 @@
               <textarea name="message" class="form-control" rows="3"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-success w-50">
+            <button type="submit" class="btn btn-success w-50 d-block mx-auto">
               Submit
             </button>
           </form>
@@ -317,19 +333,17 @@
     <!-- faqs -->
     <jcms:module:faq-destination/>
   </section>
-  <!-- footer -->
 
+  <!-- footer -->
   <jcms:module:footer/>
 
 
 
 
-  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel="stylesheet" />
-  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel="stylesheet" />
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
   <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js'></script>
 
   <script>
@@ -360,7 +374,9 @@
     });
 
     $(window).on("load", function () {
-      $(".testimonial-carousel").owlCarousel({
+      var $testimonialCarousel = $(".testimonial-carousel");
+
+      $testimonialCarousel.owlCarousel({
         loop: true,
         center: true,
         margin: 30,
@@ -370,25 +386,53 @@
         autoplay: true,
         autoplayTimeout: 4000,
         responsive: {
-          0: { items: 1, margin: 10 }, // mobile
-          576: { items: 1, margin: 20 }, // small tablets
-          768: { items: 2, margin: 20 }, // tablets
-          1024: { items: 2, margin: 30 }, // desktops
-          1440: { items: 2, margin: 40 }, // large screens
+          0: { items: 1, margin: 10 },
+          576: { items: 1, margin: 20 },
+          768: { items: 2, margin: 20 },
+          1024: { items: 2, margin: 30 },
+          1440: { items: 2, margin: 40 },
         },
       });
+
+      // On mobile: dynamically set each testimonial p tag height
+      // so it scrolls when content is too long, keeping the card at fixed height.
+      if (window.innerWidth <= 768) {
+        setTimeout(function () {
+          $(".testimonial-card").each(function () {
+            var $card = $(this);
+            var cardH = $card.outerHeight(); // should be 400px from CSS
+            var headerH = $card.find(".testimonial-header").outerHeight(true) || 0;
+            var authorH = $card.find(".author_info").outerHeight(true) || 0;
+            var padding = parseInt($card.css("paddingTop")) + parseInt($card.css("paddingBottom"));
+            var available = cardH - headerH - authorH - padding;
+            if (available < 60) available = 160; // fallback
+
+            var $p = $card.find("p.mt-4, .testimonial-card-content").first();
+            $p.css({
+              "height": available + "px",
+              "overflow-y": "auto",
+              "overflow-x": "hidden",
+              "text-align": "left",
+              "font-size": "14px",
+              "line-height": "1.6",
+              "padding-right": "8px",
+              "scrollbar-width": "thin",
+              "box-sizing": "border-box"
+            });
+          });
+        }, 500);
+      }
     });
 
     document.addEventListener("DOMContentLoaded", () => {
       const scrollNavbar = document.querySelector(".scroll-navbar");
 
       if (scrollNavbar) {
-        // Add this check
         window.addEventListener("scroll", () => {
           if (window.scrollY > 200) {
-            scrollNavbar.classList.add("hidden");
+            scrollNavbar.classList.add("visible");
           } else {
-            scrollNavbar.classList.remove("hidden");
+            scrollNavbar.classList.remove("visible");
           }
         });
       }
@@ -432,7 +476,7 @@
     });
   </script>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 
 
   <script>
@@ -516,6 +560,63 @@
 
 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".packages-wrapper").forEach(function(section) {
+        const cards = Array.from(section.querySelectorAll(".packages-grid .package-card"));
+        const btn = section.querySelector(".js-load-more-packages");
+
+        if (!btn || !cards.length) return;
+
+        const initial = parseInt(btn.getAttribute("data-initial"), 10) || 6;
+        const step = parseInt(btn.getAttribute("data-step"), 10) || 24;
+        const loadMoreWrap = btn.closest(".load-more-wrap");
+
+        // Force initial hide to be bulletproof
+        cards.forEach(function(card, index) {
+          if (index >= initial) {
+            card.style.setProperty("display", "none", "important");
+          }
+        });
+
+        if (cards.length <= initial) {
+          if (loadMoreWrap) loadMoreWrap.style.setProperty("display", "none", "important");
+          return;
+        }
+
+        let shown = initial;
+
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          const pTag = btn.querySelector("p");
+
+          if (btn.classList.contains("showing-all")) {
+            // Show less
+            shown = initial;
+            cards.forEach(function(card, index) {
+              if (index >= shown) {
+                card.style.setProperty("display", "none", "important");
+              }
+            });
+            btn.classList.remove("showing-all");
+            if (pTag) pTag.innerText = btn.getAttribute("data-text-more") || "Load More Packages";
+          } else {
+            // Show more
+            const next = Math.min(shown + step, cards.length);
+            for (let i = shown; i < next; i++) {
+              cards[i].style.removeProperty("display");
+            }
+            shown = next;
+
+            if (shown >= cards.length) {
+              btn.classList.add("showing-all");
+              if (pTag) pTag.innerText = btn.getAttribute("data-text-less") || "Show Less Packages";
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

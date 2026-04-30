@@ -8,6 +8,8 @@ RewriteRule ^home/?$ index.php [L]
 RewriteRule ^sitemap$ sitemap.php [L]
 
 RewriteRule ^contact-us$ contact.php [L]
+RewriteRule ^about-us$ inner.php?slug=about-us [L]
+RewriteRule ^about$ inner.php?slug=about-us [L]
 RewriteRule ^customize$ customize.php [L]
 
 #RewriteRule ^enquiry$ enquiry.php [L]
