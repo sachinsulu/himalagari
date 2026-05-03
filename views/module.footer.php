@@ -104,12 +104,14 @@ $footer1 .= '
             <img src="' . BASE_URL . 'template/web/assets/images/maestro-logo-copy.png" alt="">
           </div>
         </li>
-        <li>' . $copyrightText . '</li>
+        <li>' . $copyrightText . ' 
+        <p class="mt-2">Developed by <a href="https://longtailemedia.com" target="_blank">Longtail e-media</a></p>
+        </li>
       </ul>
 
     </footer>
 
-
+    <script src="' . BASE_URL . 'template/web/load-more.js?v=' . time() . '"></script>
 ';
 
 $jVars['module:footer'] = $footer1;

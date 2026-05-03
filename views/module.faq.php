@@ -4,7 +4,8 @@ $resfaq = '';
 $faqRec = Faq::find_all();
 
 if ($faqRec) {
-    $resfaq .= '
+$resfaq .= '
+    <link href="' . BASE_URL . 'template/web/faq.css?v=' . time() . '" rel="stylesheet" />
     <section class="faq-wrapper components" style="margin-bottom: 80px;">
         <h4 class="text-center mb-2">
             Frequently Asked Questions
