@@ -203,7 +203,29 @@ width: 95%;
 .bottom-search.active {
   transform: translateY(0);
 }
-
+.whatsapp-btn{
+  position: fixed;
+      right: 3%;
+    bottom: 6%;
+      width: 46px;
+    height: 46px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 22px;
+    text-decoration: none;
+    z-index: 9999;
+  transition: all 0.3s ease;
+}
+.whatsapp-btn i{
+  color: white;
+}
+.whatsapp-btn:hover{
+  transform: translateY(-5px);
+}
 #inquiry-btn {
   padding: 8px 18px;
   border-radius: 20px;

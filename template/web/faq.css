@@ -1,0 +1,67 @@
+/* faq.css - Extracted to serve as a single source of truth for the global FAQ module */
+
+.parent_faq_mountain{
+  position: relative;
+}
+
+/* FAQ section background */
+.faq-wrapper {
+  background-color: #dffae7; /* soft light green */
+  padding: 50px 0; /* optional: add vertical spacing */
+  border-radius: 20px; /* optional: rounded edges for the section */
+}
+
+.faq-wrapper .accordion-item {
+  border: none;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Accordion button */
+.faq-wrapper .accordion-button {
+  font-weight: 600;
+  font-size: 18px;
+  padding: 20px;
+  border-left: 6px solid transparent; /* Prevents text shifting when expanded */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Open question */
+.faq-wrapper .accordion-button:not(.collapsed) {
+  background-color: #1C6408 !important;
+  color: whitesmoke !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-left: 6px solid #1C6408;
+}
+
+/* IMPORTANT: keep collapse clean */
+.faq-wrapper .accordion-collapse {
+  transition: height 0.35s ease;
+}
+
+/* Accordion body handles visuals */
+.faq-wrapper .accordion-body {
+  padding: 20px;
+  line-height: 1.7;
+  font-size: 16px;
+  color: #444;
+  background-color: #e0f2e9;
+  border-left: 6px solid #1C6408;
+  border-radius: 0 0 14px 14px;
+}
+
+/* Width */
+.faq-wrapper .faq_content {
+  max-width: 1300px; /* Merged max width */
+}
+
+/* Arrow color when collapsed (not clicked) */
+.faq-wrapper .accordion-button.collapsed::after {
+  filter: invert(0); /* black */
+}
+
+/* Arrow color when expanded (clicked) */
+.faq-wrapper .accordion-button:not(.collapsed)::after {
+  filter: invert(1); /* white */
+}

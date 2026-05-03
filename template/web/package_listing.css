@@ -213,6 +213,29 @@ width: 95%;
     position: relative;
     transition: width 0.3s ease-in-out, transform 0.2s ease;
 }
+.whatsapp-btn{
+  position: fixed;
+      right: 3%;
+    bottom: 6%;
+      width: 46px;
+    height: 46px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 22px;
+    text-decoration: none;
+    z-index: 9999;
+  transition: all 0.3s ease;
+}
+.whatsapp-btn i{
+  color: white;
+}
+.whatsapp-btn:hover{
+  transform: translateY(-5px);
+}
 .inquiry-btn {
   background-color: #94ce94;
   color: #000;
