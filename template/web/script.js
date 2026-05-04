@@ -517,6 +517,36 @@ $(document).ready(function() {
   // Initial call to set price if something is already selected
   updateInquiryPrice();
 
-  // logic moved inline
+  // --- Navbar Scroll Behavior (Show/Hide) ---
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+  const scrollDelta = 5; 
+  const navbarHeight = 85;
+
+  if (navbar) {
+    window.addEventListener('scroll', function() {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // 1. Handle background transparency
+      if (scrollTop > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+
+      // 2. Handle Show/Hide on scroll
+      if (Math.abs(lastScrollTop - scrollTop) <= scrollDelta) return;
+
+      if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
+        // Scroll Down - Hide
+        navbar.classList.add('nav-up');
+      } else {
+        // Scroll Up - Show
+        navbar.classList.remove('nav-up');
+      }
+      
+      lastScrollTop = scrollTop;
+    }, { passive: true });
+  }
 
 });

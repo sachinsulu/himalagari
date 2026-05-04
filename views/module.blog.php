@@ -34,17 +34,15 @@ if (defined('BLOGLIST_PAGE')) {
             $blogDate = date('d M Y', strtotime($homebl->blog_date));
 
             $bl .= '
-            <li class="package-card deal-card">
+            <li class="package-card deal-card blog-list-card">
               <div class="deal-image">
                 <a href="' . $linksrc . '"' . $linkTarget . '><img src="' . $imgSrc . '" alt="' . $title . '"></a>
+                <div class="blog-date-box">' . $blogDate . '</div>
               </div>
               <div class="card-content">
                 <div class="blog-meta blog-text">
                   <div class="author-info">
                     <p>By ' . $author . '</p>
-                  </div>
-                  <div class="blog-date-box">
-                    ' . $blogDate . '
                   </div>
                 </div>
                 <div class="blog-content blog_continue_reading">
@@ -52,11 +50,9 @@ if (defined('BLOGLIST_PAGE')) {
                   <p>' . $brief . '</p>
                 </div>
                 <hr>
-                <a href="' . $linksrc . '"' . $linkTarget . '>
-                  <div class="author ">
-                    <p>Continue Reading</p>
-                    <i class="fa-solid fa-arrow-right fa-1x py-2"></i>
-                  </div>
+                <a href="' . $linksrc . '"' . $linkTarget . ' class="continue-reading">
+                  <span>Continue Reading</span>
+                  <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
             </li>';
@@ -102,18 +98,17 @@ if (defined('HOME_PAGE')) {
             $hideStyle = ($blogCount > 6) ? ' style="display:none;"' : '';
 
             $homebloglist .= '
-      <li class="package-card deal-card"'. $hideStyle .'>
+      <li class="package-card deal-card blog-list-card"'. $hideStyle .'>
         <div class="deal-image">
           <a href="' . $linksrc . '"' . $linkTarget . '><img src="' . $imgSrc . '" alt="' . $title . '" /></a>
+          <div class="blog-date-box">
+            <span>' . $day . '</span>' . $monthYear . '
+          </div>
         </div>
         <div class="card-content">
           <div class="blog-meta">
             <div class="author-info">
               <p>By ' . $author . '</p>
-            </div>
-            <div class="blog-date-box">
-              <span>' . $day . '</span>
-              ' . $monthYear . '
             </div>
           </div>
 
@@ -124,7 +119,7 @@ if (defined('HOME_PAGE')) {
             <p>' . $brief . '</p>
           </div>
           <hr />
-          <a href="' . $linksrc . '"' . $linkTarget . '" class="continue-reading">
+          <a href="' . $linksrc . '"' . $linkTarget . ' class="continue-reading">
               <span>Continue Reading</span>
               <i class="fa-solid fa-arrow-right"></i>
           </a>

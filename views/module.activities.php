@@ -319,7 +319,7 @@ if (defined('HOME_PAGE')) {
         $homeActivities .= '
         <section class="activities mt-5 text-center">
             <h4>Holiday Types</h4>
-            <h2 class="green-title mb-5 mx-auto">
+            <h2 class="green-title mb-5 mx-auto text-center">
                 Find the Perfect <span class="orange-text">Holiday</span> for Every
                 <span class="orange-text">Travel Style</span>
             </h2>

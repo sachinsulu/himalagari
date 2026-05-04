@@ -213,7 +213,7 @@ if (!empty($topRatedRec)) {
     <section class="packages-wrapper components">
       <header class="page-header">
         <h4 class="text-center">Highly Recommended</h4>
-        <h2 class="green-title">
+        <h2 class="green-title text-center">
           Discover our <span class="orange-text">Top Rated</span> Adventures
         </h2>
       </header>

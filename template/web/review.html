@@ -21,22 +21,48 @@
   <link
     href='https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Fjalla+One&family=Orelega+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
     rel="stylesheet" />
+  <style>
+    .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 5px;
+    }
+    .star-rating input {
+      display: none;
+    }
+    .star-rating label {
+      color: #ccc;
+      font-size: 24px;
+      padding: 0;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+    }
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: #ffb400;
+    }
+    .review-input, .review-textarea {
+      border: 1px solid #ced4da;
+    }
+  </style>
 </head>
 
-<body>
-  <section class="scroll-wrapper">
+<body class="review-page-body">
+  <section>
     <!-- navbar -->
     <jcms:module:header/>
 
     <br><br><br>
     <!-- whatsapp -->
     <a href="https://api.whatsapp.com/send/?phone=%2B9779712600700&text&type=phone_number&app_absent=0" target="_blank"
-      class="whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
+      class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i></a>
     <!-- write_a_review -->
     <section class="review-page components py-5" id="share-experience">
       <div class="container">
         <div class="text-center mb-5">
-          <h2 class="green-title">Experience <span class="orange-text">With Us</span></h2>
+          <h2 class="green-title text-center">Experience <span class="orange-text">With Us</span></h2>
           <p class="mx-auto review-description">
             Your feedback helps us improve our services and create better travel
             experiences. We value your opinion and appreciate your time.
@@ -54,12 +80,33 @@
                     <input type="text" name="name" class="form-control review-input" placeholder="Enter your name" required>
                   </div>
                   <div class="col-md-6 mb-4">
-                    <label class="form-label fw-bold">Email Address <span>*</span></label>
-                    <input type="email" name="email" class="form-control review-input" placeholder="Enter your email" required>
+                    <label class="form-label fw-bold">Country <span>*</span></label>
+                    <input type="text" name="country" class="form-control review-input" placeholder="Enter your country" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <label class="form-label fw-bold">Subject of Review <span>*</span></label>
+                    <input type="text" name="subject" class="form-control review-input" placeholder="Enter subject" required>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <label class="form-label fw-bold">Review Stars <span>*</span></label>
+                    <div class="star-rating">
+                      <input type="radio" id="star5" name="rating" value="5" required />
+                      <label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
+                      <input type="radio" id="star4" name="rating" value="4" />
+                      <label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
+                      <input type="radio" id="star3" name="rating" value="3" />
+                      <label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
+                      <input type="radio" id="star2" name="rating" value="2" />
+                      <label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
+                      <input type="radio" id="star1" name="rating" value="1" />
+                      <label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
+                    </div>
                   </div>
                 </div>
                 <div class="mb-4">
-                  <label class="form-label fw-bold">Your Experience <span>*</span></label>
+                  <label class="form-label fw-bold">Review Text <span>*</span></label>
                   <textarea name="message" class="form-control review-textarea" rows="6" placeholder="Tell us about your trip..." required></textarea>
                 </div>
                 <div class="text-center mt-4">

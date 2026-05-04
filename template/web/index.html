@@ -27,12 +27,6 @@
   <link
     href='https://fonts.googleapis.com/css2?family=Anton&family=Corinthia:wght@400;700&family=Dancing+Script:wght@400..700&display=swap'
     rel="stylesheet" />
-  <style>
-    body {
-      overflow-x: hidden;
-      width: 100%;
-    }
-  </style>
   <!-- Custom CSS -->
   <link href="style.css?v=20260430" rel="stylesheet" />
   <!-- owl-carousel -->
@@ -41,7 +35,7 @@
     rel="stylesheet" />
   <!-- swiperjs -->
   <link href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' rel="stylesheet" />
-  <link href="./package_listing.css?v=20260430" rel="stylesheet" />
+  <!-- <link href="./package_listing.css?v=20260430" rel="stylesheet" /> -->
 
   <style>
     /* Force explore-box icons to appear white */
@@ -144,7 +138,7 @@
   </style>
 </head>
 
-<body>
+<body class="home-page">
   <!-- clone navbar -->
 
   <section class="herosection">
@@ -157,10 +151,6 @@
 
       <jcms:module:home-best-seller/>
     </div>
-    
-    <!-- whatsapp -->
-    <a href="https://api.whatsapp.com/send/?phone=%2B9779712600700&text&type=phone_number&app_absent=0" target="_blank"
-      class="whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
   </section>
 
   <jcms:module:header_components/>
@@ -204,7 +194,7 @@
   <!-- testimonial -->
   <section class="testimonial-wrapper components text-center">
     <h4>Our Happy Travellers</h4>
-    <h2 class="mb-4 mx-1 green-title">
+    <h2 class="mb-4 mx-1 green-title text-center">
       What Our <span class="orange-text">Clients Say ?</span>
     </h2>
     <div class="owl-carousel owl-theme testimonial-carousel">
@@ -223,9 +213,10 @@
           Your feedback helps us improve our services and create better travel
           experiences. We value your opinion to help us serve you better.
         </p>
+        <a href="./review.html">Write your Review</a>
       </div>
       <!-- qr -->
-      <a href="./review.html" title="Click to open the Review form">
+      <a href="./review.html" class="w-25" title="Click to open the Review form">
         <img src="./assets/images/qr.png" alt="qr" class="review-qr" />
       </a>
     </section>
@@ -565,6 +556,10 @@
 
 
   <script src="./load-more.js"></script>
+  <!-- WhatsApp floating button -->
+  <a href="https://api.whatsapp.com/send/?phone=%2B9779712600700&text&type=phone_number&app_absent=0" target="_blank"
+    class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i></a>
+
 </body>
 
 </html>
