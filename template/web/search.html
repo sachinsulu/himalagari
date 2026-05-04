@@ -2,20 +2,22 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jcms:site:seotitle/>
 
     <!-- Fav and Touch Icons -->
     <jcms:site:fevicon/>
     
+    <link href="./style.css?v=3" rel="stylesheet">
     <link href="./Nepal.css" rel="stylesheet">
-    <link href="./holiday_types_inner.css" rel="stylesheet">
-    <link href="./package_listing.css" rel="stylesheet">
+    <!-- <link href="./holiday_types_inner.css" rel="stylesheet">
+    <link href="./package_listing.css" rel="stylesheet"> -->
 
     <!-- bootstrp -->
     <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' rel="stylesheet">
 
     <!-- font-awesome -->
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' rel="stylesheet">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel="stylesheet">
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com' rel="preconnect" />
     <link href='https://fonts.gstatic.com' crossorigin rel="preconnect" />
@@ -25,14 +27,15 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css' rel="stylesheet">
 </head>
 
-<body>
-    <section class="scroll-wrapper">
+<body class="search-page">
+    <section>
         <jcms:module:header/>
 
         <!-- nepal-hero-content -->
         
         <section class="packages-wrapper search-wrapper">
-            <div class="container-fluid" id="scrolll" style="max-width: 1400px; padding: 40px 40px 0 40px;">
+             <h2 class="text-center green-title">Search <span class="orange-text">Packages</span></h2>
+                  <div class="container-fluid px-3 px-lg-5 pt-4" id="scrolll" style="max-width: 1400px;">
                 <div class="row align-items-start">
                     <div class="col-12 col-lg-3">
                         <jcms:module:search-searchform/>
@@ -40,7 +43,7 @@
 
                     <div class="col-12 col-lg-9">
                         <div class="package-grid-wrapper" style="max-height: none;">
-                            <div class="packages-grid mx-auto" id="filter-data" style="display: grid;">
+                            <div class="packages-grid mx-auto" id="filter-data">
                                 <jcms:module:package-searchlist/>
                             </div>
                         </div>
@@ -54,6 +57,10 @@
         </section>
 
         <jcms:module:footer/>
+
+        <!-- whatsapp -->
+        <a href="https://api.whatsapp.com/send/?phone=%2B9779712600700&text&type=phone_number&app_absent=0" target="_blank"
+          class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i></a>
 
     </section>
 

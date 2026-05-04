@@ -21,7 +21,7 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = Package::get_total_destination_packages($destinationRow->id);
         $destination_filter .= '
-                <div class="form-check mb-2">
+                <div class="form-check mb-2 d-flex">
                     <input class="form-check-input qdestination" type="checkbox" name="qdestination[]" ' . $sel . ' id="dest-' . $destinationRow->id . '" value="' . $destinationRow->id . '">
                     <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="dest-' . $destinationRow->id . '">
                         <span>' . $destinationRow->title . '</span>
@@ -44,7 +44,7 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         $tot += Package::get_total_activities_packages($ActivitiesRow->id);
         $activities_filter .= '
-                <div class="form-check mb-2">
+                <div class="form-check mb-2 d-flex">
                     <input class="form-check-input qactivities" type="checkbox" name="qactivities[]" ' . $sel . ' id="acti-' . $ActivitiesRow->id . '" value="' . $ActivitiesRow->id . '">
                     <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="acti-' . $ActivitiesRow->id . '">
                         <span>' . $ActivitiesRow->title . '</span>
@@ -64,7 +64,7 @@ if (defined('SEARCH_PAGE')) {
         $sql = "SELECT id FROM tbl_package WHERE difficulty='" . $v . "' AND status=1";
         $tot = $db->num_rows($db->query($sql));
         $difficulty_filter .= '
-                <div class="form-check mb-2">
+                <div class="form-check mb-2 d-flex">
                     <input class="form-check-input gdifficulty" type="checkbox" name="gdifficulty[]" ' . $sel . ' id="diff-' . $k . '" value="' . $k . '">
                     <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="diff-' . $k . '">
                         <span>' . $v . '</span>
@@ -97,7 +97,7 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = $db->num_rows($db->query($sql));
         $duration_filter .= '
-                    <div class="form-check mb-2">
+                    <div class="form-check mb-2 d-flex">
                         <input class="form-check-input gdays" type="radio" name="days" ' . $sel . ' id="days-' . $k . '" value="' . $k . '">
                         <label class="form-check-label d-flex justify-content-between align-items-center w-100" for="days-' . $k . '">
                             <span>' . $v . '</span>

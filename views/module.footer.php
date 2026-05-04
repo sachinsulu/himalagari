@@ -30,7 +30,7 @@ foreach ($contacts as $contact) {
 
 
 $footer1 .= '
-     <link href="' . BASE_URL . 'template/web/footer.css?v=' . time() . '" rel="stylesheet" />
+     <!-- <link href="' . BASE_URL . 'template/web/footer.css?v=' . time() . '" rel="stylesheet" /> -->
      <footer class="footer ">
       <div class="container-fluid position-relative">
 

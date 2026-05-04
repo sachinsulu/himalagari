@@ -133,21 +133,21 @@ $header_components .= '
           <form class="row g-3 align-items-end" id="navSearchForm" action="' . BASE_URL . 'searchlist" method="post">
             <div class="col-md-3">
               <label class="form-label">Destination</label>
-              <select id="destination" name="qdestination[]" class="form-control">
+              <select id="destination" name="qdestination[]" class="form-control h-auto">
                 ' . $destinationsHTML . '
               </select>
             </div>
 
             <div class="col-md-3">
               <label class="form-label">Activity</label>
-              <select id="activity" name="qactivities[]" class="form-control">
+              <select id="activity" name="qactivities[]" class="form-control h-auto">
                 ' . $activitiesHTML . '
               </select>
             </div>
 
             <div class="col-md-3">
               <label class="form-label">Duration</label>
-              <select id="duration" name="days" class="form-control">
+              <select id="duration" name="days" class="form-control h-auto">
                 ' . $durationHTML . '
               </select>
             </div>
@@ -161,14 +161,17 @@ $header_components .= '
       </div>
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_inquiry" aria-labelledby="offcanvas_inquiryLabel">
-        <div class="offcanvas-header justify-content-end">
-          <!-- <h5 class="offcanvas-title" id="offcanvas_inquiryLabel">Offcanvas</h5> -->
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
         <div class="inquiry_text">
           <div class="offcanvas-body">
             <div class="inquiry_title orange-text">
-              <span>Plan</span> Your Trip
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <span>Plan</span> Your Trip
+              </div>
+              <div class="offcanvas-header p-0">
+                <button type="button" class="btn-close cross-icon" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+            </div>
               <div id="planTripMsg"></div>
               <form id="planTripForm">
                 <!-- Packages & Date -->
